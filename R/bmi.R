@@ -5,8 +5,8 @@
 #' @param weightkg weight in kg, may be a vector
 #' @return numeric (vector)
 #' @export
-bodySurfaceAreaAdult <- function(heightm, weightkg) { 
-  sqrt(heightm*weightkg)/6 
+bodySurfaceAreaAdult <- function(heightm, weightkg) {
+  sqrt(heightm * weightkg)/6
 }
 
 #' @title ideal weight
@@ -16,8 +16,8 @@ bodySurfaceAreaAdult <- function(heightm, weightkg) {
 #' @param male logical TRUE or FALSE
 #' @rdname idealWeight
 #' @export
-idealWeight <- function(heightm, male) { 
-  idealWeightDevine(heightm, male) 
+idealWeight <- function(heightm, male) {
+  idealWeightDevine(heightm, male)
 }
 
 #' @title ideal weight by Devine method
@@ -28,7 +28,7 @@ idealWeight <- function(heightm, male) {
 #' @inheritParams idealWeight
 #' @rdname idealWeight
 #' @export
-idealWeightDevine <- function(heightm, male) { 
+idealWeightDevine <- function(heightm, male) {
   idealWeightGenericLinear(heightm, male, 60, 50, 45.5, 2.3, 2.3)
 }
 
@@ -40,7 +40,9 @@ idealWeightDevine <- function(heightm, male) {
 #'   relationship. (Robinson JD, Lupkiewicz SM, Palenik L et al. Determination
 #'   of ideal body weight for drug dosage calculations. Am J Hosp Pharm 1983;
 #'   40: 1016-9.)
-idealWeightRobinson <- function(heightm, male) idealWeightGenericLinear(heightm, male, 60, 52, 49, 1.9, 1.7)
+idealWeightRobinson <- function(heightm, male) {
+  idealWeightGenericLinear(heightm, male, 60, 52, 49, 1.9, 1.7)
+}
 
 #' @title ideal weight by Miller
 #' @export
@@ -49,7 +51,9 @@ idealWeightRobinson <- function(heightm, male) idealWeightGenericLinear(heightm,
 #' @description Miller's method for ideal weight: different linear relationship.
 #'   (Miller DR, Carlson JD, Loyd BJ et al. Determining ideal body weight.
 #'   (Letter). Am J Hosp Pharm 1983; 40: 1622.)
-idealWeightMiller <- function(heightm, male) idealWeightGenericLinear(heightm, male, 60, 56.2, 53.1, 1.41, 1.36)
+idealWeightMiller <- function(heightm, male) {
+  idealWeightGenericLinear(heightm, male, 60, 56.2, 53.1, 1.41, 1.36)
+}
 
 #' @title ideal weight by Broca
 #' @description Calculate ideal weight based on Broca (1871) Height in cm -100
@@ -58,13 +62,17 @@ idealWeightMiller <- function(heightm, male) idealWeightGenericLinear(heightm, m
 #' @inheritParams idealWeight
 #' @rdname idealWeight
 #' @export
-idealWeightBroca <- function(heightm, male) idealWeightGenericLinear(heightm, male, 0, -100, -105, 2.54, 2.54)
+idealWeightBroca <- function(heightm, male) {
+  idealWeightGenericLinear(heightm, male, 0, -100, -105, 2.54, 2.54)
+}
 
 #' @title ideal weight by Lemmens
 #' @description Lemmens merhod assumes BMI 22 as ideal (Obesity Surgery 2005)
 #' @rdname idealWeight
 #' @export
-idealWeightLemmens <- function(heightm) 22*heightm^2
+idealWeightLemmens <- function(heightm) {
+  22 * heightm^2
+}
 
 #' @title ideal weight by gender, offset and gradient
 #' @description generic internal function to handle linear ideal weight
