@@ -1,7 +1,8 @@
 Package: physiology
 Title: Estimate physiological characteristics of adults and children
 Version: 0.1
-Authors@R: Jack Wasey <jack@jackwasey.com> [aut,cre]
+Authors@R: person("Jack O. Wasey", "Creator",
+    role=c("aut", "cre"), email="jack@jackwasey.com")
 Description: A variety of formulae are provided for estimation of height,
     weight and fluid compartments of adults and children. Each formula is
     referenced to the original publication. Warnings can be given for
