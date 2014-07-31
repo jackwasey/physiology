@@ -1,23 +1,41 @@
 #' @title Estimate body surface area of an adult
 #' @description \code{bodySurfaceAreaAdult} Estimate body surface area of an
-#'   adult using \code{sqrt(wt*ht)/6}
-#' @param heightm height in metres, may be a vector
-#' @param weightkg weight in kg, may be a vector
-#' @return numeric (vector)
+#'   adult using \code{sqrt(wt*ht)/6} TODO: reference for this.
+#' @template heightm
+#' @param weightkg
+#' @return numeric vector
 #' @export
 bodySurfaceAreaAdult <- function(heightm, weightkg) {
   sqrt(heightm * weightkg)/6
 }
 
-#' @title ideal weight
-#' @description \code{idealWeight} gives the ideal weight using default
-#'   algorithm, Lemmens. TODO: add param to select alternative algo
-#' @param heightm numeric height in meters
-#' @param male logical TRUE or FALSE
+#' @title ideal weight for adults
+#' @description \code{idealWeight} gives the ideal weight using default adult
+#'   algorithm, Devine. #TODO: param to switch to different method without
+#'   knowing the function name.
+#' @template heightm
+#' @template male
 #' @rdname idealWeight
 #' @export
-idealWeight <- function(heightm, male) {
+idealWeightAdult <- function(heightm, male) {
   idealWeightDevine(heightm, male)
+}
+
+#' @title ideal weight for adults
+#' @description \code{idealWeight} gives the ideal weight using default
+#'   paediatric algorithm. TODO: account for Down's/other well calibrated
+#'   developmental differences. Age specifications are mutually exclusive, and
+#'   an error will be generated if more than on age i specified per patient.
+#' @template heightm
+#' @template male
+#' @param ageYears numeric vector, age(s) in years
+#' @param ageMonths numeric vector, age(s) in months
+#' @param ageDays  numeric vector, age(s) in days
+#' @rdname idealWeight
+#' @export
+idealWeightChild <- function(heightm, male, ageYears = NULL, ageMonths = NULL) {
+  stopifnot(xor(xor(isnull(ageYears), isnull(ageMonths)), isnull(ageDays)))
+  stop("not implemented yet")
 }
 
 #' @title ideal weight by Devine method
@@ -91,7 +109,7 @@ idealWeightGenericLinear <- function(heightm, male, heightmininch, male_min_kg, 
 
   if (length(heightm) != length(male))
     stop('height (%d) and sex (%d) vectors are different lengths',
-               length(heightm), length(male))
+         length(heightm), length(male))
 
   heightinch <- heightm*100/2.54
 
