@@ -33,10 +33,19 @@ idealWeightAdult <- function(heightm, male) {
 #' @param ageDays  numeric vector, age(s) in days
 #' @rdname idealWeight
 #' @export
-idealWeightChild <- function(heightm, male, ageYears = NULL, ageMonths = NULL) {
+idealWeightChild <- function(heightm, male, ageYears = NULL, ageMonths = NULL, ageDays = NULL) {
   stopifnot(xor(xor(isnull(ageYears), isnull(ageMonths)), isnull(ageDays)))
   stop("not implemented yet")
 }
+
+idealWeightChildStraub <- function(heightm, male, ageYears = NULL, ageMonths = NULL, ageDays = NULL) {
+  stopifnot(xor(xor(isnull(ageYears), isnull(ageMonths)), isnull(ageDays)))
+  if (any(!is.null(ageYears) & (ageYears < 1 | ageYears > 17)))
+    warn("age < 1 year or age > 17 year not validated from Straub formula")
+  # http://www.ncbi.nlm.nih.gov/pubmed/6823980
+# 2.396e0.01863(ht), where height is in cm
+}
+
 
 #' @title ideal weight by Devine method
 #' @description Devine method is the default and most widely used. Normally
