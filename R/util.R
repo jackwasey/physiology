@@ -5,10 +5,10 @@ ageFromDates <- function(birthDate, refDate = Sys.Date(), unit = c("year", "mont
   period[unit]
 }
 
-
+# do this as S3 class?
 age <- function(i) {
 #  if (class(i) != "interval") stop("must construct with an inteval")
-  structure(i, class = c("age", "")
+  #structure(i, class = c("age", ""))
 }
 
 as.character.age <- function(a) {

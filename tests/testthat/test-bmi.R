@@ -29,27 +29,29 @@ test_that("nadlerBloodVolume", {
 
 })
 
-test_that("idealWeight", {
+context("ideal weight")
+
+test_that("idealWeightAdultAdult", {
   inch=100/2.54
-  expect_error(idealWeight(male = TRUE))
-  expect_error(idealWeight(heightm = 1.7))
+  expect_error(idealWeightAdult(male = TRUE))
+  expect_error(idealWeightAdult(heightm = 1.7))
 
-  expect_warning(idealWeight(heightm = 0, male = TRUE)) # should warn when height is out of validated range of the formula
-  expect_warning(idealWeight(heightm = -1, male = TRUE)) # should warn when height is out of validated range of the formula
-  expect_warning(idealWeight(heightm = 3, male = TRUE)) # should warn when height is out of validated range of the formula
-  expect_warning(idealWeight(heightm = 59/inch, male = TRUE)) # should warn when height is out of validated range of the formula
+  expect_warning(idealWeightAdult(heightm = 0, male = TRUE)) # should warn when height is out of validated range of the formula
+  expect_warning(idealWeightAdult(heightm = -1, male = TRUE)) # should warn when height is out of validated range of the formula
+  expect_warning(idealWeightAdult(heightm = 3, male = TRUE)) # should warn when height is out of validated range of the formula
+  expect_warning(idealWeightAdult(heightm = 59/inch, male = TRUE)) # should warn when height is out of validated range of the formula
 
 
-  expect_equal(idealWeight(60/inch, male = TRUE), 50)
-  expect_equal(idealWeight(60/inch, male = F), 45.5)
-  expect_equal(idealWeight(c(60/inch, 60/inch), male=c(FALSE, TRUE)), c(45.5, 50))
-  expect_equal(idealWeight(c(60/inch, 60/inch, NA), male=c(FALSE, TRUE, TRUE)), c(45.5, 50, NA))
-  expect_equal(idealWeight(c(60/inch, 60/inch, 60/inch), male = c(FALSE, NA, TRUE)), c(45.5, NA, 50))
-  expect_error(idealWeight(c(60/inch, 60/inch, 60/inch), male = c(FALSE, TRUE)))
-  expect_error(idealWeight(c(60/inch, 60/inch), male = c(FALSE, TRUE, TRUE)))
-  expect_error(idealWeight(c(), male=c(FALSE, TRUE, TRUE)))
-  expect_error(idealWeight(c(60/inch, 60/inch), male = c()))
+  expect_equal(idealWeightAdult(60/inch, male = TRUE), 50)
+  expect_equal(idealWeightAdult(60/inch, male = F), 45.5)
+  expect_equal(idealWeightAdult(c(60/inch, 60/inch), male=c(FALSE, TRUE)), c(45.5, 50))
+  expect_equal(idealWeightAdult(c(60/inch, 60/inch, NA), male=c(FALSE, TRUE, TRUE)), c(45.5, 50, NA))
+  expect_equal(idealWeightAdult(c(60/inch, 60/inch, 60/inch), male = c(FALSE, NA, TRUE)), c(45.5, NA, 50))
+  expect_error(idealWeightAdult(c(60/inch, 60/inch, 60/inch), male = c(FALSE, TRUE)))
+  expect_error(idealWeightAdult(c(60/inch, 60/inch), male = c(FALSE, TRUE, TRUE)))
+  expect_error(idealWeightAdult(c(), male=c(FALSE, TRUE, TRUE)))
+  expect_error(idealWeightAdult(c(60/inch, 60/inch), male = c()))
 
-  expect_warning(idealWeight(12*8.1/inch, male = TRUE))
+  expect_warning(idealWeightAdult(12*8.1/inch, male = TRUE))
 
 })

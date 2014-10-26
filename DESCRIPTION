@@ -10,6 +10,13 @@ Description: A variety of formulae are provided for estimation of height,
     are expected to cover more material with a focus on anaesthesia, critical
     care and peri-operative medicine.
 Depends:
-    R (>= 3.0.0)
+    R (>= 3.0.2)
+Imports:
+    lubridate,
+    jwutil
+Suggests:
+    roxygen2,
+    knitr,
+    testthat
 License: GPL-3
 LazyData: true
