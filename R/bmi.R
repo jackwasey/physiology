@@ -5,9 +5,8 @@
 #' @param weightkg
 #' @return numeric vector
 #' @export
-bodySurfaceAreaAdult <- function(heightm, weightkg) {
-  sqrt(heightm * weightkg)/6
-}
+bodySurfaceAreaAdult <- function(heightm, weightkg)
+  sqrt(heightm * weightkg) / 6
 
 #' @title ideal weight for adults
 #' @description \code{idealWeight} gives the ideal weight using default adult
@@ -17,9 +16,8 @@ bodySurfaceAreaAdult <- function(heightm, weightkg) {
 #' @template male
 #' @rdname idealWeight
 #' @export
-idealWeightAdult <- function(heightm, male) {
+idealWeightAdult <- function(heightm, male)
   idealWeightDevine(heightm, male)
-}
 
 #' @title ideal weight for adults
 #' @description \code{idealWeight} gives the ideal weight using default
@@ -43,7 +41,7 @@ idealWeightChildStraub <- function(heightm, male, ageYears = NULL, ageMonths = N
   if (any(!is.null(ageYears) & (ageYears < 1 | ageYears > 17)))
     warn("age < 1 year or age > 17 year not validated from Straub formula")
   # http://www.ncbi.nlm.nih.gov/pubmed/6823980
-# 2.396e0.01863(ht), where height is in cm
+  # 2.396e0.01863(ht), where height is in cm
 }
 
 
@@ -55,9 +53,8 @@ idealWeightChildStraub <- function(heightm, male, ageYears = NULL, ageMonths = N
 #' @inheritParams idealWeight
 #' @rdname idealWeight
 #' @export
-idealWeightDevine <- function(heightm, male) {
+idealWeightDevine <- function(heightm, male)
   idealWeightGenericLinear(heightm, male, 60, 50, 45.5, 2.3, 2.3)
-}
 
 #' @title ideal weight by Robinson method
 #' @inheritParams idealWeight
@@ -67,9 +64,8 @@ idealWeightDevine <- function(heightm, male) {
 #'   relationship. (Robinson JD, Lupkiewicz SM, Palenik L et al. Determination
 #'   of ideal body weight for drug dosage calculations. Am J Hosp Pharm 1983;
 #'   40: 1016-9.)
-idealWeightRobinson <- function(heightm, male) {
+idealWeightRobinson <- function(heightm, male)
   idealWeightGenericLinear(heightm, male, 60, 52, 49, 1.9, 1.7)
-}
 
 #' @title ideal weight by Miller
 #' @export
@@ -78,9 +74,8 @@ idealWeightRobinson <- function(heightm, male) {
 #' @description Miller's method for ideal weight: different linear relationship.
 #'   (Miller DR, Carlson JD, Loyd BJ et al. Determining ideal body weight.
 #'   (Letter). Am J Hosp Pharm 1983; 40: 1622.)
-idealWeightMiller <- function(heightm, male) {
+idealWeightMiller <- function(heightm, male)
   idealWeightGenericLinear(heightm, male, 60, 56.2, 53.1, 1.41, 1.36)
-}
 
 #' @title ideal weight by Broca
 #' @description Calculate ideal weight based on Broca (1871) Height in cm -100
@@ -89,17 +84,15 @@ idealWeightMiller <- function(heightm, male) {
 #' @inheritParams idealWeight
 #' @rdname idealWeight
 #' @export
-idealWeightBroca <- function(heightm, male) {
+idealWeightBroca <- function(heightm, male)
   idealWeightGenericLinear(heightm, male, 0, -100, -105, 2.54, 2.54)
-}
 
 #' @title ideal weight by Lemmens
 #' @description Lemmens merhod assumes BMI 22 as ideal (Obesity Surgery 2005)
 #' @rdname idealWeight
 #' @export
-idealWeightLemmens <- function(heightm) {
-  22 * heightm^2
-}
+idealWeightLemmens <- function(heightm)
+  22 * heightm ^ 2
 
 #' @title ideal weight by gender, offset and gradient
 #' @description generic internal function to handle linear ideal weight
@@ -113,7 +106,10 @@ idealWeightLemmens <- function(heightm) {
 #' @param female_kg_per_inch, slope for females
 #' @rdname idealWeight
 #' @keywords internal
-idealWeightGenericLinear <- function(heightm, male, heightmininch, male_min_kg, female_min_kg, male_kg_per_inch, female_kg_per_inch) {
+idealWeightGenericLinear <- function(heightm, male,
+                                     heightmininch,
+                                     male_min_kg, female_min_kg,
+                                     male_kg_per_inch, female_kg_per_inch) {
   #NA height or NA maleness are both allowed, and should give NA.
 
   if (length(heightm) != length(male))
@@ -126,21 +122,22 @@ idealWeightGenericLinear <- function(heightm, male, heightmininch, male_min_kg, 
   f2mgradient = male_kg_per_inch - female_kg_per_inch
 
   # TODO: vectorize errors and result!
-  if (any(heightinch < 0.75*heightmininch, na.rm=T)) {
-    warning(
-      warning('calculating idealWeight based on some very low height of %.2fm', heightm[which(heightinch < 0.75*heightmininch)])
-    )
-  }
-  if (any(heightinch < heightmininch, na.rm=T)) {
-    warning(
-      warning('calculating idealWeight based on some low height of %.3fm', heightm[which(heightinch < heightmininch)])
-    )
-  }
-  if (any(heightinch > 9*12, na.rm=T)) {
-    warning(warning('calculating idealWeight based on some very big heights of %.3fm', heightm[which(heightinch > 9*12)]))}
-  if (any(heightinch > 8*12, na.rm=T)) { warning(warning('calculating idealWeight based on some big heights of %.3fm', heightm[which(heightinch > 8*12)]))}
+  if (any(heightinch < 0.75 * heightmininch, na.rm = TRUE))
+    warning(sprintf('calculating ideal weight based on some very low height of %.2fm inches',
+                    heightm[which(heightinch < 0.75 * heightmininch)]))
 
-  female_min_kg + f2mintercept*male + (heightinch - heightmininch)*(female_kg_per_inch + f2mgradient*male)
+  if (any(heightinch < heightmininch, na.rm = TRUE))
+    warning(sprintf('calculating ideal Weight based on some low height of %.3fm inches',
+                    heightm[which(heightinch < heightmininch)]))
+  if (any(heightinch > 9*12, na.rm = TRUE))
+    warning('calculating idealWeight based on some very big heights of %.3fm inches',
+            heightm[which(heightinch > 9 * 12)])
+  if (any(heightinch > 8*12, na.rm = TRUE))
+    warning('calculating idealWeight based on some big heights of %.3fm inches',
+            heightm[which(heightinch > 8 * 12)])
+
+  female_min_kg + f2mintercept*male +
+    (heightinch - heightmininch) * (female_kg_per_inch + f2mgradient*male)
 }
 
 #' @title Nadler Blood Volume
@@ -164,13 +161,56 @@ nadlerBloodVolume <- function(heightm, weightkg, male) {
     stop("NadlerBloodVolume requires that the height weight and male vectors are all the same length.")
   }
 
-  if (any(heightm <  0.1, na.rm=TRUE)) stop("NadlerBloodVolume: some heights are less than a 10cm!")
-  if (any(heightm >  3,   na.rm=TRUE)) stop("NadlerBloodVolume: some heights are greater than 3m")
-  if (any(weightkg < 0.1, na.rm=TRUE)) stop("NadlerBloodVolume: some weights are less than 100g")
-  if (any(weightkg > 400, na.rm=TRUE)) stop("NadlerBloodVolume: some weights are greater than 400kg")
+  if (any(heightm <  0.1, na.rm = TRUE)) stop("NadlerBloodVolume: some heights are less than a 10cm!")
+  if (any(heightm >  3,   na.rm = TRUE)) stop("NadlerBloodVolume: some heights are greater than 3m")
+  if (any(weightkg < 0.1, na.rm = TRUE)) stop("NadlerBloodVolume: some weights are less than 100g")
+  if (any(weightkg > 400, na.rm = TRUE)) stop("NadlerBloodVolume: some weights are greater than 400kg")
 
-  nadler <- (0.3669-(0.3669-0.3561)*!male)*heightm^3 + (0.03219-(0.03219-0.03308)*!male)*weightkg + (0.6041-(0.6041-0.1833)*!male)
+  nadler <- (0.3669-(0.3669-0.3561)*!male)*heightm^3 +
+    (0.03219-(0.03219-0.03308)*!male)*weightkg +
+    (0.6041-(0.6041-0.1833)*!male)
 }
+
+#' @title Blood volume by Lemmens et al, 2006
+#' @description This effectively reverses engineers an ideal weight from BMI of
+#'   22, then use the sqaure root of its ratio to actual body weight to adjust
+#'   the 70ml/kg of an ideal weight person. Age-dependent regression equations
+#'   for indexed blood volume (InBV) at ideal body weight. (No adjustment made
+#'   in obesity by Lemmens.) InBV = 90-0.4 X age (males) InBV = 85-0.4 X age
+#'   (females). Sounds like he is saying either they are slim and old or younger
+#'   and obese. he doesn't attempt to integrate the formulae.
+#' @param heightm height in meters
+#' @param weightkg actual weight in kilograms
+#' @param age years
+#' @return numeric vector
+#' @export
+lemmensBloodVolumeSedentary <- function(heightm, weightkg)
+  weightkg * lemmensIndexedBloodVolume(heightm, weightkg)
+
+lemmensIndexedBloodVolume <- function(heightm, weightkg) {
+  stopifnot(length(heightm) == length(weightkg))
+  70 / sqrt( weightkg / (22 * heightm ^ 2))
+}
+
+#' @title blood volume estimate for near ideal weight
+#' @description applies to slim adults, but note that the age-related decline is
+#'   not seen if high degree of physical activity is maintained.
+#'   TODO: check BMI not elevated
+#' @details Davy KP, Seals DR. Total blood volume in healthy young and older
+#'   men. J Appl Physiol 1994; 76: 2059-62.
+#'
+#'   Parker-Jones P, Davy KP, DeSouza CA et al. Absence of agerelated decline in
+#'   total blood volume in physically active females. Am J Physiol 1997; 272:
+#'   H2534-40.
+#'   @param weightkg numeric weight in kilograms
+#'   @param age years
+#'   @param male logical
+#' @export
+lemmensBloodVolumeNonObese <- function(weightkg, age, male)
+  ifelse(male,
+         weightkg * ( 90 - (0.4 * age)),
+         weightkg * ( 85 - (0.4 * age))
+  )
 
 # TODO: consider Nadler's Formula for blood volume, contrast to ideal weight calc
 #For Males = 0.3669 * Ht^3 + 0.03219 * Wt in kgs + 0.6041
@@ -182,10 +222,15 @@ nadlerBloodVolume <- function(heightm, weightkg, male) {
 #' @title adjusted body weight
 #' @description returns ideal weight + 40% of difference between ideal and
 #'   actual weights. Ideal weight is calculated using default algorithm.
+#'   #TODO: is downward adjustment valid?
 #' @inheritParams idealWeight
 #' @param weightkg weight in kg, may be a vector
 #' @export
-adjustedWeightAdult <- function(heightm, weightkg, male) {
-  #TODO: is downward adjustment valid?
-  0.6*idealWeight(heightm, male) + 0.4*weightkg #iw + 0.4*(weightkg - iw)
-}
+adjustedWeightAdult <- function(heightm, weightkg, male)
+  0.6 * idealWeight(heightm, male) + 0.4 * weightkg #iw + 0.4*(weightkg - iw)
+
+bmiAdult <- function(heightm, weightkg)
+  weightkg / (heightm ^ 2)
+
+bmiAdultInches <- function(heightin, weightkg)
+  bmiAdult(heightin * 2.54 / 100, weightkg)
