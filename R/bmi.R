@@ -50,14 +50,12 @@ idealWeightChildStraub <- function(heightm, male, ageYears = NULL, ageMonths = N
 #'   stated in inches. Male: 50kg + 2.3kg * inches over 5ft. Female: 45.5kg +
 #'   2.3kg * inches over 5ft. (from 1974 genatamicin paper - see Lemmens for
 #'   ref.)
-#' @inheritParams idealWeight
 #' @rdname idealWeight
 #' @export
 idealWeightDevine <- function(heightm, male)
   idealWeightGenericLinear(heightm, male, 60, 50, 45.5, 2.3, 2.3)
 
 #' @title ideal weight by Robinson method
-#' @inheritParams idealWeight
 #' @rdname idealWeight
 #' @export
 #' @description Robinson's method for ideal weight: different linear
@@ -69,7 +67,6 @@ idealWeightRobinson <- function(heightm, male)
 
 #' @title ideal weight by Miller
 #' @export
-#' @inheritParams idealWeight
 #' @rdname idealWeight
 #' @description Miller's method for ideal weight: different linear relationship.
 #'   (Miller DR, Carlson JD, Loyd BJ et al. Determining ideal body weight.
@@ -81,7 +78,6 @@ idealWeightMiller <- function(heightm, male)
 #' @description Calculate ideal weight based on Broca (1871) Height in cm -100
 #'   for women, -105 for men Broca PP. Memoires d'anthropologie. Paris 1871 /
 #'   1877.
-#' @inheritParams idealWeight
 #' @rdname idealWeight
 #' @export
 idealWeightBroca <- function(heightm, male)
@@ -109,7 +105,8 @@ idealWeightLemmens <- function(heightm)
 idealWeightGenericLinear <- function(heightm, male,
                                      heightmininch,
                                      male_min_kg, female_min_kg,
-                                     male_kg_per_inch, female_kg_per_inch) {
+                                     male_kg_per_inch, female_kg_per_inch,
+                                     verbose = FALSE) {
   #NA height or NA maleness are both allowed, and should give NA.
 
   if (length(heightm) != length(male))
@@ -123,17 +120,17 @@ idealWeightGenericLinear <- function(heightm, male,
 
   # TODO: vectorize errors and result!
   if (any(heightinch < 0.75 * heightmininch, na.rm = TRUE))
-    warning(sprintf('calculating ideal weight based on some very low height of %.2fm inches',
+    if (verbose) warning(sprintf('calculating ideal weight based on some very low height of %.2fm inches',
                     heightm[which(heightinch < 0.75 * heightmininch)]))
 
   if (any(heightinch < heightmininch, na.rm = TRUE))
-    warning(sprintf('calculating ideal Weight based on some low height of %.3fm inches',
+    if (verbose) warning(sprintf('calculating ideal Weight based on some low height of %.3fm inches',
                     heightm[which(heightinch < heightmininch)]))
   if (any(heightinch > 9*12, na.rm = TRUE))
-    warning('calculating idealWeight based on some very big heights of %.3fm inches',
+    if (verbose) warning('calculating idealWeight based on some very big heights of %.3fm inches',
             heightm[which(heightinch > 9 * 12)])
   if (any(heightinch > 8*12, na.rm = TRUE))
-    warning('calculating idealWeight based on some big heights of %.3fm inches',
+    if (verbose) warning('calculating idealWeight based on some big heights of %.3fm inches',
             heightm[which(heightinch > 8 * 12)])
 
   female_min_kg + f2mintercept*male +
@@ -144,14 +141,14 @@ idealWeightGenericLinear <- function(heightm, male,
 #' @description estimate blood volume according to the classic 1960s paper by
 #'   Nadler
 #' @param weightkg weight in kilograms
-#' @inheritParams idealWeight
 #' @export
-nadlerBloodVolume <- function(heightm, weightkg, male) {
+nadlerBloodVolume <- function(heightm, weightkg, male,
+                              verbose = FALSE) {
 
   if (!is.numeric(heightm)) stop("NadlerBloodVolume requires numeric height input")
-  if (any(is.na(heightm))) warning("NadlerBloodVolume requires non-NA height input")
+  if (any(is.na(heightm)) & verbose) warning("NadlerBloodVolume requires non-NA height input")
   if (!is.numeric(weightkg)) stop("NadlerBloodVolume requires numeric weight input")
-  if (any(is.na(weightkg))) warning("NadlerBloodVolume requires non-NA weight input")
+  if (any(is.na(weightkg)) & verbose) warning("NadlerBloodVolume requires non-NA weight input")
 
   if (length(heightm) != length(weightkg) |
         length(male) != length(heightm)) {
@@ -223,7 +220,6 @@ lemmensBloodVolumeNonObese <- function(weightkg, age, male)
 #' @description returns ideal weight + 40% of difference between ideal and
 #'   actual weights. Ideal weight is calculated using default algorithm.
 #'   #TODO: is downward adjustment valid?
-#' @inheritParams idealWeight
 #' @param weightkg weight in kg, may be a vector
 #' @export
 adjustedWeightAdult <- function(heightm, weightkg, male)
