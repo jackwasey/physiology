@@ -1,9 +1,6 @@
-
-
 context("Blood Volume Calculation by Nadler method")
 
 #TODO: common tests for all functions with invalid, severely out-of-range inputs
-
 
 test_that("nadlerBloodVolume", {
   expect_error(nadlerBloodVolume())
@@ -36,10 +33,14 @@ test_that("idealWeightAdultAdult", {
   expect_error(idealWeightAdult(male = TRUE))
   expect_error(idealWeightAdult(heightm = 1.7))
 
-  expect_warning(idealWeightAdult(heightm = 0, male = TRUE)) # should warn when height is out of validated range of the formula
-  expect_warning(idealWeightAdult(heightm = -1, male = TRUE)) # should warn when height is out of validated range of the formula
-  expect_warning(idealWeightAdult(heightm = 3, male = TRUE)) # should warn when height is out of validated range of the formula
-  expect_warning(idealWeightAdult(heightm = 59/inch, male = TRUE)) # should warn when height is out of validated range of the formula
+  # should warn when height is out of validated range of the formula
+  expect_warning(idealWeightAdult(heightm = 0, male = TRUE))
+  # should warn when height is out of validated range of the formula
+  expect_warning(idealWeightAdult(heightm = -1, male = TRUE))
+  # should warn when height is out of validated range of the formula
+  expect_warning(idealWeightAdult(heightm = 3, male = TRUE))
+  # should warn when height is out of validated range of the formula
+  expect_warning(idealWeightAdult(heightm = 59/inch, male = TRUE))
 
 
   expect_equal(idealWeightAdult(60/inch, male = TRUE), 50)

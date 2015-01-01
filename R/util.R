@@ -1,6 +1,11 @@
 #' @title age from birth and reference dates
+#' @param birthDate Date of birth, in format accepted by lubridate
+#' @param refDate Date at which to calculate age, defaults to current date, in format accepted by lubridate, e.g. Date.
+#' @param unit character of length, one of "year", "month", or "day".
 #' @import lubridate
-ageFromDates <- function(birthDate, refDate = Sys.Date(), unit = c("year", "month", "day")) {
+#' @export
+ageFromDates <- function(birthDate, refDate = Sys.Date(),
+                         unit = c("year", "month", "day")) {
   period <- as.period(new_interval(birthDate, refDate), unit = unit)
   period[unit]
 }
@@ -27,6 +32,5 @@ as.character.age <- function(a) {
 #' @description based on age, will report in days, weeks, months, years.
 #' @param age vector
 #' @param ageunit single value (all ages must have the same unit)
-#' @export
 #' @return character vector
-print.age <- function() {stop("todo")}
+# print.age <- function() stop("todo")
