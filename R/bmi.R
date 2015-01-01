@@ -193,14 +193,17 @@ nadlerBloodVolume <- function(heightm, weightkg, male) {
 #'   in obesity by Lemmens.) InBV = 90-0.4 X age (males) InBV = 85-0.4 X age
 #'   (females). Sounds like he is saying either they are slim and old or younger
 #'   and obese. he doesn't attempt to integrate the formulae.
+#'
+#'   TODO: include age as cut-off butween the use of differing formulae.
 #' @param heightm height in meters
 #' @param weightkg actual weight in kilograms
-#' @param age years
 #' @return numeric vector
 #' @export
 lemmensBloodVolumeSedentary <- function(heightm, weightkg)
   weightkg * lemmensIndexedBloodVolume(heightm, weightkg)
 
+#' @rdname lemmensBloodVolumeSedentary
+#' @export
 lemmensIndexedBloodVolume <- function(heightm, weightkg) {
   stopifnot(length(heightm) == length(weightkg))
   70 / sqrt( weightkg / (22 * heightm ^ 2))
@@ -236,7 +239,6 @@ lemmensBloodVolumeNonObese <- function(weightkg, age, male)
 #' @title adjusted body weight
 #' @description returns ideal weight + 40% of difference between ideal and
 #'   actual weights. Ideal weight is calculated using default algorithm.
-<<<<<<< HEAD
 #' @inheritParams idealWeightAdult
 #' @param weightkg weight in kg, may be a vector
 #' @export
@@ -246,17 +248,17 @@ adjustedWeightAdult <- function(heightm, weightkg, male) {
   #TODO: is downward adjustment valid?
   0.6 * idealWeightAdult(heightm, male) + 0.4 * weightkg #iw + 0.4*(weightkg - iw)
 }
-=======
-#'   #TODO: is downward adjustment valid?
-#' @inheritParams idealWeight
-#' @param weightkg weight in kg, may be a vector
-#' @export
-adjustedWeightAdult <- function(heightm, weightkg, male)
-  0.6 * idealWeight(heightm, male) + 0.4 * weightkg #iw + 0.4*(weightkg - iw)
 
+#' BMI for adults
+#'
+#' @template heightm
+#' @template weightkg
+#' @export
 bmiAdult <- function(heightm, weightkg)
   weightkg / (heightm ^ 2)
 
+#' @rdname bmiAdult
+#' @param heightin height in inches
+#' @export
 bmiAdultInches <- function(heightin, weightkg)
   bmiAdult(heightin * 2.54 / 100, weightkg)
->>>>>>> fe7d44d43f65236ad96954a8f9388a41cfc22234

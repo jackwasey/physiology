@@ -1,6 +1,6 @@
 Package: physiology
 Title: Calculate physiological characteristics of adults and children
-Version: 0.1
+Version: 0.2
 Date: 2015-01-01
 Authors@R: person("Jack O. Wasey", "Creator",
     role=c("aut", "cre"), email="jack@jackwasey.com")
