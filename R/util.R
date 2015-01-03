@@ -1,36 +1,23 @@
 #' @title age from birth and reference dates
-#' @param birthDate Date of birth, in format accepted by lubridate
-#' @param refDate Date at which to calculate age, defaults to current date, in format accepted by lubridate, e.g. Date.
+#' @param birthDate Date of birth
+#' @param refDate Date at which to calculate age, defaults to current date
 #' @param unit character of length, one of "year", "month", or "day".
-#' @import lubridate
+#' @return integer vector
 #' @export
 ageFromDates <- function(birthDate, refDate = Sys.Date(),
-                         unit = c("year", "month", "day")) {
-  period <- as.period(new_interval(birthDate, refDate), unit = unit)
-  period[unit]
+                         unit = c("year", "day")) {
+  unit <- match.arg(unit)
+  pdt <- as.POSIXlt(c(birthDate, refDate))
+
+  years <- pdt$year[2] - pdt$year[1]
+  months <- pdt$mon[2] - pdt$mon[1] # of year
+  days <- pdt$mday[2] - pdt$mday[1] # of month
+  year.correct <- (months + days / 32) < 0
+  if (unit == "year")
+    return(years - year.correct)  # not birthday yet this year
+
+  as.integer(refDate - birthDate) # days
 }
 
-# do this as S3 class?
-age <- function(i) {
-#  if (class(i) != "interval") stop("must construct with an inteval")
-  #structure(i, class = c("age", ""))
-}
-
-as.character.age <- function(a) {
-  prd <- as.period(a)
-  y <- year(prd)
-  m <- month(prd)
-  d <- prd %/% days(1) # number of days, including months and years
-
-  if (y >= 2) return(y)
-  if (d < 28) return(d)
-  if (m == 0) return (1)
-  return(m)
-}
-
-#' @title print age in human readable format
-#' @description based on age, will report in days, weeks, months, years.
-#' @param age vector
-#' @param ageunit single value (all ages must have the same unit)
-#' @return character vector
-# print.age <- function() stop("todo")
+# TODO: print class to show days to 30d, months to 24 months, then years
+# automatically
