@@ -1,7 +1,7 @@
 Package: physiology
-Title: Calculate physiological characteristics of adults and children
-Version: 0.2.1
-Date: 2015-01-01
+Title: Calculate Physiological Characteristics of Adults and Children
+Version: 0.2.2
+Date: 2015-01-03
 Authors@R: person("Jack O. Wasey", role=c("aut", "cre"), email="jack@jackwasey.com")
 Description: A variety of formulae are provided for estimation of height,
     weight and fluid compartments of adults and children. Each formula is
@@ -13,6 +13,10 @@ URL: https://github.com/jackwasey/physiology
 Depends:
     R (>= 3.0.2)
 Suggests:
-    testthat
+    ggplot2,
+    reshape2,
+    testthat,
+    knitr
 License: GPL-3
 BugReports: https://github.com/jackwasey/physiology/issues
+VignetteBuilder: knitr

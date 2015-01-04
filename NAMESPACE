@@ -3,7 +3,7 @@
 export(adjustedWeightAdult)
 export(ageFromDates)
 export(bmiAdult)
-export(bmiAdultInches)
+export(bmiAdultInLb)
 export(bodySurfaceAreaAdult)
 export(idealWeightAdult)
 export(idealWeightBroca)

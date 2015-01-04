@@ -1,12 +1,20 @@
 #' @title age from birth and reference dates
-#' @param birthDate Date of birth
-#' @param refDate Date at which to calculate age, defaults to current date
+#' @param birthDate Date of birth, either as a \code{Date} or something which
+#'   will be converted to a \code{Date}
+#' @param refDate Date at which to calculate age, defaults to current date,
+#'   either as a \code{Date} or something which will be converted to a
+#'   \code{Date}
 #' @param unit character of length, one of "year", "month", or "day".
 #' @return integer vector
+#' @examples
+#' ageFromDates("2014-11-08", "2014-12-31", unit = "day")
+#' ageFromDates("1981-07-09", "2014-06-29", unit = "year")
 #' @export
 ageFromDates <- function(birthDate, refDate = Sys.Date(),
                          unit = c("year", "day")) {
   unit <- match.arg(unit)
+  birthDate <- as.Date(birthDate)
+  refDate <- as.Date(refDate)
   pdt <- as.POSIXlt(c(birthDate, refDate))
 
   years <- pdt$year[2] - pdt$year[1]

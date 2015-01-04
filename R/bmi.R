@@ -4,17 +4,26 @@
 #' @template heightm
 #' @template weightkg
 #' @return numeric vector
+#' @examples
+#' bodySurfaceAreaAdult(2, 80)
+#' bodySurfaceAreaAdult(1.5, 80)
 #' @export
 bodySurfaceAreaAdult <- function(heightm, weightkg)
   sqrt(heightm * weightkg) / 6
 
 #' @title ideal weight for adults
 #' @description \code{idealWeight} gives the ideal weight using default adult
-#'   algorithm, Devine. #TODO: param to switch to different method without
-#'   knowing the function name.
+#'   algorithm, Devine.
+#'
+#'   TODO: param to switch to different method without knowing the function
+#'   name.
 #' @template heightm
 #' @template male
 #' @rdname idealWeight
+#' @examples
+#' idealWeightAdult(1.7, TRUE)
+#' idealWeightAdult(1.7, FALSE)
+#' idealWeightAdult(6 * 12 * 2.54, TRUE)
 #' @export
 idealWeightAdult <- function(heightm, male)
   idealWeightDevine(heightm, male)
@@ -26,33 +35,54 @@ idealWeightAdult <- function(heightm, male)
 #'   an error will be generated if more than on age i specified per patient.
 #' @template heightm
 #' @template male
-#' @param ageYears numeric vector, age(s) in years
+#' @param ageYears numeric vector, age(s) in years. Only one of ageYears,
+#'   ageMonths and ageDays should be provided.
 #' @param ageMonths numeric vector, age(s) in months
 #' @param ageDays  numeric vector, age(s) in days
 #' @rdname idealWeight
 #' @export
-idealWeightChild <- function(heightm, male,
+idealWeightChild <- function(heightm,
                              ageYears = NULL,
                              ageMonths = NULL,
                              ageDays = NULL)
-  idealWeightChildStraub(heightm, male, ageYears, ageMonths, ageDays)
+  idealWeightChildStraub(heightm, ageYears, ageMonths, ageDays)
 
 #' @title ideal weight for child per Straub
-#' @description http://www.ncbi.nlm.nih.gov/pubmed/6823980
-#' 2.396e0.01863(ht), where height is in cm
+#' @description http://www.ncbi.nlm.nih.gov/pubmed/6823980 2.396e0.01863(ht),
+#'   where height is in cm. There is an argument for using another package to
+#'   capture durations, of which age is a special case. However, I am resisting
+#'   bringing in external dependencies, and for almost all use-cases I can
+#'   imagine, the age will be captured as a single number of one type, not a mix
+#'   of types. Note that gender does not appear to be important in this
+#'   relationship.
+#'
+#'   See package AGD for CDC growth chart data.
 #' @inheritParams idealWeightChild
+#' @examples
+#' # will warn if given age is not in validate range from publication:
+#' \dontrun{
+#'   idealWeightChild(0.5, ageYears = 0)
+#'   idealWeightChild(0.8, ageMonths = 11)
+#'   idealWeightChild(0.5, ageDays = 25)
+#' }
+#'   idealWeightChild(1, ageYears = 2)
+#'   idealWeightChild(0.75, ageMonths = 15)
 #' @export
-idealWeightChildStraub <- function(heightm, male,
+idealWeightChildStraub <- function(heightm,
                                    ageYears = NULL,
                                    ageMonths = NULL,
                                    ageDays = NULL) {
-  stopifnot(xor(xor(is.null(ageYears), is.null(ageMonths)), is.null(ageDays)))
+  stopifnot(sum(is.null(ageYears), is.null(ageMonths), is.null(ageDays)) == 2)
   if (any(!is.null(ageYears) & (ageYears < 1 | ageYears > 17)))
+    warning("age < 1 year or age > 17 year not validated from Straub formula")
+  if (any(!is.null(ageMonths) & (ageMonths < 24 | ageMonths > 12 * 17 + 11)))
+    warning("age < 1 year or age > 17 year not validated from Straub formula")
+  if (any(!is.null(ageMonths) & (ageDays < 364 | ageDays > 364 * 12 * 18)))
     warning("age < 1 year or age > 17 year not validated from Straub formula")
   # http://www.ncbi.nlm.nih.gov/pubmed/6823980
   # 2.396e0.01863(ht), where height is in cm
+  2.396 ^ (1.863 * heightm)
 }
-
 
 #' @title ideal weight by Devine method
 #' @description Devine method is the default and most widely used. Normally
@@ -132,18 +162,22 @@ idealWeightGenericLinear <- function(heightm, male,
 
   # TODO: vectorize errors and result!
   if (any(heightinch < 0.75 * heightmininch, na.rm = TRUE))
-    warning(sprintf('calculating ideal weight based on some very low height of %.2fm inches',
-                    heightm[which(heightinch < 0.75 * heightmininch)]))
+    warning(sprintf(
+      'calculating ideal weight based on some very low height of %.2fm inches',
+      heightm[which(heightinch < 0.75 * heightmininch)]))
 
   if (any(heightinch < heightmininch, na.rm = TRUE))
-    warning(sprintf('calculating ideal Weight based on some low height of %.3fm inches',
-                    heightm[which(heightinch < heightmininch)]))
+    warning(sprintf(
+      'calculating ideal Weight based on some low height of %.3fm inches',
+      heightm[which(heightinch < heightmininch)]))
   if (any(heightinch > 9*12, na.rm = TRUE))
-    warning('calculating idealWeight based on some very big heights of %.3fm inches',
-            heightm[which(heightinch > 9 * 12)])
+    warning(
+      'calculating idealWeight based on some very big heights of %.3fm inches',
+      heightm[which(heightinch > 9 * 12)])
   if (any(heightinch > 8*12, na.rm = TRUE))
-    warning('calculating idealWeight based on some big heights of %.3fm inches',
-            heightm[which(heightinch > 8 * 12)])
+    warning(
+      'calculating idealWeight based on some big heights of %.3fm inches',
+      heightm[which(heightinch > 8 * 12)])
 
   female_min_kg + f2mintercept * male +
     (heightinch - heightmininch) * (female_kg_per_inch + f2mgradient*male)
@@ -157,10 +191,14 @@ idealWeightGenericLinear <- function(heightm, male,
 #' @export
 nadlerBloodVolume <- function(heightm, weightkg, male) {
 
-  if (!is.numeric(heightm)) stop("NadlerBloodVolume requires numeric height input")
-  if (any(is.na(heightm))) warning("NadlerBloodVolume requires non-NA height input")
-  if (!is.numeric(weightkg)) stop("NadlerBloodVolume requires numeric weight input")
-  if (any(is.na(weightkg))) warning("NadlerBloodVolume requires non-NA weight input")
+  if (!is.numeric(heightm))
+    stop("NadlerBloodVolume requires numeric height input")
+  if (any(is.na(heightm)))
+    warning("NadlerBloodVolume requires non-NA height input")
+  if (!is.numeric(weightkg))
+    stop("NadlerBloodVolume requires numeric weight input")
+  if (any(is.na(weightkg)))
+    warning("NadlerBloodVolume requires non-NA weight input")
 
   if (length(heightm) != length(weightkg) |
         length(male) != length(heightm)) {
@@ -246,19 +284,25 @@ adjustedWeightAdult <- function(heightm, weightkg, male) {
   stopifnot(length(heightm) == length(weightkg))
   stopifnot(length(male) == length(weightkg))
   #TODO: is downward adjustment valid?
-  0.6 * idealWeightAdult(heightm, male) + 0.4 * weightkg #iw + 0.4*(weightkg - iw)
+  0.6 * idealWeightAdult(heightm, male) + 0.4 * weightkg
 }
 
-#' BMI for adults
+#' Body Mass Index (BMI) for adults
 #'
 #' @template heightm
 #' @template weightkg
+#' @examples
+#' bmiAdult(1.6, 120)
+#' bmiAdult(2, 75)
 #' @export
 bmiAdult <- function(heightm, weightkg)
   weightkg / (heightm ^ 2)
 
 #' @rdname bmiAdult
 #' @param heightin height in inches
+#' @param weightlb weight in pounds
+#' @examples
+#' bmiAdultInLb(72, 200)
 #' @export
-bmiAdultInches <- function(heightin, weightkg)
-  bmiAdult(heightin * 2.54 / 100, weightkg)
+bmiAdultInLb <- function(heightin, weightlb)
+  bmiAdult(heightin * 0.0254, weightlb * 2.20462)
