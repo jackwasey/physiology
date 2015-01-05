@@ -1,22 +1,21 @@
 Package: physiology
-Title: Estimate physiological characteristics of adults and children
-Version: 0.1
+Title: Calculate physiological characteristics of adults and children
+Version: 0.2
+Date: 2015-01-01
 Authors@R: person("Jack O. Wasey", "Creator",
     role=c("aut", "cre"), email="jack@jackwasey.com")
 Description: A variety of formulae are provided for estimation of height,
     weight and fluid compartments of adults and children. Each formula is
     referenced to the original publication. Warnings can be given for
     estimation based on input data outside of normal ranges. Future functions
-    are expected to cover more material with a focus on anaesthesia, critical
+    will cover more material with a focus on anaesthesia, critical
     care and peri-operative medicine.
+URL: https://github.com/jackwasey/physiology
 Depends:
     R (>= 3.0.2)
 Imports:
-    lubridate,
-    jwutil
+    lubridate
 Suggests:
-    roxygen2,
-    knitr,
     testthat
 License: GPL-3
-LazyData: true
+BugReports: https://github.com/jackwasey/physiology/issues
