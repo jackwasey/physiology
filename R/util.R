@@ -1,37 +1,31 @@
 #' @title age from birth and reference dates
-#' @param birth.date Date of birth, in format accepted by lubridate
-#' @param ref.date Date at which to calculate age, defaults to current date, in
-#'   format accepted by lubridate, e.g. Date.
-#' @param unit character of length, one of "year", "month", or "day".
-#' @import lubridate
+#' @param birth.date Date of birth, either as a \code{Date} or something which
+#'   will be converted to a \code{Date}
+#' @param ref.date Date at which to calculate age, defaults to current date,
+#'   either as a \code{Date} or something which will be converted to a
+#'   \code{Date}
+#' @param unit character of length, one of "year" or "day".
+#' @return integer vector
+#' @examples
+#' age_from_dates("2014-11-08", "2014-12-31", unit = "day")
+#' age_from_dates("1981-07-09", "2014-06-29", unit = "year")
 #' @export
-ageFromDates <- function(birth.date, ref.date = Sys.Date(),
-                         unit = c("year", "month", "day")) {
-  period <- as.period(new_interval(birth.date, ref.date), unit = unit)
-  period[unit]
+age_from_dates <- function(birth.date, ref.date = Sys.Date(),
+                         unit = c("year", "day")) {
+  unit <- match.arg(unit)
+  birth.date <- as.Date(birth.date)
+  ref.date <- as.Date(ref.date)
+  pdt <- as.POSIXlt(c(birth.date, ref.date))
+
+  years <- pdt$year[2] - pdt$year[1]
+  months <- pdt$mon[2] - pdt$mon[1] # of year
+  days <- pdt$mday[2] - pdt$mday[1] # of month
+  year.correct <- (months + days / 32) < 0
+  if (unit == "year")
+    return(years - year.correct)  # not birthday yet this year
+
+  as.integer(ref.date - birth.date) # days
 }
 
-# do this as S3 class?
-age <- function(i) {
-#  if (class(i) != "interval") stop("must construct with an inteval")
-  #structure(i, class = c("age", ""))
-}
-
-as.character.age <- function(a) {
-  prd <- as.period(a)
-  y <- year(prd)
-  m <- month(prd)
-  d <- prd %/% days(1) # number of days, including months and years
-
-  if (y >= 2) return(y)
-  if (d < 28) return(d)
-  if (m == 0) return (1)
-  return(m)
-}
-
-#' @title print age in human readable format
-#' @description based on age, will report in days, weeks, months, years.
-#' @param age vector
-#' @param ageunit single value (all ages must have the same unit)
-#' @return character vector
-# print.age <- function() stop("todo")
+# TODO: print class to show days to 30d, months to 24 months, then years
+# automatically
