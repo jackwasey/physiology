@@ -26,16 +26,16 @@ idealWeightAdult <- function(heightm, male)
 #'   an error will be generated if more than on age i specified per patient.
 #' @template heightm
 #' @template male
-#' @param ageYears numeric vector, age(s) in years
-#' @param ageMonths numeric vector, age(s) in months
-#' @param ageDays  numeric vector, age(s) in days
+#' @param age.years numeric vector, age(s) in years
+#' @param age.months numeric vector, age(s) in months
+#' @param age.days  numeric vector, age(s) in days
 #' @rdname idealWeight
 #' @export
 idealWeightChild <- function(heightm, male,
-                             ageYears = NULL,
-                             ageMonths = NULL,
-                             ageDays = NULL)
-  idealWeightChildStraub(heightm, male, ageYears, ageMonths, ageDays)
+                             age.years = NULL,
+                             age.months = NULL,
+                             age.days = NULL)
+  idealWeightChildStraub(heightm, male, age.years, age.months, age.days)
 
 #' @title ideal weight for child per Straub
 #' @description http://www.ncbi.nlm.nih.gov/pubmed/6823980
@@ -43,11 +43,11 @@ idealWeightChild <- function(heightm, male,
 #' @inheritParams idealWeightChild
 #' @export
 idealWeightChildStraub <- function(heightm, male,
-                                   ageYears = NULL,
-                                   ageMonths = NULL,
-                                   ageDays = NULL) {
-  stopifnot(xor(xor(is.null(ageYears), is.null(ageMonths)), is.null(ageDays)))
-  if (any(!is.null(ageYears) & (ageYears < 1 | ageYears > 17)))
+                                   age.years = NULL,
+                                   age.months = NULL,
+                                   age.days = NULL) {
+  stopifnot(xor(xor(is.null(age.years), is.null(age.months)), is.null(age.days)))
+  if (any(!is.null(age.years) & (age.years < 1 | age.years > 17)))
     warning("age < 1 year or age > 17 year not validated from Straub formula")
   # http://www.ncbi.nlm.nih.gov/pubmed/6823980
   # 2.396e0.01863(ht), where height is in cm
@@ -119,46 +119,55 @@ idealWeightGenericLinear <- function(heightm, male,
   #NA height or NA maleness are both allowed, and should give NA.
 
   if (length(heightm) != length(male))
-    stop('height (%d) and sex (%d) vectors are different lengths',
+    stop("height (%d) and sex (%d) vectors are different lengths",
          length(heightm), length(male))
 
-  heightinch <- heightm*100/2.54
+  heightinch <- heightm * 100 / 2.54
 
-  f2mintercept = male_min_kg - female_min_kg
-  f2mgradient = male_kg_per_inch - female_kg_per_inch
+  f2mintercept <- male_min_kg - female_min_kg
+  f2mgradient <- male_kg_per_inch - female_kg_per_inch
 
   # TODO: vectorize errors and result!
   if (any(heightinch < 0.75 * heightmininch, na.rm = TRUE))
-    if (verbose) warning(sprintf('calculating ideal weight based on some very low height of %.2fm inches',
+    if (verbose) warning(sprintf(
+      "calculating ideal weight based on some very low height of %.2fm inches",
                     heightm[which(heightinch < 0.75 * heightmininch)]))
 
   if (any(heightinch < heightmininch, na.rm = TRUE))
-    if (verbose) warning(sprintf('calculating ideal Weight based on some low height of %.3fm inches',
+    if (verbose) warning(sprintf(
+      "calculating ideal Weight based on some low height of %.3fm inches",
                     heightm[which(heightinch < heightmininch)]))
-  if (any(heightinch > 9*12, na.rm = TRUE))
-    if (verbose) warning('calculating idealWeight based on some very big heights of %.3fm inches',
+  if (any(heightinch > 9 * 12, na.rm = TRUE))
+    if (verbose) warning(
+      "calculating idealWeight based on some very big heights of %.3fm inches",
             heightm[which(heightinch > 9 * 12)])
-  if (any(heightinch > 8*12, na.rm = TRUE))
-    if (verbose) warning('calculating idealWeight based on some big heights of %.3fm inches',
+  if (any(heightinch > 8 * 12, na.rm = TRUE))
+    if (verbose) warning(
+      "calculating idealWeight based on some big heights of %.3fm inches",
             heightm[which(heightinch > 8 * 12)])
 
   female_min_kg + f2mintercept * male +
-    (heightinch - heightmininch) * (female_kg_per_inch + f2mgradient*male)
+    (heightinch - heightmininch) * (female_kg_per_inch + f2mgradient * male)
 }
 
 #' @title Nadler Blood Volume
 #' @description estimate blood volume according to the classic 1960s paper by
-#'   Nadler
+#'   Nadler. Surgery. 1962 Feb;51(2):224-32. Prediction of blood volume in
+#'   normal human adults. Nadler SB, Hidalgo JH, Bloch T.
 #' @inheritParams idealWeightAdult
 #' @param weightkg weight in kilograms
 #' @export
 nadlerBloodVolume <- function(heightm, weightkg, male,
                               verbose = FALSE) {
 
-  if (!is.numeric(heightm)) stop("NadlerBloodVolume requires numeric height input")
-  if (any(is.na(heightm)) & verbose) warning("NadlerBloodVolume requires non-NA height input")
-  if (!is.numeric(weightkg)) stop("NadlerBloodVolume requires numeric weight input")
-  if (any(is.na(weightkg)) & verbose) warning("NadlerBloodVolume requires non-NA weight input")
+  if (!is.numeric(heightm))
+    stop("NadlerBloodVolume requires numeric height input")
+  if (any(is.na(heightm)) & verbose)
+    warning("NadlerBloodVolume requires non-NA height input")
+  if (!is.numeric(weightkg))
+    stop("NadlerBloodVolume requires numeric weight input")
+  if (any(is.na(weightkg)) & verbose)
+    warning("NadlerBloodVolume requires non-NA weight input")
 
   if (length(heightm) != length(weightkg) |
         length(male) != length(heightm)) {
@@ -178,9 +187,9 @@ nadlerBloodVolume <- function(heightm, weightkg, male,
   if (any(weightkg > 400, na.rm = TRUE))
     stop("NadlerBloodVolume: some weights are greater than 400kg")
 
-  nadler <- (0.3669 - (0.3669-0.3561)*!male) * heightm ^ 3 +
-    (0.03219 - (0.03219-0.03308) * !male) * weightkg +
-    (0.6041 - (0.6041-0.1833) * !male)
+  nadler <- (0.3669 - (0.3669 - 0.3561) * !male) * heightm ^ 3 +
+    (0.03219 - (0.03219 - 0.03308) * !male) * weightkg +
+    (0.6041 - (0.6041 - 0.1833) * !male)
 }
 
 #' @title Blood volume by Lemmens et al, 2006
@@ -204,7 +213,7 @@ lemmensBloodVolumeSedentary <- function(heightm, weightkg)
 #' @export
 lemmensIndexedBloodVolume <- function(heightm, weightkg) {
   stopifnot(length(heightm) == length(weightkg))
-  70 / sqrt( weightkg / (22 * heightm ^ 2))
+  70 / sqrt(weightkg / (22 * heightm ^ 2))
 }
 
 #' @title blood volume estimate for near ideal weight
@@ -223,16 +232,9 @@ lemmensIndexedBloodVolume <- function(heightm, weightkg) {
 #' @export
 lemmensBloodVolumeNonObese <- function(weightkg, age, male)
   ifelse(male,
-         weightkg * ( 90 - (0.4 * age)),
-         weightkg * ( 85 - (0.4 * age))
+         weightkg * (90 - (0.4 * age)),
+         weightkg * (85 - (0.4 * age))
   )
-
-# TODO: consider Nadler's Formula for blood volume, contrast to ideal weight calc
-#For Males = 0.3669 * Ht^3 + 0.03219 * Wt in kgs + 0.6041
-#For Females = 0.3561 * Ht^3 + 0.03308 x Wt in kgs + 0.1833
-# Surgery. 1962 Feb;51(2):224-32.
-# Prediction of blood volume in normal human adults.
-# Nadler SB, Hidalgo JH, Bloch T.
 
 #' @title adjusted body weight
 #' @description returns ideal weight + 40% of difference between ideal and
