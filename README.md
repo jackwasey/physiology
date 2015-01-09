@@ -1,5 +1,7 @@
 # physiology
 
+[![Build Status](https://travis-ci.org/jackwasey/physiology.svg?branch=master)](https://travis-ci.org/jackwasey/physiology) [![Coverage Status](https://img.shields.io/coveralls/jackwasey/physiology.svg)](https://coveralls.io/r/jackwasey/physiology?branch=master)
+
 ## Calculate physiological characteristics of adults and children
 
 A variety of formulae are provided for estimation of height,
