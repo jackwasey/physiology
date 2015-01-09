@@ -1,7 +1,7 @@
 Package: physiology
 Title: Calculate Physiological Characteristics of Adults and Children
-Version: 0.2.2
-Date: 2015-01-03
+Version: 0.3
+Date: 2015-01-09
 Authors@R: person("Jack O. Wasey", role=c("aut", "cre"), email="jack@jackwasey.com")
 Description: A variety of formulae are provided for estimation of height,
     weight and fluid compartments of adults and children. Each formula is
