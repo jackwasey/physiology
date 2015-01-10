@@ -224,11 +224,9 @@ blood_vol_Nadler <- function(heightm, weightkg, male,
 
   if (length(heightm) != length(weightkg) |
         length(male) != length(heightm)) {
-    stop("length(heightm)=%d", length(heightm))
-    stop("length(weightkg)=%d", length(weightkg))
-    stop("length(male)=%d", length(male))
-    stop("NadlerBloodVolume requires that the height weight and \
-         male vectors are all the same length.")
+    stop(sprintf("discrepancy between vector lengths: length(heightm)=%d, \
+                 length(weightkg)=%d, length(male)=%d",
+                 length(heightm), length(weightkg), length(male)))
   }
   if (warn) {
     if (any(heightm <  0.1, na.rm = TRUE))

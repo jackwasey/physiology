@@ -21,12 +21,12 @@ test_that("blood_vol_Nadler", {
   expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50, male=""))
   expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50, male="xebec"))
   expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50,
-                                 male=list("nonsense", 4)))
+                                male=list("nonsense", 4)))
 
   expect_that(blood_vol_Nadler(heightm = 1, weightkg = 50, male = FALSE),
               not(equals(
                 blood_vol_Nadler(heightm = 1, weightkg = 50, male = TRUE))
-                ))
+              ))
 
   h <- c(1, 1.5, 2)
   w <- c(60, 70, 80)
@@ -37,3 +37,64 @@ test_that("blood_vol_Nadler", {
   expect_equal(blood_vol_Nadler(h[3],w[3],s[3]), r[3])
 
 })
+
+test_that("Lemmens indexed blood vol", {
+  expect_error(blood_vol_lemmens_indexed())
+  expect_error(blood_vol_lemmens_indexed(2))
+  expect_error(blood_vol_lemmens_indexed(heightm = 2))
+  expect_error(blood_vol_lemmens_indexed(weightkg = 80))
+  expect_error(blood_vol_lemmens_indexed(bad_input))
+  expect_error(blood_vol_lemmens_indexed(bad_input, bad_input))
+
+  # TODO: expect warnings for crazy height and weight standard across functions
+
+  expect_error(blood_vol_lemmens_indexed(c(1,2), 50))
+  expect_error(blood_vol_lemmens_indexed(2, c(50, 80)))
+
+  expect_equal(blood_vol_lemmens_indexed(2, 100),
+               70 / sqrt(100 / (22 * 2 ^ 2)))
+})
+
+test_that("Lemmens sedentary blood vol", {
+  expect_error(blood_vol_lemmens_sedentary())
+  expect_error(blood_vol_lemmens_sedentary(2))
+  expect_error(blood_vol_lemmens_sedentary(heightm = 2))
+  expect_error(blood_vol_lemmens_sedentary(weightkg = 80))
+  expect_error(blood_vol_lemmens_sedentary(bad_input))
+  expect_error(blood_vol_lemmens_sedentary(bad_input, bad_input))
+
+  # TODO: expect warnings for crazy height and weight standard across functions
+
+  expect_error(blood_vol_lemmens_sedentary(c(1,2), 50))
+  expect_error(blood_vol_lemmens_sedentary(2, c(50, 80)))
+
+  expect_equal(blood_vol_lemmens_sedentary(2, 100),
+               7000 / sqrt(100 / (22 * 2 ^ 2)))
+})
+
+test_that("adj body weight", {
+  expect_error(adj_weight_adult())
+  expect_error(adj_weight_adult(2))
+  expect_error(adj_weight_adult(heightm = 2))
+  expect_error(adj_weight_adult(weightkg = 80))
+  expect_error(adj_weight_adult(heightm = 2, weightkg = 80))
+  expect_error(adj_weight_adult(heightm = 2, male = TRUE))
+  expect_error(adj_weight_adult(weightkg = 80, male = TRUE))
+  expect_error(adj_weight_adult(bad_input))
+  expect_error(adj_weight_adult(bad_input, bad_input))
+  expect_error(adj_weight_adult(bad_input, bad_input, bad_input))
+
+  expect_error(adj_weight_adult(c(1, 2), c(40, 80), FALSE))
+  expect_error(adj_weight_adult(c(1, 2), 40, c(FALSE, TRUE)))
+  expect_error(adj_weight_adult(2, c(40, 80), c(FALSE, TRUE)))
+
+  expect_error(adj_weight_adult(2, 100, "male"))
+  expect_error(adj_weight_adult(2, 100, "TRUE"))
+
+  #TODO valid ranges for doing this adjustment, e.g. downwards?
+  # the calc depends on what method is used to find ideal body weight:
+  expect_equal(adj_weight_adult(2, 100, TRUE),
+               0.6 * ideal_weight_adult(2, TRUE) + 40)
+
+})
+
