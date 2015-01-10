@@ -104,13 +104,51 @@ test_that("Straub", {
 
 })
 
+test_that("child ideal weight defaults to Straub", {
+  expect_equal(ideal_weight_child(1, age.days = 700),
+              ideal_weight_Straub(1, age.days = 700))
+})
+
 test_that("body surface area", {
   expect_equal(bsa_adult(heightm = 2, weightkg = 72), 2)
   expect_equal(bsa_adult(heightm = c(NA, 2), weightkg = c(70, 72)), c(NA_real_, 2))
 })
 
 test_that("ideal weight Lemmens", {
-expect_equal(ideal_weight_Lemmens(2), 88)
+  expect_equal(ideal_weight_Lemmens(2), 88)
+})
+
+test_that("BMI adult", {
+  expect_equal(bmi_adult(2, 100), 25)
+})
+
+test_that("BMI adult imperial measure", {
+  expect_equal(bmi_adult_ins_lbs(72, 200), 27.124600709)
+})
+
+test_that("blood vol Lemmens not obese", {
+  expect_error(blood_vol_Lemmens_non_obese())
+  expect_error(blood_vol_Lemmens_non_obese(NA))
+  expect_error(blood_vol_Lemmens_non_obese(NA, NA))
+  expect_error(blood_vol_Lemmens_non_obese(NULL))
+  expect_error(blood_vol_Lemmens_non_obese(NULL, NULL))
+  expect_error(blood_vol_Lemmens_non_obese(NULL, NULL, NULL))
+  expect_error(blood_vol_Lemmens_non_obese(50))
+  expect_error(blood_vol_Lemmens_non_obese(weightkg = 50))
+  expect_error(blood_vol_Lemmens_non_obese(age = 20))
+  expect_error(blood_vol_Lemmens_non_obese(male = TRUE))
+  expect_error(blood_vol_Lemmens_non_obese(weightkg = 50, age = 20))
+  expect_error(blood_vol_Lemmens_non_obese(age = 20, male = FALSE))
+  expect_error(blood_vol_Lemmens_non_obese(weightkg = 50, male = TRUE))
+
+  expect_error(blood_vol_Lemmens_non_obese(weightkg = 50, age = 50, male = "M"))
+
+  expect_error(blood_vol_Lemmens_non_obese(weightkg = 50, age = 50, male = c(TRUE, FALSE)))
+  expect_error(blood_vol_Lemmens_non_obese(weightkg = 50, age = c(50, 60), male = FALSE))
+  expect_error(blood_vol_Lemmens_non_obese(weightkg = c(50, 75), age = 50, male = FALSE))
+
+  expect_equal(blood_vol_Lemmens_non_obese(50, 50, TRUE), 3500)
+  expect_equal(blood_vol_Lemmens_non_obese(50, 50, FALSE), 3250)
 })
 
 test_that("height, weight funcs invalid input", {
@@ -173,7 +211,7 @@ test_that("height, gender funcs invalid input", {
   funs <- c("ideal_weight_adult", "ideal_weight_Broca",
             "ideal_weight_Devine", "ideal_weight_Miller",
             "ideal_weight_Robinson"
-            )
+  )
 
   # now give conditions that should be true for all these functions:
   for (f in funs) {

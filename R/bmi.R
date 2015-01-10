@@ -258,6 +258,8 @@ blood_vol_Lemmens_indexed <- function(heightm, weightkg, ...) {
 #'   blood_vol_Lemmens_non_obese(80, age = 75, male = TRUE)
 #' @export
 blood_vol_Lemmens_non_obese <- function(weightkg, age, male, ...) {
+  stopifnot(length(weightkg) == length(age))
+  stopifnot(length(male) == length(age))
   valid_weight(weightkg, ...)
   valid_age(age, ...)
   stopifnot(is.logical(male))
@@ -310,5 +312,5 @@ bmi_adult <- function(heightm, weightkg, ...) {
 #' bmi_adult_ins_lbs(72, 200)
 #' @export
 bmi_adult_ins_lbs <- function(heightin, weightlb, ...) {
-  bmi_adult(heightin * 0.0254, weightlb * 2.20462, ...)
+  bmi_adult(heightin * 0.0254, weightlb / 2.2046224, ...)
 }
