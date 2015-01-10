@@ -8,8 +8,11 @@
 #' bsa_adult(2, 80)
 #' bsa_adult(1.5, 80)
 #' @export
-bsa_adult <- function(heightm, weightkg)
+bsa_adult <- function(heightm, weightkg, ...) {
+  valid_height_adult(heightm, ...)
+  valid_weight(weightkg, ...)
   sqrt(heightm * weightkg) / 6
+}
 
 #' @title ideal weight for adults
 #' @description \code{ideal_weight_adult} gives the ideal weight using default
@@ -40,15 +43,15 @@ ideal_weight_adult <- function(heightm, male, ...)
 #'   adds complexity and a dependency.
 #' @param age.months numeric vector, age(s) in months
 #' @param age.days  numeric vector, age(s) in days
-#' @template warn
+#' @param ... passed on to subsequent functions, e.g. \code{do.warn = TRUE} or \code{do.stop = TRUE}
 #' @rdname ideal_weight
 #' @export
 ideal_weight_child <- function(heightm,
                                age.years = NULL,
                                age.months = NULL,
                                age.days = NULL,
-                               warn = FALSE)
-  ideal_weight_Straub(heightm, age.years, age.months, age.days, warn)
+                               ...)
+  ideal_weight_Straub(heightm, age.years, age.months, age.days, ...)
 
 #' @title ideal weight for child per Straub
 #' @description http://www.ncbi.nlm.nih.gov/pubmed/6823980 2.396e0.01863(ht),
@@ -77,27 +80,22 @@ ideal_weight_Straub <- function(heightm,
                                 age.years = NULL,
                                 age.months = NULL,
                                 age.days = NULL,
-                                warn = FALSE) {
+                                ...) {
   stopifnot(sum(is.null(age.years),
                 is.null(age.months),
                 is.null(age.days)) >= 2)
 
-  if (any(!is.null(age.years) & (age.years < 0 | age.years > 150)) ||
-        any(!is.null(age.months) & (age.months < 0 | age.months > 12 * 150)) ||
-        any(!is.null(age.days) & (age.days < 0 | age.days > 365 * 150)))
-    warning("absurd age(s) of less than 0 or greater than 150 years found")
-
-  if (any(heightm < 0.1 | heightm > 3))
-    warning("absurd height(s) < 10cm or > 3m found")
-
-  if (warn) {
-    if (any(!is.null(age.years) & (age.years < 1 | age.years > 17)))
-      warning("age < 1 year or age > 17 year not validated from Straub formula")
-    if (any(!is.null(age.months) & (age.months < 24 | age.months > 12 * 17 + 11)))
-      warning("age < 1 year or age > 17 year not validated from Straub formula")
-    if (any(!is.null(age.days) & (age.days < 364 | age.days > 365 * 18)))
-      warning("age < 1 year or age > 17 year not validated from Straub formula")
+  if (is.null(age.years)) {
+    if (is.null(age.days))
+      age.years = age.months / 12
+    else
+      age.years = age.days / 365
   }
+
+  valid_age(age.years, age.min = 1, age.max = 18,
+            age.min.hard = 0, age.max.hard = 150,
+            extramsg = "age < 1 year or age > 17 year not validated from Straub formula", ...)
+  valid_height(heightm, ...)
 
   # 2.396e0.01863(ht), where height is in cm
   2.396 ^ (1.863 * heightm)
@@ -113,6 +111,7 @@ ideal_weight_Straub <- function(heightm,
 ideal_weight_Devine <- function(heightm, male, ...)
   ideal_weight_linear(heightm, male, 60, 50, 45.5, 2.3, 2.3, ...)
 
+
 #' @title ideal weight by Robinson method
 #' @rdname ideal_weight
 #' @export
@@ -122,6 +121,7 @@ ideal_weight_Devine <- function(heightm, male, ...)
 #'   40: 1016-9.)
 ideal_weight_Robinson <- function(heightm, male, ...)
   ideal_weight_linear(heightm, male, 60, 52, 49, 1.9, 1.7, ...)
+
 
 #' @title ideal weight by Miller
 #' @export
@@ -146,8 +146,10 @@ ideal_weight_Broca <- function(heightm, male, ...)
 #' TODO: verbose height bounds check
 #' @rdname ideal_weight
 #' @export
-ideal_weight_Lemmens <- function(heightm)
+ideal_weight_Lemmens <- function(heightm, ...) {
+  valid_height(heightm, ...)
   22 * heightm ^ 2
+}
 
 #' @title ideal weight by gender, offset and gradient
 #' @description generic internal function to handle linear ideal weight
@@ -159,43 +161,21 @@ ideal_weight_Lemmens <- function(heightm)
 #'   females
 #' @param male_kg_per_inch, slope for males
 #' @param female_kg_per_inch, slope for females
-#' @template warn
+#' @param ... passed on to validation
 #' @rdname ideal_weight
 #' @keywords internal
 ideal_weight_linear <- function(heightm, male,
                                 heightmininch,
                                 male_min_kg, female_min_kg,
                                 male_kg_per_inch, female_kg_per_inch,
-                                warn = FALSE) {
-  #NA height or NA maleness are both allowed, and should give NA.
-
-  if (length(heightm) != length(male))
-    stop("height (%d) and sex (%d) vectors are different lengths",
-         length(heightm), length(male))
+                                ...) {
+  stopifnot(length(heightm) == length(male))
+  valid_height(heightm, ...)
 
   heightinch <- heightm * 100 / 2.54
 
   f2mintercept <- male_min_kg - female_min_kg
   f2mgradient <- male_kg_per_inch - female_kg_per_inch
-
-  # TODO: vectorize errors and result!
-  if (any(heightinch < 0.75 * heightmininch, na.rm = TRUE))
-    if (warn) warning(sprintf(
-      "calculating ideal weight based on some very low height of %.2fm inches",
-      heightm[which(heightinch < 0.75 * heightmininch)]))
-
-  if (any(heightinch < heightmininch, na.rm = TRUE))
-    if (warn) warning(sprintf(
-      "calculating ideal Weight based on some low height of %.3fm inches",
-      heightm[which(heightinch < heightmininch)]))
-  if (any(heightinch > 9 * 12, na.rm = TRUE))
-    if (warn) warning(
-      "calculating ideal_weight_ based on some big heights of %.3fm inches",
-      heightm[which(heightinch > 9 * 12)])
-  if (any(heightinch > 8 * 12, na.rm = TRUE))
-    if (warn) warning(
-      "calculating ideal_weight_ based on some big heights of %.3fm inches",
-      heightm[which(heightinch > 8 * 12)])
 
   female_min_kg + f2mintercept * male +
     (heightinch - heightmininch) * (female_kg_per_inch + f2mgradient * male)
@@ -208,38 +188,17 @@ ideal_weight_linear <- function(heightm, male,
 #'   normal human adults. Nadler SB, Hidalgo JH, Bloch T.
 #' @inheritParams ideal_weight_adult
 #' @template weightkg
-#' @template warn
+#' @param ... passed on to validation
 #' @examples
 #' blood_vol_Nadler(1.8, 80, male = TRUE)
 #' blood_vol_Nadler(1.8, 160, male = TRUE)
 #' blood_vol_Nadler(1.8, 80, male = FALSE)
 #' @export
-blood_vol_Nadler <- function(heightm, weightkg, male,
-                             warn = FALSE) {
+blood_vol_Nadler <- function(heightm, weightkg, male, ...) {
 
-  if (!is.numeric(heightm)) stop("need numeric height input")
-  if (any(is.na(heightm)) & warn) warning("need non-NA height input")
-  if (!is.numeric(weightkg)) stop("need numeric weight input")
-  if (any(is.na(weightkg)) & warn) warning("need non-NA weight input")
-
-  if (length(heightm) != length(weightkg) |
-        length(male) != length(heightm)) {
-    stop(sprintf("discrepancy between vector lengths: length(heightm)=%d, \
-                 length(weightkg)=%d, length(male)=%d",
-                 length(heightm), length(weightkg), length(male)))
-  }
-  if (warn) {
-    if (any(heightm <  0.1, na.rm = TRUE))
-      warning("some heights are less than a 10cm!")
-    if (any(heightm >  3,   na.rm = TRUE))
-      warning("some heights are greater than 3m")
-    if (any(weightkg < 0.1, na.rm = TRUE))
-      warning("some weights are less than 100g")
-    if (any(weightkg > 400, na.rm = TRUE))
-      warning("some weights are greater than 400kg")
-  }
-
-  nadler <- (0.3669 - (0.3669 - 0.3561) * !male) * heightm ^ 3 +
+  valid_height(heightm, ...)
+  valid_weight(weightkg, ...)
+  (0.3669 - (0.3669 - 0.3561) * !male) * heightm ^ 3 +
     (0.03219 - (0.03219 - 0.03308) * !male) * weightkg +
     (0.6041 - (0.6041 - 0.1833) * !male)
 }
@@ -260,16 +219,20 @@ blood_vol_Nadler <- function(heightm, weightkg, male,
 #' blood_vol_lemmens_sedentary(1.8, 80)
 #' blood_vol_lemmens_sedentary(1.8, 160)
 #' @export
-blood_vol_lemmens_sedentary <- function(heightm, weightkg)
-  weightkg * blood_vol_lemmens_indexed(heightm, weightkg)
+blood_vol_lemmens_sedentary <- function(heightm, weightkg, ...) {
+  weightkg * blood_vol_lemmens_indexed(heightm, weightkg, ...)
+}
 
 #' @rdname bloodvol
 #' @examples
 #' blood_vol_lemmens_indexed(1.8, 80)
 #' blood_vol_lemmens_indexed(1.8, 160)
 #' @export
-blood_vol_lemmens_indexed <- function(heightm, weightkg) {
+blood_vol_lemmens_indexed <- function(heightm, weightkg, ...) {
   stopifnot(length(heightm) == length(weightkg))
+  valid_height_adult(heightm, ...)
+  valid_weight_adult(weightkg, ...)
+
   70 / sqrt(weightkg / (22 * heightm ^ 2))
 }
 
@@ -290,11 +253,14 @@ blood_vol_lemmens_indexed <- function(heightm, weightkg) {
 #'   blood_vol_lemmens_non_obese(80, age = 25, male = TRUE)
 #'   blood_vol_lemmens_non_obese(80, age = 75, male = TRUE)
 #' @export
-blood_vol_lemmens_non_obese <- function(weightkg, age, male)
+blood_vol_lemmens_non_obese <- function(weightkg, age, male, ...) {
+  valid_weight(weightkg, ...)
+  valid_age(heightm, ...)
   ifelse(male,
          weightkg * (90 - (0.4 * age)),
          weightkg * (85 - (0.4 * age))
   )
+}
 
 #' @title adjusted body weight
 #' @description returns ideal weight + 40% of difference between ideal and
@@ -305,9 +271,12 @@ blood_vol_lemmens_non_obese <- function(weightkg, age, male)
 #' @examples
 #' adj_weight_adult(1.6, 120, male = FALSE)
 #' @export
-adj_weight_adult <- function(heightm, weightkg, male) {
+adj_weight_adult <- function(heightm, weightkg, male, ...) {
   stopifnot(length(heightm) == length(weightkg))
   stopifnot(length(male) == length(weightkg))
+  valid_height_adult(heightm, ...)
+  valid_weight_adult(weightkg, ...)
+
   #TODO: is downward adjustment valid?
   0.6 * ideal_weight_adult(heightm, male) + 0.4 * weightkg
 }
@@ -320,8 +289,12 @@ adj_weight_adult <- function(heightm, weightkg, male) {
 #' bmi_adult(1.6, 120)
 #' bmi_adult(2, 75)
 #' @export
-bmi_adult <- function(heightm, weightkg)
+bmi_adult <- function(heightm, weightkg, ...) {
+  stopifnot(length(heightm) == length(weightkg))
+  valid_height_adult(heightm, ...)
+  valid_weight_adult(weightkg, ...)
   weightkg / (heightm ^ 2)
+}
 
 #' @rdname bmi
 #' @param heightin height in inches
@@ -329,5 +302,6 @@ bmi_adult <- function(heightm, weightkg)
 #' @examples
 #' bmi_adult_ins_lbs(72, 200)
 #' @export
-bmi_adult_ins_lbs <- function(heightin, weightlb)
-  bmi_adult(heightin * 0.0254, weightlb * 2.20462)
+bmi_adult_ins_lbs <- function(heightin, weightlb, ...) {
+  bmi_adult(heightin * 0.0254, weightlb * 2.20462, ...)
+}

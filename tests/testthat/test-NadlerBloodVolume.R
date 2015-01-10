@@ -10,14 +10,14 @@ test_that("blood_vol_Nadler", {
   expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50))
 
   expect_warning(blood_vol_Nadler(heightm = 0, weightkg = 50,
-                                  male = TRUE, warn = TRUE))
+                                  male = TRUE, do.warn = TRUE))
   expect_warning(blood_vol_Nadler(heightm = 1, weightkg = 5000,
-                                  male = TRUE, warn = TRUE))
+                                  male = TRUE, do.warn = TRUE))
   expect_warning(blood_vol_Nadler(heightm =-1, weightkg = 50,
-                                  male = TRUE, warn = TRUE))
+                                  male = TRUE, do.warn = TRUE))
 
   expect_warning(blood_vol_Nadler(heightm = 1, weightkg = -50,
-                                  male = TRUE, warn = TRUE))
+                                  male = TRUE, do.warn = TRUE))
   expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50, male=""))
   expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50, male="xebec"))
   expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50,
