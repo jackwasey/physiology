@@ -35,7 +35,9 @@ ideal_weight_adult <- function(heightm, male, ...)
 #'   developmental differences. Age specifications are mutually exclusive, and
 #'   an error will be generated if more than on age i specified per patient.
 #' @template heightm
-#' @param age.years numeric vector, age(s) in years
+#' @param age.years numeric vector, age(s) in years. TODO: there must be a
+#'   better way of capturing age. 'lubridate' doesn't seem to help much, and
+#'   adds complexity and a dependency.
 #' @param age.months numeric vector, age(s) in months
 #' @param age.days  numeric vector, age(s) in days
 #' @template warn
@@ -78,16 +80,25 @@ ideal_weight_Straub <- function(heightm,
                                 warn = FALSE) {
   stopifnot(sum(is.null(age.years),
                 is.null(age.months),
-                is.null(age.days)) == 2)
+                is.null(age.days)) >= 2)
+
+  if (any(!is.null(age.years) & (age.years < 0 | age.years > 150)) ||
+        any(!is.null(age.months) & (age.months < 0 | age.months > 12 * 150)) ||
+        any(!is.null(age.days) & (age.days < 0 | age.days > 365 * 150)))
+    warning("absurd age(s) of less than 0 or greater than 150 years found")
+
+  if (any(heightm < 0.1 | heightm > 3))
+    warning("absurd height(s) < 10cm or > 3m found")
+
   if (warn) {
     if (any(!is.null(age.years) & (age.years < 1 | age.years > 17)))
       warning("age < 1 year or age > 17 year not validated from Straub formula")
     if (any(!is.null(age.months) & (age.months < 24 | age.months > 12 * 17 + 11)))
       warning("age < 1 year or age > 17 year not validated from Straub formula")
-    if (any(!is.null(age.months) & (age.days < 364 | age.days > 364 * 12 * 18)))
+    if (any(!is.null(age.days) & (age.days < 364 | age.days > 365 * 18)))
       warning("age < 1 year or age > 17 year not validated from Straub formula")
   }
-  #
+
   # 2.396e0.01863(ht), where height is in cm
   2.396 ^ (1.863 * heightm)
 }
