@@ -10,8 +10,9 @@
 #' bsa_adult(1.5, 80)
 #' @export
 bsa_adult <- function(heightm, weightkg, ...) {
+  stopifnot(length(heightm) == length(weightkg))
   valid_height_adult(heightm, ...)
-  valid_weight(weightkg, ...)
+  valid_weight_adult(weightkg, ...)
   sqrt(heightm * weightkg) / 6
 }
 
@@ -171,6 +172,7 @@ ideal_weight_linear <- function(heightm, male,
                                 male_min_kg, female_min_kg,
                                 male_kg_per_inch, female_kg_per_inch,
                                 ...) {
+  stopifnot(is.logical(male))
   stopifnot(length(heightm) == length(male))
   valid_height(heightm, ...)
 
@@ -197,9 +199,9 @@ ideal_weight_linear <- function(heightm, male,
 #' blood_vol_Nadler(1.8, 80, male = FALSE)
 #' @export
 blood_vol_Nadler <- function(heightm, weightkg, male, ...) {
-
   valid_height(heightm, ...)
   valid_weight(weightkg, ...)
+  stopifnot(is.logical(male))
   (0.3669 - (0.3669 - 0.3561) * !male) * heightm ^ 3 +
     (0.03219 - (0.03219 - 0.03308) * !male) * weightkg +
     (0.6041 - (0.6041 - 0.1833) * !male)
@@ -218,19 +220,19 @@ blood_vol_Nadler <- function(heightm, weightkg, male, ...) {
 #'   TODO: include age as cut-off butween the use of differing formulae.
 #' @return numeric vector
 #' @examples
-#' blood_vol_lemmens_sedentary(1.8, 80)
-#' blood_vol_lemmens_sedentary(1.8, 160)
+#' blood_vol_Lemmens_sedentary(1.8, 80)
+#' blood_vol_Lemmens_sedentary(1.8, 160)
 #' @export
-blood_vol_lemmens_sedentary <- function(heightm, weightkg, ...) {
-  weightkg * blood_vol_lemmens_indexed(heightm, weightkg, ...)
+blood_vol_Lemmens_sedentary <- function(heightm, weightkg, ...) {
+  weightkg * blood_vol_Lemmens_indexed(heightm, weightkg, ...)
 }
 
 #' @rdname bloodvol
 #' @examples
-#' blood_vol_lemmens_indexed(1.8, 80)
-#' blood_vol_lemmens_indexed(1.8, 160)
+#' blood_vol_Lemmens_indexed(1.8, 80)
+#' blood_vol_Lemmens_indexed(1.8, 160)
 #' @export
-blood_vol_lemmens_indexed <- function(heightm, weightkg, ...) {
+blood_vol_Lemmens_indexed <- function(heightm, weightkg, ...) {
   stopifnot(length(heightm) == length(weightkg))
   valid_height_adult(heightm, ...)
   valid_weight_adult(weightkg, ...)
@@ -252,12 +254,13 @@ blood_vol_lemmens_indexed <- function(heightm, weightkg, ...) {
 #' @param age years
 #' @param male logical
 #' @examples
-#'   blood_vol_lemmens_non_obese(80, age = 25, male = TRUE)
-#'   blood_vol_lemmens_non_obese(80, age = 75, male = TRUE)
+#'   blood_vol_Lemmens_non_obese(80, age = 25, male = TRUE)
+#'   blood_vol_Lemmens_non_obese(80, age = 75, male = TRUE)
 #' @export
-blood_vol_lemmens_non_obese <- function(weightkg, age, male, ...) {
+blood_vol_Lemmens_non_obese <- function(weightkg, age, male, ...) {
   valid_weight(weightkg, ...)
   valid_age(age, ...)
+  stopifnot(is.logical(male))
   ifelse(male,
          weightkg * (90 - (0.4 * age)),
          weightkg * (85 - (0.4 * age))
@@ -279,7 +282,7 @@ adj_weight_adult <- function(heightm, weightkg, male, ...) {
   stopifnot(length(male) == length(weightkg))
   valid_height_adult(heightm, ...)
   valid_weight_adult(weightkg, ...)
-
+  stopifnot(is.logical(male))
   #TODO: is downward adjustment valid?
   0.6 * ideal_weight_adult(heightm, male) + 0.4 * weightkg
 }

@@ -65,7 +65,7 @@ valid_weight_adult <- function(weightkg, wt.min = 5, wt.max = 300,
 #' @param age.max.hard maximum height above which to warn if \code{warn}
 #' @export
 valid_age <- function(age.years, age.min = 0, age.max = 150,
-                      age.min.hard = 0, age.max.hard = 150,
+                      age.min.hard = 0.00001, age.max.hard = 150,
                       extramsg = "", do.warn = TRUE, do.stop = FALSE)
   valid(age.years, "age", "yr",
         age.min, age.max, age.min.hard, age.max.hard,
@@ -98,16 +98,20 @@ valid <- function(var, var.name, var.unit, min, max, min.hard, max.hard,
   stopifnot(is.character(extramsg))
   stopifnot(length(extramsg) == 1)
 
-  if (do.warn && any(var < min | var > max, na.rm = TRUE))
-    warning(sprintf("%s(s) < %0.1f or > %0.1f %s found. %s",
-                    var.name, min, max, var.unit, extramsg))
 
-  if (any(var < min.hard | var > max.hard, na.rm = TRUE)) {
-    msg <- sprintf("%s(s) < %0.1f or > %0.1f %s found. %s",
+  if (any(var <= min.hard | var >= max.hard, na.rm = TRUE)) {
+    msg <- sprintf("%s(s) <= %0.1f or >= %0.1f %s found. %s",
                    var.name, min.hard, max.hard, var.unit, extramsg)
     if (do.stop)
       stop(msg)
-    else
+    else {
       warning(msg)
+      return()
+    }
   }
+
+  if (do.warn && any(var <= min | var >= max, na.rm = TRUE))
+    warning(sprintf("%s(s) < %0.1f or > %0.1f %s found. %s",
+                    var.name, min, max, var.unit, extramsg))
+
 }

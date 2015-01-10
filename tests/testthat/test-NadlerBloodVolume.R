@@ -39,36 +39,36 @@ test_that("blood_vol_Nadler", {
 })
 
 test_that("Lemmens indexed blood vol", {
-  expect_error(blood_vol_lemmens_indexed())
-  expect_error(blood_vol_lemmens_indexed(2))
-  expect_error(blood_vol_lemmens_indexed(heightm = 2))
-  expect_error(blood_vol_lemmens_indexed(weightkg = 80))
-  expect_error(blood_vol_lemmens_indexed(bad_input))
-  expect_error(blood_vol_lemmens_indexed(bad_input, bad_input))
+  expect_error(blood_vol_Lemmens_indexed())
+  expect_error(blood_vol_Lemmens_indexed(2))
+  expect_error(blood_vol_Lemmens_indexed(heightm = 2))
+  expect_error(blood_vol_Lemmens_indexed(weightkg = 80))
+  expect_error(blood_vol_Lemmens_indexed(bad_input))
+  expect_error(blood_vol_Lemmens_indexed(bad_input, bad_input))
 
   # TODO: expect warnings for crazy height and weight standard across functions
 
-  expect_error(blood_vol_lemmens_indexed(c(1,2), 50))
-  expect_error(blood_vol_lemmens_indexed(2, c(50, 80)))
+  expect_error(blood_vol_Lemmens_indexed(c(1,2), 50))
+  expect_error(blood_vol_Lemmens_indexed(2, c(50, 80)))
 
-  expect_equal(blood_vol_lemmens_indexed(2, 100),
+  expect_equal(blood_vol_Lemmens_indexed(2, 100),
                70 / sqrt(100 / (22 * 2 ^ 2)))
 })
 
 test_that("Lemmens sedentary blood vol", {
-  expect_error(blood_vol_lemmens_sedentary())
-  expect_error(blood_vol_lemmens_sedentary(2))
-  expect_error(blood_vol_lemmens_sedentary(heightm = 2))
-  expect_error(blood_vol_lemmens_sedentary(weightkg = 80))
-  expect_error(blood_vol_lemmens_sedentary(bad_input))
-  expect_error(blood_vol_lemmens_sedentary(bad_input, bad_input))
+  expect_error(blood_vol_Lemmens_sedentary())
+  expect_error(blood_vol_Lemmens_sedentary(2))
+  expect_error(blood_vol_Lemmens_sedentary(heightm = 2))
+  expect_error(blood_vol_Lemmens_sedentary(weightkg = 80))
+  expect_error(blood_vol_Lemmens_sedentary(bad_input))
+  expect_error(blood_vol_Lemmens_sedentary(bad_input, bad_input))
 
   # TODO: expect warnings for crazy height and weight standard across functions
 
-  expect_error(blood_vol_lemmens_sedentary(c(1,2), 50))
-  expect_error(blood_vol_lemmens_sedentary(2, c(50, 80)))
+  expect_error(blood_vol_Lemmens_sedentary(c(1,2), 50))
+  expect_error(blood_vol_Lemmens_sedentary(2, c(50, 80)))
 
-  expect_equal(blood_vol_lemmens_sedentary(2, 100),
+  expect_equal(blood_vol_Lemmens_sedentary(2, 100),
                7000 / sqrt(100 / (22 * 2 ^ 2)))
 })
 

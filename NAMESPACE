@@ -2,10 +2,10 @@
 
 export(adj_weight_adult)
 export(age_from_dates)
+export(blood_vol_Lemmens_indexed)
+export(blood_vol_Lemmens_non_obese)
+export(blood_vol_Lemmens_sedentary)
 export(blood_vol_Nadler)
-export(blood_vol_lemmens_indexed)
-export(blood_vol_lemmens_non_obese)
-export(blood_vol_lemmens_sedentary)
 export(bmi_adult)
 export(bmi_adult_ins_lbs)
 export(bsa_adult)
