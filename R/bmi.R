@@ -3,6 +3,7 @@
 #'   adult using \code{sqrt(wt*ht)/6} TODO: reference for this.
 #' @template heightm
 #' @template weightkg
+#' @param ... passed to validation
 #' @return numeric vector
 #' @examples
 #' bsa_adult(2, 80)
@@ -23,6 +24,7 @@ bsa_adult <- function(heightm, weightkg, ...) {
 #' @template heightm
 #' @template male
 #' @template dots
+#' @param ... passed to validation
 #' @rdname ideal_weight
 #' @examples
 #' ideal_weight_adult(1.7, TRUE)
@@ -68,11 +70,11 @@ ideal_weight_child <- function(heightm,
 #' @examples
 #' # will warn if given age is not in validate range from publication:
 #' \dontrun{
-#'   ideal_weight_child(0.5, age.years = 0, warn = TRUE)
-#'   ideal_weight_child(0.8, age.months = 11, warn = TRUE)
-#'   ideal_weight_child(0.5, age.days = 25, warn = TRUE)
+#'   ideal_weight_child(0.5, age.years = 0, do.warn = TRUE)
+#'   ideal_weight_child(0.8, age.months = 11, do.warn = TRUE)
+#'   ideal_weight_child(0.5, age.days = 25, do.warn = TRUE)
 #' }
-#'   ideal_weight_child(0.5, age.days = 25, warn = FALSE)
+#'   ideal_weight_child(0.5, age.days = 25, do.warn = FALSE)
 #'   ideal_weight_child(1, age.years = 2)
 #'   ideal_weight_child(0.75, age.months = 15)
 #' @export
@@ -255,7 +257,7 @@ blood_vol_lemmens_indexed <- function(heightm, weightkg, ...) {
 #' @export
 blood_vol_lemmens_non_obese <- function(weightkg, age, male, ...) {
   valid_weight(weightkg, ...)
-  valid_age(heightm, ...)
+  valid_age(age, ...)
   ifelse(male,
          weightkg * (90 - (0.4 * age)),
          weightkg * (85 - (0.4 * age))
@@ -268,6 +270,7 @@ blood_vol_lemmens_non_obese <- function(weightkg, age, male, ...) {
 #'   is downward adjustment valid?
 #' @inheritParams ideal_weight_adult
 #' @param weightkg weight in kg, may be a vector
+#' @param ... passed to validation
 #' @examples
 #' adj_weight_adult(1.6, 120, male = FALSE)
 #' @export
@@ -285,6 +288,7 @@ adj_weight_adult <- function(heightm, weightkg, male, ...) {
 #' @rdname bmi
 #' @template heightm
 #' @template weightkg
+#' @param ... passed to validation
 #' @examples
 #' bmi_adult(1.6, 120)
 #' bmi_adult(2, 75)

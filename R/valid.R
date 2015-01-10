@@ -2,14 +2,17 @@
 #' @description User may generate warnings for unreasonable or obviously
 #'   erroneous heights. TODO: use age to validate further
 #' @template heightm
-#' @param min minimum height below which to warn if \code{warn = TRUE}
-#' @param max maximum height above which to warn if \code{warn = TRUE}
-#' @param min minimum height below which to warn regardless of \code{warn}
-#' @param max maximum height above which to warn if \code{warn}
+#' @param ht.min minimum height below which to warn if \code{warn = TRUE}
+#' @param ht.max maximum height above which to warn if \code{warn = TRUE}
+#' @param ht.min.hard minimum height below which to warn regardless of
+#'   \code{warn}
+#' @param ht.max.hard maximum height above which to warn if \code{warn}
 #' @param do.warn single logical, if TRUE, will give warnings outside of soft
 #'   limits
 #' @param do.stop single logical, \code{stop} instead of warning if any values
 #'   outside hard limits
+#' @param extramsg single character string with additional message to append,
+#'   default is ""
 #' @export
 valid_height <- function(heightm, ht.min = 0.1, ht.max = 2.5,
                          ht.min.hard = 0.001, ht.max.hard = 3,
@@ -30,6 +33,11 @@ valid_height_adult <- function(heightm, ht.min = 0.5, ht.max = 2.5,
 }
 
 #' @rdname valid_height
+#' @template weightkg
+#' @param wt.min minimum height below which to warn if \code{warn = TRUE}
+#' @param wt.max maximum height above which to warn if \code{warn = TRUE}
+#' @param wt.min.hard minimum height below which to warn regardless of \code{warn}
+#' @param wt.max.hard maximum height above which to warn if \code{warn}
 #' @export
 valid_weight <- function(weightkg, wt.min = 0.1, wt.max = 300,
                          wt.min.hard = 0, wt.max.hard = 600,
@@ -50,10 +58,24 @@ valid_weight_adult <- function(weightkg, wt.min = 5, wt.max = 300,
 }
 
 #' @rdname valid_height
+#' @param age.years numeric
+#' @param age.min minimum height below which to warn if \code{warn = TRUE}
+#' @param age.max maximum height above which to warn if \code{warn = TRUE}
+#' @param age.min.hard minimum height below which to warn regardless of \code{warn}
+#' @param age.max.hard maximum height above which to warn if \code{warn}
 #' @export
 valid_age <- function(age.years, age.min = 0, age.max = 150,
                       age.min.hard = 0, age.max.hard = 150,
                       extramsg = "", do.warn = TRUE, do.stop = FALSE)
+  valid(age.years, "age", "yr",
+        age.min, age.max, age.min.hard, age.max.hard,
+        extramsg, do.warn, do.stop)
+
+#' @rdname valid_height
+#' @export
+valid_age_adult <- function(age.years, age.min = 18, age.max = 150,
+                            age.min.hard = 17, age.max.hard = 150,
+                            extramsg = "", do.warn = TRUE, do.stop = FALSE)
   valid(age.years, "age", "yr",
         age.min, age.max, age.min.hard, age.max.hard,
         extramsg, do.warn, do.stop)
