@@ -260,8 +260,8 @@ blood_vol_Lemmens_indexed <- function(heightm, weightkg, ...) {
 blood_vol_Lemmens_non_obese <- function(weightkg, age, male, ...) {
   stopifnot(length(weightkg) == length(age))
   stopifnot(length(male) == length(age))
-  valid_weight(weightkg, ...)
-  valid_age(age, ...)
+  valid_weight_adult(weightkg, ...)
+  valid_age_adult(age, ...)
   stopifnot(is.logical(male))
   ifelse(male,
          weightkg * (90 - (0.4 * age)),
