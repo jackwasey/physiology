@@ -289,7 +289,9 @@ adj_weight_adult <- function(heightm, weightkg, male, ...) {
   0.6 * ideal_weight_adult(heightm, male) + 0.4 * weightkg
 }
 
-#' @title Body Mass Index (BMI) for adults
+#' Body Mass Index (BMI) for adults
+#'
+#' Calculate body mass index using weight in kg / (height in metres ^ 2)
 #' @rdname bmi
 #' @template heightm
 #' @template weightkg

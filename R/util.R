@@ -1,4 +1,6 @@
-#' @title age from birth and reference dates
+#' age from birth and reference dates
+#'
+#' Calculate age at time of reference date, based on birth date.
 #' @param birth.date Date of birth, either as a \code{Date} or something which
 #'   will be converted to a \code{Date}
 #' @param ref.date Date at which to calculate age, defaults to current date,
