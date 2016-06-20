@@ -16,7 +16,9 @@ Suggests:
     ggplot2,
     reshape2,
     testthat,
-    knitr
+    knitr,
+    rvest,
+    xml2
 License: GPL-3
 BugReports: https://github.com/jackwasey/physiology/issues
 VignetteBuilder: knitr
