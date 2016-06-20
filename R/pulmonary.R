@@ -7,11 +7,11 @@
 #' @param RQ respiratory quotient, i.e. the ratio of CO2 produced to oxygen
 #'   consumed, usually between around 0.7 and 1.0, but can legitimately be
 #'   greater than 1.0. Default it 0.8.
-#' @param paCO2 partial pressure of CO2 in alveolus, which can be approximated
+#' @param paCO2_mmHg partial pressure of CO2 in alveolus, which can be approximated
 #'   as the end-tidal pCO2
-#' @param paH2O partial pressure of water vapor, defaults to 6.25 kPa (47 mmHg)
+#' @param Patm_mmHg atmospheric pressure in kPa
+#' @param paH2O_mmHg partial pressure of water vapor, defaults to 6.25 kPa (47 mmHg)
 #'   which is appropriate for body temperature
-#' @param Patm atmospheric pressure in kPa
 #' @examples
 #' # vary RQ
 #' rq <- seq(0.6, 1.4, 0.05)

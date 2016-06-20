@@ -16,6 +16,7 @@ Suggests:
     ggplot2,
     reshape2,
     rmarkdown,
+    rvest,
     testthat,
     knitr
 License: GPL-3
