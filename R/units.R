@@ -21,7 +21,7 @@ generate_med_conv <- function() {
   names(med_conv) <- c("analyte", "specimen", "ref.conventional",
                        "unit.conventional", "factor", "ref.si",
                        "unit.si")
-  saveRDS(med_conv, file = "data/med_conv.rda", compress = "xz")
+  save(med_conv, file = "data/med_conv.rda", compress = "xz")
 }
 
 #' Conversion factors and reference ranges for lab values
