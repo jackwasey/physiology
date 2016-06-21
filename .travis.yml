@@ -21,7 +21,7 @@ matrix:
 repos:
   CRAN: https://cloud.r-project.org
 
-warnings_are_errors: true
+warnings_are_errors: false
 
 before_script:
 - Rscript -e 'devtools::install_github("jimhester/covr")'
