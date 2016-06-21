@@ -14,13 +14,18 @@ diameter_mm_to_french <- function(x)
 generate_med_conv <- function() {
   loadNamespace("xml2")
   loadNamespace("rvest")
-  whole_page <- xml2::read_html("http://www.amamanualofstyle.com/page/si-conversion-calculator")
-  med_conv <- rvest::html_table(rvest::html_nodes(whole_page, ".siTable"), fill = TRUE, header = TRUE)[[2]][-5]
+  whole_page <- xml2::read_html(
+    "http://www.amamanualofstyle.com/page/si-conversion-calculator")
+  med_conv <- rvest::html_table(
+    rvest::html_nodes(whole_page, ".siTable"),
+    fill = TRUE, header = TRUE)[[2]][-5]
   med_conv <- lapply(med_conv, function(x) if (x == "" || x == " ") NA else x)
   med_conv <- as.data.frame(med_conv[-c(7, 9)])
   names(med_conv) <- c("analyte", "specimen", "ref.conventional",
                        "unit.conventional", "factor", "ref.si",
                        "unit.si")
+  Encoding(levels(med_conv$analyte)) <- "latin1"
+  levels(med_conv$analyte) <- iconv(levels(med_conv$analyte), "latin1", "UTF-8")
   save(med_conv, file = "data/med_conv.rda", compress = "xz")
 }
 

@@ -6,15 +6,13 @@
 \title{Conversion factors and reference ranges for lab values}
 \format{data frame in a tidy format, with the following columns, with example
  values:
- - Analyte _Carbon dioxide, Pco2_
+ - Analyte _Carbon dioxide, _Pco2_
  - Specimen _Arterial blood_
  - Reference Range, Conventional Unit _35-45_
- - Reference Range, Conventional Unit
  - Conventional Unit _mm Hg_
  - Conversion Factor (Multiply by) _0.133_
  - Reference Range, SI Unit _47.-5.9_
- - Conversion Result, SI Unit _kPa_
- - Convert
+ - SI Unit _kPa_
  @source \url{http://www.amamanualofstyle.com/page/si-conversion-calculator}}
 \usage{
 med_conv
