@@ -2,7 +2,7 @@
 
 export(adj_weight_adult)
 export(age_from_dates)
-export(alveolar_paO2_mmHg)
+export(alveolar_PaO2_mmHg)
 export(blood_vol_Lemmens_indexed)
 export(blood_vol_Lemmens_non_obese)
 export(blood_vol_Lemmens_sedentary)
