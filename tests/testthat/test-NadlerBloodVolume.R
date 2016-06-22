@@ -1,5 +1,3 @@
-#' @title test Blood Volume Calculation by Nadler method
-
 context("Nadler Blood Volume")
 
 test_that("blood_vol_Nadler", {
@@ -13,20 +11,19 @@ test_that("blood_vol_Nadler", {
                                   male = TRUE, do.warn = TRUE))
   expect_warning(blood_vol_Nadler(heightm = 1, weightkg = 5000,
                                   male = TRUE, do.warn = TRUE))
-  expect_warning(blood_vol_Nadler(heightm =-1, weightkg = 50,
+  expect_warning(blood_vol_Nadler(heightm = -1, weightkg = 50,
                                   male = TRUE, do.warn = TRUE))
 
   expect_warning(blood_vol_Nadler(heightm = 1, weightkg = -50,
                                   male = TRUE, do.warn = TRUE))
-  expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50, male=""))
-  expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50, male="xebec"))
+  expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50, male = ""))
+  expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50, male = "xebec"))
   expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50,
-                                male=list("nonsense", 4)))
+                                male = list("nonsense", 4)))
 
-  expect_that(blood_vol_Nadler(heightm = 1, weightkg = 50, male = FALSE),
-              not(equals(
-                blood_vol_Nadler(heightm = 1, weightkg = 50, male = TRUE))
-              ))
+  expect_false(blood_vol_Nadler(heightm = 1, weightkg = 50, male = FALSE) ==
+                 blood_vol_Nadler(heightm = 1, weightkg = 50, male = TRUE)
+  )
 
   h <- c(1, 1.5, 2)
   w <- c(60, 70, 80)

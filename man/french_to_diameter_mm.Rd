@@ -13,6 +13,7 @@ diameter_mm_to_french(x)
 \item{x}{Size in French units, or mm}
 }
 \description{
-Convert French size of a catheter to diameter in mm
+Convert French size of a catheter to diameter in mm. Currently accepts or
+returns non-integer French values
 }
 

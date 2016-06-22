@@ -17,11 +17,9 @@ test_that("ideal_weight_adultAdult", {
   #   expect_warning(ideal_weight_adult(heightm = 59 / inch,
   #                                     male = TRUE,
   #                                     do.warn = TRUE))
-  expect_that(ideal_weight_adult(heightm = 59 / inch,
+  expect_warning(ideal_weight_adult(heightm = 59 / inch,
                                  male = TRUE,
-                                 do.warn = FALSE),
-              testthat::not(gives_warning()))
-
+                                 do.warn = FALSE), NA)
 
   expect_equal(ideal_weight_adult(60 / inch, male = TRUE), 50)
   expect_equal(ideal_weight_adult(60 / inch, male = F), 45.5)
@@ -38,7 +36,7 @@ test_that("ideal_weight_adultAdult", {
                                   male = c(FALSE, TRUE)))
   expect_error(ideal_weight_adult(c(60 / inch, 60 / inch),
                                   male = c(FALSE, TRUE, TRUE)))
-  expect_error(ideal_weight_adult(c(), male=c(FALSE, TRUE, TRUE)))
+  expect_error(ideal_weight_adult(c(), male = c(FALSE, TRUE, TRUE)))
   expect_error(ideal_weight_adult(c(60 / inch, 60 / inch), male = c()))
 
   expect_warning(ideal_weight_adult(12 * 8.5 / inch, male = TRUE, do.warn = TRUE))
@@ -64,33 +62,20 @@ test_that("Straub", {
   expect_warning(ideal_weight_Straub(1, age.days = 200 * 365, do.warn = FALSE))
 
   # optionally warn for unvalidated but possible ages
-  expect_that(ideal_weight_Straub(1, age.years = 0.5, do.warn = TRUE),
-              gives_warning())
-  expect_that(ideal_weight_Straub(1, age.months = 11, do.warn = TRUE),
-              gives_warning())
-  expect_that(ideal_weight_Straub(1, age.days = 350, do.warn = TRUE),
-              gives_warning())
+  expect_warning(ideal_weight_Straub(1, age.years = 0.5, do.warn = TRUE))
+  expect_warning(ideal_weight_Straub(1, age.months = 11, do.warn = TRUE))
+  expect_warning(ideal_weight_Straub(1, age.days = 350, do.warn = TRUE))
 
-  expect_that(ideal_weight_Straub(1, age.years = 19, do.warn = TRUE),
-              gives_warning())
-  expect_that(ideal_weight_Straub(1, age.months = 18 * 12 + 1, do.warn = TRUE),
-              gives_warning())
-  expect_that(ideal_weight_Straub(1, age.days = 18 * 366, do.warn = TRUE),
-              gives_warning())
+  expect_warning(ideal_weight_Straub(1, age.years = 19, do.warn = TRUE))
+  expect_warning(ideal_weight_Straub(1, age.months = 18 * 12 + 1, do.warn = TRUE))
+  expect_warning(ideal_weight_Straub(1, age.days = 18 * 366, do.warn = TRUE))
 
-  expect_that(ideal_weight_Straub(1, age.years = 0.5, do.warn = FALSE),
-              testthat::not(gives_warning()))
-  expect_that(ideal_weight_Straub(1, age.months = 11, do.warn = FALSE),
-              testthat::not(gives_warning()))
-  expect_that(ideal_weight_Straub(1, age.days = 350, do.warn = FALSE),
-              testthat::not(gives_warning()))
-
-  expect_that(ideal_weight_Straub(1, age.years = 18, do.warn = FALSE),
-              testthat::not(gives_warning()))
-  expect_that(ideal_weight_Straub(1, age.months = 18 * 12 + 1, do.warn = FALSE),
-              testthat::not(gives_warning()))
-  expect_that(ideal_weight_Straub(1, age.days = 18 * 366, do.warn = FALSE),
-              testthat::not( gives_warning()))
+  expect_warning(ideal_weight_Straub(1, age.years = 0.5, do.warn = FALSE), NA)
+  expect_warning(ideal_weight_Straub(1, age.months = 11, do.warn = FALSE), NA)
+  expect_warning(ideal_weight_Straub(1, age.days = 350, do.warn = FALSE), NA)
+  expect_warning(ideal_weight_Straub(1, age.years = 18, do.warn = FALSE), NA)
+  expect_warning(ideal_weight_Straub(1, age.months = 18 * 12 + 1, do.warn = FALSE), NA)
+  expect_warning(ideal_weight_Straub(1, age.days = 18 * 366, do.warn = FALSE), NA)
 
   # don't need to specify age, because it is not used in calc, just validation
   expect_that(ideal_weight_Straub(1),
@@ -106,7 +91,7 @@ test_that("Straub", {
 
 test_that("child ideal weight defaults to Straub", {
   expect_equal(ideal_weight_child(1, age.days = 700),
-              ideal_weight_Straub(1, age.days = 700))
+               ideal_weight_Straub(1, age.days = 700))
 })
 
 test_that("body surface area", {
