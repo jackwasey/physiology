@@ -1,7 +1,7 @@
 #' @title validate phsyiologic input parameters
 #' @description User may generate warnings for unreasonable or obviously
 #'   erroneous heights. TODO: use age to validate further
-#' @template heightm
+#' @template height_m
 #' @param ht.min minimum height below which to warn if \code{warn = TRUE}
 #' @param ht.max maximum height above which to warn if \code{warn = TRUE}
 #' @param ht.min.hard minimum height below which to warn regardless of
@@ -14,45 +14,45 @@
 #' @param extramsg single character string with additional message to append,
 #'   default is ""
 #' @export
-valid_height <- function(heightm, ht.min = 0.1, ht.max = 2.5,
+valid_height <- function(height_m, ht.min = 0.1, ht.max = 2.5,
                          ht.min.hard = 0.001, ht.max.hard = 3,
                          extramsg = "", do.warn = TRUE, do.stop = FALSE) {
-  valid(heightm, "height", "m",
+  valid(height_m, "height", "m",
         ht.min, ht.max, ht.min.hard, ht.max.hard,
         extramsg, do.warn, do.stop)
 }
 
 #' @rdname valid_height
 #' @export
-valid_height_adult <- function(heightm, ht.min = 0.5, ht.max = 2.5,
+valid_height_adult <- function(height_m, ht.min = 0.5, ht.max = 2.5,
                          ht.min.hard = 0.001, ht.max.hard = 3,
                          extramsg = "", do.warn = TRUE, do.stop = FALSE) {
-  valid(heightm, "height", "m",
+  valid(height_m, "height", "m",
         ht.min, ht.max, ht.min.hard, ht.max.hard,
         extramsg, do.warn, do.stop)
 }
 
 #' @rdname valid_height
-#' @template weightkg
+#' @template weight_kg
 #' @param wt.min minimum height below which to warn if \code{warn = TRUE}
 #' @param wt.max maximum height above which to warn if \code{warn = TRUE}
 #' @param wt.min.hard minimum height below which to warn regardless of \code{warn}
 #' @param wt.max.hard maximum height above which to warn if \code{warn}
 #' @export
-valid_weight <- function(weightkg, wt.min = 0.1, wt.max = 300,
+valid_weight <- function(weight_kg, wt.min = 0.1, wt.max = 300,
                          wt.min.hard = 0, wt.max.hard = 600,
                          extramsg = "", do.warn = TRUE, do.stop = FALSE) {
-  valid(weightkg, "weight", "kg",
+  valid(weight_kg, "weight", "kg",
         wt.min, wt.max, wt.min.hard, wt.max.hard,
         extramsg, do.warn, do.stop)
 }
 
 #' @rdname valid_height
 #' @export
-valid_weight_adult <- function(weightkg, wt.min = 5, wt.max = 300,
+valid_weight_adult <- function(weight_kg, wt.min = 5, wt.max = 300,
                          wt.min.hard = 0, wt.max.hard = 600,
                          extramsg = "", do.warn = TRUE, do.stop = FALSE) {
-  valid(weightkg, "weight", "kg",
+  valid(weight_kg, "weight", "kg",
         wt.min, wt.max, wt.min.hard, wt.max.hard,
         extramsg, do.warn, do.stop)
 }

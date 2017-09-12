@@ -4,12 +4,12 @@
 \alias{bsa_adult}
 \title{Estimate body surface area of an adult}
 \usage{
-bsa_adult(heightm, weightkg, ...)
+bsa_adult(height_m, weight_kg, ...)
 }
 \arguments{
-\item{heightm}{single numeric, height in meters}
+\item{height_m}{single numeric, height in meters}
 
-\item{weightkg}{numeric vector of weight(s) in kg}
+\item{weight_kg}{numeric vector of weight(s) in kg}
 
 \item{...}{passed to validation}
 }
@@ -24,4 +24,3 @@ numeric vector
 bsa_adult(2, 80)
 bsa_adult(1.5, 80)
 }
-

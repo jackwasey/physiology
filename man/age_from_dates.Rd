@@ -26,4 +26,3 @@ Calculate age at time of reference date, based on birth date.
 age_from_dates("2014-11-08", "2014-12-31", unit = "day")
 age_from_dates("1981-07-09", "2014-06-29", unit = "year")
 }
-

@@ -4,12 +4,12 @@
 \alias{adj_weight_adult}
 \title{adjusted body weight}
 \usage{
-adj_weight_adult(heightm, weightkg, male, ...)
+adj_weight_adult(height_m, weight_kg, male, ...)
 }
 \arguments{
-\item{heightm}{single numeric, height in meters}
+\item{height_m}{single numeric, height in meters}
 
-\item{weightkg}{weight in kg, may be a vector}
+\item{weight_kg}{weight in kg, may be a vector}
 
 \item{male}{logical value(s) whether patient is male. TRUE or FALSE.}
 
@@ -23,4 +23,3 @@ returns ideal weight + 40% of difference between ideal and
 \examples{
 adj_weight_adult(1.6, 120, male = FALSE)
 }
-

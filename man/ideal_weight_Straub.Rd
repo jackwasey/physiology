@@ -7,11 +7,11 @@
 \url{http://www.ncbi.nlm.nih.gov/pubmed/6823980}
 }
 \usage{
-ideal_weight_Straub(heightm, age.years = NULL, age.months = NULL,
+ideal_weight_Straub(height_m, age.years = NULL, age.months = NULL,
   age.days = NULL, ...)
 }
 \arguments{
-\item{heightm}{single numeric, height in meters}
+\item{height_m}{single numeric, height in meters}
 
 \item{age.years}{numeric vector, age(s) in years. TODO: there must be a
 better way of capturing age. 'lubridate' doesn't seem to help much, and
@@ -45,4 +45,3 @@ http://www.ncbi.nlm.nih.gov/pubmed/6823980 2.396e0.01863(ht),
   ideal_weight_child(1, age.years = 2)
   ideal_weight_child(0.75, age.months = 15)
 }
-

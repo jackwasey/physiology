@@ -24,4 +24,3 @@ Calculate the pH based on bicarbonate and partial pressure of CO2
  colnames(acidbase) <- paste("PaCO2", ppCO2)
  acidbase
 }
-

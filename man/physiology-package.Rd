@@ -2,12 +2,11 @@
 % Please edit documentation in R/physiology-package.R
 \docType{package}
 \name{physiology-package}
-\alias{physiology}
 \alias{physiology-package}
+\alias{physiology}
 \title{physiology}
 \description{
 physiology
 }
 \keyword{misc}
 \keyword{utilities}
-

@@ -5,14 +5,14 @@
 \alias{bmi_adult_ins_lbs}
 \title{Body Mass Index (BMI) for adults}
 \usage{
-bmi_adult(heightm, weightkg, ...)
+bmi_adult(height_m, weight_kg, ...)
 
 bmi_adult_ins_lbs(heightin, weightlb, ...)
 }
 \arguments{
-\item{heightm}{single numeric, height in meters}
+\item{height_m}{single numeric, height in meters}
 
-\item{weightkg}{numeric vector of weight(s) in kg}
+\item{weight_kg}{numeric vector of weight(s) in kg}
 
 \item{...}{passed to validation}
 
@@ -28,4 +28,3 @@ bmi_adult(1.6, 120)
 bmi_adult(2, 75)
 bmi_adult_ins_lbs(72, 200)
 }
-

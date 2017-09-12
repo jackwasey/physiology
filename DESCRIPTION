@@ -25,4 +25,4 @@ BugReports: https://github.com/jackwasey/physiology/issues
 VignetteBuilder: knitr
 LazyData: true
 LazyDataCompression: xz
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

@@ -2,27 +2,27 @@ context("Nadler Blood Volume")
 
 test_that("blood_vol_Nadler", {
   expect_error(blood_vol_Nadler())
-  expect_error(blood_vol_Nadler(heightm = 1))
-  expect_error(blood_vol_Nadler(weightkg = 50))
-  expect_error(blood_vol_Nadler(weightkg = 50, male = TRUE))
-  expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50))
+  expect_error(blood_vol_Nadler(height_m = 1))
+  expect_error(blood_vol_Nadler(weight_kg = 50))
+  expect_error(blood_vol_Nadler(weight_kg = 50, male = TRUE))
+  expect_error(blood_vol_Nadler(height_m = 1, weight_kg = 50))
 
-  expect_warning(blood_vol_Nadler(heightm = 0, weightkg = 50,
+  expect_warning(blood_vol_Nadler(height_m = 0, weight_kg = 50,
                                   male = TRUE, do.warn = TRUE))
-  expect_warning(blood_vol_Nadler(heightm = 1, weightkg = 5000,
+  expect_warning(blood_vol_Nadler(height_m = 1, weight_kg = 5000,
                                   male = TRUE, do.warn = TRUE))
-  expect_warning(blood_vol_Nadler(heightm = -1, weightkg = 50,
+  expect_warning(blood_vol_Nadler(height_m = -1, weight_kg = 50,
                                   male = TRUE, do.warn = TRUE))
 
-  expect_warning(blood_vol_Nadler(heightm = 1, weightkg = -50,
+  expect_warning(blood_vol_Nadler(height_m = 1, weight_kg = -50,
                                   male = TRUE, do.warn = TRUE))
-  expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50, male = ""))
-  expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50, male = "xebec"))
-  expect_error(blood_vol_Nadler(heightm = 1, weightkg = 50,
+  expect_error(blood_vol_Nadler(height_m = 1, weight_kg = 50, male = ""))
+  expect_error(blood_vol_Nadler(height_m = 1, weight_kg = 50, male = "xebec"))
+  expect_error(blood_vol_Nadler(height_m = 1, weight_kg = 50,
                                 male = list("nonsense", 4)))
 
-  expect_false(blood_vol_Nadler(heightm = 1, weightkg = 50, male = FALSE) ==
-                 blood_vol_Nadler(heightm = 1, weightkg = 50, male = TRUE)
+  expect_false(blood_vol_Nadler(height_m = 1, weight_kg = 50, male = FALSE) ==
+                 blood_vol_Nadler(height_m = 1, weight_kg = 50, male = TRUE)
   )
 
   h <- c(1, 1.5, 2)
@@ -38,8 +38,8 @@ test_that("blood_vol_Nadler", {
 test_that("Lemmens indexed blood vol", {
   expect_error(blood_vol_Lemmens_indexed())
   expect_error(blood_vol_Lemmens_indexed(2))
-  expect_error(blood_vol_Lemmens_indexed(heightm = 2))
-  expect_error(blood_vol_Lemmens_indexed(weightkg = 80))
+  expect_error(blood_vol_Lemmens_indexed(height_m = 2))
+  expect_error(blood_vol_Lemmens_indexed(weight_kg = 80))
   expect_error(blood_vol_Lemmens_indexed(bad_input))
   expect_error(blood_vol_Lemmens_indexed(bad_input, bad_input))
 
@@ -55,8 +55,8 @@ test_that("Lemmens indexed blood vol", {
 test_that("Lemmens sedentary blood vol", {
   expect_error(blood_vol_Lemmens_sedentary())
   expect_error(blood_vol_Lemmens_sedentary(2))
-  expect_error(blood_vol_Lemmens_sedentary(heightm = 2))
-  expect_error(blood_vol_Lemmens_sedentary(weightkg = 80))
+  expect_error(blood_vol_Lemmens_sedentary(height_m = 2))
+  expect_error(blood_vol_Lemmens_sedentary(weight_kg = 80))
   expect_error(blood_vol_Lemmens_sedentary(bad_input))
   expect_error(blood_vol_Lemmens_sedentary(bad_input, bad_input))
 
@@ -72,11 +72,11 @@ test_that("Lemmens sedentary blood vol", {
 test_that("adj body weight", {
   expect_error(adj_weight_adult())
   expect_error(adj_weight_adult(2))
-  expect_error(adj_weight_adult(heightm = 2))
-  expect_error(adj_weight_adult(weightkg = 80))
-  expect_error(adj_weight_adult(heightm = 2, weightkg = 80))
-  expect_error(adj_weight_adult(heightm = 2, male = TRUE))
-  expect_error(adj_weight_adult(weightkg = 80, male = TRUE))
+  expect_error(adj_weight_adult(height_m = 2))
+  expect_error(adj_weight_adult(weight_kg = 80))
+  expect_error(adj_weight_adult(height_m = 2, weight_kg = 80))
+  expect_error(adj_weight_adult(height_m = 2, male = TRUE))
+  expect_error(adj_weight_adult(weight_kg = 80, male = TRUE))
   expect_error(adj_weight_adult(bad_input))
   expect_error(adj_weight_adult(bad_input, bad_input))
   expect_error(adj_weight_adult(bad_input, bad_input, bad_input))

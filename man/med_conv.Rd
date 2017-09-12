@@ -22,4 +22,3 @@ A few hundred lab values with _Conventional_ (US) and SI units, with a
 scaling factor and reference ranges.
 }
 \keyword{datasets}
-
