@@ -20,10 +20,19 @@ deadspace_total <- function(height_m, age_y = NULL, gender = NULL, elbow_ml = 10
 #'   https://www.ncbi.nlm.nih.gov/pubmed/8727530
 #' @return estimate of anatomic deadspace in ml
 deadspace_anatomic <- function(height_m = NULL, weight_kg = NULL, age_y = NULL) {
-  if (is.null(height_m)) return(125)
+  if (is.null(height_m) && is.null(weight) && is.null(age)) return(125)
 
-  if (!is.null(height_m) && !is.null(weight_kg))
-    warning("Both height and weight given. Using ideal weight.")
+  if (!is.null(height_m)) {
+    if (!is.null(weight_kg)) {
+      warning("Both height and weight given. Using ideal weight.")
+      weight_kg = ideal_weight(height_m, age_y)
+    }
+
+  } else {
+
+  }
+
+  warning("Both height and weight given. Using ideal weight.")
 
   # TODO actually, the formula gives an age of exp((3.28-2.2)/0.56)-1 = 5.88 y
   # where the formula asymptotes to the adult value of 2.2. This should be the

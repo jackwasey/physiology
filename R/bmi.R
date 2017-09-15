@@ -35,7 +35,7 @@ bsa_adult <- function(height_m, weight_kg, ...) {
 ideal_weight_adult <- function(height_m, male, ...)
   ideal_weight_Devine(height_m, male, ...)
 
-#' @title ideal weight for adults
+#' @title ideal weight for children
 #' @description \code{ideal_weight_} gives the ideal weight using default
 #'   paediatric algorithm. TODO: account for Down's/other well calibrated
 #'   developmental differences. Age specifications are mutually exclusive, and
@@ -55,6 +55,15 @@ ideal_weight_child <- function(height_m,
                                age.days = NULL,
                                ...)
   ideal_weight_Straub(height_m, age.years, age.months, age.days, ...)
+
+ideal_weight <- function(...) {
+  list2env(list(...), envir = environment())
+  age_nulls <- sum(is.null(age_y), is.null(age_m), is.null(age_d))
+  if (age_nulls == 0 || is_adult(...))
+    return(ideal_weight_adult(...))
+
+  ideal_weight_child(...)
+}
 
 #' Get ideal weight if possible
 #' @keywords internal
