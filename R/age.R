@@ -23,7 +23,7 @@ age_from_dates <- function(birth_date, ref_date = Sys.Date(),
          year = lubridate::year(pd),
          month = lubridate::month(pd),
          day = lubridate::day(pd)
-         )
+  )
 }
 
 #' Calculate age in years from ages in other units
@@ -33,28 +33,24 @@ age_from_dates <- function(birth_date, ref_date = Sys.Date(),
 #' apporximate.
 #'
 #' \code{lubridate::duration} gives mathematically predictable results,
-#' \code{lubridate::period} depends on calendar. So, giving a DoB will use the
-#' latter.
+#' \code{lubridate::period} depends on calendar. So, giving a DoB will use the latter
+#' \code{lubridate::interval} is a period with a base date
 #' @keywords internal
-as_age_y <- function(age_y = 0, age_m = 0, age_d = 0, birth_date = NULL) {
-  stopifnot(sum(c(age_y, age_m, age_d) != 0) == 1)
+as_age_y <- function(age_y, age_m, age_d, birth_date) {
+  stopifnot(sum(missing(age_y), missing(age_m), missing(age_d)) == 2)
+  if (missing(age_y)) age_y <- 0
+  if (missing(age_m)) age_m <- 0
+  if (missing(age_d)) age_d <- 0
 
-  if (is.null(birth_date)) {
-    dur <-
-      lubridate::years(age_y) +
-      base::months(age_m) +
-      lubridate::days(age_d) %>%
-      as_duration()
+  if (missing(birth_date)) {
+    # lubridate rightly refuses to add months like this, so estimate by hand:
+    return(age_y + age_m/12 + age_y/365.25)
   }
 
-
-  if (is.null(age_y)) {
-    if (is.null(age_d))
-      age_y = age_m / 12
-    else
-      age_y = age_d / 365
-  }
-  age_y
+  per <- lubridate::period(c(age_y, age_m, age_d),
+                           c("year", "month", "day"))
+  interval <- birth_date + per
+  difftime(interval, birth_date, units = "days") %>% as.numeric / 365.25
 }
 
 is_adult <- function(age_y)
