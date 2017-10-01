@@ -8,14 +8,14 @@ age_from_dates(birth_date, ref_date = Sys.Date(), unit = c("year", "month",
   "day"))
 }
 \arguments{
-\item{unit}{character of length, one of "year" or "day".}
-
-\item{birth.date}{Date of birth, either as a \code{Date} or something which
+\item{birth_date}{Date of birth, either as a \code{Date} or something which
 will be converted to a \code{Date}}
 
-\item{ref.date}{Date at which to calculate age, defaults to current date,
+\item{ref_date}{Date at which to calculate age, defaults to current date,
 either as a \code{Date} or something which will be converted to a
 \code{Date}}
+
+\item{unit}{character of length, one of "year" or "day".}
 }
 \value{
 integer vector

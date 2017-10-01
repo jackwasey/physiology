@@ -9,70 +9,73 @@
 \alias{valid_age_adult}
 \title{validate phsyiologic input parameters}
 \usage{
-valid_height(height_m, ht.min = 0.1, ht.max = 2.5, ht.min.hard = 0.001,
-  ht.max.hard = 3, extramsg = "", do.warn = TRUE, do.stop = FALSE,
+valid_height(height_m, ht_min = 0.1, ht_max = 2.5, ht_min_hard = 0.001,
+  ht_max_hard = 3, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
   equal_ok = FALSE)
 
-valid_height_adult(height_m, ht.min = 0.5, ht.max = 2.5,
-  ht.min.hard = 0.001, ht.max.hard = 3, extramsg = "", do.warn = TRUE,
-  do.stop = FALSE, equal_ok = FALSE)
+valid_height_adult(height_m, ht_min = 0.5, ht_max = 2.5,
+  ht_min_hard = 0.001, ht_max_hard = 3, extra_msg = "", do_warn = TRUE,
+  do_stop = FALSE, equal_ok = FALSE)
 
-valid_weight(weight_kg, wt.min = 0.1, wt.max = 300, wt.min.hard = 0,
-  wt.max.hard = 600, extramsg = "", do.warn = TRUE, do.stop = FALSE,
+valid_weight(weight_kg, wt_min = 0.1, wt_max = 300, wt_min_hard = 0,
+  wt_max_hard = 600, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
   equal_ok = FALSE)
 
-valid_weight_adult(weight_kg, wt.min = 5, wt.max = 300, wt.min.hard = 0,
-  wt.max.hard = 600, extramsg = "", do.warn = TRUE, do.stop = FALSE,
+valid_weight_adult(weight_kg, wt_min = 5, wt_max = 300, wt_min_hard = 0,
+  wt_max_hard = 600, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
   equal_ok = FALSE)
 
-valid_age(age_y, age.min = 0, age.max = 150, age.min.hard = 1e-05,
-  age.max.hard = 150, extramsg = "", do.warn = TRUE, do.stop = FALSE,
+valid_age(age_y, age_min = 0, age_max = 150, age_min_hard = 1e-05,
+  age_max_hard = 150, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
   equal_ok = FALSE)
 
-valid_age_adult(age_y, age.min = 18, age.max = 150, age.min.hard = 17,
-  age.max.hard = 150, extramsg = "", do.warn = TRUE, do.stop = FALSE,
+valid_age_adult(age_y, age_min = 18, age_max = 150, age_min_hard = 17,
+  age_max_hard = 150, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
   equal_ok = FALSE)
 }
 \arguments{
 \item{height_m}{single numeric, height in meters}
 
-\item{ht.min}{minimum height below which to warn if \code{warn = TRUE}}
+\item{ht_min}{minimum height below which to warn if \code{warn = TRUE}}
 
-\item{ht.max}{maximum height above which to warn if \code{warn = TRUE}}
+\item{ht_max}{maximum height above which to warn if \code{warn = TRUE}}
 
-\item{ht.min.hard}{minimum height below which to warn regardless of
+\item{ht_min_hard}{minimum height below which to warn regardless of
 \code{warn}}
 
-\item{ht.max.hard}{maximum height above which to warn if \code{warn}}
+\item{ht_max_hard}{maximum height above which to warn if \code{warn}}
 
-\item{extramsg}{single character string with additional message to append,
+\item{extra_msg}{single character string with additional message to append,
 default is ""}
 
-\item{do.warn}{single logical, if TRUE, will give warnings outside of soft
+\item{do_warn}{single logical, if TRUE, will give warnings outside of soft
 limits}
 
-\item{do.stop}{single logical, \code{stop} instead of warning if any values
+\item{do_stop}{single logical, \code{stop} instead of warning if any values
 outside hard limits}
+
+\item{equal_ok}{logical, if true, then being equal to a limit does not
+trigger a warning or error}
 
 \item{weight_kg}{numeric vector of weight(s) in kg}
 
-\item{wt.min}{minimum height below which to warn if \code{warn = TRUE}}
+\item{wt_min}{minimum height below which to warn if \code{warn = TRUE}}
 
-\item{wt.max}{maximum height above which to warn if \code{warn = TRUE}}
+\item{wt_max}{maximum height above which to warn if \code{warn = TRUE}}
 
-\item{wt.min.hard}{minimum height below which to warn regardless of \code{warn}}
+\item{wt_min_hard}{minimum height below which to warn regardless of \code{warn}}
 
-\item{wt.max.hard}{maximum height above which to warn if \code{warn}}
+\item{wt_max_hard}{maximum height above which to warn if \code{warn}}
 
 \item{age_y}{numeric}
 
-\item{age.min}{minimum age below which to warn if \code{warn = TRUE}}
+\item{age_min}{minimum age below which to warn if \code{warn = TRUE}}
 
-\item{age.max}{maximum age above which to warn if \code{warn = TRUE}}
+\item{age_max}{maximum age above which to warn if \code{warn = TRUE}}
 
-\item{age.min.hard}{minimum age below which to warn regardless of \code{warn}}
+\item{age_min_hard}{minimum age below which to warn regardless of \code{warn}}
 
-\item{age.max.hard}{maximum age above which to warn if \code{warn}}
+\item{age_max_hard}{maximum age above which to warn if \code{warn}}
 }
 \description{
 User may generate warnings for unreasonable or obviously

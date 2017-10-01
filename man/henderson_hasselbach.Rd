@@ -4,23 +4,23 @@
 \alias{henderson_hasselbach}
 \title{pH by Henderson Hasselbach equation}
 \usage{
-henderson_hasselbach(bicarbonate, ppCO2)
+henderson_hasselbach(bicarbonate, pp_co2)
 }
 \arguments{
 \item{bicarbonate}{mmol/L}
 
-\item{ppCO2}{partial pressure of carbon dioxide in mmHg}
+\item{pp_co2}{partial pressure of carbon dioxide in mmHg}
 }
 \description{
 Calculate the pH based on bicarbonate and partial pressure of CO2
 }
 \examples{
  bicarbonate <- seq(10, 50, 5)
- ppCO2 <- seq(20, 70, 10)
- bc <- rep(bicarbonate, length(ppCO2))
- pp <- rep(ppCO2, each = length(bicarbonate))
+ pp_co2 <- seq(20, 70, 10)
+ bc <- rep(bicarbonate, length(pp_co2))
+ pp <- rep(pp_co2, each = length(bicarbonate))
  acidbase <- matrix(henderson_hasselbach(bc, pp), nrow = 9, ncol = 6)
  rownames(acidbase) <- paste("bicarb", bicarbonate)
- colnames(acidbase) <- paste("PaCO2", ppCO2)
+ colnames(acidbase) <- paste("PaCO2", pp_co2)
  acidbase
 }

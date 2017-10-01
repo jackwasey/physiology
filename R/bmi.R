@@ -79,11 +79,11 @@ ideal_or_actual_weight <- function(male = NULL, height_m = NULL, weight_kg = NUL
 #' @examples
 #' # will warn if given age is not in validate range from publication:
 #' \dontrun{
-#'   ideal_weight_child(height_m = 0.5, age_y = 0, do.warn = TRUE)
-#'   ideal_weight_child(0.8, age_y = 11 / 12, do.warn = TRUE)
-#'   ideal_weight_child(0.5, age_y = 25/365, do.warn = TRUE)
+#'   ideal_weight_child(height_m = 0.5, age_y = 0, do_warn = TRUE)
+#'   ideal_weight_child(0.8, age_y = 11 / 12, do_warn = TRUE)
+#'   ideal_weight_child(0.5, age_y = 25/365, do_warn = TRUE)
 #' }
-#'   ideal_weight_child(0.5, age.days = 25, do.warn = FALSE)
+#'   ideal_weight_child(0.5, age_y = 25 / 365, do_warn = FALSE)
 #'   ideal_weight_child(1, age_y = 2)
 #' @export
 ideal_weight_Traub <- function(height_m,
@@ -91,9 +91,9 @@ ideal_weight_Traub <- function(height_m,
                                 ...) {
 
   if (!is.null(age_y))
-    valid_age(age_y, age.min = 1, age.max = 18,
-              age.min.hard = 0, age.max.hard = 150,
-              extramsg = "age < 1 year or age > 17 year not validated from Traub formula", ...)
+    valid_age(age_y, age_min = 1, age_max = 18,
+              age_min_hard = 0, age_max_hard = 150,
+              extra_msg = "age < 1 year or age > 17 year not validated from Traub formula", ...)
   valid_height(height_m, ...)
 
   # 2.396 * e^0.01863(ht), where height is in cm

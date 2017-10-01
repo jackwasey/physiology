@@ -8,14 +8,14 @@ test_that("blood_vol_Nadler", {
   expect_error(blood_vol_Nadler(height_m = 1, weight_kg = 50))
 
   expect_warning(blood_vol_Nadler(height_m = 0, weight_kg = 50,
-                                  male = TRUE, do.warn = TRUE))
+                                  male = TRUE, do_warn = TRUE))
   expect_warning(blood_vol_Nadler(height_m = 1, weight_kg = 5000,
-                                  male = TRUE, do.warn = TRUE))
+                                  male = TRUE, do_warn = TRUE))
   expect_warning(blood_vol_Nadler(height_m = -1, weight_kg = 50,
-                                  male = TRUE, do.warn = TRUE))
+                                  male = TRUE, do_warn = TRUE))
 
   expect_warning(blood_vol_Nadler(height_m = 1, weight_kg = -50,
-                                  male = TRUE, do.warn = TRUE))
+                                  male = TRUE, do_warn = TRUE))
   expect_error(blood_vol_Nadler(height_m = 1, weight_kg = 50, male = ""))
   expect_error(blood_vol_Nadler(height_m = 1, weight_kg = 50, male = "xebec"))
   expect_error(blood_vol_Nadler(height_m = 1, weight_kg = 50,
@@ -29,9 +29,9 @@ test_that("blood_vol_Nadler", {
   w <- c(60, 70, 80)
   s <- c(FALSE, FALSE, TRUE)
   r <- blood_vol_Nadler(h,w,s)
-  expect_equal(blood_vol_Nadler(h[1],w[1],s[1]), r[1])
-  expect_equal(blood_vol_Nadler(h[2],w[2],s[2]), r[2])
-  expect_equal(blood_vol_Nadler(h[3],w[3],s[3]), r[3])
+  expect_equal(blood_vol_Nadler(h[1], w[1], s[1]), r[1])
+  expect_equal(blood_vol_Nadler(h[2], w[2], s[2]), r[2])
+  expect_equal(blood_vol_Nadler(h[3], w[3], s[3]), r[3])
 
 })
 

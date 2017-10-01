@@ -32,10 +32,10 @@ http://www.ncbi.nlm.nih.gov/pubmed/6823980 2.396e0.01863(ht),
 \examples{
 # will warn if given age is not in validate range from publication:
 \dontrun{
-  ideal_weight_child(height_m = 0.5, age_y = 0, do.warn = TRUE)
-  ideal_weight_child(0.8, age_y = 11 / 12, do.warn = TRUE)
-  ideal_weight_child(0.5, age_y = 25/365, do.warn = TRUE)
+  ideal_weight_child(height_m = 0.5, age_y = 0, do_warn = TRUE)
+  ideal_weight_child(0.8, age_y = 11 / 12, do_warn = TRUE)
+  ideal_weight_child(0.5, age_y = 25/365, do_warn = TRUE)
 }
-  ideal_weight_child(0.5, age.days = 25, do.warn = FALSE)
+  ideal_weight_child(0.5, age_y = 25 / 365, do_warn = FALSE)
   ideal_weight_child(1, age_y = 2)
 }

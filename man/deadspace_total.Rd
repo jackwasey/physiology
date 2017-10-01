@@ -5,24 +5,27 @@
 \alias{deadspace_anatomic}
 \alias{deadspace_anatomic_adult}
 \alias{deadspace_anatomic_child}
+\alias{deadspace_intrathoracic_ml}
 \title{Estimate ventilatory dead space}
 \usage{
-deadspace_total(height_m, age_y = NULL, male = NULL, elbow_ml = 10,
+deadspace_total(ideal_weight_kg, age_y = NULL, elbow_ml = 10,
   humidifier_ml = 7, ett_diameter_mm = NULL)
 
-deadspace_anatomic(ideal_weight_kg, age_y = NULL, ...)
+deadspace_anatomic(ideal_weight_kg, age_y = NULL)
 
 deadspace_anatomic_adult(ideal_weight_kg = NULL)
 
 deadspace_anatomic_child(ideal_weight_kg, age_y = NULL)
+
+deadspace_intrathoracic_ml(ideal_weight_kg)
 }
 \arguments{
-\item{height_m}{Height in m}
+\item{ideal_weight_kg}{Ideal weight in kilograms. May be calculated using
+\code{physiology::ideal_weight_adult} or
+\code{physiology::ideal_weight_child}}
 
 \item{age_y}{Age in years, optional for estimating ETT and HME sizes
 automatically}
-
-\item{male}{Logical. Default is \code{NULL}}
 
 \item{elbow_ml}{Numeric: volume of elbow of breathing circuit in ml}
 
@@ -37,6 +40,10 @@ estimate of anatomic deadspace in ml
 \description{
 Estimate ventilatory dead space
 }
+\details{
+"Mean intrathoracic anatomic dead space was 1.03 ml/kg and was not
+  related to age." Numa, 1985
+}
 \section{Functions}{
 \itemize{
 \item \code{deadspace_anatomic}: Estimate anatomic deadspace
@@ -44,13 +51,16 @@ Estimate ventilatory dead space
 \item \code{deadspace_anatomic_adult}: Estimate anatomic deadspace in an adult
 
 \item \code{deadspace_anatomic_child}: Estimate anatomic deadspace in an infant or child
+
+\item \code{deadspace_intrathoracic_ml}: intrathoracic component of deadspace is age
+independent
 }}
 
 \examples{
   height <- seq(1, 2, 0.05)
   male <- rep(FALSE, length(height))
   iw <- ideal_weight_adult(height_m = height, male = male)
-  plot(x, deadspace_anatomic_adult(ideal_weight_kg = height))
+  plot(iw, deadspace_anatomic_adult(ideal_weight_kg = height))
 
   # discontinuity at age 6 is driven by ideal weight more than the lograithmic calculation
   iw <- c(seq(12, 18, 0.2), seq(18.5, 24, 0.5))
