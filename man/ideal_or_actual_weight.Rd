@@ -5,7 +5,7 @@
 \title{Get ideal weight if possible}
 \usage{
 ideal_or_actual_weight(male = NULL, height_m = NULL, weight_kg = NULL,
-  age_y = NULL, age_m = NULL, age_d = NULL)
+  age_y = NULL)
 }
 \description{
 Get ideal weight if possible

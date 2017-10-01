@@ -10,23 +10,28 @@
 \title{validate phsyiologic input parameters}
 \usage{
 valid_height(height_m, ht.min = 0.1, ht.max = 2.5, ht.min.hard = 0.001,
-  ht.max.hard = 3, extramsg = "", do.warn = TRUE, do.stop = FALSE)
+  ht.max.hard = 3, extramsg = "", do.warn = TRUE, do.stop = FALSE,
+  equal_ok = FALSE)
 
 valid_height_adult(height_m, ht.min = 0.5, ht.max = 2.5,
   ht.min.hard = 0.001, ht.max.hard = 3, extramsg = "", do.warn = TRUE,
-  do.stop = FALSE)
+  do.stop = FALSE, equal_ok = FALSE)
 
 valid_weight(weight_kg, wt.min = 0.1, wt.max = 300, wt.min.hard = 0,
-  wt.max.hard = 600, extramsg = "", do.warn = TRUE, do.stop = FALSE)
+  wt.max.hard = 600, extramsg = "", do.warn = TRUE, do.stop = FALSE,
+  equal_ok = FALSE)
 
 valid_weight_adult(weight_kg, wt.min = 5, wt.max = 300, wt.min.hard = 0,
-  wt.max.hard = 600, extramsg = "", do.warn = TRUE, do.stop = FALSE)
+  wt.max.hard = 600, extramsg = "", do.warn = TRUE, do.stop = FALSE,
+  equal_ok = FALSE)
 
-valid_age(age.years, age.min = 0, age.max = 150, age.min.hard = 1e-05,
-  age.max.hard = 150, extramsg = "", do.warn = TRUE, do.stop = FALSE)
+valid_age(age_y, age.min = 0, age.max = 150, age.min.hard = 1e-05,
+  age.max.hard = 150, extramsg = "", do.warn = TRUE, do.stop = FALSE,
+  equal_ok = FALSE)
 
-valid_age_adult(age.years, age.min = 18, age.max = 150, age.min.hard = 17,
-  age.max.hard = 150, extramsg = "", do.warn = TRUE, do.stop = FALSE)
+valid_age_adult(age_y, age.min = 18, age.max = 150, age.min.hard = 17,
+  age.max.hard = 150, extramsg = "", do.warn = TRUE, do.stop = FALSE,
+  equal_ok = FALSE)
 }
 \arguments{
 \item{height_m}{single numeric, height in meters}
@@ -59,15 +64,15 @@ outside hard limits}
 
 \item{wt.max.hard}{maximum height above which to warn if \code{warn}}
 
-\item{age.years}{numeric}
+\item{age_y}{numeric}
 
-\item{age.min}{minimum height below which to warn if \code{warn = TRUE}}
+\item{age.min}{minimum age below which to warn if \code{warn = TRUE}}
 
-\item{age.max}{maximum height above which to warn if \code{warn = TRUE}}
+\item{age.max}{maximum age above which to warn if \code{warn = TRUE}}
 
-\item{age.min.hard}{minimum height below which to warn regardless of \code{warn}}
+\item{age.min.hard}{minimum age below which to warn regardless of \code{warn}}
 
-\item{age.max.hard}{maximum height above which to warn if \code{warn}}
+\item{age.max.hard}{maximum age above which to warn if \code{warn}}
 }
 \description{
 User may generate warnings for unreasonable or obviously

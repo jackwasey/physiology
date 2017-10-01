@@ -3,12 +3,18 @@
 \name{deadspace_total}
 \alias{deadspace_total}
 \alias{deadspace_anatomic}
+\alias{deadspace_anatomic_adult}
+\alias{deadspace_anatomic_child}
 \title{Estimate ventilatory dead space}
 \usage{
-deadspace_total(height_m, age_y = NULL, gender = NULL, elbow_ml = 10,
+deadspace_total(height_m, age_y = NULL, male = NULL, elbow_ml = 10,
   humidifier_ml = 7, ett_diameter_mm = NULL)
 
-deadspace_anatomic(height_m = NULL, weight_kg = NULL, age_y = NULL)
+deadspace_anatomic(ideal_weight_kg, age_y = NULL, ...)
+
+deadspace_anatomic_adult(ideal_weight_kg = NULL)
+
+deadspace_anatomic_child(ideal_weight_kg, age_y = NULL)
 }
 \arguments{
 \item{height_m}{Height in m}
@@ -16,15 +22,14 @@ deadspace_anatomic(height_m = NULL, weight_kg = NULL, age_y = NULL)
 \item{age_y}{Age in years, optional for estimating ETT and HME sizes
 automatically}
 
+\item{male}{Logical. Default is \code{NULL}}
+
 \item{elbow_ml}{Numeric: volume of elbow of breathing circuit in ml}
 
 \item{humidifier_ml}{Numeric: volume of humidifier of breathing circuit in ml}
 
 \item{ett_diameter_mm}{Numeric: internal diameter of endotrachel tube.
 Default is \code{NULL} which would estimate this from the age of patient}
-
-\item{gender_f}{Logical: female if \code{TRUE}. Default is not to specify
-gender.}
 }
 \value{
 estimate of anatomic deadspace in ml
@@ -35,8 +40,26 @@ Estimate ventilatory dead space
 \section{Functions}{
 \itemize{
 \item \code{deadspace_anatomic}: Estimate anatomic deadspace
+
+\item \code{deadspace_anatomic_adult}: Estimate anatomic deadspace in an adult
+
+\item \code{deadspace_anatomic_child}: Estimate anatomic deadspace in an infant or child
 }}
 
+\examples{
+  height <- seq(1, 2, 0.05)
+  male <- rep(FALSE, length(height))
+  iw <- ideal_weight_adult(height_m = height, male = male)
+  plot(x, deadspace_anatomic_adult(ideal_weight_kg = height))
+
+  # discontinuity at age 6 is driven by ideal weight more than the lograithmic calculation
+  iw <- c(seq(12, 18, 0.2), seq(18.5, 24, 0.5))
+  youngest = 3
+  oldest = 9
+  ages <- seq(youngest, oldest, (oldest - youngest) / (length(iw) - 1))
+  plot(iw, deadspace_anatomic_child(ideal_weight_kg = iw, age_y = ages), type = "l")
+
+}
 \references{
 http://www.atsjournals.org/doi/abs/10.1164/arrd.1971.104.2.215
   http://rc.rcjournal.com/content/53/7/885.short
