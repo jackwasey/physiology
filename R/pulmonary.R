@@ -1,10 +1,10 @@
 #' alveolar gas equation
 #'
-#' Estimate PAO2 in alveolus based on atmospheric pressure, FiO2, PACO2, and
+#' Estimate PAO2 in alveolus based on atmospheric pressure, fi_o2, PACO2, and
 #' respiratory quotient
-#' @param FiO2 fraction of oxygen in inspired gas, from 0 to 1, default is (dry)
+#' @param fi_o2 fraction of oxygen in inspired gas, from 0 to 1, default is (dry)
 #'   room air
-#' @param RQ respiratory quotient, i.e. the ratio of CO2 produced to oxygen
+#' @param rq respiratory quotient, i.e. the ratio of CO2 produced to oxygen
 #'   consumed, usually between around 0.7 and 1.0, but can legitimately be
 #'   greater than 1.0. Default it 0.8.
 #' @param PACO2_mmHg partial pressure of CO2 in alveolus, which can be approximated
@@ -15,20 +15,20 @@
 #' @examples
 #' # vary RQ
 #' rq <- seq(0.6, 1.4, 0.05)
-#' plot(rq, alveolar_PAO2_mmHg(RQ = rq))
+#' plot(rq, alveolar_PAO2_mmHg(rq = rq))
 #'
-#' # 100% FiO2 at typical atmospheric pressure
-#' alveolar_PAO2_mmHg(FiO2 = 1)
+#' # 100% fi_o2 at typical atmospheric pressure
+#' alveolar_PAO2_mmHg(fi_o2 = 1)
 #'
 #' # hyperbaric oxygen at 100%, 2 atmospheres
-#' alveolar_PAO2_mmHg(FiO2 = 1, Patm_mmHg = 1520)
+#' alveolar_PAO2_mmHg(fi_o2 = 1, Patm_mmHg = 1520)
 #' @export
-alveolar_PAO2_mmHg <- function(FiO2 = 0.209, RQ = 0.8, PACO2_mmHg = 40, Patm_mmHg = 760, PAH2O_mmHg = 47) {
-  stopifnot(FiO2 >= 0, FiO2 <= 1)
-  stopifnot(RQ > 0, RQ < 10)
+alveolar_PAO2_mmHg <- function(fi_o2 = 0.209, rq = 0.8, PACO2_mmHg = 40, Patm_mmHg = 760, PAH2O_mmHg = 47) {
+  stopifnot(fi_o2 >= 0, fi_o2 <= 1)
+  stopifnot(rq > 0, rq < 10)
   stopifnot(PACO2_mmHg > 0, PACO2_mmHg < (Patm_mmHg - PAH2O_mmHg))
   stopifnot(Patm_mmHg > 0)
   stopifnot(PAH2O_mmHg > 0, PAH2O_mmHg < (Patm_mmHg - PACO2_mmHg))
 
-  FiO2 * (Patm_mmHg - PAH2O_mmHg) - PACO2_mmHg * (1 - FiO2 * (1 - RQ)) / RQ
+  fi_o2 * (Patm_mmHg - PAH2O_mmHg) - PACO2_mmHg * (1 - fi_o2 * (1 - rq)) / rq
 }

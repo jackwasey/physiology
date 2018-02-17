@@ -2,123 +2,134 @@
 #' @description User may generate warnings for unreasonable or obviously
 #'   erroneous heights. TODO: use age to validate further
 #' @template height_m
-#' @param ht.min minimum height below which to warn if \code{warn = TRUE}
-#' @param ht.max maximum height above which to warn if \code{warn = TRUE}
-#' @param ht.min.hard minimum height below which to warn regardless of
+#' @param ht_min minimum height below which to warn if \code{warn = TRUE}
+#' @param ht_max maximum height above which to warn if \code{warn = TRUE}
+#' @param ht_min_hard minimum height below which to warn regardless of
 #'   \code{warn}
-#' @param ht.max.hard maximum height above which to warn if \code{warn}
-#' @param do.warn single logical, if TRUE, will give warnings outside of soft
+#' @param ht_max_hard maximum height above which to warn if \code{warn}
+#' @param do_warn single logical, if TRUE, will give warnings outside of soft
 #'   limits
-#' @param do.stop single logical, \code{stop} instead of warning if any values
+#' @param do_stop single logical, \code{stop} instead of warning if any values
 #'   outside hard limits
-#' @param extramsg single character string with additional message to append,
+#' @param extra_msg single character string with additional message to append,
 #'   default is ""
+#' @param equal_ok logical, if true, then being equal to a limit does not
+#'   trigger a warning or error
 #' @export
-valid_height <- function(height_m, ht.min = 0.1, ht.max = 2.5,
-                         ht.min.hard = 0.001, ht.max.hard = 3,
-                         extramsg = "", do.warn = TRUE, do.stop = FALSE) {
+valid_height <- function(height_m, ht_min = 0.1, ht_max = 2.5,
+                         ht_min_hard = 0.001, ht_max_hard = 3,
+                         extra_msg = "", do_warn = TRUE, do_stop = FALSE,
+                         equal_ok = FALSE) {
   valid(height_m, "height", "m",
-        ht.min, ht.max, ht.min.hard, ht.max.hard,
-        extramsg, do.warn, do.stop)
+        ht_min, ht_max, ht_min_hard, ht_max_hard,
+        extra_msg, do_warn, do_stop, equal_ok = equal_ok)
 }
 
 #' @rdname valid_height
 #' @export
-valid_height_adult <- function(height_m, ht.min = 0.5, ht.max = 2.5,
-                         ht.min.hard = 0.001, ht.max.hard = 3,
-                         extramsg = "", do.warn = TRUE, do.stop = FALSE) {
+valid_height_adult <- function(height_m, ht_min = 0.5, ht_max = 2.5,
+                         ht_min_hard = 0.001, ht_max_hard = 3,
+                         extra_msg = "", do_warn = TRUE, do_stop = FALSE,
+                         equal_ok = FALSE) {
   valid(height_m, "height", "m",
-        ht.min, ht.max, ht.min.hard, ht.max.hard,
-        extramsg, do.warn, do.stop)
+        ht_min, ht_max, ht_min_hard, ht_max_hard,
+        extra_msg, do_warn, do_stop, equal_ok = equal_ok)
 }
 
 #' @rdname valid_height
 #' @template weight_kg
-#' @param wt.min minimum height below which to warn if \code{warn = TRUE}
-#' @param wt.max maximum height above which to warn if \code{warn = TRUE}
-#' @param wt.min.hard minimum height below which to warn regardless of \code{warn}
-#' @param wt.max.hard maximum height above which to warn if \code{warn}
+#' @param wt_min minimum height below which to warn if \code{warn = TRUE}
+#' @param wt_max maximum height above which to warn if \code{warn = TRUE}
+#' @param wt_min_hard minimum height below which to warn regardless of \code{warn}
+#' @param wt_max_hard maximum height above which to warn if \code{warn}
 #' @export
-valid_weight <- function(weight_kg, wt.min = 0.1, wt.max = 300,
-                         wt.min.hard = 0, wt.max.hard = 600,
-                         extramsg = "", do.warn = TRUE, do.stop = FALSE) {
+valid_weight <- function(weight_kg, wt_min = 0.1, wt_max = 300,
+                         wt_min_hard = 0, wt_max_hard = 600,
+                         extra_msg = "", do_warn = TRUE, do_stop = FALSE,
+                         equal_ok = FALSE) {
   valid(weight_kg, "weight", "kg",
-        wt.min, wt.max, wt.min.hard, wt.max.hard,
-        extramsg, do.warn, do.stop)
+        wt_min, wt_max, wt_min_hard, wt_max_hard,
+        extra_msg, do_warn, do_stop, equal_ok = equal_ok)
 }
 
 #' @rdname valid_height
 #' @export
-valid_weight_adult <- function(weight_kg, wt.min = 5, wt.max = 300,
-                         wt.min.hard = 0, wt.max.hard = 600,
-                         extramsg = "", do.warn = TRUE, do.stop = FALSE) {
+valid_weight_adult <- function(weight_kg, wt_min = 5, wt_max = 300,
+                         wt_min_hard = 0, wt_max_hard = 600,
+                         extra_msg = "", do_warn = TRUE, do_stop = FALSE,
+                         equal_ok = FALSE) {
   valid(weight_kg, "weight", "kg",
-        wt.min, wt.max, wt.min.hard, wt.max.hard,
-        extramsg, do.warn, do.stop)
+        wt_min, wt_max, wt_min_hard, wt_max_hard,
+        extra_msg, do_warn, do_stop, equal_ok = equal_ok)
 }
 
 #' @rdname valid_height
 #' @param age numeric of years or \code{lubridate} Period, i.e. a fixed length
 #'   of time, which does not vary. If birth dates of individuals are known, the
 #'   user should use lubridate to convert Durations from birthdates to Periods.
-#' @param age.min minimum age below which to warn if \code{warn = TRUE}
-#' @param age.max maximum age above which to warn if \code{warn = TRUE}
-#' @param age.min.hard minimum age below which to warn regardless of
-#'   \code{warn}
-#' @param age.max.hard maximum age above which to warn if \code{warn}
+#' @param age_min minimum age below which to warn if \code{warn = TRUE}
+#' @param age_max maximum age above which to warn if \code{warn = TRUE}
+#' @param age_min_hard minimum age below which to warn regardless of \code{warn}
+#' @param age_max_hard maximum age above which to warn if \code{warn}
 #' @export
-valid_age <- function(age, age.min = 0, age.max = 150,
-                      age.min.hard = 0.00001, age.max.hard = 150,
-                      extramsg = "", do.warn = TRUE, do.stop = FALSE) {
+valid_age <- function(age, age_min = 0, age_max = 150,
+                      age_min_hard = 0.00001, age_max_hard = 150,
+                      extra_msg = "", do_warn = TRUE, do_stop = FALSE,
+                      equal_ok = FALSE) {
 
   stopifnot(lubridate::is.period(age) || is.numeric(age))
   age_y <- lubridate::years(age) %/% lubridate::years(1)
   valid(age_y, "age", "yr",
-        age.min, age.max, age.min.hard, age.max.hard,
-        extramsg, do.warn, do.stop)
+        age_min, age_max, age_min_hard, age_max_hard,
+        extra_msg, do_warn, do_stop, equal_ok = equal_ok)
 }
 
 #' @rdname valid_height
 #' @export
-valid_age_adult <- function(age.years, age.min = 18, age.max = 150,
-                            age.min.hard = 17, age.max.hard = 150,
-                            extramsg = "", do.warn = TRUE, do.stop = FALSE)
-  valid(age.years, "age", "yr",
-        age.min, age.max, age.min.hard, age.max.hard,
-        extramsg, do.warn, do.stop)
+valid_age_adult <- function(age_y, age_min = 18, age_max = 150,
+                            age_min_hard = 17, age_max_hard = 150,
+                            extra_msg = "", do_warn = TRUE, do_stop = FALSE,
+                            equal_ok = FALSE)
+  valid(age_y, "age", "yr",
+        age_min, age_max, age_min_hard, age_max_hard,
+        extra_msg, do_warn, do_stop, equal_ok = equal_ok)
 
-valid <- function(var, var.name, var.unit, min, max, min.hard, max.hard,
-                  extramsg = "", do.warn = TRUE, do.stop = FALSE) {
+valid <- function(var, name, unit, min, max, min_hard, max_hard,
+                  extra_msg = "", do_warn = TRUE, do_stop = FALSE,
+                  equal_ok = TRUE) {
   stopifnot(is.numeric(var))
   stopifnot(is.numeric(min))
   stopifnot(is.numeric(max))
-  stopifnot(is.numeric(min.hard))
-  stopifnot(is.numeric(max.hard))
+  stopifnot(is.numeric(min_hard))
+  stopifnot(is.numeric(max_hard))
   stopifnot(length(min) == 1)
   stopifnot(length(max) == 1)
-  stopifnot(length(min.hard) == 1)
-  stopifnot(length(max.hard) == 1)
-  stopifnot(is.logical(do.warn))
-  stopifnot(is.logical(do.stop))
-  stopifnot(length(do.warn) == 1)
-  stopifnot(length(do.stop) == 1)
-  stopifnot(is.character(extramsg))
-  stopifnot(length(extramsg) == 1)
+  stopifnot(length(min_hard) == 1)
+  stopifnot(length(max_hard) == 1)
+  stopifnot(is.logical(do_warn))
+  stopifnot(is.logical(do_stop))
+  stopifnot(length(do_warn) == 1)
+  stopifnot(length(do_stop) == 1)
+  stopifnot(is.character(extra_msg))
+  stopifnot(length(extra_msg) == 1)
 
-
-  if (any(var <= min.hard | var >= max.hard, na.rm = TRUE)) {
-    msg <- sprintf("%s(s) <= %0.1f or >= %0.1f %s found. %s",
-                   var.name, min.hard, max.hard, var.unit, extramsg)
-    if (do.stop)
+  eq_hard <- any(var == min_hard | var == max_hard, na.rm = TRUE)
+  df_hard <- any(var < min_hard | var > max_hard, na.rm = TRUE)
+  if (df_hard || (eq_hard && !equal_ok)) {
+    msg <- sprintf("%s(s) < %0.1f or > %0.1f %s found. %s",
+                   name, min_hard, max_hard, unit, extra_msg)
+    if (do_stop)
       stop(msg)
     else {
       warning(msg)
       return()
     }
   }
+  if (!do_warn) return()
 
-  if (do.warn && any(var <= min | var >= max, na.rm = TRUE))
+  eq_soft <- any(var == min | var == max, na.rm = TRUE)
+  df_soft <- any(var < min | var > max, na.rm = TRUE)
+  if (df_soft || (eq_soft && !equal_ok))
     warning(sprintf("%s(s) < %0.1f or > %0.1f %s found. %s",
-                    var.name, min, max, var.unit, extramsg))
-
+                    name, min, max, unit, extra_msg))
 }

@@ -18,39 +18,38 @@ bsa_adult <- function(height_m, weight_kg, ...) {
 
 #' @title ideal weight for adults
 #' @description \code{ideal_weight_adult} gives the ideal weight using default
-#'   adult algorithm, Devine.
-#'
-#'   TODO: param to switch to different method without knowing the function
-#'   name.
+#'   adult algorithm, Devine. If an age is specified and less than 18 years, the
+#'   Traub function will be used.
 #' @template height_m
 #' @template male
 #' @template dots
-#' @param ... passed to validation
+#' @param age_y numeric vector, age(s) in years. Extremely exact age is not
+#'   required, so for age in days or months, simplest just to divide. This is
+#'   not used in the calculation itself, so may be missing.
+#' @param ... passed to validation.
+#' @param age_y age in years
 #' @rdname ideal_weight
 #' @examples
 #' ideal_weight_adult(1.7, TRUE)
 #' ideal_weight_adult(1.7, FALSE)
 #' ideal_weight_adult(6 * 12 * 2.54, TRUE)
 #' @export
+ideal_weight <- function(height_m, ..., age_y = NULL) {
+  if (is.null(age_y) || age_y > 18)
+    ideal_weight_adult(height_m = height_m, ...)
+  else
+    ideal_weight_child(height_m = height_m, age_y = age_y, ...)
+}
+
+#' @describeIn ideal_weight Ideal weight of an adult
+#' @export
 ideal_weight_adult <- function(height_m, male, ...)
   ideal_weight_Devine(height_m, male, ...)
 
-#' @title ideal weight for children
-#' @description \code{ideal_weight_} gives the ideal weight using default
-#'   paediatric algorithm. TODO: account for Down's/other well calibrated
-#'   developmental differences. Age specifications are mutually exclusive, and
-#'   an error will be generated if more than on age i specified per patient.
-#' @template height_m
-#' @param age.years numeric vector, age(s) in years. TODO: there must be a
-#'   better way of capturing age. 'lubridate' doesn't seem to help much, and
-#'   adds complexity and a dependency.
-#' @param age.months numeric vector, age(s) in months
-#' @param age.days  numeric vector, age(s) in days
-#' @param ... passed on to subsequent functions, e.g. \code{do.warn = TRUE} or \code{do.stop = TRUE}
-#' @rdname ideal_weight
+#' @describeIn ideal_weight Ideal weight of a child, age >= 1 and age < 18 years
 #' @export
 ideal_weight_child <- function(height_m, age = NULL, ...)
-  ideal_weight_Straub(height_m, age, ...)
+  ideal_weight_Traub(height_m, age, ...)
 
 ideal_weight <- function(...) {
   dots <- list(...)
@@ -62,18 +61,18 @@ ideal_weight <- function(...) {
 
 #' Get ideal weight if possible
 #' @keywords internal
-ideal_or_actual_weight <- function(male = NULL, height_m = NULL, weight_kg = NULL, age_y = NULL, age_m = NULL, age_d = NULL) {
-  if (is.null(age_y) && is.null(age_m) && is.null(age_d) || age_y >= 18) {
+ideal_or_actual_weight <- function(male = NULL, height_m = NULL, weight_kg = NULL, age_y = NULL) {
+  if (is.null(age_y) || age_y >= 18) {
     # adult
     if (is.null(height_m) && !is.null(weight_kg)) return(weight_kg)
     if (!is.null(height_m) && is.null(weight_kg)) return(ideal_weight_adult(height_m = height_m, male = male))
     stop("cannot give a weight with no height or weight information")
   }
   if (is.null(height_m) && !is.null(weight_kg)) return(weight_kg)
-  ideal_weight_child(height_m = height_m, age.years = age_y, age.months = age_m, age.days = age_d)
+  ideal_weight_child(height_m = height_m, age_y = age_y)
 }
 
-#' @title ideal weight for child per Straub
+#' @title ideal weight for child per Traub
 #' @description http://www.ncbi.nlm.nih.gov/pubmed/6823980 2.396e0.01863(ht),
 #'   where height is in cm. There is an argument for using another package to
 #'   capture durations, of which age is a special case. However, I am resisting
@@ -88,23 +87,22 @@ ideal_or_actual_weight <- function(male = NULL, height_m = NULL, weight_kg = NUL
 #' @examples
 #' # will warn if given age is not in validate range from publication:
 #' \dontrun{
-#'   ideal_weight_child(0.5, age.years = 0, do.warn = TRUE)
-#'   ideal_weight_child(0.8, age.months = 11, do.warn = TRUE)
-#'   ideal_weight_child(0.5, age.days = 25, do.warn = TRUE)
+#'   ideal_weight_child(height_m = 0.5, age_y = 0, do_warn = TRUE)
+#'   ideal_weight_child(0.8, age_y = 11 / 12, do_warn = TRUE)
+#'   ideal_weight_child(0.5, age_y = 25/365, do_warn = TRUE)
 #' }
-#'   ideal_weight_child(0.5, age.days = 25, do.warn = FALSE)
-#'   ideal_weight_child(1, age.years = 2)
-#'   ideal_weight_child(0.75, age.months = 15)
+#'   ideal_weight_child(0.5, age_y = 25 / 365, do_warn = FALSE)
+#'   ideal_weight_child(1, age_y = 2)
 #' @export
-ideal_weight_Straub <- function(height_m, age = NULL, ...) {
+ideal_weight_Traub <- function(height_m, age = NULL, ...) {
 
   valid_age(age, age.min = 1, age.max = 18,
             age.min.hard = 0, age.max.hard = 150,
             extramsg = "age < 1 year or age > 17 year not validated from Straub formula", ...)
   valid_height(height_m, ...)
 
-  # 2.396e0.01863(ht), where height is in cm
-  2.396 ^ (1.863 * height_m)
+  # 2.396 * e^0.01863(ht), where height is in cm
+  2.396 * exp(1.863 * height_m)
 }
 
 #' @title ideal weight by Devine method

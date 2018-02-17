@@ -8,18 +8,18 @@ test_that("ideal_weight_adultAdult", {
   expect_error(ideal_weight_adult(height_m = 1.7))
 
   # should warn when height is out of validated range of the formula
-  expect_warning(ideal_weight_adult(height_m = 0, male = TRUE, do.warn = TRUE))
+  expect_warning(ideal_weight_adult(height_m = 0, male = TRUE, do_warn = TRUE))
   # should warn when height is out of validated range of the formula
-  expect_warning(ideal_weight_adult(height_m = -1, male = TRUE, do.warn = TRUE))
+  expect_warning(ideal_weight_adult(height_m = -1, male = TRUE, do_warn = TRUE))
   # should warn when height is out of validated range of the formula
-  expect_warning(ideal_weight_adult(height_m = 3, male = TRUE, do.warn = TRUE))
+  expect_warning(ideal_weight_adult(height_m = 3, male = TRUE, do_warn = TRUE))
   # should warn when height is out of validated range of the formula
   #   expect_warning(ideal_weight_adult(height_m = 59 / inch,
   #                                     male = TRUE,
-  #                                     do.warn = TRUE))
+  #                                     warn = TRUE))
   expect_warning(ideal_weight_adult(height_m = 59 / inch,
                                  male = TRUE,
-                                 do.warn = FALSE), NA)
+                                 do_warn = FALSE), NA)
 
   expect_equal(ideal_weight_adult(60 / inch, male = TRUE), 50)
   expect_equal(ideal_weight_adult(60 / inch, male = F), 45.5)
@@ -39,59 +39,43 @@ test_that("ideal_weight_adultAdult", {
   expect_error(ideal_weight_adult(c(), male = c(FALSE, TRUE, TRUE)))
   expect_error(ideal_weight_adult(c(60 / inch, 60 / inch), male = c()))
 
-  expect_warning(ideal_weight_adult(12 * 8.5 / inch, male = TRUE, do.warn = TRUE))
+  expect_warning(ideal_weight_adult(12 * 8.5 / inch, male = TRUE, do_warn = TRUE))
 
 })
 
-test_that("Straub", {
-  expect_error(ideal_weight_Straub(bad_input))
-  expect_error(ideal_weight_Straub(bad_input, bad_input))
-  expect_error(ideal_weight_Straub())
-
-  # spec age correctly
-  expect_error(ideal_weight_Straub(1, age.years = 2, age.months = 2))
-  expect_error(ideal_weight_Straub(1, age.years = 2, age.days = 100))
-  expect_error(ideal_weight_Straub(1, age.months = 50, age.days = 100))
+test_that("Traub", {
+  expect_error(ideal_weight_Traub(bad_input))
+  expect_error(ideal_weight_Traub(bad_input, bad_input))
+  expect_error(ideal_weight_Traub())
 
   # definitely invalid numbers always warn:
-  expect_warning(ideal_weight_Straub(-1, age.years = 10, do.warn = FALSE))
-  expect_warning(ideal_weight_Straub(5, age.years = 10, do.warn = FALSE))
-  expect_warning(ideal_weight_Straub(1, age.years = -1, do.warn = FALSE))
-  expect_warning(ideal_weight_Straub(1, age.years = 200, do.warn = FALSE))
-  expect_warning(ideal_weight_Straub(1, age.months = 200 * 12, do.warn = FALSE))
-  expect_warning(ideal_weight_Straub(1, age.days = 200 * 365, do.warn = FALSE))
+  expect_warning(ideal_weight_Traub(-1, age_y = 10, do_warn = FALSE))
+  expect_warning(ideal_weight_Traub(5, age_y = 10, do_warn = FALSE))
+  expect_warning(ideal_weight_Traub(1, age_y = -1, do_warn = FALSE))
+  expect_warning(ideal_weight_Traub(1, age_y = 200, do_warn = FALSE))
 
   # optionally warn for unvalidated but possible ages
-  expect_warning(ideal_weight_Straub(1, age.years = 0.5, do.warn = TRUE))
-  expect_warning(ideal_weight_Straub(1, age.months = 11, do.warn = TRUE))
-  expect_warning(ideal_weight_Straub(1, age.days = 350, do.warn = TRUE))
+  expect_warning(ideal_weight_Traub(1, age_y = 0.5, do_warn = TRUE))
 
-  expect_warning(ideal_weight_Straub(1, age.years = 19, do.warn = TRUE))
-  expect_warning(ideal_weight_Straub(1, age.months = 18 * 12 + 1, do.warn = TRUE))
-  expect_warning(ideal_weight_Straub(1, age.days = 18 * 366, do.warn = TRUE))
+  expect_warning(ideal_weight_Traub(1, age_y = 19, do_warn = TRUE))
 
-  expect_warning(ideal_weight_Straub(1, age.years = 0.5, do.warn = FALSE), NA)
-  expect_warning(ideal_weight_Straub(1, age.months = 11, do.warn = FALSE), NA)
-  expect_warning(ideal_weight_Straub(1, age.days = 350, do.warn = FALSE), NA)
-  expect_warning(ideal_weight_Straub(1, age.years = 18, do.warn = FALSE), NA)
-  expect_warning(ideal_weight_Straub(1, age.months = 18 * 12 + 1, do.warn = FALSE), NA)
-  expect_warning(ideal_weight_Straub(1, age.days = 18 * 366, do.warn = FALSE), NA)
+  expect_warning(ideal_weight_Traub(1, age_y = 0.5, do_warn = FALSE), NA)
+  expect_warning(ideal_weight_Traub(1, age_y = 18, do_warn = FALSE), NA)
 
   # don't need to specify age, because it is not used in calc, just validation
-  expect_that(ideal_weight_Straub(1),
-              testthat::equals(2.396^1.863))
-  expect_that(ideal_weight_Straub(1, age.years = 3),
-              testthat::equals(2.396^1.863))
-  expect_that(ideal_weight_Straub(1, age.months = 20),
-              testthat::equals(2.396^1.863))
-  expect_that(ideal_weight_Straub(1, age.days = 700),
-              testthat::equals(2.396^1.863))
-
+  expect_that(ideal_weight_Traub(1),
+              testthat::equals(2.396*exp(1.863)))
+  expect_that(ideal_weight_Traub(1, age_y = 3),
+              testthat::equals(2.396 * exp(1.863)))
+  expect_that(ideal_weight_Traub(1, age_y = 20 / 12),
+              testthat::equals(2.396 * exp(1.863)))
+  expect_that(ideal_weight_Traub(1, age_y = 700 / 365),
+              testthat::equals(2.396 * exp(1.863)))
 })
 
-test_that("child ideal weight defaults to Straub", {
-  expect_equal(ideal_weight_child(1, age.days = 700),
-               ideal_weight_Straub(1, age.days = 700))
+test_that("child ideal weight defaults to Traub", {
+  expect_equal(ideal_weight_child(1, age_y = 2),
+               ideal_weight_Traub(1, age_y = 2))
 })
 
 test_that("body surface area", {
