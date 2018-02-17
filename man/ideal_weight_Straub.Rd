@@ -7,19 +7,10 @@
 \url{http://www.ncbi.nlm.nih.gov/pubmed/6823980}
 }
 \usage{
-ideal_weight_Straub(height_m, age.years = NULL, age.months = NULL,
-  age.days = NULL, ...)
+ideal_weight_Straub(height_m, age = NULL, ...)
 }
 \arguments{
 \item{height_m}{single numeric, height in meters}
-
-\item{age.years}{numeric vector, age(s) in years. TODO: there must be a
-better way of capturing age. 'lubridate' doesn't seem to help much, and
-adds complexity and a dependency.}
-
-\item{age.months}{numeric vector, age(s) in months}
-
-\item{age.days}{numeric vector, age(s) in days}
 
 \item{...}{arguments passed to downstream functions, e.g. \code{warn = TRUE}}
 }

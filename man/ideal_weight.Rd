@@ -13,8 +13,7 @@
 \usage{
 ideal_weight_adult(height_m, male, ...)
 
-ideal_weight_child(height_m, age.years = NULL, age.months = NULL,
-  age.days = NULL, ...)
+ideal_weight_child(height_m, age = NULL, ...)
 
 ideal_weight_Devine(height_m, male, ...)
 
@@ -36,14 +35,6 @@ ideal_weight_linear(height_m, male, height_mininch, male_min_kg, female_min_kg,
 
 \item{...}{arguments passed to downstream functions, e.g. \code{warn = TRUE}}
 
-\item{age.years}{numeric vector, age(s) in years. TODO: there must be a
-better way of capturing age. 'lubridate' doesn't seem to help much, and
-adds complexity and a dependency.}
-
-\item{age.months}{numeric vector, age(s) in months}
-
-\item{age.days}{numeric vector, age(s) in days}
-
 \item{height_mininch, }{height above which to start scaling; consider as a
 minimum (for at least some algorithms)}
 
@@ -59,6 +50,14 @@ females}
 \item{...}{passed to validation}
 
 \item{height_m}{single numeric, height in meters}
+
+\item{age.years}{numeric vector, age(s) in years. TODO: there must be a
+better way of capturing age. 'lubridate' doesn't seem to help much, and
+adds complexity and a dependency.}
+
+\item{age.months}{numeric vector, age(s) in months}
+
+\item{age.days}{numeric vector, age(s) in days}
 
 \item{...}{passed on to subsequent functions, e.g. \code{do.warn = TRUE} or \code{do.stop = TRUE}}
 

@@ -22,7 +22,7 @@ valid_weight(weight_kg, wt.min = 0.1, wt.max = 300, wt.min.hard = 0,
 valid_weight_adult(weight_kg, wt.min = 5, wt.max = 300, wt.min.hard = 0,
   wt.max.hard = 600, extramsg = "", do.warn = TRUE, do.stop = FALSE)
 
-valid_age(age.years, age.min = 0, age.max = 150, age.min.hard = 1e-05,
+valid_age(age, age.min = 0, age.max = 150, age.min.hard = 1e-05,
   age.max.hard = 150, extramsg = "", do.warn = TRUE, do.stop = FALSE)
 
 valid_age_adult(age.years, age.min = 18, age.max = 150, age.min.hard = 17,
@@ -59,15 +59,18 @@ outside hard limits}
 
 \item{wt.max.hard}{maximum height above which to warn if \code{warn}}
 
-\item{age.years}{numeric}
+\item{age}{numeric of years or \code{lubridate} Period, i.e. a fixed length
+of time, which does not vary. If birth dates of individuals are known, the
+user should use lubridate to convert Durations from birthdates to Periods.}
 
-\item{age.min}{minimum height below which to warn if \code{warn = TRUE}}
+\item{age.min}{minimum age below which to warn if \code{warn = TRUE}}
 
-\item{age.max}{maximum height above which to warn if \code{warn = TRUE}}
+\item{age.max}{maximum age above which to warn if \code{warn = TRUE}}
 
-\item{age.min.hard}{minimum height below which to warn regardless of \code{warn}}
+\item{age.min.hard}{minimum age below which to warn regardless of
+\code{warn}}
 
-\item{age.max.hard}{maximum height above which to warn if \code{warn}}
+\item{age.max.hard}{maximum age above which to warn if \code{warn}}
 }
 \description{
 User may generate warnings for unreasonable or obviously

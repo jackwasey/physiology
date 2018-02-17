@@ -58,18 +58,25 @@ valid_weight_adult <- function(weight_kg, wt.min = 5, wt.max = 300,
 }
 
 #' @rdname valid_height
-#' @param age.years numeric
-#' @param age.min minimum height below which to warn if \code{warn = TRUE}
-#' @param age.max maximum height above which to warn if \code{warn = TRUE}
-#' @param age.min.hard minimum height below which to warn regardless of \code{warn}
-#' @param age.max.hard maximum height above which to warn if \code{warn}
+#' @param age numeric of years or \code{lubridate} Period, i.e. a fixed length
+#'   of time, which does not vary. If birth dates of individuals are known, the
+#'   user should use lubridate to convert Durations from birthdates to Periods.
+#' @param age.min minimum age below which to warn if \code{warn = TRUE}
+#' @param age.max maximum age above which to warn if \code{warn = TRUE}
+#' @param age.min.hard minimum age below which to warn regardless of
+#'   \code{warn}
+#' @param age.max.hard maximum age above which to warn if \code{warn}
 #' @export
-valid_age <- function(age.years, age.min = 0, age.max = 150,
+valid_age <- function(age, age.min = 0, age.max = 150,
                       age.min.hard = 0.00001, age.max.hard = 150,
-                      extramsg = "", do.warn = TRUE, do.stop = FALSE)
-  valid(age.years, "age", "yr",
+                      extramsg = "", do.warn = TRUE, do.stop = FALSE) {
+
+  stopifnot(lubridate::is.period(age) || is.numeric(age))
+  age_y <- lubridate::years(age) %/% lubridate::years(1)
+  valid(age_y, "age", "yr",
         age.min, age.max, age.min.hard, age.max.hard,
         extramsg, do.warn, do.stop)
+}
 
 #' @rdname valid_height
 #' @export

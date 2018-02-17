@@ -49,20 +49,15 @@ ideal_weight_adult <- function(height_m, male, ...)
 #' @param ... passed on to subsequent functions, e.g. \code{do.warn = TRUE} or \code{do.stop = TRUE}
 #' @rdname ideal_weight
 #' @export
-ideal_weight_child <- function(height_m,
-                               age.years = NULL,
-                               age.months = NULL,
-                               age.days = NULL,
-                               ...)
-  ideal_weight_Straub(height_m, age.years, age.months, age.days, ...)
+ideal_weight_child <- function(height_m, age = NULL, ...)
+  ideal_weight_Straub(height_m, age, ...)
 
 ideal_weight <- function(...) {
-  list2env(list(...), envir = environment())
-  age_nulls <- sum(is.null(age_y), is.null(age_m), is.null(age_d))
-  if (age_nulls == 0 || is_adult(...))
-    return(ideal_weight_adult(...))
-
-  ideal_weight_child(...)
+  dots <- list(...)
+  if (is.null(dots$age || is_adult(dots$age)))
+    ideal_weight_adult(...)
+  else
+    ideal_weight_child(...)
 }
 
 #' Get ideal weight if possible
@@ -101,15 +96,9 @@ ideal_or_actual_weight <- function(male = NULL, height_m = NULL, weight_kg = NUL
 #'   ideal_weight_child(1, age.years = 2)
 #'   ideal_weight_child(0.75, age.months = 15)
 #' @export
-ideal_weight_Straub <- function(height_m,
-                                age.years = NULL,
-                                age.months = NULL,
-                                age.days = NULL,
-                                ...) {
+ideal_weight_Straub <- function(height_m, age = NULL, ...) {
 
-  age.years <- age_from_ages(age.years, age.months, age.days)
-
-  valid_age(age.years, age.min = 1, age.max = 18,
+  valid_age(age, age.min = 1, age.max = 18,
             age.min.hard = 0, age.max.hard = 150,
             extramsg = "age < 1 year or age > 17 year not validated from Straub formula", ...)
   valid_height(height_m, ...)
