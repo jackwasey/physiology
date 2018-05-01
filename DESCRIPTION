@@ -17,6 +17,7 @@ Suggests:
     dplyr,
     ggplot2,
     lubridate,
+    magrittr,
     reshape2,
     rmarkdown,
     rvest,

@@ -3,6 +3,10 @@ title: "Effect of breathing circuit compliance and deadspace on neonatal ventila
 author: "Jack O. Wasey"
 date: "October 1, 2017"
 output: html_document
+vignette: >
+  %\VignetteIndexEntry{Effect of breathing circuit compliance and deadspace on neonatal ventilation}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ```{r setup, include=FALSE}
@@ -26,7 +30,7 @@ driving_pressure <- 15
 insp_tube_vol_diff <- driving_pressure * (max_compliance - min_compliance)
 
 # get median weight for age up to one year. Let's just take female for simplicity.
-dat <- as_tibble(childsds::make_percentile_tab(who.ref, item = "weight", perc = 50, stack = TRUE))
+dat <- as_tibble(childsds::make_percentile_tab(childsds::who.ref, item = "weight", perc = 50, stack = TRUE, sex = "sex"))
 #dat <- dat[dat$sex == "female" & dat$age <= 1, c("age", "value")]
 dat <- dplyr::filter(dat, sex == "female", age <= 1) %>%
   dplyr::rename(weight = value) %>% 
