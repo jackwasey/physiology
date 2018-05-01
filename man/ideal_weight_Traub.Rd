@@ -7,14 +7,10 @@
 \url{http://www.ncbi.nlm.nih.gov/pubmed/6823980}
 }
 \usage{
-ideal_weight_Traub(height_m, age_y = NULL, ...)
+ideal_weight_Traub(height_m, age = NULL, ...)
 }
 \arguments{
 \item{height_m}{single numeric, height in meters}
-
-\item{age_y}{numeric vector, age(s) in years. Extremely exact age is not
-required, so for age in days or months, simplest just to divide. This is
-not used in the calculation itself, so may be missing.}
 
 \item{...}{arguments passed to downstream functions, e.g. \code{warn = TRUE}}
 }

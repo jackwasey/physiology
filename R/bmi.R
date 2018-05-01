@@ -48,8 +48,16 @@ ideal_weight_adult <- function(height_m, male, ...)
 
 #' @describeIn ideal_weight Ideal weight of a child, age >= 1 and age < 18 years
 #' @export
-ideal_weight_child <- function(height_m, age_y = NULL, ...)
-  ideal_weight_Traub(height_m, age_y, ...)
+ideal_weight_child <- function(height_m, age = NULL, ...)
+  ideal_weight_Traub(height_m, age, ...)
+
+ideal_weight <- function(...) {
+  dots <- list(...)
+  if (is.null(dots$age || is_adult(dots$age)))
+    ideal_weight_adult(...)
+  else
+    ideal_weight_child(...)
+}
 
 #' Get ideal weight if possible
 #' @keywords internal
@@ -86,14 +94,11 @@ ideal_or_actual_weight <- function(male = NULL, height_m = NULL, weight_kg = NUL
 #'   ideal_weight_child(0.5, age_y = 25 / 365, do_warn = FALSE)
 #'   ideal_weight_child(1, age_y = 2)
 #' @export
-ideal_weight_Traub <- function(height_m,
-                                age_y = NULL,
-                                ...) {
+ideal_weight_Traub <- function(height_m, age = NULL, ...) {
 
-  if (!is.null(age_y))
-    valid_age(age_y, age_min = 1, age_max = 18,
-              age_min_hard = 0, age_max_hard = 150,
-              extra_msg = "age < 1 year or age > 17 year not validated from Traub formula", ...)
+  valid_age(age, age.min = 1, age.max = 18,
+            age.min.hard = 0, age.max.hard = 150,
+            extramsg = "age < 1 year or age > 17 year not validated from Straub formula", ...)
   valid_height(height_m, ...)
 
   # 2.396 * e^0.01863(ht), where height is in cm

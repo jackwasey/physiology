@@ -25,7 +25,7 @@ valid_weight_adult(weight_kg, wt_min = 5, wt_max = 300, wt_min_hard = 0,
   wt_max_hard = 600, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
   equal_ok = FALSE)
 
-valid_age(age_y, age_min = 0, age_max = 150, age_min_hard = 1e-05,
+valid_age(age, age_min = 0, age_max = 150, age_min_hard = 1e-05,
   age_max_hard = 150, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
   equal_ok = FALSE)
 
@@ -67,7 +67,9 @@ trigger a warning or error}
 
 \item{wt_max_hard}{maximum height above which to warn if \code{warn}}
 
-\item{age_y}{numeric}
+\item{age}{numeric of years or \code{lubridate} Period, i.e. a fixed length
+of time, which does not vary. If birth dates of individuals are known, the
+user should use lubridate to convert Durations from birthdates to Periods.}
 
 \item{age_min}{minimum age below which to warn if \code{warn = TRUE}}
 
