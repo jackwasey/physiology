@@ -15,12 +15,14 @@
 #'   iw <- ideal_weight_adult(height_m = height, male = male)
 #'   plot(iw, deadspace_anatomic_adult(ideal_weight_kg = height))
 #'
-#'   # discontinuity at age 6 is driven by ideal weight more than the lograithmic calculation
+#'   # discontinuity at age 6 is driven by ideal weight more than the
+#'   # lograithmic calculation
 #'   iw <- c(seq(12, 18, 0.2), seq(18.5, 24, 0.5))
 #'   youngest = 3
 #'   oldest = 9
 #'   ages <- seq(youngest, oldest, (oldest - youngest) / (length(iw) - 1))
-#'   plot(iw, deadspace_anatomic_child(ideal_weight_kg = iw, age_y = ages), type = "l")
+#'   plot(iw, deadspace_anatomic_child(ideal_weight_kg = iw, age_y = ages),
+#'        type = "l")
 #'
 #' @export
 deadspace_total <- function(ideal_weight_kg,

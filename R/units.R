@@ -16,7 +16,7 @@ diameter_mm_to_french <- function(x) {
   x / 3
 }
 
-generate_med_conv <- function() {
+generate_med_conv <- function(save_data = TRUE) {
   loadNamespace("xml2")
   loadNamespace("rvest")
   whole_page <- xml2::read_html(encoding = "latin1",
@@ -31,7 +31,8 @@ generate_med_conv <- function() {
                        "unit.conventional", "factor", "ref.si",
                        "unit.si")
   med_conv <- iconv(med_conv, from = "latin1", to = "UTF-8")
-  save(med_conv, file = "data/med_conv.rda", compress = "xz")
+  if (save_data)
+    save(med_conv, file = "data/med_conv.rda", compress = "xz")
 }
 
 #' Conversion factors and reference ranges for lab values

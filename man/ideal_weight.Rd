@@ -12,11 +12,11 @@
 \alias{ideal_weight_linear}
 \title{ideal weight for adults}
 \usage{
-ideal_weight(...)
+ideal_weight(height_m, ..., age_y = NULL, male = NULL)
 
 ideal_weight_adult(height_m, male, ...)
 
-ideal_weight_child(height_m, age = NULL, ...)
+ideal_weight_child(height_m, age_y = NULL, ...)
 
 ideal_weight_Devine(height_m, male, ...)
 
@@ -32,9 +32,13 @@ ideal_weight_linear(height_m, male, height_mininch, male_min_kg, female_min_kg,
   male_kg_per_inch, female_kg_per_inch, ...)
 }
 \arguments{
+\item{height_m}{single numeric, height in meters}
+
 \item{...}{arguments passed to downstream functions, e.g. \code{warn = TRUE}}
 
-\item{height_m}{single numeric, height in meters}
+\item{age_y}{numeric vector, age(s) in years. Extremely exact age is not
+required, so for age in days or months, simplest just to divide. This is
+not used in the calculation itself, so may be missing.}
 
 \item{male}{logical value(s) whether patient is male. TRUE or FALSE.}
 
@@ -50,13 +54,7 @@ females}
 
 \item{female_kg_per_inch, }{slope for females}
 
-\item{age_y}{numeric vector, age(s) in years. Extremely exact age is not
-required, so for age in days or months, simplest just to divide. This is
-not used in the calculation itself, so may be missing.}
-
 \item{...}{passed to validation.}
-
-\item{age_y}{age in years}
 
 \item{...}{passed on to validation}
 }

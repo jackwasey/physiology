@@ -27,16 +27,15 @@ bsa_adult <- function(height_m, weight_kg, ...) {
 #'   required, so for age in days or months, simplest just to divide. This is
 #'   not used in the calculation itself, so may be missing.
 #' @param ... passed to validation.
-#' @param age_y age in years
 #' @rdname ideal_weight
 #' @examples
 #' ideal_weight_adult(1.7, TRUE)
 #' ideal_weight_adult(1.7, FALSE)
 #' ideal_weight_adult(6 * 12 * 2.54, TRUE)
 #' @export
-ideal_weight <- function(height_m, ..., age_y = NULL) {
+ideal_weight <- function(height_m, ..., age_y = NULL, male = NULL) {
   if (is.null(age_y) || age_y > 18)
-    ideal_weight_adult(height_m = height_m, ...)
+    ideal_weight_adult(height_m = height_m, male = male, ...)
   else
     ideal_weight_child(height_m = height_m, age_y = age_y, ...)
 }
@@ -48,29 +47,8 @@ ideal_weight_adult <- function(height_m, male, ...)
 
 #' @describeIn ideal_weight Ideal weight of a child, age >= 1 and age < 18 years
 #' @export
-ideal_weight_child <- function(height_m, age = NULL, ...)
-  ideal_weight_Traub(height_m, age, ...)
-
-ideal_weight <- function(...) {
-  dots <- list(...)
-  if (is.null(dots$age || is_adult(dots$age)))
-    ideal_weight_adult(...)
-  else
-    ideal_weight_child(...)
-}
-
-#' Get ideal weight if possible
-#' @keywords internal
-ideal_or_actual_weight <- function(male = NULL, height_m = NULL, weight_kg = NULL, age_y = NULL) {
-  if (is.null(age_y) || age_y >= 18) {
-    # adult
-    if (is.null(height_m) && !is.null(weight_kg)) return(weight_kg)
-    if (!is.null(height_m) && is.null(weight_kg)) return(ideal_weight_adult(height_m = height_m, male = male))
-    stop("cannot give a weight with no height or weight information")
-  }
-  if (is.null(height_m) && !is.null(weight_kg)) return(weight_kg)
-  ideal_weight_child(height_m = height_m, age_y = age_y)
-}
+ideal_weight_child <- function(height_m, age_y = NULL, ...)
+  ideal_weight_Traub(height_m, age_y, ...)
 
 #' @title ideal weight for child per Traub
 #' @description http://www.ncbi.nlm.nih.gov/pubmed/6823980 2.396e0.01863(ht),
@@ -94,15 +72,15 @@ ideal_or_actual_weight <- function(male = NULL, height_m = NULL, weight_kg = NUL
 #'   ideal_weight_child(0.5, age_y = 25 / 365, do_warn = FALSE)
 #'   ideal_weight_child(1, age_y = 2)
 #' @export
-ideal_weight_Traub <- function(height_m, age = NULL, ...) {
-
-  valid_age(age, age.min = 1, age.max = 18,
-            age.min.hard = 0, age.max.hard = 150,
-            extramsg = "age < 1 year or age > 17 year not validated from Straub formula", ...)
-  valid_height(height_m, ...)
-
-  # 2.396 * e^0.01863(ht), where height is in cm
-  2.396 * exp(1.863 * height_m)
+ideal_weight_Traub <- function(height_m, age_y = NULL, ...) {
+  if (!is.null(age_y))
+      valid_age(age_y, age_min = 1, age_max = 18,
+                age_min_hard = 0, age_max_hard = 150,
+                extra_msg = "age < 1 year or age > 17 year \
+                not validated from Traub formula",
+                ...)
+      valid_height(height_m, ...)
+      2.396 * exp(1.863 * height_m)
 }
 
 #' @title ideal weight by Devine method
@@ -114,7 +92,6 @@ ideal_weight_Traub <- function(height_m, age = NULL, ...) {
 #' @export
 ideal_weight_Devine <- function(height_m, male, ...)
   ideal_weight_linear(height_m, male, 60, 50, 45.5, 2.3, 2.3, ...)
-
 
 #' @title ideal weight by Robinson method
 #' @rdname ideal_weight
@@ -237,7 +214,6 @@ blood_vol_Lemmens_indexed <- function(height_m, weight_kg, ...) {
   stopifnot(length(height_m) == length(weight_kg))
   valid_height_adult(height_m, ...)
   valid_weight_adult(weight_kg, ...)
-
   70 / sqrt(weight_kg / (22 * height_m ^ 2))
 }
 
@@ -252,21 +228,20 @@ blood_vol_Lemmens_indexed <- function(height_m, weight_kg, ...) {
 #'   Parker-Jones P, Davy KP, DeSouza CA et al. Absence of agerelated decline in
 #'   total blood volume in physically active females. Am J Physiol 1997; 272:
 #'   H2534-40.
-#' @param age years
 #' @param male logical
 #' @examples
-#'   blood_vol_Lemmens_non_obese(80, age = 25, male = TRUE)
-#'   blood_vol_Lemmens_non_obese(80, age = 75, male = TRUE)
+#'   blood_vol_Lemmens_non_obese(80, age_y = 25, male = TRUE)
+#'   blood_vol_Lemmens_non_obese(80, age_y = 75, male = TRUE)
 #' @export
-blood_vol_Lemmens_non_obese <- function(weight_kg, age, male, ...) {
-  stopifnot(length(weight_kg) == length(age))
-  stopifnot(length(male) == length(age))
+blood_vol_Lemmens_non_obese <- function(weight_kg, age_y, male, ...) {
+  stopifnot(length(weight_kg) == length(age_y))
+  stopifnot(length(male) == length(age_y))
   valid_weight_adult(weight_kg, ...)
-  valid_age_adult(age, ...)
+  valid_age_adult(age_y, ...)
   stopifnot(is.logical(male))
   ifelse(male,
-         weight_kg * (90 - (0.4 * age)),
-         weight_kg * (85 - (0.4 * age))
+         weight_kg * (90 - (0.4 * age_y)),
+         weight_kg * (85 - (0.4 * age_y))
   )
 }
 

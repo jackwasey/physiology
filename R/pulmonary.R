@@ -23,7 +23,8 @@
 #' # hyperbaric oxygen at 100%, 2 atmospheres
 #' alveolar_PAO2_mmHg(fi_o2 = 1, Patm_mmHg = 1520)
 #' @export
-alveolar_PAO2_mmHg <- function(fi_o2 = 0.209, rq = 0.8, PACO2_mmHg = 40, Patm_mmHg = 760, PAH2O_mmHg = 47) {
+alveolar_PAO2_mmHg <- function(fi_o2 = 0.209, rq = 0.8, PACO2_mmHg = 40,
+                               Patm_mmHg = 760, PAH2O_mmHg = 47) {
   stopifnot(fi_o2 >= 0, fi_o2 <= 1)
   stopifnot(rq > 0, rq < 10)
   stopifnot(PACO2_mmHg > 0, PACO2_mmHg < (Patm_mmHg - PAH2O_mmHg))

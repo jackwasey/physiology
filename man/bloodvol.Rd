@@ -13,7 +13,7 @@ blood_vol_Lemmens_sedentary(height_m, weight_kg, ...)
 
 blood_vol_Lemmens_indexed(height_m, weight_kg, ...)
 
-blood_vol_Lemmens_non_obese(weight_kg, age, male, ...)
+blood_vol_Lemmens_non_obese(weight_kg, age_y, male, ...)
 }
 \arguments{
 \item{height_m}{single numeric, height in meters}
@@ -24,7 +24,9 @@ blood_vol_Lemmens_non_obese(weight_kg, age, male, ...)
 
 \item{...}{passed on to validation}
 
-\item{age}{years}
+\item{age_y}{numeric vector, age(s) in years. Extremely exact age is not
+required, so for age in days or months, simplest just to divide. This is
+not used in the calculation itself, so may be missing.}
 }
 \value{
 numeric vector
@@ -64,6 +66,6 @@ blood_vol_Lemmens_sedentary(1.8, 80)
 blood_vol_Lemmens_sedentary(1.8, 160)
 blood_vol_Lemmens_indexed(1.8, 80)
 blood_vol_Lemmens_indexed(1.8, 160)
-  blood_vol_Lemmens_non_obese(80, age = 25, male = TRUE)
-  blood_vol_Lemmens_non_obese(80, age = 75, male = TRUE)
+  blood_vol_Lemmens_non_obese(80, age_y = 25, male = TRUE)
+  blood_vol_Lemmens_non_obese(80, age_y = 75, male = TRUE)
 }
