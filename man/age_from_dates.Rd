@@ -21,7 +21,9 @@ either as a \code{Date} or something which will be converted to a
 integer vector
 }
 \description{
-Calculate age at time of reference date, based on birth date.
+Calculate age at time of reference date, based on birth date, rounded to the
+given unit. These are designed for physiologic estimations, not for accuracy.
+The dates can be given as anything which can be coerced into a \code{Date}.
 }
 \examples{
 age_from_dates("2014-11-08", "2014-12-31", unit = "day")

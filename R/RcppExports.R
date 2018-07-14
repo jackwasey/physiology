@@ -16,6 +16,7 @@
 #' atm_pres(7950) # Camp 4
 #' atm_pres(8850) # Everest summit
 #' atm_pres_frac(8850) # fraction of sea level pressure on Everest
+#' @concept atmospheric pressure
 #' @export
 atm_pres <- function(altitude_m) {
     .Call(`_physiology_atm_pres`, altitude_m)

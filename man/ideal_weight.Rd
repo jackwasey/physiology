@@ -95,8 +95,9 @@ generic internal function to handle linear ideal weight
 }}
 
 \examples{
-ideal_weight_adult(1.7, TRUE)
-ideal_weight_adult(1.7, FALSE)
-ideal_weight_adult(6 * 12 * 2.54, TRUE)
+ideal_weight_adult(1.7, male = TRUE)
+ideal_weight_adult(1.7, male = FALSE)
+ideal_weight_adult(6 * 12 * 2.54 / 100, male = TRUE) # 6ft
+suppressWarnings(ideal_weight_adult(5, male = FALSE))
 }
 \keyword{internal}

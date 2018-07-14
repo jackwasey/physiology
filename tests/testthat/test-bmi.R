@@ -102,20 +102,20 @@ test_that("blood vol Lemmens not obese", {
   expect_error(blood_vol_Lemmens_non_obese(NULL, NULL, NULL))
   expect_error(blood_vol_Lemmens_non_obese(50))
   expect_error(blood_vol_Lemmens_non_obese(weight_kg = 50))
-  expect_error(blood_vol_Lemmens_non_obese(age = 20))
+  expect_error(blood_vol_Lemmens_non_obese(age_y = 20))
   expect_error(blood_vol_Lemmens_non_obese(male = TRUE))
-  expect_error(blood_vol_Lemmens_non_obese(weight_kg = 50, age = 20))
-  expect_error(blood_vol_Lemmens_non_obese(age = 20, male = FALSE))
+  expect_error(blood_vol_Lemmens_non_obese(weight_kg = 50, age_y = 20))
+  expect_error(blood_vol_Lemmens_non_obese(age_y = 20, male = FALSE))
   expect_error(blood_vol_Lemmens_non_obese(weight_kg = 50, male = TRUE))
   expect_error(
-    blood_vol_Lemmens_non_obese(weight_kg = 50, age = 50, male = "M"))
+    blood_vol_Lemmens_non_obese(weight_kg = 50, age_y = 50, male = "M"))
   expect_error(
     blood_vol_Lemmens_non_obese(
-      weight_kg = 50, age = 50, male = c(TRUE, FALSE)))
+      weight_kg = 50, age_y = 50, male = c(TRUE, FALSE)))
   expect_error(
-    blood_vol_Lemmens_non_obese(weight_kg = 50, age = c(50, 60), male = FALSE))
+    blood_vol_Lemmens_non_obese(weight_kg = 50, age_y = c(50, 60), male = FALSE))
   expect_error(
-    blood_vol_Lemmens_non_obese(weight_kg = c(50, 75), age = 50, male = FALSE))
+    blood_vol_Lemmens_non_obese(weight_kg = c(50, 75), age_y = 50, male = FALSE))
 
   expect_equal(blood_vol_Lemmens_non_obese(50, 50, TRUE), 3500)
   expect_equal(blood_vol_Lemmens_non_obese(50, 50, FALSE), 3250)
@@ -252,6 +252,6 @@ test_that("ideal weight determine by age", {
     ideal_weight(1.8, male = TRUE, age_y = 99),
     ideal_weight_adult(1.8, male = TRUE))
   expect_identical(
-    ideal_weight(1, male = FALSE, age_y = age_m(23)),
-    ideal_weight_child(1, age_y = age_m(23)))
+    ideal_weight(1, male = FALSE, age_y = age_m_to_y(23)),
+    ideal_weight_child(1, age_y = age_m_to_y(23)))
 })

@@ -2,7 +2,7 @@
 
 export(adj_weight_adult)
 export(age_from_dates)
-export(age_m)
+export(age_m_to_y)
 export(alveolar_PAO2_mmHg)
 export(atm_pres)
 export(atm_pres_frac)

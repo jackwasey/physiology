@@ -29,9 +29,10 @@ bsa_adult <- function(height_m, weight_kg, ...) {
 #' @param ... passed to validation.
 #' @rdname ideal_weight
 #' @examples
-#' ideal_weight_adult(1.7, TRUE)
-#' ideal_weight_adult(1.7, FALSE)
-#' ideal_weight_adult(6 * 12 * 2.54, TRUE)
+#' ideal_weight_adult(1.7, male = TRUE)
+#' ideal_weight_adult(1.7, male = FALSE)
+#' ideal_weight_adult(6 * 12 * 2.54 / 100, male = TRUE) # 6ft
+#' suppressWarnings(ideal_weight_adult(5, male = FALSE))
 #' @export
 ideal_weight <- function(height_m, ..., age_y = NULL, male = NULL) {
   if (is.null(age_y) || age_y > 18)

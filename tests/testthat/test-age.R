@@ -3,11 +3,11 @@ context("age")
 test_that("basic age calcs", {
   expect_equal(
     age_from_dates(birth_date = "2000-01-01",
-                   ref_date = "2005-01-01", unit = "year"), 5)
+                   ref_date = "2005-01-01", unit = "year"), 5, tolerance = 0.1)
   expect_equal(
     age_from_dates(birth_date = "2000-01-01",
-                   ref_date = "2005-01-01", unit = "month"), 60)
+                   ref_date = "2005-01-01", unit = "month"), 60, tolerance = 0.1)
   expect_equal(
     age_from_dates(birth_date = "2000-01-01",
-                   ref_date = "2000-01-08", unit = "day"), 7)
+                   ref_date = "2000-01-08", unit = "day"), 7, tolerance = 0.01)
 })
