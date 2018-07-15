@@ -4,3 +4,4 @@
 man-roxygen
 ^appveyor\.yml$
 ^\.lintr$
+^codecov\.yml$

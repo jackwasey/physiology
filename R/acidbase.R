@@ -1,4 +1,4 @@
-#' pH by Henderson Hasselbach equation
+#' pH by Henderson Hasselbalch equation
 #'
 #' Calculate the pH based on bicarbonate and partial pressure of CO2
 #' @param bicarbonate mmol/L
@@ -8,11 +8,11 @@
 #'  pp_co2 <- seq(20, 70, 10)
 #'  bc <- rep(bicarbonate, length(pp_co2))
 #'  pp <- rep(pp_co2, each = length(bicarbonate))
-#'  acidbase <- matrix(henderson_hasselbach(bc, pp), nrow = 9, ncol = 6)
+#'  acidbase <- matrix(henderson_hasselbalch(bc, pp), nrow = 9, ncol = 6)
 #'  rownames(acidbase) <- paste("bicarb", bicarbonate)
 #'  colnames(acidbase) <- paste("PaCO2", pp_co2)
 #'  acidbase
 #' @export
-henderson_hasselbach <- function(bicarbonate, pp_co2) {
+henderson_hasselbalch <- function(bicarbonate, pp_co2) {
   6.1 + log10(bicarbonate / (0.0307 * pp_co2))
 }

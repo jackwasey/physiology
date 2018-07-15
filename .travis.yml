@@ -1,10 +1,10 @@
-# https://docs.travis-ci.com/user/languages/r
-language: r
-dist: trusty
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
 sudo: false
 cache: packages
 
-r:
+R:
   - oldrel
   - release
   - devel
@@ -23,11 +23,8 @@ repos:
 
 warnings_are_errors: true
 
-before_script:
-- Rscript -e 'devtools::install_github("jimhester/covr")'
-
 after_success:
-  - Rscript -e 'covr::coveralls()'
+  - Rscript -e 'covr::codecov()'
 
 notifications:
   email:
