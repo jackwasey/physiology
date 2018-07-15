@@ -1,6 +1,6 @@
 # physiology
 
-[![Build Status](https://travis-ci.org/jackwasey/physiology.svg?branch=master)](https://travis-ci.org/jackwasey/physiology) [![Coverage Status](https://img.shields.io/coveralls/jackwasey/physiology.svg)](https://coveralls.io/r/jackwasey/physiology?branch=master)
+[![Build Status](https://travis-ci.org/jackwasey/physiology.svg?branch=master)](https://travis-ci.org/jackwasey/physiology)
 [![Coverage status](https://codecov.io/gh/jackwasey/physiology/branch/master/graph/badge.svg)](https://codecov.io/github/jackwasey/physiology?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/physiology)](https://cran.r-project.org/package=physiology)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
