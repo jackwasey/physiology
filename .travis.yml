@@ -1,19 +1,33 @@
+# https://docs.travis-ci.com/user/languages/r
 language: r
+dist: trusty
+sudo: false
+cache: packages
 
-sudo: required
+r:
+  - oldrel
+  - release
+  - devel
 
-warnings_are_errors: false
-env: R_CHECK_CRAN_INCOMING_=FALSE
+os:
+  - linux
+  - osx
 
-r_github_packages:
- - jimhester/covr
- - hadley/testthat
+matrix:
+  allow_failures:
+    - r: oldrel
+    - os: osx
+
+repos:
+  CRAN: https://cloud.r-project.org
+
+warnings_are_errors: true
+
+before_script:
+- Rscript -e 'devtools::install_github("jimhester/covr")'
 
 after_success:
- - Rscript -e 'devtools::install()'
- - Rscript -e 'devtools::session_info()'
- - env: COVR=true
- - Rscript -e 'library(covr); coveralls(quiet = FALSE)'
+  - Rscript -e 'covr::coveralls()'
 
 notifications:
   email:

@@ -1,0 +1,47 @@
+---
+title: "Effect of breathing circuit compliance and deadspace on neonatal ventilation"
+author: "Jack O. Wasey"
+date: "October 1, 2017"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{Effect of breathing circuit compliance and deadspace on neonatal ventilation}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+suppressPackageStartupMessages({
+  library(childsds)
+  library(dplyr)
+  library(magrittr)
+})
+```
+
+Fully extending the concertina tubing of a breathing circuit reduces compliance: the rigidity of the tubing itself falls, and there is more air in it. The following chart shows the effect of this difference on deadspace fraction in neonatal ventilation. This shows why a compliance test is essential before a neonatal anesthesia case, and why the tubing should not be extended or contracted after this test.
+
+```{r, echo = T}
+# units of ml per cmH20
+min_compliance <- 0.5
+max_compliance <- 1.5
+# unit cmH20
+driving_pressure <- 15
+insp_tube_vol_diff <- driving_pressure * (max_compliance - min_compliance)
+
+# get median weight for age up to one year. Let's just take female for simplicity.
+dat <- as_tibble(childsds::make_percentile_tab(childsds::who.ref, item = "weight", perc = 50, stack = TRUE, sex = "sex"))
+#dat <- dat[dat$sex == "female" & dat$age <= 1, c("age", "value")]
+dat <- dplyr::filter(dat, sex == "female", age <= 1) %>%
+  dplyr::rename(weight = value) %>% 
+  dplyr::select(age, weight)
+plot(dat, type = "l")
+
+# dat$anatomic_deadspace <- deadspace_anatomic_child(ideal_weight_kg = dat$value, age_y = dat$age)
+
+dat <- dat %>%
+  mutate(tidal_volume = 7 * weight) %>% 
+  mutate(error_fraction = insp_tube_vol_diff / tidal_volume)
+
+plot(dat[c("weight", "error_fraction")], type = "l")
+```

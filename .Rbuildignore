@@ -1,5 +1,6 @@
 ^\.travis\.yml$
-^.*\.Rproj$
+^physiology\.Rproj$
 ^\.Rproj\.user$
 man-roxygen
 ^appveyor\.yml$
+^\.lintr$
