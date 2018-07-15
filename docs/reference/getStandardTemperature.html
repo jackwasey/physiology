@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>French to diameter — french_to_diameter_mm • physiology</title>
+<title>get standard temperature at a given altitude — getStandardTemperature • physiology</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,10 +30,10 @@
 
 
 
-<meta property="og:title" content="French to diameter — french_to_diameter_mm" />
+<meta property="og:title" content="get standard temperature at a given altitude — getStandardTemperature" />
 
-<meta property="og:description" content="Convert French size of a catheter to diameter in mm. Currently accepts or
-returns non-integer French values" />
+<meta property="og:description" content="altitude_km = earth_radius * altitude / (earth_radius + altitude) All in
+km Temperature is in kelvins = 273.15 + Celsius" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -119,30 +119,34 @@ returns non-integer French values" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>French to diameter</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jackwasey/physiology/blob/master/R/units.R'><code>R/units.R</code></a></small>
-    <div class="hidden name"><code>french_to_diameter_mm.Rd</code></div>
+    <h1>get standard temperature at a given altitude</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jackwasey/physiology/blob/master/R/RcppExports.R'><code>R/RcppExports.R</code></a></small>
+    <div class="hidden name"><code>getStandardTemperature.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Convert French size of a catheter to diameter in mm. Currently accepts or
-returns non-integer French values</p>
+    <p>altitude_km = earth_radius * altitude / (earth_radius + altitude) All in
+km Temperature is in kelvins = 273.15 + Celsius</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>french_to_diameter_mm</span>(<span class='no'>x</span>)
-
-<span class='fu'>diameter_mm_to_french</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>getStandardTemperature</span>(<span class='no'>altitude_km</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Size in French units, or mm</p></td>
+      <th>altitude_km</th>
+      <td><p>Altitude in kilometers</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Below 51 km: Practical Meteorology by Roland Stull, pg 12. Above 51 km:
+http://www.braeunig.us/space/atmmodel.htm Validation data:
+https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf</p>
     
 
   </div>
@@ -150,7 +154,9 @@ returns non-integer French values</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#references">References</a></li>
+          </ul>
 
   </div>
 </div>

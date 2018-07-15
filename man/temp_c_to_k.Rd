@@ -6,6 +6,9 @@
 \usage{
 temp_c_to_k(temp_c)
 }
+\arguments{
+\item{temp_c}{Temperature in Celsius}
+}
 \description{
 Temperature in Kelvin from Celsius
 }

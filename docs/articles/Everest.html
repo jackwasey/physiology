@@ -62,6 +62,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -124,7 +127,7 @@
 <a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="dt">PACO2_mmHg =</span> <span class="dv">40</span>, </a>
 <a class="sourceLine" id="cb4-8" data-line-number="8">  <span class="dt">Patm_mmHg =</span> pres_atm_everest,</a>
 <a class="sourceLine" id="cb4-9" data-line-number="9">  <span class="dt">PAH2O_mmHg =</span> PAH2O_mmHg_summit)</a></code></pre></div>
-<p>The assumption of a typical PACO2 of 40 mmHg is invalid for a climber who has achieved the summit. In fact, the combination of huge exertion and hyperventilation due to hypoxemia, result in a significantly lower PACO2. Let’s take the group mean of 13.3 mmHg (an astonishingly low number) from the Caudwell Xtreme Everest expedition climbers <span class="citation">(Grocott et al. 2009)</span>.</p>
+<p>The assumption of a typical PACO2 of 40 mmHg is invalid for a climber who has achieved the summit. In fact, the hyperventilation due to hypoxemia results in a significantly lower PACO2. Let’s take the group mean of 13.3 mmHg (an astonishingly low number) from the Caudwell Xtreme Everest expedition climbers <span class="citation">(Grocott et al. 2009)</span>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">PACO2_mmHg_Grocott &lt;-<span class="st"> </span><span class="fl">13.3</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">PAO2_summit_exerted &lt;-<span class="st"> </span><span class="kw"><a href="../reference/alveolar_PAO2_mmHg.html">alveolar_PAO2_mmHg</a></span>(</a>
@@ -197,7 +200,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Jack O. Wasey, Roland Stull.</p>
+  <p>Developed by Jack O. Wasey.</p>
 </div>
 
 <div class="pkgdown">

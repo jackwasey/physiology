@@ -94,6 +94,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -149,6 +152,12 @@
 <li><p><code>pres_atm_frac</code>: Get fraction of mean atomspheric pressure at sea level</p></li>
 </ul>
     
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Below 51 km: Practical Meteorology by Roland Stull, pg 12. Above 51 km:
+http://www.braeunig.us/space/atmmodel.htm Validation data:
+https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>pres_atm_kPa</span>(-<span class='fl'>430.5</span>) <span class='co'># Dead Sea</span></div><div class='output co'>#&gt; [1] 106605</div><div class='input'><span class='fu'>pres_atm_kPa</span>(<span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] 101325</div><div class='input'><span class='fu'>pres_atm_kPa</span>(<span class='fl'>3440</span>) <span class='co'># Namche Bazaar</span></div><div class='output co'>#&gt; [1] 66289.45</div><div class='input'><span class='fu'>pres_atm_kPa</span>(<span class='fl'>4260</span>) <span class='co'># Dingboche</span></div><div class='output co'>#&gt; [1] 59602.43</div><div class='input'><span class='fu'>pres_atm_kPa</span>(<span class='fl'>5364</span>) <span class='co'># Everest Base Camp</span></div><div class='output co'>#&gt; [1] 51474.86</div><div class='input'><span class='fu'>pres_atm_kPa</span>(<span class='fl'>6000</span>) <span class='co'># Camp 1</span></div><div class='output co'>#&gt; [1] 47217.62</div><div class='input'><span class='fu'>pres_atm_kPa</span>(<span class='fl'>6400</span>) <span class='co'># Camp 2</span></div><div class='output co'>#&gt; [1] 44689.9</div><div class='input'><span class='fu'>pres_atm_kPa</span>(<span class='fl'>7200</span>) <span class='co'># Camp 3</span></div><div class='output co'>#&gt; [1] 39963.68</div><div class='input'><span class='fu'>pres_atm_kPa</span>(<span class='fl'>7950</span>) <span class='co'># Camp 4</span></div><div class='output co'>#&gt; [1] 35909.55</div><div class='input'><span class='fu'>pres_atm_kPa</span>(<span class='fl'>8850</span>) <span class='co'># Everest summit</span></div><div class='output co'>#&gt; [1] 31492</div><div class='input'><span class='fu'>pres_atm_frac</span>(<span class='fl'>8850</span>) <span class='co'># fraction of sea level pressure on Everest</span></div><div class='output co'>#&gt; [1] 0.3108019</div></pre>
@@ -161,6 +170,8 @@
       <li><a href="#value">Value</a></li>
 
       <li><a href="#functions">Functions</a></li>
+
+      <li><a href="#references">References</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
@@ -170,7 +181,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Jack O. Wasey, Roland Stull.</p>
+  <p>Developed by Jack O. Wasey.</p>
 </div>
 
 <div class="pkgdown">

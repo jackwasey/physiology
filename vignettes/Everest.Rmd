@@ -53,7 +53,7 @@ PAO2_summit_resting <- alveolar_PAO2_mmHg(
   PAH2O_mmHg = PAH2O_mmHg_summit)
 ```
 
-The assumption of a typical PACO2 of 40 mmHg is invalid for a climber who has achieved the summit. In fact, the combination of huge exertion and hyperventilation due to hypoxemia, result in a significantly lower PACO2. Let's take the group mean of 13.3 mmHg (an astonishingly low number) from the Caudwell Xtreme Everest expedition climbers [@Grocott_Arterialbloodgases_2009].
+The assumption of a typical PACO2 of 40 mmHg is invalid for a climber who has achieved the summit. In fact, the hyperventilation due to hypoxemia results in a significantly lower PACO2. Let's take the group mean of 13.3 mmHg (an astonishingly low number) from the Caudwell Xtreme Everest expedition climbers [@Grocott_Arterialbloodgases_2009].
 
 ```{r summitexertion}
 
@@ -95,7 +95,9 @@ results <- c("sea\nlevel" = PAO2_sealevel,
              "summit\nfatty diet" = PAO2_summit_lipids, 
              "summit\ncarbs diet" = PAO2_summit_carbs)
 colours <- c("dark blue", "red", "dark green", "brown", "tan")
-barplot(results, col = colours, ylim = c(-10, 100))
+barplot(results, 
+        col = colours, ylim = c(-10, 100),
+        ylab = "PAO2")
 ```
 
 The remarkable thing about this plot is that dropping a resting adult out of a pressurized container (e.g., an aeroplane) on to the summit of Mount Everest would be quickly fatal, since there is no room for oxygen in the alveoli. Of course, some molecules of oxygen would reach the alveoli, but the water would be furiously boiling off and occupying alveolar space; and without extreme hyperventilation, the blood would also be exporting a large amount carbon dioxide.

@@ -6,6 +6,9 @@
 \usage{
 svp_sea_level(temp_k)
 }
+\arguments{
+\item{temp_k}{Temperature in Kelvin}
+}
 \description{
 Saturation vapor pressure of water at sea level
 }

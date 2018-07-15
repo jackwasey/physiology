@@ -2,6 +2,10 @@ authors:
   Jack Wasey:
     href: https://www.jackwasey.com
 
+developers:
+  Jack Wasey:
+    href: http://www.jackwasey.com
+
 template:
   params:
     bootswatch: solar

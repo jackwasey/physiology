@@ -1,9 +1,11 @@
 #' Temperature in Kelvin from Celsius
+#' @param temp_c Temperature in Celsius
 #' @export
 temp_c_to_k <- function(temp_c)
   273.15 + temp_c
 
 #' Saturation vapor pressure of water at sea level
+#' @param temp_k Temperature in Kelvin
 #' @export
 svp_sea_level <- function(temp_k)
   0.00750061683 *
