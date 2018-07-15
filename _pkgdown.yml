@@ -1,3 +1,7 @@
+authors:
+  Jack Wasey:
+    href: https://www.jackwasey.com
+
 template:
   params:
     bootswatch: solar
