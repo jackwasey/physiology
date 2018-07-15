@@ -1,0 +1,105 @@
+---
+title: "Respiratory Physiology at the summit of Mount Everest"
+author: "Jack O. Wasey"
+date: "7/15/2018"
+bibliography: altitude.bib
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{Respiratory Physiology Climbing Mount Everest}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include=FALSE}
+library(physiology)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Climbing Mount Everest without supplemental oxygen
+
+## Introduction
+
+The summit of Mount Everest is at 8850 meters above sea level. It is unclear how humans can survive at all at this altitude without supplemental oxygen [@west_high-altitude_2012]: this article shows how it is possible.
+
+We can calculate the atmospheric pressure, compared to that at sea level:
+
+```{r summmitintro}
+library(physiology)
+pres_atm_frac(altitude_m = 8850)
+```
+We asssume the same fraction of oxygen in atmosphere at sea level and Everest summit. The relative fraction of gasses changes significantly much higher in the atmosphere.
+
+## Water vapor pressure is not constant with altitude
+
+We have to fix a common assumption in examples of the alveolar gas equation that the partial pressure of water vapor in the alveolus is ~47mmHg. This is true at sea level barometric pressures, but not on Everest, and the term becomes significant in the extremes of an Everest ascent. It is probably more complicated than this, but let's start by just scaling the sea level partial pressure of water vapor.
+
+```{r correctingh2o}
+temp_k = temp_c_to_k(37)
+svp <- svp_sea_level(temp_k)
+PAH2O_mmHg_summit <- svp * pres_atm_frac(8850)
+```
+
+The calculated saturation vapor pressure (SVP) of `r svp` matches the common textbook value of 47 at sea level barometric pressure.
+
+```{r alveolargasses}
+pres_atm_everest = 760 * pres_atm_frac(8850)
+
+PAO2_sealevel <- alveolar_PAO2_mmHg(
+  PACO2_mmHg = 40,
+  Patm_mmHg = 760)
+PAO2_summit_resting <- alveolar_PAO2_mmHg(
+  PACO2_mmHg = 40, 
+  Patm_mmHg = pres_atm_everest,
+  PAH2O_mmHg = PAH2O_mmHg_summit)
+```
+
+The assumption of a typical PACO2 of 40 mmHg is invalid for a climber who has achieved the summit. In fact, the combination of huge exertion and hyperventilation due to hypoxemia, result in a significantly lower PACO2. Let's take the group mean of 13.3 mmHg (an astonishingly low number) from the Caudwell Xtreme Everest expedition climbers [@Grocott_Arterialbloodgases_2009].
+
+```{r summitexertion}
+
+PACO2_mmHg_Grocott <- 13.3
+
+PAO2_summit_exerted <- alveolar_PAO2_mmHg(
+  PACO2_mmHg = PACO2_mmHg_Grocott, 
+  Patm_mmHg = pres_atm_everest,
+  PAH2O_mmHg = PAH2O_mmHg_summit)
+```
+
+## Varying the respiratory quotient
+
+Above we assumed the respiratory quotient (RQ) is the typical 0.8. Would a higher fat or higher carbohydrate diet make it easier to be at the summit of Everest without supplemental oxygen?
+
+```{r rq}
+rq_lipids <- 0.6
+rq_carbs <- 1.0
+PAO2_summit_lipids <- alveolar_PAO2_mmHg(
+  PACO2_mmHg = PACO2_mmHg_Grocott, 
+  Patm_mmHg = pres_atm_everest,
+  PAH2O_mmHg = PAH2O_mmHg_summit,
+  rq = rq_lipids)
+PAO2_summit_carbs <- alveolar_PAO2_mmHg(
+  PACO2_mmHg = PACO2_mmHg_Grocott, 
+  Patm_mmHg = pres_atm_everest,
+  PAH2O_mmHg = PAH2O_mmHg_summit,
+  rq = rq_carbs)
+```
+
+In pratice, there is a limit to how much RQ can be modified, especially in light of an Everest summit attempt (base camp six to summit and back) taking something of the order of 10,000 kcal, which is not matched by caloric intake. Thus, the summit attempt, and likely preceeding stages, are catabolic: burning body fat or ingested fat requires more oxygen per unit energy than burning simple carbohydrates.
+
+## Results
+
+```{r plotres, echo=FALSE}
+results <- c("sea\nlevel" = PAO2_sealevel, 
+             "summit\nresting" = PAO2_summit_resting, 
+             "summit\nexertion" = PAO2_summit_exerted, 
+             "summit\nfatty diet" = PAO2_summit_lipids, 
+             "summit\ncarbs diet" = PAO2_summit_carbs)
+colours <- c("dark blue", "red", "dark green", "brown", "tan")
+barplot(results, col = colours, ylim = c(-10, 100))
+```
+
+The remarkable thing about this plot is that dropping a resting adult out of a pressurized container (e.g., an aeroplane) on to the summit of Mount Everest would be quickly fatal, since there is no room for oxygen in the alveoli. Of course, some molecules of oxygen would reach the alveoli, but the water would be furiously boiling off and occupying alveolar space; and without extreme hyperventilation, the blood would also be exporting a large amount carbon dioxide.
+
+Further refinements could be made to this simple model, for example, accounting fo the fact that there is slightly higher atmospheric pressure measured than predicted at the Everest summit [@West_Barometricpressuresextreme_1983; @west_high-altitude_2012].
+
+# References

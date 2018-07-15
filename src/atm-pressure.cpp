@@ -8,33 +8,33 @@ using namespace Rcpp;
  *  "src/registration.c", character_only = FALSE)
  */
 
-//' Get mean atmospheric pressure at given altitude
+//' Get mean atmospheric pressure at given altitude in kPa
 //' @param altitude_m Altitude above mean sea level in meters
 //' @return Pressure in pascals
 //' @examples
-//' atm_pres(-430.5) # Dead Sea
-//' atm_pres(0)
-//' atm_pres(3440) # Namche Bazaar
-//' atm_pres(4260) # Dingboche
-//' atm_pres(5364) # Everest Base Camp
-//' atm_pres(6000) # Camp 1
-//' atm_pres(6400) # Camp 2
-//' atm_pres(7200) # Camp 3
-//' atm_pres(7950) # Camp 4
-//' atm_pres(8850) # Everest summit
-//' atm_pres_frac(8850) # fraction of sea level pressure on Everest
+//' pres_atm_kPa(-430.5) # Dead Sea
+//' pres_atm_kPa(0)
+//' pres_atm_kPa(3440) # Namche Bazaar
+//' pres_atm_kPa(4260) # Dingboche
+//' pres_atm_kPa(5364) # Everest Base Camp
+//' pres_atm_kPa(6000) # Camp 1
+//' pres_atm_kPa(6400) # Camp 2
+//' pres_atm_kPa(7200) # Camp 3
+//' pres_atm_kPa(7950) # Camp 4
+//' pres_atm_kPa(8850) # Everest summit
+//' pres_atm_frac(8850) # fraction of sea level pressure on Everest
 //' @concept atmospheric pressure
 //' @export
 // [[Rcpp::export]]
-NumericVector atm_pres(NumericVector altitude_m) {
+NumericVector pres_atm_kPa(NumericVector altitude_m) {
   return sapply(altitude_m, getStandardPressure);
 }
 
-//' @describeIn atm_pres Get fraction of mean atomspheric pressure at sea level
+//' @describeIn pres_atm_kPa Get fraction of mean atomspheric pressure at sea level
 //' @export
 // [[Rcpp::export]]
-NumericVector atm_pres_frac(NumericVector altitude_m) {
-  NumericVector p = atm_pres(altitude_m);
+NumericVector pres_atm_frac(NumericVector altitude_m) {
+  NumericVector p = pres_atm_kPa(altitude_m);
   float p0 = getStandardPressure(0);
   return ( p / p0);
 }

@@ -5,25 +5,25 @@
 
 using namespace Rcpp;
 
-// atm_pres
-NumericVector atm_pres(NumericVector altitude_m);
-RcppExport SEXP _physiology_atm_pres(SEXP altitude_mSEXP) {
+// pres_atm_kPa
+NumericVector pres_atm_kPa(NumericVector altitude_m);
+RcppExport SEXP _physiology_pres_atm_kPa(SEXP altitude_mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type altitude_m(altitude_mSEXP);
-    rcpp_result_gen = Rcpp::wrap(atm_pres(altitude_m));
+    rcpp_result_gen = Rcpp::wrap(pres_atm_kPa(altitude_m));
     return rcpp_result_gen;
 END_RCPP
 }
-// atm_pres_frac
-NumericVector atm_pres_frac(NumericVector altitude_m);
-RcppExport SEXP _physiology_atm_pres_frac(SEXP altitude_mSEXP) {
+// pres_atm_frac
+NumericVector pres_atm_frac(NumericVector altitude_m);
+RcppExport SEXP _physiology_pres_atm_frac(SEXP altitude_mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type altitude_m(altitude_mSEXP);
-    rcpp_result_gen = Rcpp::wrap(atm_pres_frac(altitude_m));
+    rcpp_result_gen = Rcpp::wrap(pres_atm_frac(altitude_m));
     return rcpp_result_gen;
 END_RCPP
 }

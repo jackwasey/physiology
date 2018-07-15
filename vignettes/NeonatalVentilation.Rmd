@@ -28,17 +28,22 @@ max_compliance <- 1.5
 # unit cmH20
 driving_pressure <- 15
 insp_tube_vol_diff <- driving_pressure * (max_compliance - min_compliance)
-
-# get median weight for age up to one year. Let's just take female for simplicity.
-dat <- as_tibble(childsds::make_percentile_tab(childsds::who.ref, item = "weight", perc = 50, stack = TRUE, sex = "sex"))
-#dat <- dat[dat$sex == "female" & dat$age <= 1, c("age", "value")]
+```
+Get median female weight for age up to one year.
+```{r getmedianweights}
+dat <- as_tibble(
+  childsds::make_percentile_tab(
+    childsds::who.ref, 
+    item = "weight",
+    perc = 50,
+    stack = TRUE, 
+    sex = "sex"))
 dat <- dplyr::filter(dat, sex == "female", age <= 1) %>%
   dplyr::rename(weight = value) %>% 
   dplyr::select(age, weight)
-plot(dat, type = "l")
+```
 
-# dat$anatomic_deadspace <- deadspace_anatomic_child(ideal_weight_kg = dat$value, age_y = dat$age)
-
+```{r deadspacecalc}
 dat <- dat %>%
   mutate(tidal_volume = 7 * weight) %>% 
   mutate(error_fraction = insp_tube_vol_diff / tidal_volume)
