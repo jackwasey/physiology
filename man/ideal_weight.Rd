@@ -42,17 +42,17 @@ not used in the calculation itself, so may be missing.}
 
 \item{male}{logical value(s) whether patient is male. TRUE or FALSE.}
 
-\item{height_mininch, }{height above which to start scaling; consider as a
+\item{height_mininch}{height above which to start scaling; consider as a
 minimum (for at least some algorithms)}
 
-\item{male_min_kg, }{y intercept i.e. ideal weight at minimum height for males}
+\item{male_min_kg}{y intercept i.e. ideal weight at minimum height for males}
 
-\item{female_min_kg, }{y intercept i.e. ideal weight at minimum height for
+\item{female_min_kg}{y intercept i.e. ideal weight at minimum height for
 females}
 
-\item{male_kg_per_inch, }{slope for males}
+\item{male_kg_per_inch}{slope for males}
 
-\item{female_kg_per_inch, }{slope for females}
+\item{female_kg_per_inch}{slope for females}
 
 \item{...}{passed to validation.}
 
@@ -81,11 +81,10 @@ Calculate ideal weight based on Broca (1871) Height in cm -100
   for women, -105 for men Broca PP. Memoires d'anthropologie. Paris 1871 /
   1877.
 
-Lemmens merhod assumes BMI 22 as ideal (Obesity Surgery 2005)
-TODO: verbose height bounds check
+Lemmens method assumes BMI 22 as ideal (Obesity Surgery 2005)
 
 generic internal function to handle linear ideal weight
-  calculations. Unofrtunately mixes inches and meters at present.
+  calculations. Unfortunately mixes inches and meters at present.
 }
 \section{Functions}{
 \itemize{

@@ -27,7 +27,7 @@ We can calculate the atmospheric pressure, compared to that at sea level:
 library(physiology)
 pres_atm_frac(altitude_m = 8850)
 ```
-We asssume the same fraction of oxygen in atmosphere at sea level and Everest summit. The relative fraction of gasses changes significantly much higher in the atmosphere.
+We assume the same fraction of oxygen in atmosphere at sea level and Everest summit. The relative fraction of gasses changes significantly much higher in the atmosphere.
 
 ## Water vapor pressure is not constant with altitude
 
@@ -84,7 +84,7 @@ PAO2_summit_carbs <- alveolar_PAO2_mmHg(
   rq = rq_carbs)
 ```
 
-In pratice, there is a limit to how much RQ can be modified, especially in light of an Everest summit attempt (base camp six to summit and back) taking something of the order of 10,000 kcal, which is not matched by caloric intake. Thus, the summit attempt, and likely preceeding stages, are catabolic: burning body fat or ingested fat requires more oxygen per unit energy than burning simple carbohydrates.
+In practice, there is a limit to how much RQ can be modified, especially in light of an Everest summit attempt (base camp six to summit and back) taking something of the order of 10,000 kcal, which is not matched by caloric intake. Thus, the summit attempt, and likely preceding stages, are catabolic: burning body fat or ingested fat requires more oxygen per unit energy than burning simple carbohydrates.
 
 ## Results
 
@@ -100,8 +100,8 @@ barplot(results,
         ylab = "PAO2")
 ```
 
-The remarkable thing about this plot is that dropping a resting adult out of a pressurized container (e.g., an aeroplane) on to the summit of Mount Everest would be quickly fatal, since there is no room for oxygen in the alveoli. Of course, some molecules of oxygen would reach the alveoli, but the water would be furiously boiling off and occupying alveolar space; and without extreme hyperventilation, the blood would also be exporting a large amount carbon dioxide.
+The remarkable thing about this plot is that dropping a resting adult out of a pressurized container (e.g., an aircraft) on to the summit of Mount Everest would be quickly fatal, since there is no room for oxygen in the alveoli. Of course, some molecules of oxygen would reach the alveoli, but the water would be furiously boiling off and occupying alveolar space; and without extreme hyperventilation, the blood would also be exporting a large amount carbon dioxide.
 
-Further refinements could be made to this simple model, for example, accounting fo the fact that there is slightly higher atmospheric pressure measured than predicted at the Everest summit [@West_Barometricpressuresextreme_1983; @west_high-altitude_2012].
+Further refinements could be made to this simple model, for example, accounting for the fact that there is slightly higher atmospheric pressure measured than predicted at the Everest summit [@West_Barometricpressuresextreme_1983; @west_high-altitude_2012].
 
 # References

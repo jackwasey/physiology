@@ -38,8 +38,8 @@ pres_atm_frac(8850) # fraction of sea level pressure on Everest
 }
 \references{
 Below 51 km: Practical Meteorology by Roland Stull, pg 12. Above 51 km:
-http://www.braeunig.us/space/atmmodel.htm Validation data:
-https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf
+\url{http://www.braeunig.us/space/atmmodel.htm} Validation data:
+\url{https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf}
 }
 \concept{
 atmospheric pressure

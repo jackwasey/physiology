@@ -19,15 +19,14 @@ not used in the calculation itself, so may be missing.}
 \item{...}{arguments passed to downstream functions, e.g. \code{warn = TRUE}}
 }
 \description{
-http://www.ncbi.nlm.nih.gov/pubmed/6823980 2.396e0.01863(ht),
-  where height is in cm. There is an argument for using another package to
-  capture durations, of which age is a special case. However, I am resisting
-  bringing in external dependencies, and for almost all use-cases I can
-  imagine, the age will be captured as a single number of one type, not a mix
-  of types. Note that gender does not appear to be important in this
-  relationship.
+\code{2.396e0.01863(height)}, where height is in cm. There is an
+argument for using another package to capture durations, of which age is a
+special case. However, I am resisting bringing in external dependencies,
+and for almost all use-cases I can imagine, the age will be captured as a
+single number of one type, not a mix of types. Note that gender does not
+appear to be important in this relationship.
 
-  See package AGD for CDC growth chart data.
+See package AGD for CDC growth chart data.
 }
 \examples{
 # will warn if given age is not in validate range from publication:

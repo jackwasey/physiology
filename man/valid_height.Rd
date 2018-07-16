@@ -7,7 +7,7 @@
 \alias{valid_weight_adult}
 \alias{valid_age}
 \alias{valid_age_adult}
-\title{validate phsyiologic input parameters}
+\title{Validate physiologic input parameters}
 \usage{
 valid_height(height_m, ht_min = 0.1, ht_max = 2.5, ht_min_hard = 0.001,
   ht_max_hard = 3, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
@@ -79,6 +79,5 @@ trigger a warning or error}
 \item{age_max_hard}{maximum age above which to warn if \code{warn}}
 }
 \description{
-User may generate warnings for unreasonable or obviously
-  erroneous heights. TODO: use age to validate further
+User may generate warnings for unreasonable or obviously erroneous heights.
 }

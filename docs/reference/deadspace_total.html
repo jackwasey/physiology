@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Estimate ventilatory dead space — deadspace_total • physiology</title>
+<title>Estimate ventilation dead-space — deadspace_total • physiology</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Estimate ventilatory dead space — deadspace_total" />
+<meta property="og:title" content="Estimate ventilation dead-space — deadspace_total" />
 
-<meta property="og:description" content="Estimate ventilatory dead space" />
+<meta property="og:description" content="Estimate ventilation dead-space" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -90,7 +90,7 @@
       <a href="../articles/IdealWeightComparison.html">Compare Ideal Weight Formulae</a>
     </li>
     <li>
-      <a href="../articles/NeonatalVentilation.html">Effect of breathing circuit compliance and deadspace on neonatal ventilation</a>
+      <a href="../articles/NeonatalVentilation.html">Effect of breathing circuit compliance and dead-space on neonatal ventilation</a>
     </li>
   </ul>
 </li>
@@ -118,14 +118,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Estimate ventilatory dead space</h1>
+    <h1>Estimate ventilation dead-space</h1>
     <small class="dont-index">Source: <a href='https://github.com/jackwasey/physiology/blob/master/R/ventilation.R'><code>R/ventilation.R</code></a></small>
     <div class="hidden name"><code>deadspace_total.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Estimate ventilatory dead space</p>
+    <p>Estimate ventilation dead-space</p>
     
     </div>
 
@@ -146,8 +146,7 @@
     <tr>
       <th>ideal_weight_kg</th>
       <td><p>Ideal weight in kilograms. May be calculated using
-<code><a href='ideal_weight.html'>physiology::ideal_weight_adult</a></code> or
-<code><a href='ideal_weight.html'>physiology::ideal_weight_child</a></code></p></td>
+<code><a href='ideal_weight.html'>ideal_weight_adult</a></code> or <code><a href='ideal_weight.html'>ideal_weight_child</a></code></p></td>
     </tr>
     <tr>
       <th>age_y</th>
@@ -156,43 +155,44 @@ automatically</p></td>
     </tr>
     <tr>
       <th>elbow_ml</th>
-      <td><p>Numeric: volume of elbow of breathing circuit in ml</p></td>
+      <td><p>Numeric volume of elbow of breathing circuit in ml</p></td>
     </tr>
     <tr>
       <th>humidifier_ml</th>
-      <td><p>Numeric: volume of humidifier of breathing circuit in ml</p></td>
+      <td><p>Numeric volume of humidifier of breathing circuit in ml</p></td>
     </tr>
     <tr>
       <th>ett_diameter_mm</th>
-      <td><p>Numeric: internal diameter of endotrachel tube.
+      <td><p>Numeric internal diameter of endotracheal tube.
 Default is <code>NULL</code> which would estimate this from the age of patient</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>estimate of anatomic deadspace in ml</p>
+    <p>estimate of anatomic dead-space in ml</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>"Mean intrathoracic anatomic dead space was 1.03 ml/kg and was not
-  related to age." Numa, 1985</p>
+    <p>'Mean intrathoracic anatomic dead space was 1.03 ml/kg and was not
+  related to age.' Numa, 1985</p>
     
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     <ul>
-<li><p><code>deadspace_anatomic</code>: Estimate anatomic deadspace</p></li>
-<li><p><code>deadspace_anatomic_adult</code>: Estimate anatomic deadspace in an adult</p></li>
-<li><p><code>deadspace_anatomic_child</code>: Estimate anatomic deadspace in an infant or child</p></li>
-<li><p><code>deadspace_intrathoracic_ml</code>: intrathoracic component of deadspace is age
+<li><p><code>deadspace_anatomic</code>: Estimate anatomic dead-space</p></li>
+<li><p><code>deadspace_anatomic_adult</code>: Estimate anatomic dead-space in an adult</p></li>
+<li><p><code>deadspace_anatomic_child</code>: Estimate anatomic dead-space in an infant or
+child</p></li>
+<li><p><code>deadspace_intrathoracic_ml</code>: intrathoracic component of dead-space is age
 independent</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>http://www.atsjournals.org/doi/abs/10.1164/arrd.1971.104.2.215
-  http://rc.rcjournal.com/content/53/7/885.short
-  https://www.ncbi.nlm.nih.gov/pubmed/8727530</p>
+    <p><a href='http://www.atsjournals.org/doi/abs/10.1164/arrd.1971.104.2.215'>http://www.atsjournals.org/doi/abs/10.1164/arrd.1971.104.2.215</a>
+  <a href='http://rc.rcjournal.com/content/53/7/885.short'>http://rc.rcjournal.com/content/53/7/885.short</a>
+  <a href='https://www.ncbi.nlm.nih.gov/pubmed/8727530'>https://www.ncbi.nlm.nih.gov/pubmed/8727530</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

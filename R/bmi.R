@@ -52,13 +52,12 @@ ideal_weight_child <- function(height_m, age_y = NULL, ...)
   ideal_weight_Traub(height_m, age_y, ...)
 
 #' @title ideal weight for child per Traub
-#' @description http://www.ncbi.nlm.nih.gov/pubmed/6823980 2.396e0.01863(ht),
-#'   where height is in cm. There is an argument for using another package to
-#'   capture durations, of which age is a special case. However, I am resisting
-#'   bringing in external dependencies, and for almost all use-cases I can
-#'   imagine, the age will be captured as a single number of one type, not a mix
-#'   of types. Note that gender does not appear to be important in this
-#'   relationship.
+#' @description `2.396e0.01863(height)`, where height is in cm. There is an
+#'   argument for using another package to capture durations, of which age is a
+#'   special case. However, I am resisting bringing in external dependencies,
+#'   and for almost all use-cases I can imagine, the age will be captured as a
+#'   single number of one type, not a mix of types. Note that gender does not
+#'   appear to be important in this relationship.
 #'
 #'   See package AGD for CDC growth chart data.
 #' @inheritParams ideal_weight_child
@@ -72,6 +71,7 @@ ideal_weight_child <- function(height_m, age_y = NULL, ...)
 #' }
 #'   ideal_weight_child(0.5, age_y = 25 / 365, do_warn = FALSE)
 #'   ideal_weight_child(1, age_y = 2)
+#' @md
 #' @export
 ideal_weight_Traub <- function(height_m, age_y = NULL, ...) {
   if (!is.null(age_y))
@@ -124,25 +124,25 @@ ideal_weight_Broca <- function(height_m, male, ...)
   ideal_weight_linear(height_m, male, 0, -100, -105, 2.54, 2.54, ...)
 
 #' @title ideal weight by Lemmens
-#' @description Lemmens merhod assumes BMI 22 as ideal (Obesity Surgery 2005)
-#' TODO: verbose height bounds check
+#' @description Lemmens method assumes BMI 22 as ideal (Obesity Surgery 2005)
 #' @rdname ideal_weight
 #' @export
 ideal_weight_Lemmens <- function(height_m, ...) {
+  # TODO: verbose height bounds check
   valid_height(height_m, ...)
   22 * height_m ^ 2
 }
 
 #' @title ideal weight by gender, offset and gradient
 #' @description generic internal function to handle linear ideal weight
-#'   calculations. Unofrtunately mixes inches and meters at present.
-#' @param height_mininch, height above which to start scaling; consider as a
+#'   calculations. Unfortunately mixes inches and meters at present.
+#' @param height_mininch height above which to start scaling; consider as a
 #'   minimum (for at least some algorithms)
-#' @param male_min_kg, y intercept i.e. ideal weight at minimum height for males
-#' @param female_min_kg, y intercept i.e. ideal weight at minimum height for
+#' @param male_min_kg y intercept i.e. ideal weight at minimum height for males
+#' @param female_min_kg y intercept i.e. ideal weight at minimum height for
 #'   females
-#' @param male_kg_per_inch, slope for males
-#' @param female_kg_per_inch, slope for females
+#' @param male_kg_per_inch slope for males
+#' @param female_kg_per_inch slope for females
 #' @param ... passed on to validation
 #' @rdname ideal_weight
 #' @keywords internal
@@ -189,18 +189,16 @@ blood_vol_Nadler <- function(height_m, weight_kg, male, ...) {
 #' @title Blood volume by Lemmens et al, 2006
 #' @rdname bloodvol
 #' @description This effectively reverses engineers an ideal weight from BMI of
-#'   22, then use the sqaure root of its ratio to actual body weight to adjust
-#'   the 70ml/kg of an ideal weight person. Age-dependent regression equations
-#'   for indexed blood volume (InBV) at ideal body weight. (No adjustment made
-#'   in obesity by Lemmens.) InBV = 90-0.4 X age (males) InBV = 85-0.4 X age
-#'   (females). Sounds like he is saying either they are slim and old or younger
-#'   and obese. he doesn't attempt to integrate the formulae.
-#'
-#'   TODO: include age as cut-off butween the use of differing formulae.
+#'   22, then use the square root of its ratio to actual body weight to adjust
+#'   the 70ml per kg of an ideal weight person. Age-dependent regression
+#'   equations for indexed blood volume `InBV` at ideal body weight. (No
+#'   adjustment made in obesity by Lemmens.) `InBV = 90-0.4 X age` (males) `InBV
+#'   = 85-0.4 X age` (females).
 #' @return numeric vector
 #' @examples
 #' blood_vol_Lemmens_sedentary(1.8, 80)
 #' blood_vol_Lemmens_sedentary(1.8, 160)
+#' @md
 #' @export
 blood_vol_Lemmens_sedentary <- function(height_m, weight_kg, ...) {
   weight_kg * blood_vol_Lemmens_indexed(height_m, weight_kg, ...)
@@ -223,12 +221,12 @@ blood_vol_Lemmens_indexed <- function(height_m, weight_kg, ...) {
 #' @description applies to slim adults, but note that the age-related decline is
 #'   not seen if high degree of physical activity is maintained. TODO: check BMI
 #'   not elevated
-#' @details Davy KP, Seals DR. Total blood volume in healthy young and older
-#'   men. J Appl Physiol 1994; 76: 2059-62.
+#' @references 'Davy KP, Seals DR. Total blood volume in healthy young and older
+#'   men. J Appl Physiol 1994; 76: 2059-62'
 #'
-#'   Parker-Jones P, Davy KP, DeSouza CA et al. Absence of agerelated decline in
-#'   total blood volume in physically active females. Am J Physiol 1997; 272:
-#'   H2534-40.
+#'   'Parker-Jones P, Davy KP, DeSouza CA et al. Absence of age-related decline
+#'   in total blood volume in physically active females. Am J Physiol 1997; 272:
+#'   H2534-40'
 #' @param male logical
 #' @examples
 #'   blood_vol_Lemmens_non_obese(80, age_y = 25, male = TRUE)
@@ -268,7 +266,7 @@ adj_weight_adult <- function(height_m, weight_kg, male, ...) {
 
 #' Body Mass Index (BMI) for adults
 #'
-#' Calculate body mass index using weight in kg / (height in metres ^ 2)
+#' Calculate body mass index using weight in kg / (height in meters ^ 2)
 #' @rdname bmi
 #' @template height_m
 #' @template weight_kg

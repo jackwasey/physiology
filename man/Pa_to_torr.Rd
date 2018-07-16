@@ -9,6 +9,6 @@
 Pa_to_torr
 }
 \description{
-Conversion factor from Pa to torr (mmHg)
+The conversion is exactly 760 / 101325
 }
 \keyword{datasets}

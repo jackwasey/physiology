@@ -13,6 +13,8 @@ svp_sea_level <- function(temp_k)
   temp_k ^ 8.2
 
 #' Conversion factor from Pa to torr (mmHg)
+#'
+#' The conversion is exactly 760 / 101325
 #' @keywords datasets
 #' @export
-Pa_to_torr = 0.0075006168270417
+Pa_to_torr = 760 / 101325

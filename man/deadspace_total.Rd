@@ -6,7 +6,7 @@
 \alias{deadspace_anatomic_adult}
 \alias{deadspace_anatomic_child}
 \alias{deadspace_intrathoracic_ml}
-\title{Estimate ventilatory dead space}
+\title{Estimate ventilation dead-space}
 \usage{
 deadspace_total(ideal_weight_kg, age_y = NULL, elbow_ml = 10,
   humidifier_ml = 7, ett_diameter_mm = NULL)
@@ -21,38 +21,38 @@ deadspace_intrathoracic_ml(ideal_weight_kg)
 }
 \arguments{
 \item{ideal_weight_kg}{Ideal weight in kilograms. May be calculated using
-\code{physiology::ideal_weight_adult} or
-\code{physiology::ideal_weight_child}}
+\code{\link{ideal_weight_adult}} or \code{\link{ideal_weight_child}}}
 
 \item{age_y}{Age in years, optional for estimating ETT and HME sizes
 automatically}
 
-\item{elbow_ml}{Numeric: volume of elbow of breathing circuit in ml}
+\item{elbow_ml}{Numeric volume of elbow of breathing circuit in ml}
 
-\item{humidifier_ml}{Numeric: volume of humidifier of breathing circuit in ml}
+\item{humidifier_ml}{Numeric volume of humidifier of breathing circuit in ml}
 
-\item{ett_diameter_mm}{Numeric: internal diameter of endotrachel tube.
+\item{ett_diameter_mm}{Numeric internal diameter of endotracheal tube.
 Default is \code{NULL} which would estimate this from the age of patient}
 }
 \value{
-estimate of anatomic deadspace in ml
+estimate of anatomic dead-space in ml
 }
 \description{
-Estimate ventilatory dead space
+Estimate ventilation dead-space
 }
 \details{
-"Mean intrathoracic anatomic dead space was 1.03 ml/kg and was not
-  related to age." Numa, 1985
+'Mean intrathoracic anatomic dead space was 1.03 ml/kg and was not
+  related to age.' Numa, 1985
 }
 \section{Functions}{
 \itemize{
-\item \code{deadspace_anatomic}: Estimate anatomic deadspace
+\item \code{deadspace_anatomic}: Estimate anatomic dead-space
 
-\item \code{deadspace_anatomic_adult}: Estimate anatomic deadspace in an adult
+\item \code{deadspace_anatomic_adult}: Estimate anatomic dead-space in an adult
 
-\item \code{deadspace_anatomic_child}: Estimate anatomic deadspace in an infant or child
+\item \code{deadspace_anatomic_child}: Estimate anatomic dead-space in an infant or
+child
 
-\item \code{deadspace_intrathoracic_ml}: intrathoracic component of deadspace is age
+\item \code{deadspace_intrathoracic_ml}: intrathoracic component of dead-space is age
 independent
 }}
 
@@ -73,7 +73,7 @@ independent
 
 }
 \references{
-http://www.atsjournals.org/doi/abs/10.1164/arrd.1971.104.2.215
-  http://rc.rcjournal.com/content/53/7/885.short
-  https://www.ncbi.nlm.nih.gov/pubmed/8727530
+\url{http://www.atsjournals.org/doi/abs/10.1164/arrd.1971.104.2.215}
+  \url{http://rc.rcjournal.com/content/53/7/885.short}
+  \url{https://www.ncbi.nlm.nih.gov/pubmed/8727530}
 }

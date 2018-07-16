@@ -1,6 +1,6 @@
-#' @title validate phsyiologic input parameters
-#' @description User may generate warnings for unreasonable or obviously
-#'   erroneous heights. TODO: use age to validate further
+#' Validate physiologic input parameters
+#'
+#' User may generate warnings for unreasonable or obviously erroneous heights.
 #' @template height_m
 #' @param ht_min minimum height below which to warn if \code{warn = TRUE}
 #' @param ht_max maximum height above which to warn if \code{warn = TRUE}
@@ -20,6 +20,7 @@ valid_height <- function(height_m, ht_min = 0.1, ht_max = 2.5,
                          ht_min_hard = 0.001, ht_max_hard = 3,
                          extra_msg = "", do_warn = TRUE, do_stop = FALSE,
                          equal_ok = FALSE) {
+  # TODO: use age to validate further
   valid(height_m, "height", "m",
         ht_min, ht_max, ht_min_hard, ht_max_hard,
         extra_msg, do_warn, do_stop, equal_ok = equal_ok)

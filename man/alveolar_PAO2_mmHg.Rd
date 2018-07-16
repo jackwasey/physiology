@@ -8,23 +8,24 @@ alveolar_PAO2_mmHg(fi_o2 = 0.209, rq = 0.8, PACO2_mmHg = 40,
   Patm_mmHg = 760, PAH2O_mmHg = 47)
 }
 \arguments{
-\item{fi_o2}{fraction of oxygen in inspired gas, from 0 to 1, default is (dry)
-room air}
+\item{fi_o2}{fraction of oxygen in inspired gas, from 0 to 1, default
+reflects (dry) room air}
 
-\item{rq}{respiratory quotient, i.e. the ratio of CO2 produced to oxygen
+\item{rq}{respiratory quotient, i.e., the ratio of CO2 produced to oxygen
 consumed, usually between around 0.7 and 1.0, but can legitimately be
 greater than 1.0. Default it 0.8.}
 
-\item{PACO2_mmHg}{partial pressure of CO2 in alveolus, which can be approximated
-as the end-tidal pCO2}
+\item{PACO2_mmHg}{partial pressure of CO2 in alveolus, which can be roughly
+approximated as the end-tidal pCO2}
 
 \item{Patm_mmHg}{atmospheric pressure in kPa}
 
-\item{PAH2O_mmHg}{partial pressure of water vapor, defaults to 6.25 kPa (47 mmHg)
-which is appropriate for body temperature}
+\item{PAH2O_mmHg}{partial pressure of water vapor at sea level, defaults to
+6.25 kPa (47 mmHg) which is appropriate for body temperature}
 }
 \description{
-Estimate PAO2 in alveolus based on atmospheric pressure, fi_o2, PACO2, and
+Estimate PAO2 in alveolus based on atmospheric pressure, fraction of oxygen
+in inspired air, partial pressure of carbon dioxide in the alveolus, and the
 respiratory quotient
 }
 \examples{

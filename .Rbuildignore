@@ -5,6 +5,7 @@ man-roxygen
 ^appveyor\.yml$
 ^\.lintr$
 ^codecov\.yml$
+^README\.html$
 ^README\.Rmd$
 ^_pkgdown\.yml$
 ^docs$

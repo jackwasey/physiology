@@ -37,26 +37,14 @@ estimate blood volume according to the classic 1960s paper by
   normal human adults. Nadler SB, Hidalgo JH, Bloch T.
 
 This effectively reverses engineers an ideal weight from BMI of
-  22, then use the sqaure root of its ratio to actual body weight to adjust
-  the 70ml/kg of an ideal weight person. Age-dependent regression equations
-  for indexed blood volume (InBV) at ideal body weight. (No adjustment made
-  in obesity by Lemmens.) InBV = 90-0.4 X age (males) InBV = 85-0.4 X age
-  (females). Sounds like he is saying either they are slim and old or younger
-  and obese. he doesn't attempt to integrate the formulae.
-
-  TODO: include age as cut-off butween the use of differing formulae.
+22, then use the square root of its ratio to actual body weight to adjust
+the 70ml per kg of an ideal weight person. Age-dependent regression
+equations for indexed blood volume \code{InBV} at ideal body weight. (No
+adjustment made in obesity by Lemmens.) \code{InBV = 90-0.4 X age} (males) \code{InBV = 85-0.4 X age} (females).
 
 applies to slim adults, but note that the age-related decline is
   not seen if high degree of physical activity is maintained. TODO: check BMI
   not elevated
-}
-\details{
-Davy KP, Seals DR. Total blood volume in healthy young and older
-  men. J Appl Physiol 1994; 76: 2059-62.
-
-  Parker-Jones P, Davy KP, DeSouza CA et al. Absence of agerelated decline in
-  total blood volume in physically active females. Am J Physiol 1997; 272:
-  H2534-40.
 }
 \examples{
 blood_vol_Nadler(1.8, 80, male = TRUE)
@@ -68,4 +56,12 @@ blood_vol_Lemmens_indexed(1.8, 80)
 blood_vol_Lemmens_indexed(1.8, 160)
   blood_vol_Lemmens_non_obese(80, age_y = 25, male = TRUE)
   blood_vol_Lemmens_non_obese(80, age_y = 75, male = TRUE)
+}
+\references{
+'Davy KP, Seals DR. Total blood volume in healthy young and older
+  men. J Appl Physiol 1994; 76: 2059-62'
+
+  'Parker-Jones P, Davy KP, DeSouza CA et al. Absence of age-related decline
+  in total blood volume in physically active females. Am J Physiol 1997; 272:
+  H2534-40'
 }

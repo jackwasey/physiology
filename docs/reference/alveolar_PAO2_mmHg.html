@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="alveolar gas equation — alveolar_PAO2_mmHg" />
 
-<meta property="og:description" content="Estimate PAO2 in alveolus based on atmospheric pressure, fi_o2, PACO2, and
+<meta property="og:description" content="Estimate PAO2 in alveolus based on atmospheric pressure, fraction of oxygen
+in inspired air, partial pressure of carbon dioxide in the alveolus, and the
 respiratory quotient" />
 <meta name="twitter:card" content="summary" />
 
@@ -91,7 +92,7 @@ respiratory quotient" />
       <a href="../articles/IdealWeightComparison.html">Compare Ideal Weight Formulae</a>
     </li>
     <li>
-      <a href="../articles/NeonatalVentilation.html">Effect of breathing circuit compliance and deadspace on neonatal ventilation</a>
+      <a href="../articles/NeonatalVentilation.html">Effect of breathing circuit compliance and dead-space on neonatal ventilation</a>
     </li>
   </ul>
 </li>
@@ -126,7 +127,8 @@ respiratory quotient" />
 
     <div class="ref-description">
     
-    <p>Estimate PAO2 in alveolus based on atmospheric pressure, fi_o2, PACO2, and
+    <p>Estimate PAO2 in alveolus based on atmospheric pressure, fraction of oxygen
+in inspired air, partial pressure of carbon dioxide in the alveolus, and the
 respiratory quotient</p>
     
     </div>
@@ -139,19 +141,19 @@ respiratory quotient</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fi_o2</th>
-      <td><p>fraction of oxygen in inspired gas, from 0 to 1, default is (dry)
-room air</p></td>
+      <td><p>fraction of oxygen in inspired gas, from 0 to 1, default
+reflects (dry) room air</p></td>
     </tr>
     <tr>
       <th>rq</th>
-      <td><p>respiratory quotient, i.e. the ratio of CO2 produced to oxygen
+      <td><p>respiratory quotient, i.e., the ratio of CO2 produced to oxygen
 consumed, usually between around 0.7 and 1.0, but can legitimately be
 greater than 1.0. Default it 0.8.</p></td>
     </tr>
     <tr>
       <th>PACO2_mmHg</th>
-      <td><p>partial pressure of CO2 in alveolus, which can be approximated
-as the end-tidal pCO2</p></td>
+      <td><p>partial pressure of CO2 in alveolus, which can be roughly
+approximated as the end-tidal pCO2</p></td>
     </tr>
     <tr>
       <th>Patm_mmHg</th>
@@ -159,8 +161,8 @@ as the end-tidal pCO2</p></td>
     </tr>
     <tr>
       <th>PAH2O_mmHg</th>
-      <td><p>partial pressure of water vapor, defaults to 6.25 kPa (47 mmHg)
-which is appropriate for body temperature</p></td>
+      <td><p>partial pressure of water vapor at sea level, defaults to
+6.25 kPa (47 mmHg) which is appropriate for body temperature</p></td>
     </tr>
     </table>
     

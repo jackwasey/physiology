@@ -21,7 +21,7 @@ bmi_adult_ins_lbs(heightin, weightlb, ...)
 \item{weightlb}{weight in pounds}
 }
 \description{
-Calculate body mass index using weight in kg / (height in metres ^ 2)
+Calculate body mass index using weight in kg / (height in meters ^ 2)
 }
 \examples{
 bmi_adult(1.6, 120)

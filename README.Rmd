@@ -34,7 +34,7 @@ Functions are provided for estimation of a range of physiologic characteristics 
  - Height, weight and fluid compartments.
  - Henderson-Hasslebalch
  - Alveolar gas equation
- - Airway deadspace
+ - Airway dead-space
  
 Each formula is referenced to the original publication. Warnings can be given for
 estimation based on input data outside of normal ranges. Future functions

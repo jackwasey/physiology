@@ -1,17 +1,18 @@
 #' alveolar gas equation
 #'
-#' Estimate PAO2 in alveolus based on atmospheric pressure, fi_o2, PACO2, and
+#' Estimate PAO2 in alveolus based on atmospheric pressure, fraction of oxygen
+#' in inspired air, partial pressure of carbon dioxide in the alveolus, and the
 #' respiratory quotient
-#' @param fi_o2 fraction of oxygen in inspired gas, from 0 to 1, default is (dry)
-#'   room air
-#' @param rq respiratory quotient, i.e. the ratio of CO2 produced to oxygen
+#' @param fi_o2 fraction of oxygen in inspired gas, from 0 to 1, default
+#'   reflects (dry) room air
+#' @param rq respiratory quotient, i.e., the ratio of CO2 produced to oxygen
 #'   consumed, usually between around 0.7 and 1.0, but can legitimately be
 #'   greater than 1.0. Default it 0.8.
-#' @param PACO2_mmHg partial pressure of CO2 in alveolus, which can be approximated
-#'   as the end-tidal pCO2
+#' @param PACO2_mmHg partial pressure of CO2 in alveolus, which can be roughly
+#'   approximated as the end-tidal pCO2
 #' @param Patm_mmHg atmospheric pressure in kPa
-#' @param PAH2O_mmHg partial pressure of water vapor, defaults to 6.25 kPa (47 mmHg)
-#'   which is appropriate for body temperature
+#' @param PAH2O_mmHg partial pressure of water vapor at sea level, defaults to
+#'   6.25 kPa (47 mmHg) which is appropriate for body temperature
 #' @examples
 #' # vary RQ
 #' rq <- seq(0.6, 1.4, 0.05)
@@ -31,5 +32,5 @@ alveolar_PAO2_mmHg <- function(fi_o2 = 0.209, rq = 0.8, PACO2_mmHg = 40,
   stopifnot(Patm_mmHg > 0)
   stopifnot(PAH2O_mmHg > 0, PAH2O_mmHg < (Patm_mmHg - PACO2_mmHg))
 
-  fi_o2 * (Patm_mmHg - PAH2O_mmHg) - PACO2_mmHg * (1 - fi_o2 * (1 - rq)) / rq
+    fi_o2 * (Patm_mmHg - PAH2O_mmHg) - PACO2_mmHg * (1 - fi_o2 * (1 - rq)) / rq
 }

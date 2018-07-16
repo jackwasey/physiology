@@ -18,8 +18,8 @@
 #' pres_atm_frac(8850) # fraction of sea level pressure on Everest
 #' @references
 #' Below 51 km: Practical Meteorology by Roland Stull, pg 12. Above 51 km:
-#' http://www.braeunig.us/space/atmmodel.htm Validation data:
-#' https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf
+#' \url{http://www.braeunig.us/space/atmmodel.htm} Validation data:
+#' \url{https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf}
 #' @concept atmospheric pressure
 #' @export
 pres_atm_kPa <- function(altitude_m) {
@@ -37,13 +37,11 @@ getGeopotential <- function(altitude_km) {
 }
 
 #' @title get standard temperature at a given altitude
-#' @description altitude_km = earth_radius * altitude / (earth_radius + altitude) All in
-#' km Temperature is in kelvins = 273.15 + Celsius
-#' @references
-#' Below 51 km: Practical Meteorology by Roland Stull, pg 12. Above 51 km:
-#' http://www.braeunig.us/space/atmmodel.htm Validation data:
-#' https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf
+#' @description `altitude_km = earth_radius * altitude / (earth_radius +
+#' altitude)` All in km Temperature is in Kelvin.
+#' @seealso \code{\link{pres_atm_kPa}}
 #' @param altitude_km Altitude in kilometers
+#' @md
 #' @keywords internal
 getStandardTemperature <- function(altitude_km) {
     .Call(`_physiology_getStandardTemperature`, altitude_km)

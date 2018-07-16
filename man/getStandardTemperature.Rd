@@ -10,12 +10,9 @@ getStandardTemperature(altitude_km)
 \item{altitude_km}{Altitude in kilometers}
 }
 \description{
-altitude_km = earth_radius * altitude / (earth_radius + altitude) All in
-km Temperature is in kelvins = 273.15 + Celsius
+\code{altitude_km = earth_radius * altitude / (earth_radius + altitude)} All in km Temperature is in Kelvin.
 }
-\references{
-Below 51 km: Practical Meteorology by Roland Stull, pg 12. Above 51 km:
-http://www.braeunig.us/space/atmmodel.htm Validation data:
-https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf
+\seealso{
+\code{\link{pres_atm_kPa}}
 }
 \keyword{internal}
