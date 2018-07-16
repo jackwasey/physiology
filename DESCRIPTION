@@ -1,7 +1,7 @@
 Package: physiology
 Title: Calculate Physiological Characteristics of Adults,
     Children and Infants
-Version: 1.0
+Version: 1.0.1
 Authors@R: 
     person(given = "Jack O. Wasey",
            role = c("aut", "cre", "cph"),
@@ -27,6 +27,7 @@ Suggests:
     testthat,
     knitr,
     rvest,
+    spelling,
     xml2,
     covr
 License: GPL-3

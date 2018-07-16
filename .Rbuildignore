@@ -7,6 +7,8 @@ man-roxygen
 ^codecov\.yml$
 ^README\.html$
 ^README\.Rmd$
+^tests\/testthat\/Rplots.pdf$
 ^_pkgdown\.yml$
 ^docs$
 ^cran-comments\.md$
+
