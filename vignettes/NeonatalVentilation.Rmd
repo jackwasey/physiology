@@ -29,7 +29,7 @@ max_compliance <- 1.5
 driving_pressure <- 15
 insp_tube_vol_diff <- driving_pressure * (max_compliance - min_compliance)
 ```
-Get median female weight for age up to one year.
+Get median female weight for age up to one year. (See also this [comparison of growth calculator](http://www.monicagerber.com/2018/07/roundup-of-growth-chart-packages/).)
 ```{r getmedianweights}
 dat <- as_tibble(
   childsds::make_percentile_tab(
