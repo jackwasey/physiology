@@ -12,7 +12,7 @@ Description: A variety of formulae are provided for estimation
     alveolar gas equation.  Each formula is referenced to the original
     publication.  Future functions will cover more material with a focus
     on anaesthesia, critical care and peri-operative medicine.
-URL: https://github.com/jackwasey/physiology
+URL: https://jackwasey.github.io/physiology/
 Depends:
     R (>= 3.4)
 Imports:
