@@ -9,20 +9,19 @@ r:
   - release
   - devel
 
-os:
-  - linux
-  - osx
-
 r_packages:
+  - pkgdown
   - knitr
   - rmarkdown
   - covr
   - lintr
 
+os:
+  - linux
+
 matrix:
   allow_failures:
     - r: oldrel
-    - os: osx
 
 repos:
   CRAN: https://cloud.r-project.org
@@ -32,6 +31,16 @@ warnings_are_errors: true
 after_success:
   - Rscript -e 'covr::codecov()'
   - Rscript -e 'lintr::lint_package()'
+  - Rscript -e 'pkgdown::build_site()'
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_PAT
+  keep-history: true
+  local-dir: docs
+  on:
+    branch: master
 
 notifications:
   email:
