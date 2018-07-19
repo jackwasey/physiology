@@ -17,4 +17,4 @@ svp_sea_level <- function(temp_k)
 #' The conversion is exactly 760 / 101325
 #' @keywords datasets
 #' @export
-Pa_to_torr = 760 / 101325
+Pa_to_torr <- 760 / 101325

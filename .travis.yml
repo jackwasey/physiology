@@ -13,6 +13,12 @@ os:
   - linux
   - osx
 
+r_packages:
+  - knitr
+  - rmarkdown
+  - covr
+  - lintr
+
 matrix:
   allow_failures:
     - r: oldrel
@@ -25,6 +31,7 @@ warnings_are_errors: true
 
 after_success:
   - Rscript -e 'covr::codecov()'
+  - Rscript -e 'lintr::lint_package()'
 
 notifications:
   email:
