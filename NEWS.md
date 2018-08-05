@@ -1,4 +1,10 @@
-# physiology 1.0
+# physiology
+
+## Version 1.1
+
+* ETT volume calculation
+
+## Version 1.0
 
 * Everest summit physiology vignette
 * Simplified date and age handling
