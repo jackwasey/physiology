@@ -5,7 +5,8 @@
 \title{Calculate equipment deadspace in ventilator breathing circuit}
 \usage{
 deadspace_equipment_ml(humidifier = c("adult", "infant", "none"),
-  elbow = TRUE, flexible = c("none", "compressed", "extended"))
+  elbow = TRUE, flexible = c("none", "compressed", "extended"),
+  min = 0)
 }
 \arguments{
 \item{humidifier}{Single value, if \code{TRUE}, the default, then we assume
@@ -20,6 +21,10 @@ the default, no additional flexible tubing is added. If \code{TRUE}, the
 volume of typical extended flexible tubing is added. If \code{"compressed"}
 or \code{"extended"} are given, the volume of flexible tubing in the given
 state is used.}
+
+\item{min}{numeric, giving the minimum number of obligatory milliliters of
+deadspace. The default is zero to allow calculation of additional airway
+elements.}
 }
 \description{
 There are minor brand variations between these airway devices. For the

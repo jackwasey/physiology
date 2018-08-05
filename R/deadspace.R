@@ -96,6 +96,9 @@ deadspace_physiologic <- function(ideal_weight_kg) {
 #'   volume of typical extended flexible tubing is added. If \code{"compressed"}
 #'   or \code{"extended"} are given, the volume of flexible tubing in the given
 #'   state is used.
+#' @param min numeric, giving the minimum number of obligatory milliliters of
+#'   deadspace. The default is zero to allow calculation of additional airway
+#'   elements.
 #' @examples
 #' deadspace_equipment_ml()
 #' deadspace_equipment_ml(humidifier = FALSE)
@@ -107,7 +110,8 @@ deadspace_physiologic <- function(ideal_weight_kg) {
 deadspace_equipment_ml <-
   function(humidifier = c("adult", "infant", "none"),
            elbow = TRUE,
-           flexible = c("none", "compressed", "extended")) {
+           flexible = c("none", "compressed", "extended"),
+           min = 0) {
     out <- 0
     if (is.logical(humidifier))
       out <- out + ifelse(humidifier, deadspace_things_ml$humidifier_adult, 0)
