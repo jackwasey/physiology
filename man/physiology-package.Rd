@@ -8,14 +8,9 @@
 \description{
 physiology
 }
-\concept{
-physiology
-
-medicine
-
-blood
-
-ideal weight
-}
+\concept{blood}
+\concept{ideal weight}
+\concept{medicine}
+\concept{physiology}
 \keyword{misc}
 \keyword{utilities}

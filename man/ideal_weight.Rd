@@ -28,8 +28,8 @@ ideal_weight_Broca(height_m, male, ...)
 
 ideal_weight_Lemmens(height_m, ...)
 
-ideal_weight_linear(height_m, male, height_mininch, male_min_kg, female_min_kg,
-  male_kg_per_inch, female_kg_per_inch, ...)
+ideal_weight_linear(height_m, male, height_mininch, male_min_kg,
+  female_min_kg, male_kg_per_inch, female_kg_per_inch, ...)
 }
 \arguments{
 \item{height_m}{single numeric, height in meters}

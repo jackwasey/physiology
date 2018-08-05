@@ -36,7 +36,7 @@ VignetteBuilder:
     knitr
 LazyData: true
 LazyDataCompression: xz
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 LinkingTo: 
     Rcpp
 Encoding: UTF-8

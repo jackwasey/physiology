@@ -9,29 +9,29 @@
 \alias{valid_age_adult}
 \title{Validate physiologic input parameters}
 \usage{
-valid_height(height_m, ht_min = 0.1, ht_max = 2.5, ht_min_hard = 0.001,
-  ht_max_hard = 3, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
-  equal_ok = FALSE)
+valid_height(height_m, ht_min = 0.1, ht_max = 2.5,
+  ht_min_hard = 0.001, ht_max_hard = 3, extra_msg = "",
+  do_warn = TRUE, do_stop = FALSE, equal_ok = FALSE)
 
 valid_height_adult(height_m, ht_min = 0.5, ht_max = 2.5,
-  ht_min_hard = 0.001, ht_max_hard = 3, extra_msg = "", do_warn = TRUE,
-  do_stop = FALSE, equal_ok = FALSE)
+  ht_min_hard = 0.001, ht_max_hard = 3, extra_msg = "",
+  do_warn = TRUE, do_stop = FALSE, equal_ok = FALSE)
 
 valid_weight(weight_kg, wt_min = 0.1, wt_max = 300, wt_min_hard = 0,
-  wt_max_hard = 600, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
-  equal_ok = FALSE)
+  wt_max_hard = 600, extra_msg = "", do_warn = TRUE,
+  do_stop = FALSE, equal_ok = FALSE)
 
-valid_weight_adult(weight_kg, wt_min = 5, wt_max = 300, wt_min_hard = 0,
-  wt_max_hard = 600, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
-  equal_ok = FALSE)
+valid_weight_adult(weight_kg, wt_min = 5, wt_max = 300,
+  wt_min_hard = 0, wt_max_hard = 600, extra_msg = "",
+  do_warn = TRUE, do_stop = FALSE, equal_ok = FALSE)
 
 valid_age(age_y, age_min = 0, age_max = 150, age_min_hard = 1e-05,
-  age_max_hard = 150, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
-  equal_ok = FALSE)
+  age_max_hard = 150, extra_msg = "", do_warn = TRUE,
+  do_stop = FALSE, equal_ok = FALSE)
 
-valid_age_adult(age_y, age_min = 18, age_max = 150, age_min_hard = 17,
-  age_max_hard = 150, extra_msg = "", do_warn = TRUE, do_stop = FALSE,
-  equal_ok = FALSE)
+valid_age_adult(age_y, age_min = 18, age_max = 150,
+  age_min_hard = 17, age_max_hard = 150, extra_msg = "",
+  do_warn = TRUE, do_stop = FALSE, equal_ok = FALSE)
 }
 \arguments{
 \item{height_m}{single numeric, height in meters}

@@ -41,6 +41,4 @@ Below 51 km: Practical Meteorology by Roland Stull, pg 12. Above 51 km:
 \url{http://www.braeunig.us/space/atmmodel.htm} Validation data:
 \url{https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf}
 }
-\concept{
-atmospheric pressure
-}
+\concept{atmospheric pressure}

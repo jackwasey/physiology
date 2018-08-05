@@ -4,8 +4,8 @@
 \alias{age_from_dates}
 \title{age from birth and reference dates}
 \usage{
-age_from_dates(birth_date, ref_date = Sys.Date(), unit = c("year", "month",
-  "day"))
+age_from_dates(birth_date, ref_date = Sys.Date(), unit = c("year",
+  "month", "day"))
 }
 \arguments{
 \item{birth_date}{Date of birth, either as a \code{Date} or something which
