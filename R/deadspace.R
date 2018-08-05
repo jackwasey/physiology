@@ -22,7 +22,8 @@
 #'   ages <- seq(youngest, oldest, (oldest - youngest) / (length(iw) - 1))
 #'   plot(iw, deadspace_anatomic_child(ideal_weight_kg = iw, age_y = ages),
 #'        type = "l")
-#'
+#' @family airway
+#' @concept deadspace dead-space
 #' @export
 deadspace_total <- function(ideal_weight_kg,
                             age_y = NULL,
@@ -73,9 +74,55 @@ deadspace_intrathoracic_ml <- function(ideal_weight_kg)
   1.03 * ideal_weight_kg
 
 deadspace_extrathoracic <- function(ideal_weight_kg = NULL, age_y = NULL) {
-.NotYetImplemented()
+  .NotYetImplemented()
 }
 
 deadspace_physiologic <- function(ideal_weight_kg) {
   .NotYetImplemented()
 }
+
+#' Calculate equipment deadspace in ventilator breathing circuit
+#'
+#' There are minor brand variations between these airway devices. For the
+#' purposes of rough physiologic calculations, this function gives values based
+#' on real, widely-used equipment.
+#' @param humidifier Single value, if \code{TRUE}, the default, then we assume
+#'   the adult humidifier. If \code{humidifier} is set to the character string
+#'   \code{"adult"}, the results is the same as for \code{TRUE}. Alternatively,
+#'   \code{"infant"} refers to the lower volume, higher resistance device.
+#' @param elbow Single logical value, default is \code{TRUE}
+#' @param flexible Single logical value or character string. If \code{FALSE},
+#'   the default, no additional flexible tubing is added. If \code{TRUE}, the
+#'   volume of typical extended flexible tubing is added. If \code{"compressed"}
+#'   or \code{"extended"} are given, the volume of flexible tubing in the given
+#'   state is used.
+#' @examples
+#' deadspace_equipment_ml()
+#' deadspace_equipment_ml(humidifier = FALSE)
+#' deadspace_equipment_ml(humidifier = "infant", elbow = TRUE)
+#' deadspace_equipment_ml(flexible = "extended", elbow = FALSE)
+#' deadspace_equipment_ml(flexible = "extended", elbow = TRUE)
+#' @seealso \code{\link{deadspace_things_ml}}
+#' @export
+deadspace_equipment_ml <-
+  function(humidifier = c("adult", "infant", "none"),
+           elbow = TRUE,
+           flexible = c("none", "compressed", "extended")) {
+    out <- 0
+    if (is.logical(humidifier))
+      out <- out + ifelse(humidifier, deadspace_things_ml$humidifier_adult, 0)
+    else
+      out <- out + switch(match.arg(humidifier),
+                          "adult" = deadspace_things_ml$humidifier_adult,
+                          "infant" = deadspace_things_ml$humidifier_infant,
+                          "none" = 0)
+    out <- out + ifelse(elbow, deadspace_things_ml$elbow, 0)
+    if (is.logical(flexible))
+      out <- out + ifelse(flexible, deadspace_things_ml$flexible_adult, 0)
+    else
+      out <- switch(match.arg(flexible),
+                    "none" = 0,
+                    "compressed" = deadspace_things_ml$flexible_compressed,
+                    "extended" = deadspace_things_ml$flexible_extended) + out
+    out
+  }
