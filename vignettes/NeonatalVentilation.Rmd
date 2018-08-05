@@ -15,7 +15,7 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Fully extending the primary concertina tubing of a breathing circuit reduces compliance: the rigidity of the tubing itself falls, and there is more air in it. The following chart shows the effect of this difference on deadspace fraction in neonatal ventilation. This shows why a compliance test is essential before a neonatal anesthesia case, and why the tubing should not be extended or contracted after this test.
+Fully extending the primary concertina tubing of a breathing circuit increases compliance: the rigidity of the tubing itself falls, and there is more air in it. The following chart shows the effect of this difference on deadspace fraction in neonatal ventilation. This shows why a compliance test is essential before a neonatal anesthesia case, and why the tubing should not be extended or contracted after this test.
 
 ```{r calc, echo = T, warn = FALSE, message = FALSE}
 library(physiology)
