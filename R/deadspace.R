@@ -114,15 +114,18 @@ deadspace_equipment_ml <-
            min = 0) {
     out <- 0
     if (is.logical(humidifier))
-      out <- out + ifelse(humidifier, deadspace_things_ml$humidifier_adult, 0)
+      out <- out + ifelse(humidifier,
+                          physiology::deadspace_things_ml$humidifier_adult, 0)
     else
-      out <- out + switch(match.arg(humidifier),
-                          "adult" = deadspace_things_ml$humidifier_adult,
-                          "infant" = deadspace_things_ml$humidifier_infant,
-                          "none" = 0)
-    out <- out + ifelse(elbow, deadspace_things_ml$elbow, 0)
+      out <- out + switch(
+        match.arg(humidifier),
+        "adult" = physiology::deadspace_things_ml$humidifier_adult,
+        "infant" = physiology::deadspace_things_ml$humidifier_infant,
+        "none" = 0)
+    out <- out + ifelse(elbow, physiology::deadspace_things_ml$elbow, 0)
     if (is.logical(flexible))
-      out <- out + ifelse(flexible, deadspace_things_ml$flexible_adult, 0)
+      out <- out + ifelse(flexible,
+                          physiology::deadspace_things_ml$flexible_adult, 0)
     else
       out <- switch(match.arg(flexible),
                     "none" = 0,
