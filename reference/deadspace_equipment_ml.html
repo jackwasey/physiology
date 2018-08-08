@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>age from birth and reference dates — age_from_dates • physiology</title>
+<title>Calculate equipment deadspace in ventilator breathing circuit — deadspace_equipment_ml • physiology</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,11 @@
 
 
 
-<meta property="og:title" content="age from birth and reference dates — age_from_dates" />
+<meta property="og:title" content="Calculate equipment deadspace in ventilator breathing circuit — deadspace_equipment_ml" />
 
-<meta property="og:description" content="Calculate age at time of reference date, based on birth date, rounded to the
-given unit. These are designed for physiologic estimations, not for accuracy.
-The dates can be given as anything which can be coerced into a Date." />
+<meta property="og:description" content="There are minor brand variations between these airway devices. For the
+purposes of rough physiologic calculations, this function gives values based
+on real, widely-used equipment." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,62 +115,67 @@ The dates can be given as anything which can be coerced into a Date." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>age from birth and reference dates</h1>
+    <h1>Calculate equipment deadspace in ventilator breathing circuit</h1>
     
-    <div class="hidden name"><code>age_from_dates.Rd</code></div>
+    <div class="hidden name"><code>deadspace_equipment_ml.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Calculate age at time of reference date, based on birth date, rounded to the
-given unit. These are designed for physiologic estimations, not for accuracy.
-The dates can be given as anything which can be coerced into a <code>Date</code>.</p>
+    <p>There are minor brand variations between these airway devices. For the
+purposes of rough physiologic calculations, this function gives values based
+on real, widely-used equipment.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>age_from_dates</span>(<span class='no'>birth_date</span>, <span class='kw'>ref_date</span> <span class='kw'>=</span> <span class='fu'>Sys.Date</span>(), <span class='kw'>unit</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"year"</span>,
-  <span class='st'>"month"</span>, <span class='st'>"day"</span>))</pre>
+    <pre class="usage"><span class='fu'>deadspace_equipment_ml</span>(<span class='kw'>humidifier</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"adult"</span>, <span class='st'>"infant"</span>, <span class='st'>"none"</span>),
+  <span class='kw'>elbow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>flexible</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"none"</span>, <span class='st'>"compressed"</span>, <span class='st'>"extended"</span>),
+  <span class='kw'>min</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>birth_date</th>
-      <td><p>Date of birth, either as a <code>Date</code> or something which
-will be converted to a <code>Date</code></p></td>
+      <th>humidifier</th>
+      <td><p>Single value, if <code>TRUE</code>, the default, then we assume
+the adult humidifier. If <code>humidifier</code> is set to the character string
+<code>"adult"</code>, the results is the same as for <code>TRUE</code>. Alternatively,
+<code>"infant"</code> refers to the lower volume, higher resistance device.</p></td>
     </tr>
     <tr>
-      <th>ref_date</th>
-      <td><p>Date at which to calculate age, defaults to current date,
-either as a <code>Date</code> or something which will be converted to a
-<code>Date</code></p></td>
+      <th>elbow</th>
+      <td><p>Single logical value, default is <code>TRUE</code></p></td>
     </tr>
     <tr>
-      <th>unit</th>
-      <td><p>character of length, one of "year" or "day".</p></td>
+      <th>flexible</th>
+      <td><p>Single logical value or character string. If <code>FALSE</code>,
+the default, no additional flexible tubing is added. If <code>TRUE</code>, the
+volume of typical extended flexible tubing is added. If <code>"compressed"</code>
+or <code>"extended"</code> are given, the volume of flexible tubing in the given
+state is used.</p></td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td><p>numeric, giving the minimum number of obligatory milliliters of
+deadspace. The default is zero to allow calculation of additional airway
+elements.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>integer vector</p>
-    
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>https://stackoverflow.com/questions/31126726/efficient-and-accurate-age-calculation-in-years-months-or-weeks-in-r-given-b</p>
+    <div class='dont-index'><p><code><a href='deadspace_things_ml.html'>deadspace_things_ml</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"2014-11-08"</span>, <span class='st'>"2014-12-31"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"day"</span>)</div><div class='output co'>#&gt; [1] 53</div><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"1981-07-09"</span>, <span class='st'>"2014-06-29"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"year"</span>)</div><div class='output co'>#&gt; [1] 32.97194</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>deadspace_equipment_ml</span>()</div><div class='output co'>#&gt; [1] 30</div><div class='input'><span class='fu'>deadspace_equipment_ml</span>(<span class='kw'>humidifier</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] 8</div><div class='input'><span class='fu'>deadspace_equipment_ml</span>(<span class='kw'>humidifier</span> <span class='kw'>=</span> <span class='st'>"infant"</span>, <span class='kw'>elbow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] 17</div><div class='input'><span class='fu'>deadspace_equipment_ml</span>(<span class='kw'>flexible</span> <span class='kw'>=</span> <span class='st'>"extended"</span>, <span class='kw'>elbow</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] 47</div><div class='input'><span class='fu'>deadspace_equipment_ml</span>(<span class='kw'>flexible</span> <span class='kw'>=</span> <span class='st'>"extended"</span>, <span class='kw'>elbow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] 55</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#references">References</a></li>
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

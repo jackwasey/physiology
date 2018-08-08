@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>age from birth and reference dates — age_from_dates • physiology</title>
+<title>Estimate appropriate size of endotracheal tube for infants and children — ett_size_by_age • physiology</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,13 @@
 
 
 
-<meta property="og:title" content="age from birth and reference dates — age_from_dates" />
+<meta property="og:title" content="Estimate appropriate size of endotracheal tube for infants and children — ett_size_by_age" />
 
-<meta property="og:description" content="Calculate age at time of reference date, based on birth date, rounded to the
-given unit. These are designed for physiologic estimations, not for accuracy.
-The dates can be given as anything which can be coerced into a Date." />
+<meta property="og:description" content="ett_size_cole uses the classic Cole formula for uncuffed tubes,
+Motoyama formula for cuffed tubes with age over two years, and the Khine
+formula for cuffed tubes with age under two years. All of these, as any
+anesthesiologist will tell, give poor estimates at any extreme of age, or
+height. These formulae are for use in pedatric practice only." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,53 +117,59 @@ The dates can be given as anything which can be coerced into a Date." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>age from birth and reference dates</h1>
+    <h1>Estimate appropriate size of endotracheal tube for infants and children</h1>
     
-    <div class="hidden name"><code>age_from_dates.Rd</code></div>
+    <div class="hidden name"><code>ett_size_by_age.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Calculate age at time of reference date, based on birth date, rounded to the
-given unit. These are designed for physiologic estimations, not for accuracy.
-The dates can be given as anything which can be coerced into a <code>Date</code>.</p>
+    <p><code>ett_size_cole</code> uses the classic Cole formula for uncuffed tubes,
+Motoyama formula for cuffed tubes with age over two years, and the Khine
+formula for cuffed tubes with age under two years. All of these, as any
+anesthesiologist will tell, give poor estimates at any extreme of age, or
+height. These formulae are for use in pedatric practice only.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>age_from_dates</span>(<span class='no'>birth_date</span>, <span class='kw'>ref_date</span> <span class='kw'>=</span> <span class='fu'>Sys.Date</span>(), <span class='kw'>unit</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"year"</span>,
-  <span class='st'>"month"</span>, <span class='st'>"day"</span>))</pre>
+    <pre class="usage"><span class='fu'>ett_size_by_age</span>(<span class='no'>age_y</span>, <span class='kw'>cuffed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>birth_date</th>
-      <td><p>Date of birth, either as a <code>Date</code> or something which
-will be converted to a <code>Date</code></p></td>
+      <th>age_y</th>
+      <td><p>numeric vector</p></td>
     </tr>
     <tr>
-      <th>ref_date</th>
-      <td><p>Date at which to calculate age, defaults to current date,
-either as a <code>Date</code> or something which will be converted to a
-<code>Date</code></p></td>
-    </tr>
-    <tr>
-      <th>unit</th>
-      <td><p>character of length, one of "year" or "day".</p></td>
+      <th>cuffed</th>
+      <td><p>logical vector, single value, or a vector of the same length as
+the given age vector, defining whether the desired tube is to be cuffed. If
+not specified, then it is assumed that a cuffed tube is used.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>integer vector</p>
+    <p>ETT size, internal diameter in mm, rounded to nearest half-mm size up
+  to 6mm, then the nearest integer.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>https://stackoverflow.com/questions/31126726/efficient-and-accurate-age-calculation-in-years-months-or-weeks-in-r-given-b</p>
+    <p>http://anesthesiology.pubs.asahq.org/Article.aspx?articleid=1933172</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"2014-11-08"</span>, <span class='st'>"2014-12-31"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"day"</span>)</div><div class='output co'>#&gt; [1] 53</div><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"1981-07-09"</span>, <span class='st'>"2014-06-29"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"year"</span>)</div><div class='output co'>#&gt; [1] 32.97194</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>teenagers</span> <span class='kw'>&lt;-</span> <span class='fu'>ett_size_by_age</span>(<span class='fl'>13</span>:<span class='fl'>18</span>)
+<span class='fu'>plot</span>(<span class='fl'>13</span>:<span class='fl'>18</span>, <span class='no'>teenagers</span>,
+  <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"This formula for ETT tube size overestimates tube
+  sizes of teenagers, and takes no account of gender"</span>)</div><div class='input'><span class='fu'>lines</span>(<span class='fl'>13</span>:<span class='fl'>18</span>, <span class='no'>teenagers</span>)</div><div class='img'><img src='ett_size_by_age-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>ages</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>1</span>/<span class='fl'>12</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>4</span>, <span class='fl'>7</span>, <span class='fl'>11</span>)
+<span class='no'>neonate_to_child</span> <span class='kw'>&lt;-</span> <span class='fu'>ett_size_by_age</span>(<span class='kw'>age</span> <span class='kw'>=</span> <span class='no'>ages</span>)
+<span class='fu'>names</span>(<span class='no'>neonate_to_child</span>) <span class='kw'>&lt;-</span> <span class='no'>ages</span>
+<span class='fu'>print</span>(<span class='no'>neonate_to_child</span>)</div><div class='output co'>#&gt; 0.0833333333333333                  1                  2                  4 
+#&gt;                3.0                3.0                4.0                4.5 
+#&gt;                  7                 11 
+#&gt;                5.0                6.0 </div><div class='input'><span class='fu'>plot</span>(<span class='no'>ages</span>, <span class='no'>neonate_to_child</span>)</div><div class='input'><span class='fu'>lines</span>(<span class='no'>ages</span>, <span class='no'>neonate_to_child</span>)</div><div class='img'><img src='ett_size_by_age-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>plot</span>(<span class='no'>ages</span>, <span class='no'>neonate_to_child</span>, <span class='kw'>log</span> <span class='kw'>=</span> <span class='st'>"x"</span>)</div><div class='input'><span class='fu'>lines</span>(<span class='no'>ages</span>, <span class='no'>neonate_to_child</span>)</div><div class='img'><img src='ett_size_by_age-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

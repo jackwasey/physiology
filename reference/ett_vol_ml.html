@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • physiology</title>
+<title>Estimate volume inside an endotracheal tube — ett_vol_ml • physiology</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,12 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Estimate volume inside an endotracheal tube — ett_vol_ml" />
+
+<meta property="og:description" content="Calculations are based on standard endotracheal tubes. The volume is
+estimated as the cylinder of the given diameter and typical length of a tube
+of given size." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -46,7 +51,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -110,20 +115,57 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      
+    <h1>Estimate volume inside an endotracheal tube</h1>
+    
+    <div class="hidden name"><code>ett_vol_ml.Rd</code></div>
     </div>
 
-  </div>
+    <div class="ref-description">
+    
+    <p>Calculations are based on standard endotracheal tubes. The volume is
+estimated as the cylinder of the given diameter and typical length of a tube
+of given size.</p>
+    
+    </div>
 
+    <pre class="usage"><span class='fu'>ett_vol_ml</span>(<span class='no'>diameter_mm</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>diameter_mm</th>
+      <td><p>The internal diameter of the endotracheal tube in
+millimeters. Sizes between 2.0 and 8 are offered. Half sizes between 2.5
+and 6 are accepted.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Volumes of each given ETT in cubic millimeters</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>ett_vol_ml</span>(<span class='fl'>2</span>:<span class='fl'>8</span>)</div><div class='output co'>#&gt; [1]  0.439823  1.201659  2.638938  4.908739  8.199557 11.930198 16.587609</div><div class='input'><span class='fu'>plot</span>(<span class='fl'>2</span>:<span class='fl'>8</span>, <span class='fu'>ett_vol_ml</span>(<span class='fl'>2</span>:<span class='fl'>8</span>))</div><div class='input'><span class='fu'>lines</span>(<span class='fl'>2</span>:<span class='fl'>8</span>, <span class='fu'>ett_vol_ml</span>(<span class='fl'>2</span>:<span class='fl'>8</span>),
+  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"ETT internal diameter, mm"</span>,
+  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"ETT internal volume, mm^3"</span>)</div><div class='img'><img src='ett_vol_ml-1.png' alt='' width='700' height='433' /></div><div class='input'>(<span class='no'>vols_cm3</span> <span class='kw'>&lt;-</span> <span class='fu'>ett_vol_ml</span>(<span class='fu'>seq</span>(<span class='fl'>2</span>, <span class='fl'>6</span>, <span class='fl'>0.5</span>)) / <span class='fl'>1000</span>)</div><div class='output co'>#&gt; [1] 0.0004398230 0.0007363108 0.0012016592 0.0018280142 0.0026389378
+#&gt; [6] 0.0036579919 0.0049087385 0.0066523224 0.0081995568</div><div class='input'>
+<span class='co'># Ages through to ETT internal volume</span>
+<span class='fu'>ett_vol_ml</span>(<span class='fu'><a href='ett_size_by_age.html'>ett_size_by_age</a></span>(<span class='no'>ages</span>))</div><div class='output co'>#&gt; <span class='error'>Error in diameter_mm %in% lookup_diam_mm: object 'ages' not found</span></div><div class='input'>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
+  </div>
 </div>
 
       <footer>

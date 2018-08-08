@@ -90,34 +90,81 @@
 
     
     
-<p>Fully extending the concertina tubing of a breathing circuit reduces compliance: the rigidity of the tubing itself falls, and there is more air in it. The following chart shows the effect of this difference on dead-space fraction in neonatal ventilation. This shows why a compliance test is essential before a neonatal anesthesia case, and why the tubing should not be extended or contracted after this test.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># units of ml per cmH20</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">min_compliance &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">max_compliance &lt;-<span class="st"> </span><span class="fl">1.5</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># unit cmH20</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">driving_pressure &lt;-<span class="st"> </span><span class="dv">15</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">insp_tube_vol_diff &lt;-<span class="st"> </span>driving_pressure <span class="op">*</span><span class="st"> </span>(max_compliance <span class="op">-</span><span class="st"> </span>min_compliance)</a></code></pre></div>
+<p>Fully extending the primary concertina tubing of a breathing circuit increases compliance: the rigidity of the tubing itself falls, and there is more air in it. The following chart shows the effect of this difference on deadspace fraction in neonatal ventilation. This shows why a compliance test is essential before a neonatal anesthesia case, and why the tubing should not be extended or contracted after this test.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(physiology)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(childsds)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(magrittr)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># units of ml per cmH20</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">min_compliance &lt;-<span class="st"> </span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">max_compliance &lt;-<span class="st"> </span><span class="fl">1.5</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># unit cmH20</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">driving_pressure &lt;-<span class="st"> </span><span class="dv">15</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">insp_tube_vol_diff &lt;-<span class="st"> </span>driving_pressure <span class="op">*</span><span class="st"> </span>(max_compliance <span class="op">-</span><span class="st"> </span>min_compliance)</a></code></pre></div>
 <p>Get median female weight for age up to one year. (See also this <a href="http://www.monicagerber.com/2018/07/roundup-of-growth-chart-packages/">comparison of growth calculator</a>.)</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">dat &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">dat &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/reexports.html">as_tibble</a></span>(</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">  childsds<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/childsds/topics/make_percentile_tab">make_percentile_tab</a></span>(</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">    childsds<span class="op">::</span>who.ref, </a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">    <span class="dt">item =</span> <span class="st">"weight"</span>,</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">    <span class="dt">perc =</span> <span class="dv">50</span>,</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6">    <span class="dt">stack =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">    <span class="dt">sex =</span> <span class="st">"sex"</span>))</a></code></pre></div>
-<pre><code>## Loading required namespace: reshape2</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">dat &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(dat, sex <span class="op">==</span><span class="st"> "female"</span>, age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">rename</a></span>(<span class="dt">weight =</span> value) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(age, weight)</a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tidal_volume =</span> <span class="dv">7</span> <span class="op">*</span><span class="st"> </span>weight) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">error_fraction =</span> insp_tube_vol_diff <span class="op">/</span><span class="st"> </span>tidal_volume)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">plot</span>(dat[<span class="kw">c</span>(<span class="st">"weight"</span>, <span class="st">"error_fraction"</span>)], <span class="dt">type =</span> <span class="st">"l"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb2-7" data-line-number="7">    <span class="dt">sex =</span> <span class="st">"sex"</span>))</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">dat &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(dat, sex <span class="op">==</span><span class="st"> "female"</span>, age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">rename</a></span>(<span class="dt">weight =</span> value) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/select.html">select</a></span>(age, weight)</a></code></pre></div>
+<p>The following plot shows the fractional error in tidal volume delivery in small patients. The error is based on a machine check with fully collapsed tubing, and ventilation with fully extended tubing.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">tidal_volume =</span> <span class="dv">7</span> <span class="op">*</span><span class="st"> </span>weight) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">error_fraction =</span> insp_tube_vol_diff <span class="op">/</span><span class="st"> </span>tidal_volume)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">plot</span>(dat[<span class="kw">c</span>(<span class="st">"weight"</span>, <span class="st">"error_fraction"</span>)], </a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">     <span class="dt">type =</span> <span class="st">"l"</span>,</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">     <span class="dt">xlab =</span> <span class="st">"Weight, kg"</span>,</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">     <span class="dt">ylab =</span> <span class="st">"Error in tidal volume delivery as fraction of delivered"</span>)</a></code></pre></div>
 <p><img src="NeonatalVentilation_files/figure-html/deadspacecalc-1.png" width="700"></p>
+<div id="equipment-deadspace" class="section level2">
+<h2 class="hasAnchor">
+<a href="#equipment-deadspace" class="anchor"></a>Equipment deadspace</h2>
+<p>The volume of breathing circuit equipment is more important the smaller the patient. E.g., for a cleft palate repair in an infant, a flexible extension is often used, in addition to a (hopefully) pediatric in-line humidifier. Let’s calculate the volume of this apparatus:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">cleft_repair_deadspace &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/deadspace_equipment_ml.html">deadspace_equipment_ml</a></span>(<span class="dt">humidifier =</span> <span class="st">"infant"</span>,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">                         <span class="dt">elbow =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">                         <span class="dt">flexible =</span> <span class="st">"extended"</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">cleft_repair_deadspace2 &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/deadspace_equipment_ml.html">deadspace_equipment_ml</a></span>(<span class="dt">humidifier =</span> <span class="st">"infant"</span>,</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">                         <span class="dt">elbow =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">                         <span class="dt">flexible =</span> <span class="st">"none"</span>)</a></code></pre></div>
+<p>Now we see the great relative proportion of all this optional equipment even in older infants. In these plots, the predicted ideal weight for age is used to calculate a tidal volume. The typical setup is with the flexible tubing extended and a pediatric humidifier. The somewhat better setup is with just the pediatric humidifier. No elbow was included.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">dat<span class="op">$</span>equip_err_frac &lt;-<span class="st"> </span>cleft_repair_deadspace <span class="op">/</span><span class="st"> </span>dat<span class="op">$</span>tidal_volume</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">dat<span class="op">$</span>equip_err_frac2 &lt;-<span class="st"> </span>cleft_repair_deadspace2 <span class="op">/</span><span class="st"> </span>dat<span class="op">$</span>tidal_volume</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">dat<span class="op">$</span>months &lt;-<span class="st"> </span>dat<span class="op">$</span>age <span class="op">*</span><span class="st"> </span><span class="dv">12</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw">plot</span>(dat<span class="op">$</span>months, dat<span class="op">$</span>equip_err_frac, </a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">     <span class="dt">axes =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">     <span class="dt">type =</span> <span class="st">"l"</span>,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">     <span class="dt">main =</span> <span class="st">"Effect of optional equipment deadspace in infants"</span>,</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">     <span class="dt">sub =</span> <span class="st">"Age, months (top axis), Weight, kg (bottom axis)"</span>,</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">     <span class="dt">xlab =</span> <span class="st">""</span>,</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">     <span class="dt">ylab =</span> <span class="st">"Equipment deadspace as fraction of expected tidal volume"</span>)</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="kw">axis</span>(<span class="dv">2</span>, <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">at =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">line =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="kw">lines</span>(dat<span class="op">$</span>months, dat<span class="op">$</span>equip_err_frac2, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">wts &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">floor</span>(<span class="kw">min</span>(dat<span class="op">$</span>weight)), <span class="kw">ceiling</span>(<span class="kw">max</span>(dat<span class="op">$</span>weight)))</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="kw">points</span>(dat<span class="op">$</span>months, <span class="kw">rep_len</span>(<span class="dv">0</span>, <span class="kw">length</span>(dat<span class="op">$</span>months)), <span class="dt">type =</span> <span class="st">"n"</span>)</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">12</span>, <span class="dv">12</span><span class="op">/</span><span class="dv">6</span>), <span class="dt">labels =</span> wts, <span class="dt">line =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="kw">legend</span>(<span class="st">"topright"</span>, <span class="kw">c</span>(<span class="st">"typical"</span>, <span class="st">"better"</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</a></code></pre></div>
+<p><img src="NeonatalVentilation_files/figure-html/plotclefterr-1.png" width="700"></p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#equipment-deadspace">Equipment deadspace</a></li>
+      </ul>
+</div>
       </div>
 
 </div>
