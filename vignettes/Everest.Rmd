@@ -53,7 +53,7 @@ PAO2_summit_resting <- alveolar_PAO2_mmHg(
   PAH2O_mmHg = PAH2O_mmHg_summit)
 ```
 
-The assumption of a typical PACO2 of 40 mmHg is invalid for a climber who has achieved the summit. In fact, the hyperventilation due to hypoxemia results in a significantly lower PACO2. Let's take the group mean of 13.3 mmHg (an astonishingly low number) from the Caudwell Xtreme Everest expedition climbers [@Grocott_Arterialbloodgases_2009].
+The assumption of a typical PACO2 of 40 mmHg is invalid for a climber who has achieved the summit. In fact, the hyperventilation due to hypoxemia results in a significantly lower PACO2. Let's take the group mean of 13.3 mmHg (an astonishingly low number) from the Caudwell Xtreme Everest expedition climbers [@Grocott_Arterialbloodgases_2009]. This also has influence on oxygen carrying capacity via the Bohr effect, but we won't consider that here.
 
 ```{r summitexertion}
 
