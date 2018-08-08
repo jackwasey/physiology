@@ -28,6 +28,6 @@ lines(2:8, ett_vol_ml(2:8),
 (vols_cm3 <- ett_vol_ml(seq(2, 6, 0.5)) / 1000)
 
 # Ages through to ETT internal volume
-ett_vol_ml(ett_size_by_age(ages))
+ett_vol_ml(ett_size_by_age(1:10))
 
 }
