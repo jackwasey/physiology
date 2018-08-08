@@ -14,7 +14,9 @@ r_packages:
   - knitr
   - rmarkdown
   - covr
-  - lintr
+
+r_github_packages:
+  - jimhester/lintr
 
 os:
   - linux
