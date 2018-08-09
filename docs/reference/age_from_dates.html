@@ -157,11 +157,15 @@ either as a <code>Date</code> or something which will be converted to a
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>https://stackoverflow.com/questions/31126726/efficient-and-accurate-age-calculation-in-years-months-or-weeks-in-r-given-b</p>
+    <p>https://stackoverflow.com/questions/31126726</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"2014-11-08"</span>, <span class='st'>"2014-12-31"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"day"</span>)</div><div class='output co'>#&gt; [1] 53</div><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"1981-07-09"</span>, <span class='st'>"2014-06-29"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"year"</span>)</div><div class='output co'>#&gt; [1] 32.97194</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"2014-11-08"</span>, <span class='st'>"2014-12-31"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"day"</span>)</div><div class='output co'>#&gt; [1] 53</div><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"2014-11-08"</span>, <span class='st'>"2014-12-31"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"day"</span>)</div><div class='output co'>#&gt; [1] 53</div><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"1981-07-09"</span>, <span class='st'>"2014-06-29"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"year"</span>)</div><div class='output co'>#&gt; [1] 32.97194</div><div class='input'># age must be zero or positive, may be in future, or error is thrown
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>age_from_dates</span>(<span class='st'>"2120-10-10"</span>, <span class='st'>"2119-01-01"</span>)
+<span class='co'># }</span><div class='input'><span class='co'># leap days work: we are just using internal R date manipulation</span>
+<span class='fu'>age_from_dates</span>(<span class='st'>"2000-02-28"</span>, <span class='st'>"2000-03-01"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"day"</span>)</div><div class='output co'>#&gt; [1] 2</div><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"2004-02-28"</span>, <span class='st'>"2004-03-01"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"day"</span>)</div><div class='output co'>#&gt; [1] 2</div><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"1900-02-28"</span>, <span class='st'>"1900-03-01"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"day"</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'>age_from_dates</span>(<span class='st'>"1901-02-28"</span>, <span class='st'>"1901-03-01"</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"day"</span>)</div><div class='output co'>#&gt; [1] 1</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -37,6 +37,7 @@ before_script:
 after_success:
   - Rscript -e 'covr::codecov()'
   - Rscript -e 'lintr::lint_package()'
+  - Rscript -e 'roxygen2::roxygenise(c("collate", "rd""))'
   - Rscript -e 'pkgdown::build_site()'
 
 deploy:
