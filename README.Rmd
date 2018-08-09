@@ -23,13 +23,13 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/physiology)](https://cran.r-project.org/package=physiology)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
-## Calculate physiologic characteristics of adults and children
+## Calculate physiologic characteristics of awake and anesthetized adults, children and infants
 
 ```{r pkgdesc, results='asis', echo = FALSE}
 cat(utils::packageDescription("physiology")$Description)
 ```
 
-Functions are provided for estimation of a range of physiologic characteristics of infants, child and adult humans.
+Functions are provided for estimation of a range of physiologic characteristics of infant, child and adult humans.
 
  - Height, weight and fluid compartments.
  - Henderson-Hasslebalch

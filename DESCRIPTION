@@ -1,6 +1,6 @@
 Package: physiology
-Title: Calculate Physiological Characteristics of Adults,
-    Children and Infants
+Title: Calculate physiologic characteristics of awake and
+    anesthetized adults, children and infants
 Version: 1.0.1.9000
 Authors@R: 
     person(given = "Jack O. Wasey",
@@ -12,7 +12,9 @@ Description: A variety of formulae are provided for estimation
     alveolar gas equation.  Each formula is referenced to the original
     publication.  Future functions will cover more material with a focus
     on anaesthesia, critical care and peri-operative medicine.
+License: GPL-3
 URL: https://jackwasey.github.io/physiology/
+BugReports: https://github.com/jackwasey/physiology/issues
 Depends:
     R (>= 3.4)
 Imports:
@@ -30,14 +32,12 @@ Suggests:
     spelling,
     xml2,
     covr
-License: GPL-3
-BugReports: https://github.com/jackwasey/physiology/issues
+LinkingTo: 
+    Rcpp
 VignetteBuilder: 
     knitr
+Encoding: UTF-8
+Language: en-US
 LazyData: true
 LazyDataCompression: xz
 RoxygenNote: 6.1.0
-LinkingTo: 
-    Rcpp
-Encoding: UTF-8
-Language: en-US

@@ -124,12 +124,13 @@ deadspace_equipment_ml <-
         "none" = 0)
     out <- out + ifelse(elbow, physiology::deadspace_things_ml$elbow, 0)
     if (is.logical(flexible))
-      out <- out + ifelse(flexible,
-                          physiology::deadspace_things_ml$flexible_adult, 0)
+      out <- out +
+      ifelse(flexible, physiology::deadspace_things_ml$flexible_adult, 0)
     else
-      out <- switch(match.arg(flexible),
-                    "none" = 0,
-                    "compressed" = deadspace_things_ml$flexible_compressed,
-                    "extended" = deadspace_things_ml$flexible_extended) + out
+      out <- switch(
+        match.arg(flexible),
+        "none" = 0,
+        "compressed" = physiology::deadspace_things_ml$flexible_compressed,
+        "extended" = physiology::deadspace_things_ml$flexible_extended) + out
     out
   }

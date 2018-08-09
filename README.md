@@ -15,7 +15,7 @@ status](https://codecov.io/gh/jackwasey/physiology/branch/master/graph/badge.svg
 status](https://www.r-pkg.org/badges/version/physiology)](https://cran.r-project.org/package=physiology)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 
-## Calculate physiologic characteristics of adults and children
+## Calculate physiologic characteristics of awake and anesthetized adults, children and infants
 
 A variety of formulae are provided for estimation of physiologic
 characteristics of infants, children, and adults. For example,
@@ -25,7 +25,7 @@ functions will cover more material with a focus on anaesthesia, critical
 care and peri-operative medicine.
 
 Functions are provided for estimation of a range of physiologic
-characteristics of infants, child and adult humans.
+characteristics of infant, child and adult humans.
 
   - Height, weight and fluid compartments.
   - Henderson-Hasslebalch
