@@ -128,7 +128,6 @@ ideal_weight_Broca <- function(height_m, male, ...)
 #' @rdname ideal_weight
 #' @export
 ideal_weight_Lemmens <- function(height_m, ...) {
-  # TODO: verbose height bounds check
   valid_height(height_m, ...)
   22 * height_m ^ 2
 }
