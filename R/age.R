@@ -14,7 +14,7 @@
 #' age_from_dates("2014-11-08", "2014-12-31", unit = "day")
 #' age_from_dates("1981-07-09", "2014-06-29", unit = "year")
 #' @references
-#' https://stackoverflow.com/questions/31126726/efficient-and-accurate-age-calculation-in-years-months-or-weeks-in-r-given-b
+#' https://stackoverflow.com/questions/31126726
 #' @export
 age_from_dates <- function(birth_date, ref_date = Sys.Date(),
                            unit = c("year", "month", "day")) {
@@ -22,8 +22,7 @@ age_from_dates <- function(birth_date, ref_date = Sys.Date(),
   ref_date <- as.Date(ref_date)
   unit <- match.arg(unit)
   age <- as.numeric(ref_date - birth_date)
-  if (age < 0 )
-    stop("Calculated age is less than zero")
+  if (age < 0) stop("Calculated age is less than zero")
   switch(unit,
          year = age_d_to_y(age),
          month = age_d_to_m(age),

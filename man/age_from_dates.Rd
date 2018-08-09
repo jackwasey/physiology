@@ -30,5 +30,5 @@ age_from_dates("2014-11-08", "2014-12-31", unit = "day")
 age_from_dates("1981-07-09", "2014-06-29", unit = "year")
 }
 \references{
-https://stackoverflow.com/questions/31126726/efficient-and-accurate-age-calculation-in-years-months-or-weeks-in-r-given-b
+https://stackoverflow.com/questions/31126726
 }
