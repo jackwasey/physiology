@@ -3,15 +3,21 @@ Title: Calculate physiologic characteristics of awake and
     anesthetized adults, children and infants
 Version: 1.0.1.9000
 Authors@R: 
-    person(given = "Jack O. Wasey",
-           role = c("aut", "cre", "cph"),
-           email = "jack@jackwasey.com")
+    c(
+      person(given = "Jack O. Wasey",
+             role = c("aut", "cre", "cph"),
+             email = "jack@jackwasey.com"),
+      person("Bill", "Denney",
+             role="ctb",
+             email="wdenney@humanpredictions.com",
+             comment=c(ORCID="0000-0002-5759-428X"))
+    )
 Description: A variety of formulae are provided for estimation
     of physiologic characteristics of infants, children, and adults. For
-    example, calculations of ideal weight, airway dead-space, and the
-    alveolar gas equation.  Each formula is referenced to the original
-    publication.  Future functions will cover more material with a focus
-    on anaesthesia, critical care and peri-operative medicine.
+    example, calculations of body surface area, ideal weight, airway
+    dead-space, and the alveolar gas equation.  Each formula is referenced
+    to the original publication.  Future functions will cover more material
+    with a focus on anaesthesia, critical care and peri-operative medicine.
 License: GPL-3
 URL: https://jackwasey.github.io/physiology/
 BugReports: https://github.com/jackwasey/physiology/issues

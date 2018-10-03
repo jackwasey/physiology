@@ -3,6 +3,7 @@
 ## Version 1.1
 
 * ETT volume calculation
+* Added multiple variants of BSA and deprecated `bsa_adult()`
 
 ## Version 1.0
 
