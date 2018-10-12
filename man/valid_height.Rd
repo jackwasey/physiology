@@ -7,6 +7,7 @@
 \alias{valid_weight_adult}
 \alias{valid_age}
 \alias{valid_age_adult}
+\alias{valid_scr}
 \title{Validate physiologic input parameters}
 \usage{
 valid_height(height_m, ht_min = 0.1, ht_max = 2.5,
@@ -32,6 +33,10 @@ valid_age(age_y, age_min = 0, age_max = 150, age_min_hard = 1e-05,
 valid_age_adult(age_y, age_min = 18, age_max = 150,
   age_min_hard = 17, age_max_hard = 150, extra_msg = "",
   do_warn = TRUE, do_stop = FALSE, equal_ok = FALSE)
+
+valid_scr(scr_uM, scr_min = 8, scr_max = 1000, scr_min_hard = 0,
+  scr_max_hard = 4000, extra_msg = "", do_warn = TRUE,
+  do_stop = FALSE, equal_ok = FALSE)
 }
 \arguments{
 \item{height_m}{single numeric, height in meters}
@@ -77,6 +82,16 @@ trigger a warning or error}
 \item{age_min_hard}{minimum age below which to warn regardless of \code{warn}}
 
 \item{age_max_hard}{maximum age above which to warn if \code{warn}}
+
+\item{scr_uM}{numeric serum creatinine (umol/L)}
+
+\item{scr_min}{minimum scr below which to warn if \code{warn = TRUE}}
+
+\item{scr_max}{maximum src above which to warn if \code{warn = TRUE}}
+
+\item{scr_min_hard}{minimum scr below which to warn regardless of \code{warn}}
+
+\item{scr_max_hard}{maximum scr above which to warn if \code{warn}}
 }
 \description{
 User may generate warnings for unreasonable or obviously erroneous heights.
