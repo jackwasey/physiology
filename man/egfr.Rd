@@ -36,6 +36,8 @@ egfr_bedside_schwartz(scr_uM, height_m, idms_assay = TRUE, ...)
 \item{...}{passed to subsequent egfr methods (for \code{egfr}) or validation
 (for other functions)}
 
+\item{weight_kg}{numeric vector of weight(s) in kg}
+
 \item{idms_assay}{Was an isotope dilution mass spectrometry (IDMS) calibrated
 assay used for serum creatinine measurement?}
 
@@ -47,7 +49,8 @@ generated suggesting MDRD is preferred?}
 }
 \value{
 A vector of estimated glomerular filtration rates with units of
-  mL/min/1.73 m^2.
+  mL/min/1.73 m^2 (except that the units are mL/min for
+  `egfr_cockroft_gault()`.
 }
 \description{
 Automatically select the best equation to use for estimated glomerular

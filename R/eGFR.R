@@ -57,7 +57,8 @@ scr_mgdl_to_uM <- function(scr_mgdl, ...) {
 #' @param ... passed to subsequent egfr methods (for \code{egfr}) or validation
 #'   (for other functions)
 #' @return A vector of estimated glomerular filtration rates with units of
-#'   mL/min/1.73 m^2.
+#'   mL/min/1.73 m^2 (except that the units are mL/min for
+#'   `egfr_cockroft_gault()`.
 #' @references Levey AS, Stevens LA, Schmid CH, Zhang YL, Castro AF, 3rd,
 #' Feldman HI, et al. A new equation to estimate glomerular filtration rate. Ann
 #' Intern Med. 2009;150(9):604-12.
@@ -129,6 +130,7 @@ egfr <- function(scr_uM, age_y, height_m, male, black, ...) {
 # Equation from https://www.kidney.org/professionals/KDOQI/gfr_calculatorCoc
 # Reference: Cockcroft DW, Gault MH. Prediction of creatinine clearance from serum creatinine. Nephron. 1976;16(1):31-41.
 #' @describeIn egfr The Cockroft-Gault equation for eGFR (not preferred).
+#' @template weight_kg
 #' @export
 egfr_cockroft_gault <- function(scr_uM, age_y, weight_kg, male, idms_assay=TRUE, ...) {
   warning("The Cockroft-Gault equation for eGFR is not recommended by the NKDEP or the NIH.  MDRD or CKD-EPI are recommended.")
