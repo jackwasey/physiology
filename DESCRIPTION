@@ -3,9 +3,13 @@ Title: Calculate physiologic characteristics of awake and
     anesthetized adults, children and infants
 Version: 1.0.1.9000
 Authors@R: 
-    person(given = "Jack O. Wasey",
-           role = c("aut", "cre", "cph"),
-           email = "jack@jackwasey.com")
+    c(person(given = "Jack O. Wasey",
+             role = c("aut", "cre", "cph"),
+             email = "jack@jackwasey.com",
+             comment = c(ORCID = "0000-0003-3738-4637")),
+      person(given = "Anne R. Tong",
+             role = "ctb",
+             email = "anneracht@gmail.com"))
 Description: A variety of formulae are provided for estimation
     of physiologic characteristics of infants, children, and adults. For
     example, calculations of ideal weight, airway dead-space, and the
@@ -29,6 +33,7 @@ Suggests:
     testthat,
     knitr,
     rvest,
+    shiny,
     spelling,
     xml2,
     covr
