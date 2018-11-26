@@ -213,15 +213,15 @@ test_that("Combinations of vector inputs for egfr_ckdepi", {
 })
 
 
-test_that("egfr_cockroft_gault", {
+test_that("egfr_cockcroft_gault", {
   expect_warning(
-    egfr_cockroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE,
+    egfr_cockcroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE,
                         idms_assay = FALSE),
     regexp = "not recommended",
-    info = "Cockroft-Gault is never recommended"
+    info = "Cockcroft-Gault is never recommended"
   )
   expect_equal(
-    expect_warning(egfr_cockroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70,
+    expect_warning(egfr_cockcroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70,
                                        male = TRUE)),
     (140 - 20) *
       70 *
@@ -230,7 +230,7 @@ test_that("egfr_cockroft_gault", {
       (72 * 113.12 / 10000 * 80)
   )
   expect_equal(
-    expect_warning(egfr_cockroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70,
+    expect_warning(egfr_cockcroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70,
                                        male = FALSE)),
     (140 - 20) *
       70 *
@@ -240,7 +240,7 @@ test_that("egfr_cockroft_gault", {
   )
   expect_equal(
     expect_warning(
-      egfr_cockroft_gault(scr_uM = c(80, 80), age_y = c(20, 20),
+      egfr_cockcroft_gault(scr_uM = c(80, 80), age_y = c(20, 20),
                           weight_kg = c(70, 70), male = c(FALSE, TRUE))),
     (140 - 20) *
       70 *
@@ -371,11 +371,11 @@ test_that("egfr calcs warn or adjust correctly with IDMS-calibrated assays", {
                 idms_assay = TRUE)
   )
   expect_warning(
-    egfr_cockroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE),
+    egfr_cockcroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE),
     regexp = "IDMS"
   )
   expect_warning(
-    egfr_cockroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE,
+    egfr_cockcroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE,
                         idms_assay = FALSE),
     regexp = "not recommended",
     all = TRUE

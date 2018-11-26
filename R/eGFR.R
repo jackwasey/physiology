@@ -20,9 +20,9 @@ scr_mgdl_to_uM <- function(scr_mgdl, ...) {
 #'
 #' @details
 #' GFR estimation is not recommended or validated for individuals with unstable
-#' creatinine concentration (including pregnancy, seruios comorbid conditions,
+#' creatinine concentration (including pregnancy, serious comorbid conditions,
 #' hospitalized patients, patients with acute renal failure) or extremes in
-#' muscle mass and diet (including amputees, parapalegics, bodybuilders, or
+#' muscle mass and diet (including amputees, paraplegics, bodybuilders, or
 #' obese patients; or vegetarians or when taking creatine dietary supplements).
 #' For more details, please refer to the NIDDK summary on estimating GFR:
 #' \url{https://www.niddk.nih.gov/health}.
@@ -30,8 +30,8 @@ scr_mgdl_to_uM <- function(scr_mgdl, ...) {
 #' The main function (\code{egfr}) automatically selects the best
 #' method for eGFR calculation based on the following metrics:
 #'
-#' * If `age_y < 18`, use the Bedside Schwartz equation.
-#' * If `age_y >= 18`:
+#' * If \code{age_y < 18}, use the Bedside Schwartz equation.
+#' * If \code{age_y >= 18}:
 #'     * Estimate eGFR by the MDRD and CKD-EPI methods
 #'     * If eGFR,MDRD is estimated < 60 mL/min/1.73 m^2 and eGFR,CKD-EPI < 60,
 #'     return eGFR,MDRD.
@@ -39,26 +39,27 @@ scr_mgdl_to_uM <- function(scr_mgdl, ...) {
 #'     60, return eGFR,CKD-EPI.
 #'     * Otherwise, return the average of eGFR,MDRD and eGFR,CKD-EPI.
 #'
-#' If an IDMS - calibrated assay is used (`idms_assay = TRUE`), the MDRD
+#' If an IDMS - calibrated assay is used (\code{idms_assay = TRUE}), the MDRD
 #' equation will be corrected for the assay by approximately 6%, the CKD-EPI
 #' equation is only validated for use with IDMS - calibrated assays, and the
-#' Cockroft - Gault is not calibrated for use with an IDMS - calibrated assay.
+#' Cockcroft - Gault is not calibrated for use with an IDMS - calibrated assay.
 #' Most labs follow the National Kidney Disease Education Program (NKDEP)
-#' recommendation to use an IDMS - calibrated assay, so by default `idms_assay =
-#' TRUE`.
+#' recommendation to use an IDMS - calibrated assay, so by default
+#' \code{idms_assay = TRUE}.
 #'
-#' @param scr_uM Serum creatinine (in umol/L aka uM).
+#' @param scr_uM Serum creatinine (in micromoles/L, or 'uM').
 #' @param age_y Age in years
 #' @param height_m Height in meters
-#' @param male TRUE (male) or FALSE (female)
-#' @param black TRUE (race is black) or FALSE (race is not black)
+#' @param male Logical, TRUE (male) or FALSE (female)
+#' @param black Logical, \code{TRUE} (race is Black (African-American in USA) or
+#'   \code{FALSE}
 #' @param idms_assay Was an isotope dilution mass spectrometry (IDMS) calibrated
 #'   assay used for serum creatinine measurement?
-#' @param ... passed to subsequent egfr methods (for \code{egfr}) or validation
+#' @param ... passed to subsequent GFR methods (for \code{egfr}) or validation
 #'   (for other functions)
 #' @return A vector of estimated glomerular filtration rates with units of
 #'   mL/min/1.73 m^2 (except that the units are mL/min for
-#'   `egfr_cockroft_gault()`.
+#'   \code{\link{egfr_cockcroft_gault}}.
 #' @references Levey AS, Stevens LA, Schmid CH, Zhang YL, Castro AF, 3rd,
 #' Feldman HI, et al. A new equation to estimate glomerular filtration rate. Ann
 #' Intern Med. 2009;150(9):604-12.
@@ -69,7 +70,7 @@ scr_mgdl_to_uM <- function(scr_mgdl, ...) {
 #' disease study equation for estimating glomerular filtration rate. Ann Intern
 #' Med. 2006 Aug 15;145(4):247-54.
 #' @export
-#' @seealso [scr_mgdl_to_uM()]
+#' @seealso \code{\link{scr_mgdl_to_uM}}
 egfr <- function(scr_uM, age_y, height_m, male, black, ...) {
   stopifnot(length(scr_uM) == length(age_y))
   stopifnot(length(scr_uM) == length(height_m))
@@ -130,15 +131,15 @@ egfr <- function(scr_uM, age_y, height_m, male, black, ...) {
   ret
 }
 
-#' @describeIn egfr The Cockroft - Gault equation for eGFR (not preferred).
+#' @describeIn egfr The Cockcroft - Gault equation for eGFR (not preferred).
 #' @template weight_kg
 #' @references
 #' Cockcroft DW, Gault MH. Prediction of creatinine clearance from serum
 #' creatinine. Nephron. 1976;16(1):31-41.
 #' @export
-egfr_cockroft_gault <- function(scr_uM, age_y, weight_kg, male,
+egfr_cockcroft_gault <- function(scr_uM, age_y, weight_kg, male,
                                 idms_assay = TRUE, ...) {
-  warning("The Cockroft-Gault equation for eGFR is not recommended by the ",
+  warning("The Cockcroft-Gault equation for eGFR is not recommended by the ",
           "NKDEP or the NIH. MDRD or CKD-EPI are recommended.")
   stopifnot(length(scr_uM) == length(age_y))
   stopifnot(length(scr_uM) == length(weight_kg))
@@ -148,7 +149,7 @@ egfr_cockroft_gault <- function(scr_uM, age_y, weight_kg, male,
   valid_weight(weight_kg, ...)
   valid_age(age_y, ...)
   if (idms_assay)
-    warning("The Cockroft-Gault equation for eGFR is not calibrated for use ",
+    warning("The Cockcroft-Gault equation for eGFR is not calibrated for use ",
             "with an IDMS - calibrated assay. Interpret results with caution.")
   (140 - age_y) *
     weight_kg *
@@ -246,8 +247,8 @@ egfr_ckdepi <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
   ret
 }
 
-#' @describeIn egfr The Bedside Schwartz equation for eGFR (for children, age <
-#'   18 years).
+#' @describeIn egfr The Bedside Schwartz equation for eGFR (for children, age
+#'   less than 18 years).
 #' @references
 #'
 #' \url{https://www.niddk.nih.gov/health}

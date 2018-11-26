@@ -2,7 +2,7 @@
 % Please edit documentation in R/eGFR.R
 \name{egfr}
 \alias{egfr}
-\alias{egfr_cockroft_gault}
+\alias{egfr_cockcroft_gault}
 \alias{egfr_mdrd}
 \alias{egfr_ckdepi}
 \alias{egfr_bedside_schwartz}
@@ -11,7 +11,7 @@ filtration rate (eGFR) calculation.}
 \usage{
 egfr(scr_uM, age_y, height_m, male, black, ...)
 
-egfr_cockroft_gault(scr_uM, age_y, weight_kg, male, idms_assay = TRUE,
+egfr_cockcroft_gault(scr_uM, age_y, weight_kg, male, idms_assay = TRUE,
   ...)
 
 egfr_mdrd(scr_uM, age_y, male, black, idms_assay = TRUE, ...,
@@ -23,17 +23,18 @@ egfr_ckdepi(scr_uM, age_y, male, black, idms_assay = TRUE, ...,
 egfr_bedside_schwartz(scr_uM, height_m, idms_assay = TRUE, ...)
 }
 \arguments{
-\item{scr_uM}{Serum creatinine (in umol/L aka uM).}
+\item{scr_uM}{Serum creatinine (in micromoles/L, or 'uM').}
 
 \item{age_y}{Age in years}
 
 \item{height_m}{Height in meters}
 
-\item{male}{TRUE (male) or FALSE (female)}
+\item{male}{Logical, TRUE (male) or FALSE (female)}
 
-\item{black}{TRUE (race is black) or FALSE (race is not black)}
+\item{black}{Logical, \code{TRUE} (race is Black (African-American in USA) or
+\code{FALSE}}
 
-\item{...}{passed to subsequent egfr methods (for \code{egfr}) or validation
+\item{...}{passed to subsequent GFR methods (for \code{egfr}) or validation
 (for other functions)}
 
 \item{weight_kg}{numeric vector of weight(s) in kg}
@@ -50,7 +51,7 @@ generated suggesting MDRD is preferred?}
 \value{
 A vector of estimated glomerular filtration rates with units of
   mL/min/1.73 m^2 (except that the units are mL/min for
-  `egfr_cockroft_gault()`.
+  \code{\link{egfr_cockcroft_gault}}.
 }
 \description{
 Automatically select the best equation to use for estimated glomerular
@@ -58,9 +59,9 @@ filtration rate (eGFR) calculation.
 }
 \details{
 GFR estimation is not recommended or validated for individuals with unstable
-creatinine concentration (including pregnancy, seruios comorbid conditions,
+creatinine concentration (including pregnancy, serious comorbid conditions,
 hospitalized patients, patients with acute renal failure) or extremes in
-muscle mass and diet (including amputees, parapalegics, bodybuilders, or
+muscle mass and diet (including amputees, paraplegics, bodybuilders, or
 obese patients; or vegetarians or when taking creatine dietary supplements).
 For more details, please refer to the NIDDK summary on estimating GFR:
 \url{https://www.niddk.nih.gov/health}.
@@ -68,8 +69,8 @@ For more details, please refer to the NIDDK summary on estimating GFR:
 The main function (\code{egfr}) automatically selects the best
 method for eGFR calculation based on the following metrics:
 
-* If `age_y < 18`, use the Bedside Schwartz equation.
-* If `age_y >= 18`:
+* If \code{age_y < 18}, use the Bedside Schwartz equation.
+* If \code{age_y >= 18}:
     * Estimate eGFR by the MDRD and CKD-EPI methods
     * If eGFR,MDRD is estimated < 60 mL/min/1.73 m^2 and eGFR,CKD-EPI < 60,
     return eGFR,MDRD.
@@ -77,17 +78,17 @@ method for eGFR calculation based on the following metrics:
     60, return eGFR,CKD-EPI.
     * Otherwise, return the average of eGFR,MDRD and eGFR,CKD-EPI.
 
-If an IDMS - calibrated assay is used (`idms_assay = TRUE`), the MDRD
+If an IDMS - calibrated assay is used (\code{idms_assay = TRUE}), the MDRD
 equation will be corrected for the assay by approximately 6%, the CKD-EPI
 equation is only validated for use with IDMS - calibrated assays, and the
-Cockroft - Gault is not calibrated for use with an IDMS - calibrated assay.
+Cockcroft - Gault is not calibrated for use with an IDMS - calibrated assay.
 Most labs follow the National Kidney Disease Education Program (NKDEP)
-recommendation to use an IDMS - calibrated assay, so by default `idms_assay =
-TRUE`.
+recommendation to use an IDMS - calibrated assay, so by default
+\code{idms_assay = TRUE}.
 }
 \section{Functions}{
 \itemize{
-\item \code{egfr_cockroft_gault}: The Cockroft - Gault equation for eGFR (not preferred).
+\item \code{egfr_cockcroft_gault}: The Cockcroft - Gault equation for eGFR (not preferred).
 
 \item \code{egfr_mdrd}: The MDRD equation for eGFR (preferred for adults with eGFR <
 60).
@@ -95,8 +96,8 @@ TRUE`.
 \item \code{egfr_ckdepi}: The CKD-EPI equation for eGFR (preferred for adults
 with eGFR >= 60).
 
-\item \code{egfr_bedside_schwartz}: The Bedside Schwartz equation for eGFR (for children, age <
-18 years).
+\item \code{egfr_bedside_schwartz}: The Bedside Schwartz equation for eGFR (for children, age
+less than 18 years).
 }}
 
 \references{
@@ -134,5 +135,5 @@ Schwartz GJ and Work DF. Measurement and estimation of GFR in children and
 adolescents. Clin J Am Soc Nephrol. 2009;4(11):1832-43.
 }
 \seealso{
-[scr_mgdl_to_uM()]
+\code{\link{scr_mgdl_to_uM}}
 }

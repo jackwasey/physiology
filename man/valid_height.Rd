@@ -85,13 +85,17 @@ trigger a warning or error}
 
 \item{scr_uM}{numeric serum creatinine (umol/L)}
 
-\item{scr_min}{minimum scr below which to warn if \code{warn = TRUE}}
+\item{scr_min}{minimum serum creatinine below which to warn if \code{warn =
+TRUE}}
 
-\item{scr_max}{maximum src above which to warn if \code{warn = TRUE}}
+\item{scr_max}{maximum serum creatinine above which to warn if \code{warn =
+TRUE}}
 
-\item{scr_min_hard}{minimum scr below which to warn regardless of \code{warn}}
+\item{scr_min_hard}{minimum serum creatinine below which to warn regardless
+of \code{warn}}
 
-\item{scr_max_hard}{maximum scr above which to warn if \code{warn}}
+\item{scr_max_hard}{maximum serum creatinine above which to warn if
+\code{warn}}
 }
 \description{
 User may generate warnings for unreasonable or obviously erroneous heights.

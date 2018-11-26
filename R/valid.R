@@ -93,10 +93,14 @@ valid_age_adult <- function(age_y, age_min = 18, age_max = 150,
 
 #' @rdname valid_height
 #' @param scr_uM numeric serum creatinine (umol/L)
-#' @param scr_min minimum scr below which to warn if \code{warn = TRUE}
-#' @param scr_max maximum src above which to warn if \code{warn = TRUE}
-#' @param scr_min_hard minimum scr below which to warn regardless of \code{warn}
-#' @param scr_max_hard maximum scr above which to warn if \code{warn}
+#' @param scr_min minimum serum creatinine below which to warn if \code{warn =
+#'   TRUE}
+#' @param scr_max maximum serum creatinine above which to warn if \code{warn =
+#'   TRUE}
+#' @param scr_min_hard minimum serum creatinine below which to warn regardless
+#'   of \code{warn}
+#' @param scr_max_hard maximum serum creatinine above which to warn if
+#'   \code{warn}
 #' @export
 valid_creatinine <- function(scr_uM, scr_min = 8, scr_max = 1000,
                              scr_min_hard=0, scr_max_hard = 4000,
