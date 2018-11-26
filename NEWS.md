@@ -3,6 +3,7 @@
 ## Version 1.1
 
 * ETT volume calculation
+* Added eGFR calculations
 
 ## Version 1.0
 
