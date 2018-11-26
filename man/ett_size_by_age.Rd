@@ -22,7 +22,7 @@ ETT size, internal diameter in mm, rounded to nearest half-mm size up
 Motoyama formula for cuffed tubes with age over two years, and the Khine
 formula for cuffed tubes with age under two years. All of these, as any
 anesthesiologist will tell, give poor estimates at any extreme of age, or
-height. These formulae are for use in pedatric practice only.
+height. These formulae are for use in pediatric practice only.
 }
 \examples{
 teenagers <- ett_size_by_age(13:18)
@@ -40,5 +40,5 @@ plot(ages, neonate_to_child, log = "x")
 lines(ages, neonate_to_child)
 }
 \references{
-http://anesthesiology.pubs.asahq.org/Article.aspx?articleid=1933172
+\url{http://anesthesiology.pubs.asahq.org/Article.aspx?articleid=1933172}
 }
