@@ -42,7 +42,7 @@ egfr_bedside_schwartz(scr_uM, height_m, idms_assay = TRUE, ...)
 assay used for serum creatinine measurement?}
 
 \item{warn_ckdepi_preferred}{When calculating eGFR > 60, should a warning be
-generated suggesting CKD - EPI is preferred?}
+generated suggesting CKD-EPI is preferred?}
 
 \item{warn_mdrd_preferred}{When calculating eGFR < 60, should a warning be
 generated suggesting MDRD is preferred?}
@@ -70,7 +70,7 @@ method for eGFR calculation based on the following metrics:
 
 * If `age_y < 18`, use the Bedside Schwartz equation.
 * If `age_y >= 18`:
-    * Estimate eGFR by the MDRD and CKD - EPI methods
+    * Estimate eGFR by the MDRD and CKD-EPI methods
     * If eGFR,MDRD is estimated < 60 mL/min/1.73 m^2 and eGFR,CKD-EPI < 60,
     return eGFR,MDRD.
     * If eGFR,MDRD is estimated >= 60 mL/min/1.73 m^2 and eGFR,CKD-EPI >=
@@ -78,7 +78,7 @@ method for eGFR calculation based on the following metrics:
     * Otherwise, return the average of eGFR,MDRD and eGFR,CKD-EPI.
 
 If an IDMS - calibrated assay is used (`idms_assay = TRUE`), the MDRD
-equation will be corrected for the assay by approximately 6%, the CKD - EPI
+equation will be corrected for the assay by approximately 6%, the CKD-EPI
 equation is only validated for use with IDMS - calibrated assays, and the
 Cockroft - Gault is not calibrated for use with an IDMS - calibrated assay.
 Most labs follow the National Kidney Disease Education Program (NKDEP)
@@ -92,7 +92,7 @@ TRUE`.
 \item \code{egfr_mdrd}: The MDRD equation for eGFR (preferred for adults with eGFR <
 60).
 
-\item \code{egfr_ckdepi}: The CKD - EPI equation for eGFR (preferred for adults
+\item \code{egfr_ckdepi}: The CKD-EPI equation for eGFR (preferred for adults
 with eGFR >= 60).
 
 \item \code{egfr_bedside_schwartz}: The Bedside Schwartz equation for eGFR (for children, age <
@@ -113,7 +113,7 @@ Med. 2006 Aug 15;145(4):247-54.
 Cockcroft DW, Gault MH. Prediction of creatinine clearance from serum
 creatinine. Nephron. 1976;16(1):31-41.
 
-\url{https://www.niddk.nih.gov/health - information/communication - programs/nkdep/laboratory - evaluation/glomerular - filtration - rate - calculators/mdrd - adults - si - units}
+\url{https://www.niddk.nih.gov/health}
 
 Levey AS, Stevens LA, Schmid CH, Zhang YL, Castro AF, 3rd, Feldman HI, et al.
 A new equation to estimate glomerular filtration rate. Ann Intern Med.

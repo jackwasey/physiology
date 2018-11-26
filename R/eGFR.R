@@ -11,7 +11,7 @@
 #' @seealso \code{\link{egfr}}
 scr_mgdl_to_uM <- function(scr_mgdl, ...) {
   scr_uM <- scr_mgdl * 10000 / 113.12
-  valid_scr(scr_uM = scr_uM, ...)
+  valid_creatinine(scr_uM = scr_uM, ...)
   scr_uM
 }
 
@@ -75,7 +75,7 @@ egfr <- function(scr_uM, age_y, height_m, male, black, ...) {
   stopifnot(length(scr_uM) == length(height_m))
   stopifnot(length(scr_uM) == length(male))
   stopifnot(length(scr_uM) == length(black))
-  valid_scr(scr_uM, ...)
+  valid_creatinine(scr_uM, ...)
   valid_height(height_m, ...)
   valid_age(age_y, ...)
   mask_child <- age_y < 18
@@ -144,7 +144,7 @@ egfr_cockroft_gault <- function(scr_uM, age_y, weight_kg, male,
   stopifnot(length(scr_uM) == length(weight_kg))
   stopifnot(length(scr_uM) == length(male))
   stopifnot(length(idms_assay) == 1)
-  valid_scr(scr_uM, ...)
+  valid_creatinine(scr_uM, ...)
   valid_weight(weight_kg, ...)
   valid_age(age_y, ...)
   if (idms_assay)
@@ -164,7 +164,7 @@ egfr_cockroft_gault <- function(scr_uM, age_y, weight_kg, male,
 #' @param warn_ckdepi_preferred When calculating eGFR > 60, should a warning be
 #'   generated suggesting CKD-EPI is preferred?
 #' @references
-#' \url{https://www.niddk.nih.gov/health - information/communication - programs/nkdep/laboratory - evaluation/glomerular - filtration - rate - calculators/mdrd - adults - si - units}
+#' \url{https://www.niddk.nih.gov/health}
 #'
 #' Levey AS, Stevens LA, Schmid CH, Zhang YL, Castro AF, 3rd, Feldman HI, et al.
 #' A new equation to estimate glomerular filtration rate. Ann Intern Med.
@@ -184,7 +184,7 @@ egfr_mdrd <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
   stopifnot(all(male %in% c(TRUE, FALSE)))
   stopifnot(all(black %in% c(TRUE, FALSE)))
   stopifnot(length(idms_assay) == 1)
-  valid_scr(scr_uM = scr_uM, ...)
+  valid_creatinine(scr_uM = scr_uM, ...)
   valid_age_adult(age_y, ...)
   if (any(age_y < 18)) {
     warning("The MDRD equation for eGFR is intended for adults, age_y >= 18.")
@@ -220,7 +220,7 @@ egfr_ckdepi <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
   stopifnot(all(male %in% c(TRUE, FALSE)))
   stopifnot(all(black %in% c(TRUE, FALSE)))
   stopifnot(length(idms_assay) == 1)
-  valid_scr(scr_uM = scr_uM, ...)
+  valid_creatinine(scr_uM = scr_uM, ...)
   valid_age_adult(age_y, ...)
   if (any(age_y < 18)) {
     warning("The CKD-EPI equation for eGFR is not recommended for ages below ",
@@ -241,7 +241,7 @@ egfr_ckdepi <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
     (1 + 0.159 * black)
   if (any(ret < 60) & warn_mdrd_preferred) {
     warning("The CKD-EPI equation for eGFR is not recommended for values below",
-    " 60 mL/min/1.73m^2 (MDRD is recommended). Use these results with caution.")
+            " 60 mL/min/1.73m^2 (MDRD is recommended). Use with caution.")
   }
   ret
 }
@@ -261,7 +261,7 @@ egfr_ckdepi <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
 egfr_bedside_schwartz <- function(scr_uM, height_m, idms_assay = TRUE, ...) {
   stopifnot(length(scr_uM) == length(height_m))
   stopifnot(length(idms_assay) == 1)
-  valid_scr(scr_uM = scr_uM, ...)
+  valid_creatinine(scr_uM = scr_uM, ...)
   valid_height(height_m, ...)
   if (!idms_assay) {
     warning("The Bedside-Schwartz equation is calibrated for use with an ",

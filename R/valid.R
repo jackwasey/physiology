@@ -98,10 +98,10 @@ valid_age_adult <- function(age_y, age_min = 18, age_max = 150,
 #' @param scr_min_hard minimum scr below which to warn regardless of \code{warn}
 #' @param scr_max_hard maximum scr above which to warn if \code{warn}
 #' @export
-valid_scr <- function(scr_uM, scr_min = 8, scr_max = 1000,
-                      scr_min_hard=0, scr_max_hard = 4000,
-                      extra_msg = "", do_warn = TRUE, do_stop = FALSE,
-                      equal_ok = FALSE) {
+valid_creatinine <- function(scr_uM, scr_min = 8, scr_max = 1000,
+                             scr_min_hard=0, scr_max_hard = 4000,
+                             extra_msg = "", do_warn = TRUE, do_stop = FALSE,
+                             equal_ok = FALSE) {
   # Note that scr_min was selected to help ensure that unit conversion errors
   # did not occur where scr was not provided in mg/dL which typically ranges
   # below 10 (acute renal failure which would ba a typical maximum is typically
