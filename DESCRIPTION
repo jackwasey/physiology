@@ -24,6 +24,7 @@ Suggests:
     childsds,
     dplyr,
     ggplot2,
+    lintr,
     magrittr,
     reshape2,
     rmarkdown,
