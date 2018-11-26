@@ -33,7 +33,6 @@ warnings_are_errors: true
 before_script:
  - sed -i'' '/\.covrignore/d' .Rbuildignore
  - sed -i'' '/\.lintr/d' .Rbuildignore
- - cp .lintr inst/
 
 after_success:
   - Rscript -e 'covr::codecov()'
