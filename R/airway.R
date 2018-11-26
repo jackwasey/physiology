@@ -32,7 +32,7 @@ ett_vol_ml <- function(diameter_mm) {
 #' Motoyama formula for cuffed tubes with age over two years, and the Khine
 #' formula for cuffed tubes with age under two years. All of these, as any
 #' anesthesiologist will tell, give poor estimates at any extreme of age, or
-#' height. These formulae are for use in pedatric practice only.
+#' height. These formulae are for use in pediatric practice only.
 #' @param age_y numeric vector
 #' @param cuffed logical vector, single value, or a vector of the same length as
 #'   the given age vector, defining whether the desired tube is to be cuffed. If
@@ -54,7 +54,7 @@ ett_vol_ml <- function(diameter_mm) {
 #' plot(ages, neonate_to_child, log = "x")
 #' lines(ages, neonate_to_child)
 #' @references
-#' http://anesthesiology.pubs.asahq.org/Article.aspx?articleid=1933172
+#' \url{http://anesthesiology.pubs.asahq.org/Article.aspx?articleid=1933172}
 #' @export
 ett_size_by_age <- function(age_y, cuffed = TRUE) {
   cole <- 4 + age_y / 4

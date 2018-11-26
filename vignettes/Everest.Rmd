@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-The summit of Mount Everest is at 8850 meters above sea level. It is unclear how humans can survive at all at this altitude without supplemental oxygen [@west_high-altitude_2012;@West_HumanPhysiologyExtreme_1984]: this article shows how it is possible. Indeed, many have not survived in -- or after returning from -- the 'death zone' [@Firth_MortalityMountEverest_2008]. People have attempted achieving high altitudes for a long time, but it wasn't until 1978 that Messner and Habeler summited Everest in 1978 without supplemental oxygen [@Hingston_PhysiologicalDifficultiesAscent_1925;@Heggie_ExperimentalphysiologyEverest_2013].
+The summit of Mount Everest is at 8850 meters above sea level. It is unclear how humans can survive at all at this altitude without supplemental oxygen [@west_high-altitude_2012; @West_HumanPhysiologyExtreme_1984]: this article shows how it is possible. Indeed, many have not survived in -- or after returning from -- the 'death zone' [@Firth_MortalityMountEverest_2008]. People have attempted achieving high altitudes for a long time, but it wasn't until 1978 that Messner and Habeler reached the summit of Everest in 1978 without supplemental oxygen [@Hingston_PhysiologicalDifficultiesAscent_1925; @Heggie_ExperimentalphysiologyEverest_2013].
 
 We can calculate the atmospheric pressure, compared to that at sea level:
 
