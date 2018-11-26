@@ -4,6 +4,7 @@
 
 * ETT lumen volume calculation
 * Added body surface area variants, thanks to Bill Denney
+* Added eGFR calculations, thanks to Bill Denney
 
 ## Version 1.0
 

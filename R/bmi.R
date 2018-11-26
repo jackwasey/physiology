@@ -33,7 +33,8 @@ ideal_weight_adult <- function(height_m, male, ...)
 ideal_weight_child <- function(height_m, age_y = NULL, ...)
   ideal_weight_Traub(height_m, age_y, ...)
 
-#' @title ideal weight for child per Traub
+#' ideal weight for child per Traub
+#'
 #' @description `2.396e0.01863(height)`, where height is in cm. There is an
 #'   argument for using another package to capture durations, of which age is a
 #'   special case. However, I am resisting bringing in external dependencies,

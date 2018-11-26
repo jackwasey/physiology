@@ -91,6 +91,30 @@ valid_age_adult <- function(age_y, age_min = 18, age_max = 150,
         age_min, age_max, age_min_hard, age_max_hard,
         extra_msg, do_warn, do_stop, equal_ok = equal_ok)
 
+#' @rdname valid_height
+#' @param scr_uM numeric serum creatinine (umol/L)
+#' @param scr_min minimum serum creatinine below which to warn if \code{warn =
+#'   TRUE}
+#' @param scr_max maximum serum creatinine above which to warn if \code{warn =
+#'   TRUE}
+#' @param scr_min_hard minimum serum creatinine below which to warn regardless
+#'   of \code{warn}
+#' @param scr_max_hard maximum serum creatinine above which to warn if
+#'   \code{warn}
+#' @export
+valid_creatinine <- function(scr_uM, scr_min = 8, scr_max = 1000,
+                             scr_min_hard=0, scr_max_hard = 4000,
+                             extra_msg = "", do_warn = TRUE, do_stop = FALSE,
+                             equal_ok = FALSE) {
+  # Note that scr_min was selected to help ensure that unit conversion errors
+  # did not occur where scr was not provided in mg/dL which typically ranges
+  # below 10 (acute renal failure which would ba a typical maximum is typically
+  # defined as scr >= 4 mg/dL).
+  valid(scr_uM, "serum creatinine", "umol/L",
+        scr_min, scr_max, scr_min_hard, scr_max_hard,
+        extra_msg, do_warn, do_stop, equal_ok = equal_ok)
+}
+
 valid <- function(var, name, unit, min, max, min_hard, max_hard,
                   extra_msg = "", do_warn = TRUE, do_stop = FALSE,
                   equal_ok = TRUE) {
