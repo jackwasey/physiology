@@ -42,7 +42,7 @@ egfr_bedside_schwartz(scr_uM, height_m, idms_assay = TRUE, ...)
 assay used for serum creatinine measurement?}
 
 \item{warn_ckdepi_preferred}{When calculating eGFR > 60, should a warning be
-generated suggesting CKD-EPI is preferred?}
+generated suggesting CKD - EPI is preferred?}
 
 \item{warn_mdrd_preferred}{When calculating eGFR < 60, should a warning be
 generated suggesting MDRD is preferred?}
@@ -58,41 +58,45 @@ filtration rate (eGFR) calculation.
 }
 \details{
 GFR estimation is not recommended or validated for individuals with unstable
-creatinine concentration (including pregnancy, seruios co-morbid conditions,
+creatinine concentration (including pregnancy, seruios comorbid conditions,
 hospitalized patients, patients with acute renal failure) or extremes in
 muscle mass and diet (including amputees, parapalegics, bodybuilders, or
 obese patients; or vegetarians or when taking creatine dietary supplements).
-For more details, please refer to the NIDDK summary on estimating GFR
-(\url{https://www.niddk.nih.gov/health-information/communication-programs/nkdep/laboratory-evaluation/glomerular-filtration-rate/estimating}).
+For more details, please refer to the NIDDK summary on estimating GFR:
+\url{https://www.niddk.nih.gov/health}.
 
 The main function (\code{egfr}) automatically selects the best
 method for eGFR calculation based on the following metrics:
 
 * If `age_y < 18`, use the Bedside Schwartz equation.
 * If `age_y >= 18`:
-    * Estimate eGFR by the MDRD and CKD-EPI methods
-    * If eGFR,MDRD is estimated < 60 mL/min/1.73 m^2 and eGFR,CKD-EPI < 60, return eGFR,MDRD.
-    * If eGFR,MDRD is estimated >= 60 mL/min/1.73 m^2 and eGFR,CKD-EPI > 60, return eGFR,CKD-EPI.
+    * Estimate eGFR by the MDRD and CKD - EPI methods
+    * If eGFR,MDRD is estimated < 60 mL/min/1.73 m^2 and eGFR,CKD-EPI < 60,
+    return eGFR,MDRD.
+    * If eGFR,MDRD is estimated >= 60 mL/min/1.73 m^2 and eGFR,CKD-EPI >=
+    60, return eGFR,CKD-EPI.
     * Otherwise, return the average of eGFR,MDRD and eGFR,CKD-EPI.
 
-If an IDMS-calibrated assay is used (`idms_assay = TRUE`), the MDRD equation
-will be corrected for the assay by approximately 6%, the CKD-EPI equation is
-only validated for use with IDMS-calibrated assays, and the Cockroft-Gault is
-not calibrated for use with an IDMS-calibrated assay.  Most labs follow the
-National Kidney Disease Education Program (NKDEP) recommendation to use an
-IDMS-calibrated assay, so by default `idms_assay = TRUE`.
+If an IDMS - calibrated assay is used (`idms_assay = TRUE`), the MDRD
+equation will be corrected for the assay by approximately 6%, the CKD - EPI
+equation is only validated for use with IDMS - calibrated assays, and the
+Cockroft - Gault is not calibrated for use with an IDMS - calibrated assay.
+Most labs follow the National Kidney Disease Education Program (NKDEP)
+recommendation to use an IDMS - calibrated assay, so by default `idms_assay =
+TRUE`.
 }
 \section{Functions}{
 \itemize{
-\item \code{egfr_cockroft_gault}: The Cockroft-Gault equation for eGFR (not preferred).
+\item \code{egfr_cockroft_gault}: The Cockroft - Gault equation for eGFR (not preferred).
 
 \item \code{egfr_mdrd}: The MDRD equation for eGFR (preferred for adults with eGFR <
 60).
 
-\item \code{egfr_ckdepi}: The CKD-EPI equation for eGFR (preferred for adults
+\item \code{egfr_ckdepi}: The CKD - EPI equation for eGFR (preferred for adults
 with eGFR >= 60).
 
-\item \code{egfr_bedside_schwartz}: The Bedside Schwartz equation for eGFR (for children, age < 18 years).
+\item \code{egfr_bedside_schwartz}: The Bedside Schwartz equation for eGFR (for children, age <
+18 years).
 }}
 
 \references{
@@ -106,8 +110,11 @@ standardized serum creatinine values in the modification of diet in renal
 disease study equation for estimating glomerular filtration rate. Ann Intern
 Med. 2006 Aug 15;145(4):247-54.
 
-\url{https://www.niddk.nih.gov/health-information/communication-programs/nkdep/laboratory-evaluation/glomerular-filtration-rate-calculators/mdrd-adults-si-units}
-  
+Cockcroft DW, Gault MH. Prediction of creatinine clearance from serum
+creatinine. Nephron. 1976;16(1):31-41.
+
+\url{https://www.niddk.nih.gov/health - information/communication - programs/nkdep/laboratory - evaluation/glomerular - filtration - rate - calculators/mdrd - adults - si - units}
+
 Levey AS, Stevens LA, Schmid CH, Zhang YL, Castro AF, 3rd, Feldman HI, et al.
 A new equation to estimate glomerular filtration rate. Ann Intern Med.
 2009;150(9):604-12.
@@ -118,7 +125,7 @@ standardized serum creatinine values in the modification of diet in renal
 disease study equation for estimating glomerular filtration rate. Ann Intern
 Med. 2006 Aug 15;145(4):247-54.
 
-\url{https://www.niddk.nih.gov/health-information/communication-programs/nkdep/laboratory-evaluation/glomerular-filtration-rate-calculators/children-si-units}
+\url{https://www.niddk.nih.gov/health}
 
 Schwartz GJ, et al. New equations to estimate GFR in children with CKD. J Am
 Soc Nephrol. 2009;20:629-637.

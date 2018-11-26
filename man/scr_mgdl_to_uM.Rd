@@ -18,7 +18,7 @@ Serum creatinine in umol/L units
 Convert serum creatinine from mg/dL to umol/L
 }
 \details{
-Validation is performed after unit conversion.  The result is more
+Validation is performed after unit conversion. The result is more
   precise than the typical conversion used of \code{1 mg/dL = 88.4 umol/L}.
 }
 \references{

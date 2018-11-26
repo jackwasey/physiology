@@ -1,221 +1,214 @@
 context("eGFR")
 
 test_that("scr_mgdl_to_uM", {
-  expect_equal(scr_mgdl_to_uM(scr_mgdl=1), 88.4017, tol=0.0001)
-  expect_warning(scr_mgdl_to_uM(scr_mgdl=0.01))
-  expect_warning(scr_mgdl_to_uM(scr_mgdl=80),
-                 info="Values that are likely to be already uM give a warning.")
+  expect_equal(scr_mgdl_to_uM(scr_mgdl = 1), 88.4017, tol = 0.0001)
+  expect_warning(scr_mgdl_to_uM(scr_mgdl = 0.01))
+})
+
+test_that("Values that are likely to be already uM give a warning.", {
+  expect_warning(scr_mgdl_to_uM(scr_mgdl = 80))
 })
 
 test_that("egfr expected errors", {
   expect_error(egfr())
-  expect_error(egfr(scr_uM=1))
-  expect_error(egfr(age_y=1))
-  expect_error(egfr(scr_uM=1, age_y=1, height_m=1))
-  expect_error(egfr(scr_uM=1, age_y=1, height_m=1, male=TRUE))
+  expect_error(egfr(scr_uM = 1))
+  expect_error(egfr(age_y = 1))
+  expect_error(egfr(scr_uM = 1, age_y = 1, height_M = 1))
+  expect_error(egfr(scr_uM = 1, age_y = 1, height_M = 1, male = TRUE))
 })
 
 test_that("egfr automatic selection", {
   expect_equal(
     egfr(
-      scr_uM=c(rep(80, 8), rep(240, 4)),
-      age_y=c(rep(1, 4), rep(60, 8)),
-      height_m=rep(1, 12),
-      male=rep(c(TRUE, TRUE, FALSE, FALSE), 3),
-      black=rep(c(TRUE, FALSE, TRUE, FALSE), 3)
+      scr_uM = c(rep(80, 8), rep(240, 4)),
+      age_y = c(rep(1, 4), rep(60, 8)),
+      height_m = rep(1, 12),
+      male = rep(c(TRUE, TRUE, FALSE, FALSE), 3),
+      black = rep(c(TRUE, FALSE, TRUE, FALSE), 3)
     ),
     c(
       egfr_bedside_schwartz(
-        scr_uM=rep(80, 4),
-        height_m=rep(1, 4)
+        scr_uM = rep(80, 4),
+        height_m = rep(1, 4)
       ),
       egfr_ckdepi(
-        scr_uM=rep(80, 4),
-        age_y=rep(60, 4),
-        male=c(TRUE, TRUE, FALSE, FALSE),
-        black=c(TRUE, FALSE, TRUE, FALSE)
+        scr_uM = rep(80, 4),
+        age_y = rep(60, 4),
+        male = c(TRUE, TRUE, FALSE, FALSE),
+        black = c(TRUE, FALSE, TRUE, FALSE)
       ),
       egfr_mdrd(
-        scr_uM=rep(240, 4),
-        age_y=rep(60, 4),
-        male=c(TRUE, TRUE, FALSE, FALSE),
-        black=c(TRUE, FALSE, TRUE, FALSE)
+        scr_uM = rep(240, 4),
+        age_y = rep(60, 4),
+        male = c(TRUE, TRUE, FALSE, FALSE),
+        black = c(TRUE, FALSE, TRUE, FALSE)
       )
     ),
-    info="eGFR method selection chooses the correct method for the data."
+    info = "eGFR method selection chooses the correct method for the data."
   )
 })
 
 test_that("egfr combination of MDRD and CKD-EPI", {
-  # Code to find values that match the "both" and "neither" categories:
-  # library(dplyr)
-  # 
-  # all_combs <-
-  #   expand.grid(
-  #     scr=1:1000,
-  #     age=18:100,
-  #     male=c(TRUE, FALSE),
-  #     black=c(TRUE, FALSE)
-  #   ) %>%
-  #   mutate(
-  #     ckdepi=egfr_ckdepi(scr_uM=scr, age_y=age, male=male, black=black),
-  #     mdrd=egfr_mdrd(scr_uM=scr, age_y=age, male=male, black=black),
-  #     both=mdrd < 60 & ckdepi > 60,
-  #     neither=mdrd >= 60 & ckdepi <= 60
-  #   )
-  # all_combs %>% filter(neither)
-  # all_combs %>% filter(both)
-  
   expect_equal(
     expect_warning(
-      egfr(scr_uM=120, age_y=75, height_m=1, male=TRUE, black=TRUE),
-      regexp="neither"
+      egfr(scr_uM = 120, age_y = 75, height_M = 1, male = TRUE, black = TRUE),
+      regexp = "neither"
     ),
     mean(
       c(
-        egfr_ckdepi(scr_uM=120, age_y=75, male=TRUE, black=TRUE, warn_mdrd_preferred=FALSE),
-        egfr_mdrd(scr_uM=120, age_y=75, male=TRUE, black=TRUE)
+        egfr_ckdepi(scr_uM = 120, age_y = 75, male = TRUE, black = TRUE,
+                    warn_mdrd_preferred = FALSE),
+        egfr_mdrd(scr_uM = 120, age_y = 75, male = TRUE, black = TRUE)
       )
     ),
-    info="Neither value preferred, use the average"
+    info = "Neither value preferred, use the average"
   )
   expect_equal(
     expect_warning(
-      egfr(scr_uM=140, age_y=20, height_m=1, male=TRUE, black=FALSE),
-      regexp="both"
+      egfr(scr_uM = 140, age_y = 20, height_M = 1, male = TRUE, black = FALSE),
+      regexp = "both"
     ),
     mean(
       c(
-        egfr_ckdepi(scr_uM=140, age_y=20, male=TRUE, black=FALSE, warn_mdrd_preferred=FALSE),
-        egfr_mdrd(scr_uM=140, age_y=20, male=TRUE, black=FALSE)
+        egfr_ckdepi(scr_uM = 140, age_y = 20, male = TRUE, black = FALSE,
+                    warn_mdrd_preferred = FALSE),
+        egfr_mdrd(scr_uM = 140, age_y = 20, male = TRUE, black = FALSE)
       )
     ),
-    info="Both value preferred, use the average"
+    info = "Both value preferred, use the average"
   )
 })
 
 test_that("egfr_bedside_schwartz", {
-  expect_equal(egfr_bedside_schwartz(scr_uM=80, height_m=1),
-               36.2*100/80)
-  expect_warning(egfr_bedside_schwartz(scr_uM=1, height_m=1))
-  expect_warning(egfr_bedside_schwartz(scr_uM=80, height_m=100))
+  expect_equal(egfr_bedside_schwartz(scr_uM = 80, height_M = 1),
+               36.2 * 100 / 80)
+  expect_warning(egfr_bedside_schwartz(scr_uM = 1, height_M = 1))
+  expect_warning(egfr_bedside_schwartz(scr_uM = 80, height_M = 100))
 })
 
-test_that("Ensure all 4 combinations of male/black work with egfr_ckdepi", {
+test_that("Ensure all 4 combinations of male / black work with egfr_ckdepi", {
   expect_equal(
-    egfr_ckdepi(scr_uM=80, age_y=20, male=TRUE, black=TRUE),
+    egfr_ckdepi(scr_uM = 80, age_y = 20, male = TRUE, black = TRUE),
     141 *
-      min(80/79.6, 1)^(-0.411) *
-      max(80/79.6, 1)^(-1.209) *
-      0.993^20 *
+      min(80 / 79.6, 1) ^ (-0.411) *
+      max(80 / 79.6, 1) ^ (-1.209) *
+      0.993 ^ 20 *
       1 *
       1.159
   )
   expect_equal(
-    egfr_ckdepi(scr_uM=80, age_y=20, male=TRUE, black=FALSE),
+    egfr_ckdepi(scr_uM = 80, age_y = 20, male = TRUE, black = FALSE),
     141 *
-      min(80/79.6, 1)^(-0.411) *
-      max(80/79.6, 1)^(-1.209) *
-      0.993^20 *
+      min(80 / 79.6, 1) ^ (-0.411) *
+      max(80 / 79.6, 1) ^ (-1.209) *
+      0.993 ^ 20 *
       1 *
       1
   )
   expect_equal(
-    egfr_ckdepi(scr_uM=80, age_y=20, male=FALSE, black=TRUE),
+    egfr_ckdepi(scr_uM = 80, age_y = 20, male = FALSE, black = TRUE),
     141 *
-      min(80/61.9, 1)^(-0.329) *
-      max(80/61.9, 1)^(-1.209) *
-      0.993^20 *
+      min(80 / 61.9, 1) ^ (-0.329) *
+      max(80 / 61.9, 1) ^ (-1.209) *
+      0.993 ^ 20 *
       1.018 *
       1.159
   )
   expect_equal(
-    egfr_ckdepi(scr_uM=80, age_y=20, male=FALSE, black=FALSE),
+    egfr_ckdepi(scr_uM = 80, age_y = 20, male = FALSE, black = FALSE),
     141 *
-      min(80/61.9, 1)^(-0.329) *
-      max(80/61.9, 1)^(-1.209) *
-      0.993^20 *
+      min(80 / 61.9, 1) ^ (-0.329) *
+      max(80 / 61.9, 1) ^ (-1.209) *
+      0.993 ^ 20 *
       1.018 *
       1
   )
 })
 
-test_that("Combinations of vector inputs for egfr_ckdepi including different sides of the min/max parts of the calculation", {
-  # Same male/female, black/not black
+test_that("Combinations of vector inputs for egfr_ckdepi", {
+  # Same male / female, black / not black
   expect_equal(
-    egfr_ckdepi(scr_uM=c(80, 60), age_y=c(20, 20), male=c(TRUE, TRUE), black=c(TRUE, TRUE)),
+    egfr_ckdepi(scr_uM = c(80, 60), age_y = c(20, 20), male = c(TRUE, TRUE),
+                black = c(TRUE, TRUE)),
     141 *
-      c(1, 60/79.6)^(-0.411) * # male
-      c(80/79.6, 1)^(-1.209) * # male
+      c(1, 60 / 79.6) ^ (-0.411) * # male
+      c(80 / 79.6, 1) ^ (-1.209) * # male
       1 * # male
-      0.993^20 *
+      0.993 ^ 20 *
       1.159 # black
   )
   expect_equal(
-    egfr_ckdepi(scr_uM=c(80, 60), age_y=c(20, 20), male=c(FALSE, FALSE), black=c(TRUE, TRUE)),
+    egfr_ckdepi(scr_uM = c(80, 60), age_y = c(20, 20), male = c(FALSE, FALSE),
+                black = c(TRUE, TRUE)),
     141 *
-      c(1, 60/61.9)^(-0.329) * # female
-      c(80/61.9, 1)^(-1.209) * # female
+      c(1, 60 / 61.9) ^ (-0.329) * # female
+      c(80 / 61.9, 1) ^ (-1.209) * # female
       1.018 * # female
-      0.993^20 *
+      0.993 ^ 20 *
       1.159 # black
   )
   expect_equal(
-    egfr_ckdepi(scr_uM=c(80, 60), age_y=c(20, 20), male=c(TRUE, TRUE), black=c(FALSE, FALSE)),
+    egfr_ckdepi(scr_uM = c(80, 60), age_y = c(20, 20), male = c(TRUE, TRUE),
+                black = c(FALSE, FALSE)),
     141 *
-      c(1, 60/79.6)^(-0.411) * # male
-      c(80/79.6, 1)^(-1.209) * # male
+      c(1, 60 / 79.6) ^ (-0.411) * # male
+      c(80 / 79.6, 1) ^ (-1.209) * # male
       1 * # male
-      0.993^20 *
+      0.993 ^ 20 *
       1 # not black
   )
   expect_equal(
-    egfr_ckdepi(scr_uM=c(80, 60), age_y=c(20, 20), male=c(TRUE, TRUE), black=c(FALSE, FALSE)),
+    egfr_ckdepi(scr_uM = c(80, 60), age_y = c(20, 20), male = c(TRUE, TRUE),
+                black = c(FALSE, FALSE)),
     141 *
-      c(1, 60/79.6)^(-0.411) * # male
-      c(80/79.6, 1)^(-1.209) * # male
+      c(1, 60 / 79.6) ^ (-0.411) * # male
+      c(80 / 79.6, 1) ^ (-1.209) * # male
       1 * # male
-      0.993^20 *
+      0.993 ^ 20 *
       1 # not black
   )
 
-  # Different male/female, same black/not black
+  # Different male / female, same black / not black
   expect_equal(
-    egfr_ckdepi(scr_uM=c(80, 60), age_y=c(20, 20), male=c(TRUE, FALSE), black=c(TRUE, TRUE)),
+    egfr_ckdepi(scr_uM = c(80, 60), age_y = c(20, 20), male = c(TRUE, FALSE),
+                black = c(TRUE, TRUE)),
     141 *
-      c(1, 60/61.9)^c(-0.411, -0.329) *
-      c(80/79.6, 1)^(-1.209) *
+      c(1, 60 / 61.9) ^ c(-0.411, -0.329) *
+      c(80 / 79.6, 1) ^ (-1.209) *
       c(1, 1.018) *
-      0.993^20 *
+      0.993 ^ 20 *
       1.159 # black
   )
   expect_equal(
-    egfr_ckdepi(scr_uM=c(80, 60), age_y=c(20, 20), male=c(FALSE, TRUE), black=c(FALSE, FALSE)),
+    egfr_ckdepi(scr_uM = c(80, 60), age_y = c(20, 20), male = c(FALSE, TRUE),
+                black = c(FALSE, FALSE)),
     141 *
-      c(1, 60/79.6)^c(-0.329, -0.411) *
-      c(80/61.9, 1)^(-1.209) *
+      c(1, 60 / 79.6) ^ c(-0.329, -0.411) *
+      c(80 / 61.9, 1) ^ (-1.209) *
       c(1.018, 1) *
-      0.993^20 *
+      0.993 ^ 20 *
       1 # not black
   )
-  
-  # Same male/female, different black/not black
+
+  # Same male / female, different black / not black
   expect_equal(
-    egfr_ckdepi(scr_uM=c(80, 60), age_y=c(20, 20), male=c(TRUE, TRUE), black=c(FALSE, TRUE)),
+    egfr_ckdepi(scr_uM = c(80, 60), age_y = c(20, 20), male = c(TRUE, TRUE),
+                black = c(FALSE, TRUE)),
     141 *
-      c(1, 60/79.6)^(-0.411) * # male
-      c(80/79.6, 1)^(-1.209) * # male
+      c(1, 60 / 79.6) ^ (-0.411) * # male
+      c(80 / 79.6, 1) ^ (-1.209) * # male
       1 * # male
-      0.993^20 *
+      0.993 ^ 20 *
       c(1, 1.159)
   )
   expect_equal(
-    egfr_ckdepi(scr_uM=c(80, 60), age_y=c(20, 20), male=c(TRUE, TRUE), black=c(TRUE, FALSE)),
+    egfr_ckdepi(scr_uM = c(80, 60), age_y = c(20, 20), male = c(TRUE, TRUE),
+                black = c(TRUE, FALSE)),
     141 *
-      c(1, 60/79.6)^(-0.411) * # male
-      c(80/79.6, 1)^(-1.209) * # male
+      c(1, 60 / 79.6) ^ (-0.411) * # male
+      c(80 / 79.6, 1) ^ (-1.209) * # male
       1 * # male
-      0.993^20 *
+      0.993 ^ 20 *
       c(1.159, 1)
   )
 })
@@ -223,32 +216,37 @@ test_that("Combinations of vector inputs for egfr_ckdepi including different sid
 
 test_that("egfr_cockroft_gault", {
   expect_warning(
-    egfr_cockroft_gault(scr_uM=80, age_y=20, weight_kg=70, male=TRUE, idms_assay=FALSE),
-    regexp="not recommended",
-    info="Cockroft-Gault is never recommended"
+    egfr_cockroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE,
+                        idms_assay = FALSE),
+    regexp = "not recommended",
+    info = "Cockroft-Gault is never recommended"
   )
   expect_equal(
-    expect_warning(egfr_cockroft_gault(scr_uM=80, age_y=20, weight_kg=70, male=TRUE)),
-    (140 - 20) * 
+    expect_warning(egfr_cockroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70,
+                                       male = TRUE)),
+    (140 - 20) *
       70 *
       1 / # male
       #0.85 / # female
-      (72 * 113.12/10000 * 80)
+      (72 * 113.12 / 10000 * 80)
   )
   expect_equal(
-    expect_warning(egfr_cockroft_gault(scr_uM=80, age_y=20, weight_kg=70, male=FALSE)),
-    (140 - 20) * 
+    expect_warning(egfr_cockroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70,
+                                       male = FALSE)),
+    (140 - 20) *
       70 *
       #1 / # male
       0.85 / # female
-      (72 * 113.12/10000 * 80)
+      (72 * 113.12 / 10000 * 80)
   )
   expect_equal(
-    expect_warning(egfr_cockroft_gault(scr_uM=c(80, 80), age_y=c(20, 20), weight_kg=c(70, 70), male=c(FALSE, TRUE))),
-    (140 - 20) * 
+    expect_warning(
+      egfr_cockroft_gault(scr_uM = c(80, 80), age_y = c(20, 20),
+                          weight_kg = c(70, 70), male = c(FALSE, TRUE))),
+    (140 - 20) *
       70 *
       c(0.85, 1) /
-      (72 * 113.12/10000 * 80)
+      (72 * 113.12 / 10000 * 80)
   )
 })
 
@@ -288,14 +286,14 @@ test_that("egfr_mdrd scalar accuracy", {
       warn_ckdepi_preferred = TRUE
     ),
     32788 *
-      175/186 * # idms
+      175 / 186 * # idms
       # 1 * # not idms
-      240^(-1.154) *
-      20^(-0.203) *
+      240 ^ (-1.154) *
+      20 ^ (-0.203) *
       1.212 * # black
       # 1 * # not black
       1 # male
-      # 0.742 # female
+    # 0.742 # female
   )
   expect_equal(
     egfr_mdrd(
@@ -307,10 +305,10 @@ test_that("egfr_mdrd scalar accuracy", {
       warn_ckdepi_preferred = TRUE
     ),
     32788 *
-      175/186 * # idms
+      175 / 186 * # idms
       # 1 * # not idms
-      240^(-1.154) *
-      20^(-0.203) *
+      240 ^ (-1.154) *
+      20 ^ (-0.203) *
       1.212 * # black
       # 1 * # not black
       #1 # male
@@ -326,14 +324,14 @@ test_that("egfr_mdrd scalar accuracy", {
       warn_ckdepi_preferred = TRUE
     ),
     32788 *
-      175/186 * # idms
+      175 / 186 * # idms
       # 1 * # not idms
-      240^(-1.154) *
-      20^(-0.203) *
+      240 ^ (-1.154) *
+      20 ^ (-0.203) *
       # 1.212 * # black
       1 * # not black
       1 # male
-      # 0.742 # female
+    # 0.742 # female
   )
   expect_equal(
     egfr_mdrd(
@@ -345,49 +343,56 @@ test_that("egfr_mdrd scalar accuracy", {
       warn_ckdepi_preferred = TRUE
     ),
     32788 *
-      # 175/186 * # idms
+      # 175 / 186 * # idms
       1 * # not idms
-      240^(-1.154) *
-      20^(-0.203) *
+      240 ^ (-1.154) *
+      20 ^ (-0.203) *
       1.212 * # black
       # 1 * # not black
       1 # male
-      # 0.742 # female
+    # 0.742 # female
   )
 })
 
-test_that("egfr calculations warn or adjust correctly with IDMS-calibrated assays", {
+test_that("egfr calcs warn or adjust correctly with IDMS-calibrated assays", {
   expect_warning(
-    egfr_bedside_schwartz(scr_uM=80, height_m=1, idms_assay=FALSE),
-    regexp="IDMS"
+    egfr_bedside_schwartz(scr_uM = 80, height_M = 1, idms_assay = FALSE),
+    regexp = "IDMS"
   )
   expect_silent(
-    egfr_bedside_schwartz(scr_uM=80, height_m=1, idms_assay=TRUE)
+    egfr_bedside_schwartz(scr_uM = 80, height_M = 1, idms_assay = TRUE)
   )
   expect_warning(
-    egfr_ckdepi(scr_uM=80, age_y=20, male=TRUE, black=TRUE, idms_assay=FALSE),
-    regexp="IDMS"
+    egfr_ckdepi(scr_uM = 80, age_y = 20, male = TRUE, black = TRUE,
+                idms_assay = FALSE),
+    regexp = "IDMS"
   )
   expect_silent(
-    egfr_ckdepi(scr_uM=80, age_y=20, male=TRUE, black=TRUE, idms_assay=TRUE)
+    egfr_ckdepi(scr_uM = 80, age_y = 20, male = TRUE, black = TRUE,
+                idms_assay = TRUE)
   )
   expect_warning(
-    egfr_cockroft_gault(scr_uM=80, age_y=20, weight_kg=70, male=TRUE),
-    regexp="IDMS"
+    egfr_cockroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE),
+    regexp = "IDMS"
   )
   expect_warning(
-    egfr_cockroft_gault(scr_uM=80, age_y=20, weight_kg=70, male=TRUE, idms_assay=FALSE),
-    regexp="not recommended",
-    all=TRUE
+    egfr_cockroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE,
+                        idms_assay = FALSE),
+    regexp = "not recommended",
+    all = TRUE
   )
   expect_silent(
-    egfr_mdrd(scr_uM=240, age_y=20, male=TRUE, black=TRUE, idms_assay=TRUE)
+    egfr_mdrd(scr_uM = 240, age_y = 20, male = TRUE, black = TRUE,
+              idms_assay = TRUE)
   )
   expect_silent(
-    egfr_mdrd(scr_uM=240, age_y=20, male=TRUE, black=TRUE, idms_assay=FALSE)
+    egfr_mdrd(scr_uM = 240, age_y = 20, male = TRUE, black = TRUE,
+              idms_assay = FALSE)
   )
   expect_true(
-    egfr_mdrd(scr_uM=240, age_y=20, male=TRUE, black=TRUE, idms_assay=TRUE) !=
-      egfr_mdrd(scr_uM=240, age_y=20, male=TRUE, black=TRUE, idms_assay=FALSE)
+    egfr_mdrd(scr_uM = 240, age_y = 20, male = TRUE, black = TRUE,
+              idms_assay = TRUE) !=
+      egfr_mdrd(scr_uM = 240, age_y = 20, male = TRUE, black = TRUE,
+                idms_assay = FALSE)
   )
 })
