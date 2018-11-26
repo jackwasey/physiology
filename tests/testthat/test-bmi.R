@@ -75,12 +75,6 @@ test_that("child ideal weight defaults to Traub", {
                ideal_weight_Traub(1, age_y = 2))
 })
 
-test_that("body surface area", {
-  expect_equal(bsa_adult(height_m = 2, weight_kg = 72), 2)
-  expect_equal(
-    bsa_adult(height_m = c(NA, 2), weight_kg = c(70, 72)), c(NA_real_, 2))
-})
-
 test_that("ideal weight Lemmens", {
   expect_equal(ideal_weight_Lemmens(2), 88)
 })

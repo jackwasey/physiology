@@ -2,7 +2,8 @@
 
 ## Version 1.1
 
-* ETT volume calculation
+* ETT lumen volume calculation
+* Added body surface area variants, thanks to Bill Denney
 
 ## Version 1.0
 

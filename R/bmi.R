@@ -1,21 +1,3 @@
-#' @title Estimate body surface area of an adult
-#' @description \code{bsa_adult} Estimate body surface area of an
-#'   adult using \code{sqrt(wt*ht)/6} TODO: reference for this.
-#' @template height_m
-#' @template weight_kg
-#' @param ... passed to validation
-#' @return numeric vector
-#' @examples
-#' bsa_adult(2, 80)
-#' bsa_adult(1.5, 80)
-#' @export
-bsa_adult <- function(height_m, weight_kg, ...) {
-  stopifnot(length(height_m) == length(weight_kg))
-  valid_height_adult(height_m, ...)
-  valid_weight_adult(weight_kg, ...)
-  sqrt(height_m * weight_kg) / 6
-}
-
 #' @title ideal weight for adults
 #' @description \code{ideal_weight_adult} gives the ideal weight using default
 #'   adult algorithm, Devine. If an age is specified and less than 18 years, the

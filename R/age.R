@@ -31,7 +31,7 @@ age_from_dates <- function(birth_date, ref_date = Sys.Date(),
   ref_date <- as.Date(ref_date)
   unit <- match.arg(unit)
   age <- as.numeric(ref_date - birth_date)
-  if (age < 0 )
+  if (age < 0)
     stop("Calculated age is less than zero")
   switch(unit,
          year = age_d_to_y(age),
