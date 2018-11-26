@@ -1,6 +1,5 @@
-if (requireNamespace("lintr", quietly = TRUE)) {
   context("lints")
-  test_that("Package Style", {
+  test_that("code quality and style", {
+    skip_if_not_installed("lintr")
     lintr::expect_lint_free()
   })
-}
