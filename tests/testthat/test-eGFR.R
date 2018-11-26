@@ -18,14 +18,23 @@ test_that("egfr expected errors", {
 })
 
 test_that("egfr automatic selection", {
-  expect_equal(
-    egfr(
+  suppressWarnings({
+    mdrd <- egfr_mdrd(
+      scr_uM = rep(240, 4),
+      age_y = rep(60, 4),
+      male = c(TRUE, TRUE, FALSE, FALSE),
+      black = c(TRUE, FALSE, TRUE, FALSE)
+    )
+    egfr_auto <- egfr(
       scr_uM = c(rep(80, 8), rep(240, 4)),
       age_y = c(rep(1, 4), rep(60, 8)),
       height_m = rep(1, 12),
       male = rep(c(TRUE, TRUE, FALSE, FALSE), 3),
       black = rep(c(TRUE, FALSE, TRUE, FALSE), 3)
-    ),
+    )
+  })
+  expect_equal(
+    egfr_auto,
     c(
       egfr_bedside_schwartz(
         scr_uM = rep(80, 4),
@@ -37,18 +46,16 @@ test_that("egfr automatic selection", {
         male = c(TRUE, TRUE, FALSE, FALSE),
         black = c(TRUE, FALSE, TRUE, FALSE)
       ),
-      egfr_mdrd(
-        scr_uM = rep(240, 4),
-        age_y = rep(60, 4),
-        male = c(TRUE, TRUE, FALSE, FALSE),
-        black = c(TRUE, FALSE, TRUE, FALSE)
-      )
+      mdrd
     ),
     info = "eGFR method selection chooses the correct method for the data."
   )
 })
 
 test_that("egfr combination of MDRD and CKD-EPI", {
+  suppressWarnings(
+    mdrd <- egfr_mdrd(scr_uM = 120, age_y = 75, male = TRUE, black = TRUE)
+  )
   expect_equal(
     expect_warning(
       egfr(scr_uM = 120, age_y = 75, height_m = 1, male = TRUE, black = TRUE),
@@ -57,7 +64,7 @@ test_that("egfr combination of MDRD and CKD-EPI", {
       c(
         egfr_ckdepi(scr_uM = 120, age_y = 75, male = TRUE, black = TRUE,
                     warn_mdrd_preferred = FALSE),
-        egfr_mdrd(scr_uM = 120, age_y = 75, male = TRUE, black = TRUE)
+        mdrd
       )
     ),
     info = "Neither value preferred, use the average"
@@ -216,13 +223,13 @@ test_that("Combinations of vector inputs for egfr_ckdepi", {
 test_that("egfr_cockcroft_gault", {
   expect_warning(
     egfr_cockcroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE,
-                        idms_assay = FALSE),
+                         idms_assay = FALSE),
     regexp = "not recommended",
     info = "Cockcroft-Gault is never recommended"
   )
   expect_equal(
     expect_warning(egfr_cockcroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70,
-                                       male = TRUE)),
+                                        male = TRUE)),
     (140 - 20) *
       70 *
       1 / # male
@@ -231,7 +238,7 @@ test_that("egfr_cockcroft_gault", {
   )
   expect_equal(
     expect_warning(egfr_cockcroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70,
-                                       male = FALSE)),
+                                        male = FALSE)),
     (140 - 20) *
       70 *
       #1 / # male
@@ -241,7 +248,7 @@ test_that("egfr_cockcroft_gault", {
   expect_equal(
     expect_warning(
       egfr_cockcroft_gault(scr_uM = c(80, 80), age_y = c(20, 20),
-                          weight_kg = c(70, 70), male = c(FALSE, TRUE))),
+                           weight_kg = c(70, 70), male = c(FALSE, TRUE))),
     (140 - 20) *
       70 *
       c(0.85, 1) /
@@ -376,7 +383,7 @@ test_that("egfr calcs warn or adjust correctly with IDMS-calibrated assays", {
   )
   expect_warning(
     egfr_cockcroft_gault(scr_uM = 80, age_y = 20, weight_kg = 70, male = TRUE,
-                        idms_assay = FALSE),
+                         idms_assay = FALSE),
     regexp = "not recommended",
     all = TRUE
   )

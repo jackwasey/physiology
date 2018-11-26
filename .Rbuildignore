@@ -4,6 +4,7 @@
 man-roxygen
 ^appveyor\.yml$
 ^\.lintr$
+^inst\/\.lintr$
 ^codecov\.yml$
 ^README\.html$
 ^README\.Rmd$

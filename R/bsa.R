@@ -47,7 +47,7 @@ bsa_dubois_dubois <- bsa_simple(coefficient = 0.007184,
 #' @describeIn bsa Mosteller formula
 #' @references Mosteller, RD (1987). "Simplified calculation of body-surface
 #'   area". N Engl J Med. 317 (17): 1098.
-#'   https://www.ncbi.nlm.nih.gov/pubmed/3657876
+#'   \url{https://www.ncbi.nlm.nih.gov/pubmed/3657876}
 #' @export
 bsa_mosteller <- bsa_simple(coefficient = 1 / 60, w_exp = 0.5, h_exp = 0.5)
 
@@ -55,7 +55,7 @@ bsa_mosteller <- bsa_simple(coefficient = 1 / 60, w_exp = 0.5, h_exp = 0.5)
 #' @references Haycock, GB; Schwartz, GJ; Wisotsky, DH (1978). "Geometric method
 #'   for measuring body surface area: A height-weight formula validated in
 #'   infants, children and adults". J Pediatr. 93: 62–66.
-#'   https://doi.org/10.1016%2Fs0022-3476%2878%2980601-5
+#'   \url{https://doi.org/10.1016%2Fs0022-3476%2878%2980601-5}
 #' @export
 bsa_haycock <- bsa_simple(coefficient = 0.024265,
                           w_exp = 0.5378, h_exp = 0.3964)

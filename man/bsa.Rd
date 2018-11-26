@@ -93,12 +93,7 @@ Du Bois D, Du Bois EF (Jun 1916). "A formula to estimate the
 
 Mosteller, RD (1987). "Simplified calculation of body-surface
   area". N Engl J Med. 317 (17): 1098.
-  https://www.ncbi.nlm.nih.gov/pubmed/3657876
-
-Haycock, GB; Schwartz, GJ; Wisotsky, DH (1978). "Geometric method
-  for measuring body surface area: A height-weight formula validated in
-  infants, children and adults". J Pediatr. 93: 62–66.
-  https://doi.org/10.1016%2Fs0022-3476%2878%2980601-5
+  \url{https://www.ncbi.nlm.nih.gov/pubmed/3657876}
 
 Gehan EA, George SL, Cancer Chemother Rep 1970, 54:225-235
 
