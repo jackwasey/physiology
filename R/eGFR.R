@@ -32,7 +32,7 @@ scr_mgdl_to_uM <- function(scr_mgdl, ...) {
 #'
 #' * If `age_y < 18`, use the Bedside Schwartz equation.
 #' * If `age_y >= 18`:
-#'     * Estimate eGFR by the MDRD and CKD - EPI methods
+#'     * Estimate eGFR by the MDRD and CKD-EPI methods
 #'     * If eGFR,MDRD is estimated < 60 mL/min/1.73 m^2 and eGFR,CKD-EPI < 60,
 #'     return eGFR,MDRD.
 #'     * If eGFR,MDRD is estimated >= 60 mL/min/1.73 m^2 and eGFR,CKD-EPI >=
@@ -40,7 +40,7 @@ scr_mgdl_to_uM <- function(scr_mgdl, ...) {
 #'     * Otherwise, return the average of eGFR,MDRD and eGFR,CKD-EPI.
 #'
 #' If an IDMS - calibrated assay is used (`idms_assay = TRUE`), the MDRD
-#' equation will be corrected for the assay by approximately 6%, the CKD - EPI
+#' equation will be corrected for the assay by approximately 6%, the CKD-EPI
 #' equation is only validated for use with IDMS - calibrated assays, and the
 #' Cockroft - Gault is not calibrated for use with an IDMS - calibrated assay.
 #' Most labs follow the National Kidney Disease Education Program (NKDEP)
@@ -139,7 +139,7 @@ egfr <- function(scr_uM, age_y, height_m, male, black, ...) {
 egfr_cockroft_gault <- function(scr_uM, age_y, weight_kg, male,
                                 idms_assay = TRUE, ...) {
   warning("The Cockroft-Gault equation for eGFR is not recommended by the ",
-          "NKDEP or the NIH. MDRD or CKD - EPI are recommended.")
+          "NKDEP or the NIH. MDRD or CKD-EPI are recommended.")
   stopifnot(length(scr_uM) == length(age_y))
   stopifnot(length(scr_uM) == length(weight_kg))
   stopifnot(length(scr_uM) == length(male))
@@ -162,7 +162,7 @@ egfr_cockroft_gault <- function(scr_uM, age_y, weight_kg, male,
 #' @describeIn egfr The MDRD equation for eGFR (preferred for adults with eGFR <
 #'   60).
 #' @param warn_ckdepi_preferred When calculating eGFR > 60, should a warning be
-#'   generated suggesting CKD - EPI is preferred?
+#'   generated suggesting CKD-EPI is preferred?
 #' @references
 #' \url{https://www.niddk.nih.gov/health - information/communication - programs/nkdep/laboratory - evaluation/glomerular - filtration - rate - calculators/mdrd - adults - si - units}
 #'
@@ -202,12 +202,12 @@ egfr_mdrd <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
     (1 + 0.212 * black)
   if (any(ret > 60) & warn_ckdepi_preferred)
     warning("The MDRD equation for eGFR is not recommended for values above ",
-            "60 mL/min/1.73m^2 (CKD - EPI is recommended). ",
+            "60 mL/min/1.73m^2 (CKD-EPI is recommended). ",
             "Use results above 60 with caution.")
   ret
 }
 
-#' @describeIn egfr The CKD - EPI equation for eGFR (preferred for adults
+#' @describeIn egfr The CKD-EPI equation for eGFR (preferred for adults
 #'   with eGFR >= 60).
 #' @param warn_mdrd_preferred When calculating eGFR < 60, should a warning be
 #'   generated suggesting MDRD is preferred?

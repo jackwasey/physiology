@@ -13,8 +13,8 @@ test_that("egfr expected errors", {
   expect_error(egfr())
   expect_error(egfr(scr_uM = 1))
   expect_error(egfr(age_y = 1))
-  expect_error(egfr(scr_uM = 1, age_y = 1, height_M = 1))
-  expect_error(egfr(scr_uM = 1, age_y = 1, height_M = 1, male = TRUE))
+  expect_error(egfr(scr_uM = 1, age_y = 1, height_m = 1))
+  expect_error(egfr(scr_uM = 1, age_y = 1, height_m = 1, male = TRUE))
 })
 
 test_that("egfr automatic selection", {
@@ -51,9 +51,8 @@ test_that("egfr automatic selection", {
 test_that("egfr combination of MDRD and CKD-EPI", {
   expect_equal(
     expect_warning(
-      egfr(scr_uM = 120, age_y = 75, height_M = 1, male = TRUE, black = TRUE),
-      regexp = "neither"
-    ),
+      egfr(scr_uM = 120, age_y = 75, height_m = 1, male = TRUE, black = TRUE),
+      regexp = "neither"),
     mean(
       c(
         egfr_ckdepi(scr_uM = 120, age_y = 75, male = TRUE, black = TRUE,
@@ -65,7 +64,7 @@ test_that("egfr combination of MDRD and CKD-EPI", {
   )
   expect_equal(
     expect_warning(
-      egfr(scr_uM = 140, age_y = 20, height_M = 1, male = TRUE, black = FALSE),
+      egfr(scr_uM = 140, age_y = 20, height_m = 1, male = TRUE, black = FALSE),
       regexp = "both"
     ),
     mean(
@@ -80,10 +79,10 @@ test_that("egfr combination of MDRD and CKD-EPI", {
 })
 
 test_that("egfr_bedside_schwartz", {
-  expect_equal(egfr_bedside_schwartz(scr_uM = 80, height_M = 1),
+  expect_equal(egfr_bedside_schwartz(scr_uM = 80, height_m = 1),
                36.2 * 100 / 80)
-  expect_warning(egfr_bedside_schwartz(scr_uM = 1, height_M = 1))
-  expect_warning(egfr_bedside_schwartz(scr_uM = 80, height_M = 100))
+  expect_warning(egfr_bedside_schwartz(scr_uM = 1, height_m = 1))
+  expect_warning(egfr_bedside_schwartz(scr_uM = 80, height_m = 100))
 })
 
 test_that("Ensure all 4 combinations of male / black work with egfr_ckdepi", {
@@ -356,11 +355,11 @@ test_that("egfr_mdrd scalar accuracy", {
 
 test_that("egfr calcs warn or adjust correctly with IDMS-calibrated assays", {
   expect_warning(
-    egfr_bedside_schwartz(scr_uM = 80, height_M = 1, idms_assay = FALSE),
+    egfr_bedside_schwartz(scr_uM = 80, height_m = 1, idms_assay = FALSE),
     regexp = "IDMS"
   )
   expect_silent(
-    egfr_bedside_schwartz(scr_uM = 80, height_M = 1, idms_assay = TRUE)
+    egfr_bedside_schwartz(scr_uM = 80, height_m = 1, idms_assay = TRUE)
   )
   expect_warning(
     egfr_ckdepi(scr_uM = 80, age_y = 20, male = TRUE, black = TRUE,
