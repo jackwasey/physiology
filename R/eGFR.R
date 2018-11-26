@@ -9,7 +9,7 @@
 #' @references Molecular weight is 113.12 g/mol from
 #'   \url{https://pubchem.ncbi.nlm.nih.gov/compound/creatinine}
 #' @seealso \code{\link{egfr}}
-scr_mgdl_to_uM <- function(scr_mgdl, ...) {
+creatinine_mgdl_to_uM <- function(scr_mgdl, ...) {
   scr_uM <- scr_mgdl * 10000 / 113.12
   valid_creatinine(scr_uM = scr_uM, ...)
   scr_uM
@@ -70,7 +70,7 @@ scr_mgdl_to_uM <- function(scr_mgdl, ...) {
 #' disease study equation for estimating glomerular filtration rate. Ann Intern
 #' Med. 2006 Aug 15;145(4):247-54.
 #' @export
-#' @seealso \code{\link{scr_mgdl_to_uM}}
+#' @seealso \code{\link{creatinine_mgdl_to_uM}}
 egfr <- function(scr_uM, age_y, height_m, male, black, ...) {
   stopifnot(length(scr_uM) == length(age_y))
   stopifnot(length(scr_uM) == length(height_m))

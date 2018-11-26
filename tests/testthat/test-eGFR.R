@@ -1,12 +1,12 @@
 context("eGFR")
 
-test_that("scr_mgdl_to_uM", {
-  expect_equal(scr_mgdl_to_uM(scr_mgdl = 1), 88.4017, tol = 0.0001)
-  expect_warning(scr_mgdl_to_uM(scr_mgdl = 0.01))
+test_that("creatinine_mgdl_to_uM", {
+  expect_equal(creatinine_mgdl_to_uM(scr_mgdl = 1), 88.4017, tol = 0.0001)
+  expect_warning(creatinine_mgdl_to_uM(scr_mgdl = 0.01))
 })
 
 test_that("Values that are likely to be already uM give a warning.", {
-  expect_warning(scr_mgdl_to_uM(scr_mgdl = 80))
+  expect_warning(creatinine_mgdl_to_uM(scr_mgdl = 80))
 })
 
 test_that("egfr expected errors", {

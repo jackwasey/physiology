@@ -135,5 +135,5 @@ Schwartz GJ and Work DF. Measurement and estimation of GFR in children and
 adolescents. Clin J Am Soc Nephrol. 2009;4(11):1832-43.
 }
 \seealso{
-\code{\link{scr_mgdl_to_uM}}
+\code{\link{creatinine_mgdl_to_uM}}
 }
