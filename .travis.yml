@@ -24,20 +24,22 @@ os:
 env:
   global:
     - LINTR_COMMENT_BOT=false
+    - COVR_PHYSIOLOGY=false
 
 matrix:
   fast_finish: true
   allow_failures:
     - r: oldrel
+      r_build_args: --no-build-vignettes --no-manual --resave-data=no
+      r_check_args: -no-build-vignettes --no-vignettes --ignore-vignettes --no-codoc --no-manual
   include:
-  - r: release
-    env: LINTR_COMMENT_BOT=true
-    r_build_args: --no-build-vignettes --no-manual --resave-data=no
-    r_check_args: -no-build-vignettes --no-vignettes --ignore-vignettes --no-codoc --no-manual
-  - r: devel
-  - r: oldrel
-    r_build_args: --no-build-vignettes --no-manual --resave-data=no
-    r_check_args: -no-build-vignettes --no-vignettes --ignore-vignettes --no-codoc --no-manual
+    - r: devel
+    - r: release
+      env: LINTR_COMMENT_BOT=true
+      env: COVR_PHYSIOLOGY=true
+    - r: oldrel
+      r_build_args: --no-build-vignettes --no-manual --resave-data=no
+      r_check_args: -no-build-vignettes --no-vignettes --ignore-vignettes --no-codoc --no-manual
 
 repos:
   CRAN: https://cloud.r-project.org
@@ -46,10 +48,13 @@ warnings_are_errors: true
 
 before_script:
   - sed -i'' '/lintr/d' .Rbuildignore
+  - Rscript -e "Rcpp::compileAttributes()" # belt and braces
 
 after_success:
-  - Rscript -e 'lintr::lint_package()'
-  - Rscript -e 'covr::codecov()'
+  - if [ "$LINTR_COMMENT_BOT" = "true" ]; then
+      Rscript -e "lintr::lint_package()"; fi
+  - if [ "$COVR_PHYSIOLOGY" = "true" ]; then
+      Rscript -e "covr::codecov()"; fi
   - Rscript -e 'roxygen2::roxygenise(c("collate", "rd""))'
   - Rscript -e 'pkgdown::build_site()'
 
