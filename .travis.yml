@@ -25,12 +25,15 @@ env:
   global:
     - LINTR_COMMENT_BOT=false
     - COVR_PHYSIOLOGY=false
+    - DEPLOY_PHYSIOLOGY=false
 
 matrix:
   fast_finish: true
   include:
     - r: release
-      env: LINTR_COMMENT_BOT=true
+      env:
+        - LINTR_COMMENT_BOT=true
+        - DEPLOY_PHYSIOLOGY=true
     - r: devel
       env: COVR_PHYSIOLOGY=true
     - r: oldrel
@@ -54,11 +57,16 @@ before_script:
 
 after_success:
   - if [ "$LINTR_COMMENT_BOT" = "true" ]; then
-      R CMD INSTALL "$PKG_TARBALL" && Rscript -e "lintr::lint_package()"; fi
+      R CMD INSTALL "$PKG_TARBALL"
+      Rscript -e "lintr::lint_package()"
+    fi
   - if [ "$COVR_PHYSIOLOGY" = "true" ]; then
-      Rscript -e "covr::codecov()"; fi
-  - Rscript -e 'roxygen2::roxygenise(c("collate", "rd""))'
-  - Rscript -e 'pkgdown::build_site()'
+      Rscript -e "covr::codecov()"
+    fi
+  - if [ "$DEPLOY_PHYSIOLOGY" = "true" ]; then
+      Rscript -e 'roxygen2::roxygenise(c("collate", "rd""))'
+      Rscript -e 'pkgdown::build_site()'
+    fi
 
 deploy:
   provider: pages
@@ -68,6 +76,7 @@ deploy:
   local-dir: docs
   on:
     branch: master
+    condition: $DEPLOY_PHYSIOLOGY = true
 
 notifications:
   email:

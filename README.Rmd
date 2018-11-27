@@ -26,7 +26,11 @@ knitr::opts_chunk$set(
 ## Calculate physiologic characteristics of awake and anesthetized adults, children and infants
 
 ```{r pkgdesc, results='asis', echo = FALSE}
-cat(utils::packageDescription("physiology")$Description)
+cat(
+  unclass(
+    utils::packageDescription("physiology")
+  )[["Description"]]
+)
 ```
 
 Functions are provided for estimation of a range of physiologic characteristics of infant, child and adult humans.
