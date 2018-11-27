@@ -13,3 +13,5 @@ man-roxygen
 ^docs$
 ^cran-comments\.md$
 .*\.ods$
+physiology\.Rcheck
+physiology_.*\.tar\.gz
