@@ -136,4 +136,15 @@ adolescents. Clin J Am Soc Nephrol. 2009;4(11):1832-43.
 }
 \seealso{
 \code{\link{creatinine_mgdl_to_uM}}
+
+Other renal: \code{\link{creatinine_mgdl_to_uM}}
+
+Other renal: \code{\link{creatinine_mgdl_to_uM}}
+
+Other renal: \code{\link{creatinine_mgdl_to_uM}}
+
+Other renal: \code{\link{creatinine_mgdl_to_uM}}
+
+Other renal: \code{\link{creatinine_mgdl_to_uM}}
 }
+\concept{renal}

@@ -2,7 +2,9 @@
 #'
 #' Internal volumes reported in milliliters, based on Feldman, 2015.
 #' @keywords internal datasets list
-#' @family airway
-#' @concept deadspace dead-space
+#' @family airway equipment
+#' @concept deadspace
+#' @concept dead-space
 #' @references Feldman, J, 2015, Pediatric Anesthesia
+#' @noRd
 "deadspace_things_ml"

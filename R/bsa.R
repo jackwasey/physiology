@@ -16,6 +16,7 @@
 #'     bsa_mosteller(1.5, 80),
 #'     bsa_adult(1.5, 80)))
 #' @name bsa
+#' @family body surface area
 NULL
 
 #' @describeIn bsa Uses `bsa_mosteller()`
@@ -52,7 +53,7 @@ bsa_dubois_dubois <- bsa_simple(coefficient = 0.007184,
 bsa_mosteller <- bsa_simple(coefficient = 1 / 60, w_exp = 0.5, h_exp = 0.5)
 
 #' @describeIn bsa Haycock formula
-#' @references Haycock, GB; Schwartz, GJ; Wisotsky, DH (1978). "Geometric method
+#' @references Haycock, GB, Schwartz, GJ, Wisotsky, DH (1978). "Geometric method
 #'   for measuring body surface area: A height-weight formula validated in
 #'   infants, children and adults". J Pediatr. 93: 62–66.
 #'   \url{https://doi.org/10.1016%2Fs0022-3476%2878%2980601-5}

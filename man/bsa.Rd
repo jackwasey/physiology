@@ -117,3 +117,4 @@ Schlich, E; Schumm, M; Schlich, M (2010). "3-D-Body-Scan als
   anthropometrisches Verfahren zur Bestimmung der spezifischen
   Körperoberfläche". Ernährungs Umschau. 57: 178–183.
 }
+\concept{body surface area}

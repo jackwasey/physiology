@@ -22,8 +22,10 @@
 #'   ages <- seq(youngest, oldest, (oldest - youngest) / (length(iw) - 1))
 #'   plot(iw, deadspace_anatomic_child(ideal_weight_kg = iw, age_y = ages),
 #'        type = "l")
-#' @family airway
-#' @concept deadspace dead-space
+#' @concept deadspace
+#' @concept dead-space
+#' @family respiratory
+#' @family airway equipment
 #' @export
 deadspace_total <- function(ideal_weight_kg,
                             age_y = NULL,

@@ -66,7 +66,7 @@ age_d_to_m <- function(age_d) {
 }
 
 #' Is age >= 18 years
-#' @keywords internal
+#' @export
 is_adult <- function(age_y) {
   age_y >= 18
 }

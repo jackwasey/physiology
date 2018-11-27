@@ -9,6 +9,7 @@
 #' @references Molecular weight is 113.12 g/mol from
 #'   \url{https://pubchem.ncbi.nlm.nih.gov/compound/creatinine}
 #' @seealso \code{\link{egfr}}
+#' @family renal
 creatinine_mgdl_to_uM <- function(scr_mgdl, ...) {
   scr_uM <- scr_mgdl * 10000 / 113.12
   valid_creatinine(scr_uM = scr_uM, ...)
@@ -71,6 +72,7 @@ creatinine_mgdl_to_uM <- function(scr_mgdl, ...) {
 #' Med. 2006 Aug 15;145(4):247-54.
 #' @export
 #' @seealso \code{\link{creatinine_mgdl_to_uM}}
+#' @family renal
 egfr <- function(scr_uM, age_y, height_m, male, black, ...) {
   stopifnot(length(scr_uM) == length(age_y))
   stopifnot(length(scr_uM) == length(height_m))
@@ -137,6 +139,7 @@ egfr <- function(scr_uM, age_y, height_m, male, black, ...) {
 #' Cockcroft DW, Gault MH. Prediction of creatinine clearance from serum
 #' creatinine. Nephron. 1976;16(1):31-41.
 #' @export
+#' @family renal
 egfr_cockcroft_gault <- function(scr_uM, age_y, weight_kg, male,
                                 idms_assay = TRUE, ...) {
   warning("The Cockcroft-Gault equation for eGFR is not recommended by the ",
@@ -177,6 +180,7 @@ egfr_cockcroft_gault <- function(scr_uM, age_y, weight_kg, male,
 #' disease study equation for estimating glomerular filtration rate. Ann Intern
 #' Med. 2006 Aug 15;145(4):247-54.
 #' @export
+#' @family renal
 egfr_mdrd <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
                       ..., warn_ckdepi_preferred = TRUE) {
   stopifnot(length(scr_uM) == length(age_y))
@@ -213,6 +217,7 @@ egfr_mdrd <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
 #' @param warn_mdrd_preferred When calculating eGFR < 60, should a warning be
 #'   generated suggesting MDRD is preferred?
 #' @export
+#' @family renal
 egfr_ckdepi <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
                         ..., warn_mdrd_preferred = TRUE) {
   stopifnot(length(scr_uM) == length(age_y))
@@ -259,6 +264,7 @@ egfr_ckdepi <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
 #' Schwartz GJ and Work DF. Measurement and estimation of GFR in children and
 #' adolescents. Clin J Am Soc Nephrol. 2009;4(11):1832-43.
 #' @export
+#' @family renal
 egfr_bedside_schwartz <- function(scr_uM, height_m, idms_assay = TRUE, ...) {
   stopifnot(length(scr_uM) == length(height_m))
   stopifnot(length(idms_assay) == 1)

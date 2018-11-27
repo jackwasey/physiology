@@ -9,7 +9,6 @@
 \alias{ideal_weight_Miller}
 \alias{ideal_weight_Broca}
 \alias{ideal_weight_Lemmens}
-\alias{ideal_weight_linear}
 \title{ideal weight for adults}
 \usage{
 ideal_weight(height_m, ..., age_y = NULL, male = NULL)
@@ -27,9 +26,6 @@ ideal_weight_Miller(height_m, male, ...)
 ideal_weight_Broca(height_m, male, ...)
 
 ideal_weight_Lemmens(height_m, ...)
-
-ideal_weight_linear(height_m, male, height_mininch, male_min_kg,
-  female_min_kg, male_kg_per_inch, female_kg_per_inch, ...)
 }
 \arguments{
 \item{height_m}{single numeric, height in meters}
@@ -42,21 +38,7 @@ not used in the calculation itself, so may be missing.}
 
 \item{male}{logical value(s) whether patient is male. TRUE or FALSE.}
 
-\item{height_mininch}{height above which to start scaling; consider as a
-minimum (for at least some algorithms)}
-
-\item{male_min_kg}{y intercept i.e. ideal weight at minimum height for males}
-
-\item{female_min_kg}{y intercept i.e. ideal weight at minimum height for
-females}
-
-\item{male_kg_per_inch}{slope for males}
-
-\item{female_kg_per_inch}{slope for females}
-
 \item{...}{passed to validation.}
-
-\item{...}{passed on to validation}
 }
 \description{
 \code{ideal_weight_adult} gives the ideal weight using default
@@ -82,9 +64,6 @@ Calculate ideal weight based on Broca (1871) Height in cm -100
   1877.
 
 Lemmens method assumes BMI 22 as ideal (Obesity Surgery 2005)
-
-generic internal function to handle linear ideal weight
-  calculations. Unfortunately mixes inches and meters at present.
 }
 \section{Functions}{
 \itemize{
@@ -99,4 +78,6 @@ ideal_weight_adult(1.7, male = FALSE)
 ideal_weight_adult(6 * 12 * 2.54 / 100, male = TRUE) # 6ft
 suppressWarnings(ideal_weight_adult(5, male = FALSE))
 }
-\keyword{internal}
+\concept{BMI}
+\concept{body mass index}
+\concept{ideal weight}

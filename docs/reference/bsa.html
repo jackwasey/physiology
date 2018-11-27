@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Estimate Blood Volume — blood_vol_Nadler • physiology</title>
+<title>Estimate body surface area — bsa • physiology</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,19 +30,9 @@
 
 
 
-<meta property="og:title" content="Estimate Blood Volume — blood_vol_Nadler" />
+<meta property="og:title" content="Estimate body surface area — bsa" />
 
-<meta property="og:description" content="estimate blood volume according to the classic 1960s paper by
-  Nadler. Surgery. 1962 Feb;51(2):224-32. Prediction of blood volume in
-  normal human adults. Nadler SB, Hidalgo JH, Bloch T.
-This effectively reverses engineers an ideal weight from BMI of
-22, then use the square root of its ratio to actual body weight to adjust
-the 70ml per kg of an ideal weight person. Age-dependent regression
-equations for indexed blood volume InBV at ideal body weight. (No
-adjustment made in obesity by Lemmens.) InBV = 90-0.4 X age (males) InBV = 85-0.4 X age (females).
-applies to slim adults, but note that the age-related decline is
-  not seen if high degree of physical activity is maintained. TODO: check BMI
-  not elevated" />
+<meta property="og:description" content="Estimate body surface area (BSA)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -125,77 +115,115 @@ applies to slim adults, but note that the age-related decline is
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Estimate Blood Volume</h1>
+    <h1>Estimate body surface area</h1>
     
-    <div class="hidden name"><code>bloodvol.Rd</code></div>
+    <div class="hidden name"><code>bsa.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>estimate blood volume according to the classic 1960s paper by
-  Nadler. Surgery. 1962 Feb;51(2):224-32. Prediction of blood volume in
-  normal human adults. Nadler SB, Hidalgo JH, Bloch T.</p>
-<p>This effectively reverses engineers an ideal weight from BMI of
-22, then use the square root of its ratio to actual body weight to adjust
-the 70ml per kg of an ideal weight person. Age-dependent regression
-equations for indexed blood volume <code>InBV</code> at ideal body weight. (No
-adjustment made in obesity by Lemmens.) <code>InBV = 90-0.4 X age</code> (males) <code>InBV = 85-0.4 X age</code> (females).</p>
-<p>applies to slim adults, but note that the age-related decline is
-  not seen if high degree of physical activity is maintained. TODO: check BMI
-  not elevated</p>
+    <p>Estimate body surface area (BSA)</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>blood_vol_Nadler</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>male</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>bsa_adult</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
 
-<span class='fu'>blood_vol_Lemmens_sedentary</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
+<span class='fu'>bsa_dubois_dubois</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
 
-<span class='fu'>blood_vol_Lemmens_indexed</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
+<span class='fu'>bsa_mosteller</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
 
-<span class='fu'>blood_vol_Lemmens_non_obese</span>(<span class='no'>weight_kg</span>, <span class='no'>age_y</span>, <span class='no'>male</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>bsa_haycock</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
+
+<span class='fu'>bsa_gehan_george</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
+
+<span class='fu'>bsa_boyd</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
+
+<span class='fu'>bsa_fujimoto</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
+
+<span class='fu'>bsa_takahira</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
+
+<span class='fu'>bsa_shuter_aslani</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>...</span>)
+
+<span class='fu'>bsa_schlich</span>(<span class='no'>height_m</span>, <span class='no'>weight_kg</span>, <span class='no'>male</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>height_m</th>
-      <td><p>single numeric, height in meters</p></td>
+      <td><p>height(s) in meters</p></td>
     </tr>
     <tr>
       <th>weight_kg</th>
       <td><p>numeric vector of weight(s) in kg</p></td>
     </tr>
     <tr>
-      <th>male</th>
-      <td><p>logical</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>passed on to validation</p></td>
+      <td><p>passed to validation</p></td>
     </tr>
     <tr>
-      <th>age_y</th>
-      <td><p>numeric vector, age(s) in years. Extremely exact age is not
-required, so for age in days or months, simplest just to divide. This is
-not used in the calculation itself, so may be missing.</p></td>
+      <th>male</th>
+      <td><p>logical value(s) whether patient is male. TRUE or FALSE.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>numeric vector</p>
+    <p>numeric vector of body surface areas in m^2.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>1.73 m^2 is commonly used as an average adult BSA.</p>
+    
+    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
+
+    <ul>
+<li><p><code>bsa_adult</code>: Uses `bsa_mosteller()`</p></li>
+<li><p><code>bsa_dubois_dubois</code>: Du Bois and Du Bois formula (usually the preferred formula
+for adults and children)</p></li>
+<li><p><code>bsa_mosteller</code>: Mosteller formula</p></li>
+<li><p><code>bsa_haycock</code>: Haycock formula</p></li>
+<li><p><code>bsa_gehan_george</code>: Gehan and George formula</p></li>
+<li><p><code>bsa_boyd</code>: Boyd formula</p></li>
+<li><p><code>bsa_fujimoto</code>: Fujimoto formula (often used for Japanese individuals)</p></li>
+<li><p><code>bsa_takahira</code>: Takahira formula (a variant of Du Bois that could be used for
+Japanese individuals; Fujimoto may be preferred)</p></li>
+<li><p><code>bsa_shuter_aslani</code>: Shuter and Aslani formula</p></li>
+<li><p><code>bsa_schlich</code>: Schlich formula</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>'Davy KP, Seals DR. Total blood volume in healthy young and older
-  men. J Appl Physiol 1994; 76: 2059-62'</p>
-<p>'Parker-Jones P, Davy KP, DeSouza CA et al. Absence of age-related decline
-  in total blood volume in physically active females. Am J Physiol 1997; 272:
-  H2534-40'</p>
+    <p>Du Bois D, Du Bois EF (Jun 1916). "A formula to estimate the
+  approximate surface area if height and weight be known". Archives of
+  Internal Medicine. 17 (6): 863–71.
+  https://doi.org/10.1001<!-- %2Farchinte.1916.00080130010002 --></p>
+<p>Mosteller, RD (1987). "Simplified calculation of body-surface
+  area". N Engl J Med. 317 (17): 1098.
+  <a href='https://www.ncbi.nlm.nih.gov/pubmed/3657876'>https://www.ncbi.nlm.nih.gov/pubmed/3657876</a></p>
+<p>Gehan EA, George SL, Cancer Chemother Rep 1970, 54:225-235</p>
+<p>Boyd, Edith (1935). The Growth of the Surface Area of the Human
+  Body. University of Minnesota. The Institute of Child Welfare, Monograph
+  Series, No. x. London: Oxford University Press.</p>
+<p>Fujimoto S, Watanabe T, Sakamoto A, Yukawa K, Morimoto K. Studies
+  on the physical surface area of Japanese. 18. Calculation formulae in three
+  stages over all ages. Nippon Eiseigaku Zasshi 1968;5:443–50.</p>
+<p>Fujimoto S, Watanabe T, Sakamoto A, Yukawa K, Morimoto K. Studies
+  on the physical surface area of Japanese. 18. Calculation formulae in three
+  stages over all ages. Nippon Eiseigaku Zasshi 1968;5:443–50.</p>
+<p>Shuter, B; Aslani, A (2000). "Body surface area: Du bois and Du
+  bois revisited". European Journal of Applied Physiology. 82 (3): 250–254.
+  https://doi.org/10.1007<!-- %2Fs004210050679 --></p>
+<p>Schlich, E; Schumm, M; Schlich, M (2010). "3-D-Body-Scan als
+  anthropometrisches Verfahren zur Bestimmung der spezifischen
+  Körperoberfläche". Ernährungs Umschau. 57: 178–183.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>blood_vol_Nadler</span>(<span class='fl'>1.8</span>, <span class='fl'>80</span>, <span class='kw'>male</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] 5.319061</div><div class='input'><span class='fu'>blood_vol_Nadler</span>(<span class='fl'>1.8</span>, <span class='fl'>160</span>, <span class='kw'>male</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] 7.894261</div><div class='input'><span class='fu'>blood_vol_Nadler</span>(<span class='fl'>1.8</span>, <span class='fl'>80</span>, <span class='kw'>male</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] 4.906475</div><div class='input'><span class='fu'>blood_vol_Lemmens_sedentary</span>(<span class='fl'>1.8</span>, <span class='fl'>80</span>)</div><div class='output co'>#&gt; [1] 5285.997</div><div class='input'><span class='fu'>blood_vol_Lemmens_sedentary</span>(<span class='fl'>1.8</span>, <span class='fl'>160</span>)</div><div class='output co'>#&gt; [1] 7475.528</div><div class='input'><span class='fu'>blood_vol_Lemmens_indexed</span>(<span class='fl'>1.8</span>, <span class='fl'>80</span>)</div><div class='output co'>#&gt; [1] 66.07496</div><div class='input'><span class='fu'>blood_vol_Lemmens_indexed</span>(<span class='fl'>1.8</span>, <span class='fl'>160</span>)</div><div class='output co'>#&gt; [1] 46.72205</div><div class='input'>  <span class='fu'>blood_vol_Lemmens_non_obese</span>(<span class='fl'>80</span>, <span class='kw'>age_y</span> <span class='kw'>=</span> <span class='fl'>25</span>, <span class='kw'>male</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] 6400</div><div class='input'>  <span class='fu'>blood_vol_Lemmens_non_obese</span>(<span class='fl'>80</span>, <span class='kw'>age_y</span> <span class='kw'>=</span> <span class='fl'>75</span>, <span class='kw'>male</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] 4800</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>bsa_dubois_dubois</span>(<span class='fl'>2</span>, <span class='fl'>80</span>)</div><div class='output co'>#&gt; [1] 2.154896</div><div class='input'><span class='fu'>bsa_dubois_dubois</span>(<span class='fl'>1.5</span>, <span class='fl'>80</span>)</div><div class='output co'>#&gt; [1] 1.749225</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/stopifnot'>stopifnot</a></span>(
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/identical'>identical</a></span>(
+    <span class='fu'>bsa_mosteller</span>(<span class='fl'>1.5</span>, <span class='fl'>80</span>),
+    <span class='fu'>bsa_adult</span>(<span class='fl'>1.5</span>, <span class='fl'>80</span>)))</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -203,6 +231,10 @@ not used in the calculation itself, so may be missing.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#functions">Functions</a></li>
 
       <li><a href="#references">References</a></li>
       

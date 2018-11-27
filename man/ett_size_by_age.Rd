@@ -42,3 +42,8 @@ lines(ages, neonate_to_child)
 \references{
 \url{http://anesthesiology.pubs.asahq.org/Article.aspx?articleid=1933172}
 }
+\seealso{
+Other airway equipment: \code{\link{deadspace_total}},
+  \code{\link{ett_vol_ml}}
+}
+\concept{airway equipment}

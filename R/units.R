@@ -4,6 +4,7 @@
 #' returns non-integer French values
 #'
 #' @param x Size in French units, or mm
+#' @family unit conversions
 #' @export
 french_to_diameter_mm <- function(x) {
   stopifnot(x >= 0)

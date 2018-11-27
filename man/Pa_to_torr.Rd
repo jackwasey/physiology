@@ -11,4 +11,9 @@ Pa_to_torr
 \description{
 The conversion is exactly 760 / 101325
 }
+\seealso{
+Other physics: \code{\link{pres_atm_kPa}},
+  \code{\link{svp_sea_level}}, \code{\link{temp_c_to_k}}
+}
+\concept{physics}
 \keyword{datasets}

@@ -18,6 +18,7 @@
 #' ett_vol_ml(ett_size_by_age(1:10))
 #'
 #' @return Volumes of each given ETT in cubic millimeters
+#' @family airway equipment
 #' @export
 ett_vol_ml <- function(diameter_mm) {
   lookup_diam_mm <- c(2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 7, 8)
@@ -55,6 +56,7 @@ ett_vol_ml <- function(diameter_mm) {
 #' lines(ages, neonate_to_child)
 #' @references
 #' \url{http://anesthesiology.pubs.asahq.org/Article.aspx?articleid=1933172}
+#' @family airway equipment
 #' @export
 ett_size_by_age <- function(age_y, cuffed = TRUE) {
   cole <- 4 + age_y / 4

@@ -77,7 +77,12 @@ independent
   \url{https://www.ncbi.nlm.nih.gov/pubmed/8727530}
 }
 \seealso{
-Other airway: \code{\link{deadspace_things_ml}}
+Other respiratory: \code{\link{alveolar_PAO2_mmHg}}
+
+Other airway equipment: \code{\link{ett_size_by_age}},
+  \code{\link{ett_vol_ml}}
 }
-\concept{airway}
-\concept{deadspace dead-space}
+\concept{airway equipment}
+\concept{dead-space}
+\concept{deadspace}
+\concept{respiratory}

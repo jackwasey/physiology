@@ -23,6 +23,7 @@ using namespace Rcpp;
 //' \url{http://www.braeunig.us/space/atmmodel.htm} Validation data:
 //' \url{https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf}
 //' @concept atmospheric pressure
+//' @family physics
 //' @export
 // [[Rcpp::export]]
 NumericVector pres_atm_kPa(NumericVector altitude_m) {
@@ -51,6 +52,7 @@ float getGeopotential(float altitude_km)
 //' @seealso \code{\link{pres_atm_kPa}}
 //' @param altitude_km Altitude in kilometers
 //' @md
+//' @noRd
 //' @keywords internal
 // [[Rcpp::export]]
 float getStandardTemperature(float altitude_km) {

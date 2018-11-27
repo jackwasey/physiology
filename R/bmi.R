@@ -15,6 +15,9 @@
 #' ideal_weight_adult(1.7, male = FALSE)
 #' ideal_weight_adult(6 * 12 * 2.54 / 100, male = TRUE) # 6ft
 #' suppressWarnings(ideal_weight_adult(5, male = FALSE))
+#' @concept BMI
+#' @family body mass index
+#' @family ideal weight
 #' @export
 ideal_weight <- function(height_m, ..., age_y = NULL, male = NULL) {
   if (is.null(age_y) || age_y > 18)
@@ -127,6 +130,7 @@ ideal_weight_Lemmens <- function(height_m, ...) {
 #' @param female_kg_per_inch slope for females
 #' @param ... passed on to validation
 #' @rdname ideal_weight
+#' @noRd
 #' @keywords internal
 ideal_weight_linear <- function(height_m, male,
                                 height_mininch,

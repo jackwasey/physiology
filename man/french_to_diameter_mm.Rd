@@ -16,3 +16,4 @@ diameter_mm_to_french(x)
 Convert French size of a catheter to diameter in mm. Currently accepts or
 returns non-integer French values
 }
+\concept{unit conversions}

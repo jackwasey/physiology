@@ -12,6 +12,7 @@
 #'  rownames(acidbase) <- paste("bicarb", bicarbonate)
 #'  colnames(acidbase) <- paste("PaCO2", pp_co2)
 #'  acidbase
+#' @family acid-base
 #' @export
 henderson_hasselbalch <- function(bicarbonate, pp_co2) {
   6.1 + log10(bicarbonate / (0.0307 * pp_co2))

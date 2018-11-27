@@ -9,4 +9,3 @@ is_adult(age_y)
 \description{
 Is age >= 18 years
 }
-\keyword{internal}
