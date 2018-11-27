@@ -26,6 +26,7 @@ knitr::opts_chunk$set(
 ## Calculate physiologic characteristics of awake and anesthetized adults, children and infants
 
 ```{r pkgdesc, results='asis', echo = FALSE}
+# This relies on having the package installed
 cat(
   unclass(
     utils::packageDescription("physiology")

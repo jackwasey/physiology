@@ -1,9 +1,9 @@
-Added winbuilder test and resolved notes which appeared in previous submission.
+New functions and tests from contributor.
 
 ## Test environments
-* local OS X install, R 3.5.0
-* ubuntu 14.04 (on travis-ci), R 3.5.0, R-devel
-* appveyor Windows Server 2012 R2 x64, R version 3.5.0 Patched
+* local OS X install, R 3.5.1
+* ubuntu 14.04 (on travis-ci), R 3.5.1, R-devel
+* appveyor Windows Server 2012 R2 x64, R version 3.5.1 Patched
 * winbuilder
 
 ## R CMD check results

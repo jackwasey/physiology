@@ -9,10 +9,20 @@ r:
   - release
   - devel
 
-# only things not in DESCRIPTION
 r_packages:
   - pkgdown
   - covr
+# this is duplicated from DESCRIPTION, to allow travis to cache
+  - Rcpp
+  - childsds
+  - dplyr
+  - ggplot2
+  - magrittr
+  - rmarkdown
+  - testthat
+  - tidyr
+  - knitr
+  - spelling
 
 # also need suggest lintr in DESCRIPTION for the testthat test
 r_github_packages:
@@ -32,8 +42,8 @@ matrix:
   include:
     - r: release
       env:
-        - LINTR_COMMENT_BOT=true
-        - DEPLOY_PHYSIOLOGY=true
+      - LINTR_COMMENT_BOT=true
+      - DEPLOY_PHYSIOLOGY=true
     - r: devel
       env: COVR_PHYSIOLOGY=true
     - r: oldrel
@@ -68,15 +78,16 @@ after_success:
       Rscript -e 'pkgdown::build_site()'
     fi
 
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_PAT
-  keep-history: true
-  local-dir: docs
-  on:
-    branch: master
-    condition: $DEPLOY_PHYSIOLOGY = true
+# Currently we just serve contents of /doc not github pages
+#deploy:
+#  provider: pages
+#  skip-cleanup: true
+#  github-token: $GITHUB_PAT
+#  keep-history: true
+#  local-dir: docs
+#  on:
+#    branch: master
+#    condition: $DEPLOY_PHYSIOLOGY = true
 
 notifications:
   email:

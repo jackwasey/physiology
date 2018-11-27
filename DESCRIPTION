@@ -1,7 +1,7 @@
 Package: physiology
 Title: Calculate physiologic characteristics of awake and
     anesthetized adults, children and infants
-Version: 1.0.1.9000
+Version: 1.0.2
 Authors@R: 
     c(person(given = "Jack O. Wasey",
              role = c("aut", "cre", "cph"),
@@ -32,11 +32,12 @@ Suggests:
     ggplot2,
     lintr,
     magrittr,
-    reshape2,
     rmarkdown,
     testthat,
     knitr,
-    spelling
+    spelling,
+    tidyr,
+    utils
 LinkingTo: 
     Rcpp
 VignetteBuilder: 

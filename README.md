@@ -18,11 +18,11 @@ status](https://www.r-pkg.org/badges/version/physiology)](https://cran.r-project
 ## Calculate physiologic characteristics of awake and anesthetized adults, children and infants
 
 A variety of formulae are provided for estimation of physiologic
-characteristics of infants, children, and adults. For example,
-calculations of ideal weight, airway dead-space, and the alveolar gas
-equation. Each formula is referenced to the original publication. Future
-functions will cover more material with a focus on anaesthesia, critical
-care and peri-operative medicine.
+characteristics of infants, children, and adults. Calculations include:
+body surface area, ideal weight, airway dead-space, the alveolar gas
+equation, and GFR. Each formula is referenced to the original
+publication. Future functions will cover more material with a focus on
+anaesthesia, critical care and peri-operative medicine.
 
 Functions are provided for estimation of a range of physiologic
 characteristics of infant, child and adult humans.
