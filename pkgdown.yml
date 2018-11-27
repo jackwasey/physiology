@@ -1,8 +1,5 @@
 pandoc: '2.2'
 pkgdown: 1.2.0
 pkgdown_sha: ~
-articles:
-  Everest: Everest.html
-  IdealWeightComparison: IdealWeightComparison.html
-  NeonatalVentilation: NeonatalVentilation.html
+articles: []
 
