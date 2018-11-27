@@ -33,9 +33,9 @@ matrix:
       r_build_args: --no-build-vignettes --no-manual --resave-data=no
       r_check_args: -no-build-vignettes --no-vignettes --ignore-vignettes --no-codoc --no-manual
   include:
-    - r: devel
     - r: release
       env: LINTR_COMMENT_BOT=true
+    - r: devel
       env: COVR_PHYSIOLOGY=true
     - r: oldrel
       r_build_args: --no-build-vignettes --no-manual --resave-data=no
