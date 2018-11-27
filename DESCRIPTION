@@ -1,7 +1,7 @@
 Package: physiology
 Title: Calculate physiologic characteristics of awake and
     anesthetized adults, children and infants
-Version: 1.0.2
+Version: 1.2
 Authors@R: 
     c(person(given = "Jack O. Wasey",
              role = c("aut", "cre", "cph"),
