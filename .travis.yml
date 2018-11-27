@@ -33,11 +33,13 @@ warnings_are_errors: true
 before_script:
  #- sed -i'' '/covrignore/d' .Rbuildignore
 # - sed -i'' '/lintr/d' .Rbuildignore
- - sed -i '/lintr/d' .Rbuildignore
+  - ls -lR
+  - sed -i '/lintr/d' .Rbuildignore
+  - cat .Rbuildignore
+  - Rscript -e 'lintr::lint_package()'
 
 after_success:
   - Rscript -e 'covr::codecov()'
-  - Rscript -e 'lintr::lint_package()'
   - Rscript -e 'roxygen2::roxygenise(c("collate", "rd""))'
   - Rscript -e 'pkgdown::build_site()'
 
