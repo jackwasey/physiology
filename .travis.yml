@@ -9,12 +9,12 @@ r:
   - release
   - devel
 
+# only things not in DESCRIPTION
 r_packages:
   - pkgdown
-  - knitr
-  - rmarkdown
   - covr
 
+# also need suggest lintr in DESCRIPTION for the testthat test
 r_github_packages:
   - jimhester/lintr
 
@@ -28,10 +28,6 @@ env:
 
 matrix:
   fast_finish: true
-  allow_failures:
-    - r: oldrel
-      r_build_args: --no-build-vignettes --no-manual --resave-data=no
-      r_check_args: -no-build-vignettes --no-vignettes --ignore-vignettes --no-codoc --no-manual
   include:
     - r: release
       env: LINTR_COMMENT_BOT=true
@@ -39,7 +35,13 @@ matrix:
       env: COVR_PHYSIOLOGY=true
     - r: oldrel
       r_build_args: --no-build-vignettes --no-manual --resave-data=no
-      r_check_args: -no-build-vignettes --no-vignettes --ignore-vignettes --no-codoc --no-manual
+      r_check_args: --no-build-vignettes --no-vignettes --ignore-vignettes --no-codoc --no-manual
+  allow_failures:
+    - r: devel
+      env: COVR_PHYSIOLOGY=true
+    - r: oldrel
+      r_build_args: --no-build-vignettes --no-manual --resave-data=no
+      r_check_args: --no-build-vignettes --no-vignettes --ignore-vignettes --no-codoc --no-manual
 
 repos:
   CRAN: https://cloud.r-project.org
@@ -52,7 +54,7 @@ before_script:
 
 after_success:
   - if [ "$LINTR_COMMENT_BOT" = "true" ]; then
-      Rscript -e "lintr::lint_package()"; fi
+      R CMD INSTALL "$PKG_TARBALL" && Rscript -e "lintr::lint_package()"; fi
   - if [ "$COVR_PHYSIOLOGY" = "true" ]; then
       Rscript -e "covr::codecov()"; fi
   - Rscript -e 'roxygen2::roxygenise(c("collate", "rd""))'
