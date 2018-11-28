@@ -60,7 +60,9 @@ independent
   height <- seq(1, 2, 0.05)
   male <- rep(FALSE, length(height))
   iw <- ideal_weight_adult(height_m = height, male = male)
+  \dontrun{
   plot(iw, deadspace_anatomic_adult(ideal_weight_kg = height))
+  }
 
   # discontinuity at age 6 is driven by ideal weight more than the
   # lograithmic calculation
@@ -68,8 +70,10 @@ independent
   youngest = 3
   oldest = 9
   ages <- seq(youngest, oldest, (oldest - youngest) / (length(iw) - 1))
+  \dontrun{
   plot(iw, deadspace_anatomic_child(ideal_weight_kg = iw, age_y = ages),
        type = "l")
+  }
 }
 \references{
 \url{http://www.atsjournals.org/doi/abs/10.1164/arrd.1971.104.2.215}

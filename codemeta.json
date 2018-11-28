@@ -10,7 +10,7 @@
   "codeRepository": "https://jackwasey.github.io/physiology/",
   "issueTracker": "https://github.com/jackwasey/physiology/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.2",
+  "version": "1.2.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -206,7 +206,6 @@
   ],
   "releaseNotes": "https://github.com/jackwasey/physiology/blob/master/NEWS.md",
   "readme": "https://github.com/jackwasey/physiology/blob/master/README.md",
-  "fileSize": "45.682KB",
   "contIntegration": [
     "https://travis-ci.org/jackwasey/physiology",
     "https://ci.appveyor.com/project/jackwasey/physiology",
