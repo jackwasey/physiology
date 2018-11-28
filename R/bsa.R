@@ -37,10 +37,10 @@ bsa_simple <- function(coefficient, w_exp, h_exp) {
 
 #' @describeIn bsa Du Bois and Du Bois formula (usually the preferred formula
 #'   for adults and children)
-#' @references Du Bois D, Du Bois EF (Jun 1916). "A formula to estimate the
-#'   approximate surface area if height and weight be known". Archives of
-#'   Internal Medicine. 17 (6): 863–71.
-#'   \url{https://doi.org/10.1001%2Farchinte.1916.00080130010002}
+#' @references \url{https://doi.org/10.1001%2Farchinte.1916.00080130010002}{Du
+#' Bois D, Du Bois EF (Jun 1916). "A formula to estimate the
+#' approximate surface area if height and weight be known". Archives of
+#' Internal Medicine. 17 (6): 863–71.}
 #' @export
 bsa_dubois_dubois <- bsa_simple(coefficient = 0.007184,
                                 w_exp = 0.425, h_exp = 0.725)
@@ -53,10 +53,10 @@ bsa_dubois_dubois <- bsa_simple(coefficient = 0.007184,
 bsa_mosteller <- bsa_simple(coefficient = 1 / 60, w_exp = 0.5, h_exp = 0.5)
 
 #' @describeIn bsa Haycock formula
-#' @references Haycock, GB, Schwartz, GJ, Wisotsky, DH (1978). "Geometric method
+#' @references \url{https://doi.org/10.1016%2Fs0022-3476%2878%2980601-5}{
+#' Haycock, GB, Schwartz, GJ, Wisotsky, DH (1978). "Geometric method
 #'   for measuring body surface area: A height-weight formula validated in
-#'   infants, children and adults". J Pediatr. 93: 62–66.
-#'   \url{https://doi.org/10.1016%2Fs0022-3476%2878%2980601-5}
+#'   infants, children and adults". J Pediatr. 93: 62–66.}
 #' @export
 bsa_haycock <- bsa_simple(coefficient = 0.024265,
                           w_exp = 0.5378, h_exp = 0.3964)
@@ -96,9 +96,9 @@ bsa_fujimoto <- bsa_simple(coefficient = 0.008883, w_exp = 0.444, h_exp = 0.663)
 bsa_takahira <- bsa_simple(coefficient = 0.007241, w_exp = 0.425, h_exp = 0.725)
 
 #' @describeIn bsa Shuter and Aslani formula
-#' @references Shuter, B; Aslani, A (2000). "Body surface area: Du bois and Du
-#'   bois revisited". European Journal of Applied Physiology. 82 (3): 250–254.
-#'   \url{https://doi.org/10.1007%2Fs004210050679}
+#' @references \href{https://doi.org/10.1007%2Fs004210050679}{Shuter, B; Aslani,
+#' A (2000). "Body surface area: Du Bois and Du Bois revisited". European
+#' Journal of Applied Physiology. 82 (3): 250–254.}
 #' @export
 bsa_shuter_aslani <- bsa_simple(coefficient = 0.00949,
                                 w_exp = 0.441, h_exp = 0.655)
