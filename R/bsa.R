@@ -40,7 +40,7 @@ bsa_simple <- function(coefficient, w_exp, h_exp) {
 #' @references Du Bois D, Du Bois EF (Jun 1916). "A formula to estimate the
 #'   approximate surface area if height and weight be known". Archives of
 #'   Internal Medicine. 17 (6): 863–71.
-#'   https://doi.org/10.1001%2Farchinte.1916.00080130010002
+#'   \url{https://doi.org/10.1001%2Farchinte.1916.00080130010002}
 #' @export
 bsa_dubois_dubois <- bsa_simple(coefficient = 0.007184,
                                 w_exp = 0.425, h_exp = 0.725)
@@ -98,7 +98,7 @@ bsa_takahira <- bsa_simple(coefficient = 0.007241, w_exp = 0.425, h_exp = 0.725)
 #' @describeIn bsa Shuter and Aslani formula
 #' @references Shuter, B; Aslani, A (2000). "Body surface area: Du bois and Du
 #'   bois revisited". European Journal of Applied Physiology. 82 (3): 250–254.
-#'   https://doi.org/10.1007%2Fs004210050679
+#'   \url{https://doi.org/10.1007%2Fs004210050679}
 #' @export
 bsa_shuter_aslani <- bsa_simple(coefficient = 0.00949,
                                 w_exp = 0.441, h_exp = 0.655)

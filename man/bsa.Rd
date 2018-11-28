@@ -86,11 +86,6 @@ stopifnot(
     bsa_adult(1.5, 80)))
 }
 \references{
-Du Bois D, Du Bois EF (Jun 1916). "A formula to estimate the
-  approximate surface area if height and weight be known". Archives of
-  Internal Medicine. 17 (6): 863–71.
-  https://doi.org/10.1001%2Farchinte.1916.00080130010002
-
 Mosteller, RD (1987). "Simplified calculation of body-surface
   area". N Engl J Med. 317 (17): 1098.
   \url{https://www.ncbi.nlm.nih.gov/pubmed/3657876}
@@ -108,10 +103,6 @@ Fujimoto S, Watanabe T, Sakamoto A, Yukawa K, Morimoto K. Studies
 Fujimoto S, Watanabe T, Sakamoto A, Yukawa K, Morimoto K. Studies
   on the physical surface area of Japanese. 18. Calculation formulae in three
   stages over all ages. Nippon Eiseigaku Zasshi 1968;5:443–50.
-
-Shuter, B; Aslani, A (2000). "Body surface area: Du bois and Du
-  bois revisited". European Journal of Applied Physiology. 82 (3): 250–254.
-  https://doi.org/10.1007%2Fs004210050679
 
 Schlich, E; Schumm, M; Schlich, M (2010). "3-D-Body-Scan als
   anthropometrisches Verfahren zur Bestimmung der spezifischen
