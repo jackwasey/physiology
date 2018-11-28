@@ -1,3 +1,5 @@
+^Meta$
+^doc$
 ^codemeta\.json$
 ^\.travis\.yml$
 ^physiology\.Rproj$
