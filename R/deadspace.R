@@ -66,10 +66,18 @@ deadspace_anatomic_adult <- function(ideal_weight_kg = NULL) {
 #'   child
 #' @export
 deadspace_anatomic_child <- function(ideal_weight_kg, age_y = NULL) {
-  if (is.null(age_y) || age_y >= 6)
-    deadspace_anatomic_adult(ideal_weight_kg = ideal_weight_kg)
-  else
-    ideal_weight_kg * (3.28 - 0.56 * log(1 + age_y))
+  out <- numeric(length(ideal_weight_kg))
+  a <- deadspace_anatomic_adult(ideal_weight_kg = ideal_weight_kg)
+  if (!is.null(age_y)) {
+    old <- age_y >= 6
+    stopifnot(length(age_y) == length(ideal_weight_kg))
+    b <- ideal_weight_kg * (3.28 - 0.56 * log(1 + age_y))
+    out[old] <- a[old]
+    out[!old] <- b[!old]
+    return(out)
+  }
+  warning("Returning adult anatomic deadspace estimate because age not given")
+  a
 }
 
 #' @describeIn deadspace_total intrathoracic component of dead-space is age

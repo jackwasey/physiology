@@ -1,4 +1,5 @@
-New functions and tests from contributor.
+New functions and tests from contributor. Fixed bug thanks to CRAN check that
+everyone else missed.
 
 ## Test environments
 * local OS X install, R 3.5.1
