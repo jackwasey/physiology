@@ -1,0 +1,48 @@
+```{r include = FALSE}
+library("physiology")
+library("ggplot2")
+```
+# Summary
+
+There are numerous well-established formulae to estimate physiologic characteristics of humans. These have a wide variety of uses, from real-time analysis of an unfolding clinical situation, to improving inferences from retrospective data, e.g., by accounting for body mass index (BMI).
+
+The goal of the 'physiology' package for R is to assimilate some core formulae, and implement them carefully with academic referencing. This avoids each researcher individually implementing these formulae on her own, with the potential to introduce errors.
+
+The main areas covered relate to body dimensions, and renal function. These both have high relevance to pharmaceutical research: many drugs are dosed based on weight, and some scale with body surface area. Many drugs have at least partial renal excretion, so estimating renal function from common laboratory measurements is important.
+
+```{r quickgfr, echo = TRUE}
+egfr(creatinine_mgdl_to_uM(1.4), 
+     age_y = 2,
+     height_m = 0.9,
+     male = FALSE, 
+     black = TRUE)
+```
+
+```{r teenagers, echo = FALSE}
+# how does eGFR vary with height and age in teenagers?
+hw <- expand.grid(
+        Age = seq(20, 100, 20),
+        #Height = c(seq.default(1.2, 1.8, by = 0.2)), 
+        Height = 1.6,
+        Male = c("Male", "Female"),
+        Black = c("Black", "Not Black"))
+suppressWarnings(
+        res <- apply(hw, 1, FUN = function(x) {
+                egfr(scr_uM = 80,
+                     age_y = as.integer(x["Age"]),
+                     height_m = as.integer(x["Height"]), 
+                     #height_m = 1.6,
+                     male = x["Male"] == "Male", 
+                     black = x["Black"] == "Black")}
+                )
+        )
+plt <- cbind(hw, eGFR = res)
+ggplot(plt, aes(x = Age, y = eGFR)) + 
+        geom_col() + 
+        facet_wrap(~ Male + Black) +
+        ylim(0, 150)
+```
+
+In anesthesia, accurate measurement of some important features is hard or impossible. This is most true for mechanical ventilation of infants, where the 'dead space' of equipment often limits reliable measurements of things like tidal volume and end-tidal carbon dioxide (Feldman). Although this code is not intended to be used real-time, it does provide an educational tool, and a means to improve the intepretion of retrospective ventilation data in critical care or the operating room.
+
+# References
