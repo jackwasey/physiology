@@ -3,12 +3,11 @@
 #'   adult algorithm, Devine. If an age is specified and less than 18 years, the
 #'   Traub function will be used.
 #' @template height_m
-#' @template male
 #' @template dots
 #' @param age_y numeric vector, age(s) in years. Extremely exact age is not
 #'   required, so for age in days or months, simplest just to divide. This is
 #'   not used in the calculation itself, so may be missing.
-#' @param ... passed to validation.
+#' @template male
 #' @rdname ideal_weight
 #' @examples
 #' ideal_weight_adult(1.7, male = TRUE)
@@ -129,7 +128,6 @@ ideal_weight_Lemmens <- function(height_m, ...) {
 #' @param male_kg_per_inch slope for males
 #' @param female_kg_per_inch slope for females
 #' @param ... passed on to validation
-#' @rdname ideal_weight
 #' @noRd
 #' @keywords internal
 ideal_weight_linear <- function(height_m, male,
@@ -157,7 +155,6 @@ ideal_weight_linear <- function(height_m, male,
 #'   normal human adults. Nadler SB, Hidalgo JH, Bloch T.
 #' @inheritParams ideal_weight_adult
 #' @template weight_kg
-#' @param ... passed on to validation
 #' @examples
 #' blood_vol_Nadler(1.8, 80, male = TRUE)
 #' blood_vol_Nadler(1.8, 160, male = TRUE)

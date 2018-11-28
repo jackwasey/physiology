@@ -37,8 +37,6 @@ required, so for age in days or months, simplest just to divide. This is
 not used in the calculation itself, so may be missing.}
 
 \item{male}{logical value(s) whether patient is male. TRUE or FALSE.}
-
-\item{...}{passed to validation.}
 }
 \description{
 \code{ideal_weight_adult} gives the ideal weight using default

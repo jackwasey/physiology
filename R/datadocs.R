@@ -6,5 +6,4 @@
 #' @concept deadspace
 #' @concept dead-space
 #' @references Feldman, J, 2015, Pediatric Anesthesia
-#' @noRd
 "deadspace_things_ml"

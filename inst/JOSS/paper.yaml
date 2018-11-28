@@ -3,8 +3,11 @@ title: "Calculate physiologic characteristics of awake and anesthetized adults, 
 authors:
   - affiliation: 1
     name: Jack O Wasey
-    orcid: 0000-0003-3738-4637
-date: 27 November 2018
+    orcid: "0000-0003-3738-4637"
+  - affiliation: 2
+    name: Bill Denney
+    orcid: "0000-0002-5759-428X"
+date: 28 November 2018
 output: html_document
 bibliography:
   - r.bib
@@ -13,5 +16,7 @@ tags:
   - physiology
 affiliations:
   - index: 1
-    name: The Childrens Hospital of Philadelphia
+    name: "The Children's Hospital of Philadelphia"
+  - index: 2
+    name: "Human Predictions, LLC"
 ---

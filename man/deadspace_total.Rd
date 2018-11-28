@@ -79,8 +79,8 @@ independent
 \seealso{
 Other respiratory: \code{\link{alveolar_PAO2_mmHg}}
 
-Other airway equipment: \code{\link{ett_size_by_age}},
-  \code{\link{ett_vol_ml}}
+Other airway equipment: \code{\link{deadspace_things_ml}},
+  \code{\link{ett_size_by_age}}, \code{\link{ett_vol_ml}}
 }
 \concept{airway equipment}
 \concept{dead-space}

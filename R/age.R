@@ -56,16 +56,19 @@ age_m_to_y <- function(age_m) {
 }
 
 #' @rdname age_m
+#' @export
 age_d_to_y <- function(age_d) {
   age_d / 365.25
 }
 
 #' @rdname age_m
+#' @export
 age_d_to_m <- function(age_d) {
   age_d / (365.25 / 12)
 }
 
 #' Is age >= 18 years
+#' @template age_y
 #' @export
 is_adult <- function(age_y) {
   age_y >= 18

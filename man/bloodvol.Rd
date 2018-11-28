@@ -22,7 +22,7 @@ blood_vol_Lemmens_non_obese(weight_kg, age_y, male, ...)
 
 \item{male}{logical}
 
-\item{...}{passed on to validation}
+\item{...}{arguments passed to downstream functions, e.g. \code{warn = TRUE}}
 
 \item{age_y}{numeric vector, age(s) in years. Extremely exact age is not
 required, so for age in days or months, simplest just to divide. This is

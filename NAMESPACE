@@ -2,6 +2,8 @@
 
 export(Pa_to_torr)
 export(adj_weight_adult)
+export(age_d_to_m)
+export(age_d_to_y)
 export(age_from_dates)
 export(age_m_to_y)
 export(alveolar_PAO2_mmHg)
