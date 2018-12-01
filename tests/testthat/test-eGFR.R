@@ -402,3 +402,19 @@ test_that("egfr calcs warn or adjust correctly with IDMS-calibrated assays", {
                 idms_assay = FALSE)
   )
 })
+
+test_that("age warnings", {
+  expect_warning(
+    egfr_mdrd(scr_uM = 50, age_y = 17.9, male = FALSE, black = TRUE),
+    regexp = "age")
+  expect_warning(
+    egfr_ckdepi(scr_uM = 50, age_y = 17.9, male = FALSE, black = TRUE),
+    regexp = "age")
+})
+
+test_that("creatinine/gfr warning", {
+  expect_warning(
+    egfr_ckdepi(scr_uM = 450, age_y = 75, male = TRUE, black = FALSE),
+    regexp = "caution")
+
+})

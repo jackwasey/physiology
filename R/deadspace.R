@@ -87,6 +87,7 @@ deadspace_anatomic_child <- function(ideal_weight_kg, age_y = NULL) {
 deadspace_intrathoracic_ml <- function(ideal_weight_kg)
   1.03 * ideal_weight_kg
 
+# nocov start
 deadspace_extrathoracic <- function(ideal_weight_kg = NULL, age_y = NULL) {
   .NotYetImplemented()
 }
@@ -94,6 +95,7 @@ deadspace_extrathoracic <- function(ideal_weight_kg = NULL, age_y = NULL) {
 deadspace_physiologic <- function(ideal_weight_kg) {
   .NotYetImplemented()
 }
+# nocov end
 
 #' Calculate equipment deadspace in ventilator breathing circuit
 #'
@@ -137,14 +139,10 @@ deadspace_equipment_ml <-
         "infant" = physiology::deadspace_things_ml$humidifier_infant,
         "none" = 0)
     out <- out + ifelse(elbow, physiology::deadspace_things_ml$elbow, 0)
-    if (is.logical(flexible))
-      out <- out +
-      ifelse(flexible, physiology::deadspace_things_ml$flexible_adult, 0)
-    else
-      out <- switch(
-        match.arg(flexible),
-        "none" = 0,
-        "compressed" = physiology::deadspace_things_ml$flexible_compressed,
-        "extended" = physiology::deadspace_things_ml$flexible_extended) + out
+    out <- out + switch(
+      match.arg(flexible),
+      "none" = 0,
+      "compressed" = physiology::deadspace_things_ml$flexible_compressed,
+      "extended" = physiology::deadspace_things_ml$flexible_extended) + out
     out
   }

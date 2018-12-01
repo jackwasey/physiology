@@ -29,3 +29,14 @@ test_that("child or adult deadspace", {
 test_that("intrathoracic", {
   expect_equal(deadspace_intrathoracic_ml(ideal_weight_kg = 100), 103)
 })
+
+test_that("logical for flexible equipment deadspace", {
+  expect_true(deadspace_equipment_ml(flexible = "compressed") <
+                deadspace_equipment_ml(flexible = "extended"))
+  expect_true(deadspace_equipment_ml(elbow = TRUE) >
+                deadspace_equipment_ml(elbow = FALSE))
+  expect_true(deadspace_equipment_ml(elbow = TRUE, flexible = "extended") >
+                deadspace_equipment_ml(elbow = FALSE, flexible = "extended"))
+  expect_true(deadspace_equipment_ml(elbow = FALSE, flexible = "extended") >
+                deadspace_equipment_ml(elbow = FALSE))
+})

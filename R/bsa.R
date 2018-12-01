@@ -25,6 +25,10 @@ bsa_adult <- function(height_m, weight_kg, ...) {
   bsa_mosteller(height_m, weight_kg, ...)
 }
 
+# nocov start
+#
+# covr can't handle the following functional code
+
 # A helper to simplify the repetitiveness of the options for BSA calculation
 bsa_simple <- function(coefficient, w_exp, h_exp) {
   function(height_m, weight_kg, ...) {
@@ -34,6 +38,8 @@ bsa_simple <- function(coefficient, w_exp, h_exp) {
     coefficient * (weight_kg ^ w_exp) * ((height_m * 100) ^ h_exp)
   }
 }
+
+# nocov end
 
 #' @describeIn bsa Du Bois and Du Bois formula (usually the preferred formula
 #'   for adults and children)
