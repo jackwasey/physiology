@@ -7,13 +7,7 @@
 \alias{physiology}
 \title{physiology}
 \description{
-A variety of formulae are provided for estimation
-    of physiologic characteristics of infants, children, and adults.
-    Calculations include: body surface area, ideal weight, airway
-    dead-space, the alveolar gas equation, and GFR.  Each formula is
-    referenced to the original publication. Future functions will cover
-    more material with a focus on anaesthesia, critical care and
-    peri-operative medicine.
+A variety of formulae are provided for estimation of physiologic characteristics of infants, children, and adults. Calculations include: body surface area, ideal weight, airway dead-space, the alveolar gas equation, and GFR. Each formula is referenced to the original publication. Future functions will cover more material with a focus on anaesthesia, critical care and peri-operative medicine.
 }
 \seealso{
 Useful links:
@@ -24,11 +18,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Jack O. Wasey \email{jack@jackwasey.com} (0000-0003-3738-4637) [copyright holder]
+\strong{Maintainer}: Jack O. Wasey \email{jack@jackwasey.com} (\href{https://orcid.org/0000-0003-3738-4637}{ORCID}) [copyright holder]
 
 Other contributors:
 \itemize{
-  \item Bill Denney \email{wdenney@humanpredictions.com} (0000-0002-5759-428X) [contributor]
+  \item Bill Denney \email{wdenney@humanpredictions.com} (\href{https://orcid.org/0000-0002-5759-428X}{ORCID}) [contributor]
 }
 
 }

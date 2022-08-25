@@ -4,9 +4,12 @@
 \alias{deadspace_equipment_ml}
 \title{Calculate equipment deadspace in ventilator breathing circuit}
 \usage{
-deadspace_equipment_ml(humidifier = c("adult", "infant", "none"),
-  elbow = TRUE, flexible = c("none", "compressed", "extended"),
-  min = 0)
+deadspace_equipment_ml(
+  humidifier = c("adult", "infant", "none"),
+  elbow = TRUE,
+  flexible = c("none", "compressed", "extended"),
+  min = 0
+)
 }
 \arguments{
 \item{humidifier}{Single value, if \code{TRUE}, the default, then we assume

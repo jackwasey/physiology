@@ -4,7 +4,9 @@
 \name{Pa_to_torr}
 \alias{Pa_to_torr}
 \title{Conversion factor from Pa to torr (mmHg)}
-\format{An object of class \code{numeric} of length 1.}
+\format{
+An object of class \code{numeric} of length 1.
+}
 \usage{
 Pa_to_torr
 }
@@ -12,8 +14,10 @@ Pa_to_torr
 The conversion is exactly 760 / 101325
 }
 \seealso{
-Other physics: \code{\link{pres_atm_kPa}},
-  \code{\link{svp_sea_level}}, \code{\link{temp_c_to_k}}
+Other physics: 
+\code{\link{pres_atm_kPa}()},
+\code{\link{svp_sea_level}()},
+\code{\link{temp_c_to_k}()}
 }
 \concept{physics}
 \keyword{datasets}

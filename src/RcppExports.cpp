@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // pres_atm_kPa
 NumericVector pres_atm_kPa(NumericVector altitude_m);
 RcppExport SEXP _physiology_pres_atm_kPa(SEXP altitude_mSEXP) {

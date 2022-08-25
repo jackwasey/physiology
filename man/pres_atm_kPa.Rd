@@ -20,9 +20,9 @@ Get mean atmospheric pressure at given altitude in kPa
 }
 \section{Functions}{
 \itemize{
-\item \code{pres_atm_frac}: Get fraction of mean atomspheric pressure at sea level
-}}
+\item \code{pres_atm_frac()}: Get fraction of mean atomspheric pressure at sea level
 
+}}
 \examples{
 pres_atm_kPa(-430.5) # Dead Sea
 pres_atm_kPa(0)
@@ -42,8 +42,10 @@ Below 51 km: Practical Meteorology by Roland Stull, pg 12. Above 51 km:
 \url{https://www.avs.org/AVS/files/c7/c7edaedb-95b2-438f-adfb-36de54f87b9e.pdf}
 }
 \seealso{
-Other physics: \code{\link{Pa_to_torr}},
-  \code{\link{svp_sea_level}}, \code{\link{temp_c_to_k}}
+Other physics: 
+\code{\link{Pa_to_torr}},
+\code{\link{svp_sea_level}()},
+\code{\link{temp_c_to_k}()}
 }
 \concept{atmospheric pressure}
 \concept{physics}

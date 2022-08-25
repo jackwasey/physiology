@@ -28,6 +28,7 @@ Molecular weight is 113.12 g/mol from
 \seealso{
 \code{\link{egfr}}
 
-Other renal: \code{\link{egfr}}
+Other renal: 
+\code{\link{egfr}()}
 }
 \concept{renal}

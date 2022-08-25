@@ -8,8 +8,13 @@
 \alias{deadspace_intrathoracic_ml}
 \title{Estimate ventilation dead-space}
 \usage{
-deadspace_total(ideal_weight_kg, age_y = NULL, elbow_ml = 10,
-  humidifier_ml = 7, ett_diameter_mm = NULL)
+deadspace_total(
+  ideal_weight_kg,
+  age_y = NULL,
+  elbow_ml = 10,
+  humidifier_ml = 7,
+  ett_diameter_mm = NULL
+)
 
 deadspace_anatomic(ideal_weight_kg, age_y = NULL)
 
@@ -45,17 +50,17 @@ Estimate ventilation dead-space
 }
 \section{Functions}{
 \itemize{
-\item \code{deadspace_anatomic}: Estimate anatomic dead-space
+\item \code{deadspace_anatomic()}: Estimate anatomic dead-space
 
-\item \code{deadspace_anatomic_adult}: Estimate anatomic dead-space in an adult
+\item \code{deadspace_anatomic_adult()}: Estimate anatomic dead-space in an adult
 
-\item \code{deadspace_anatomic_child}: Estimate anatomic dead-space in an infant or
+\item \code{deadspace_anatomic_child()}: Estimate anatomic dead-space in an infant or
 child
 
-\item \code{deadspace_intrathoracic_ml}: intrathoracic component of dead-space is age
+\item \code{deadspace_intrathoracic_ml()}: intrathoracic component of dead-space is age
 independent
-}}
 
+}}
 \examples{
   height <- seq(1, 2, 0.05)
   male <- rep(FALSE, length(height))
@@ -81,10 +86,13 @@ independent
   \url{https://www.ncbi.nlm.nih.gov/pubmed/8727530}
 }
 \seealso{
-Other respiratory: \code{\link{alveolar_PAO2_mmHg}}
+Other respiratory: 
+\code{\link{alveolar_PAO2_mmHg}()}
 
-Other airway equipment: \code{\link{deadspace_things_ml}},
-  \code{\link{ett_size_by_age}}, \code{\link{ett_vol_ml}}
+Other airway equipment: 
+\code{\link{deadspace_things_ml}},
+\code{\link{ett_size_by_age}()},
+\code{\link{ett_vol_ml}()}
 }
 \concept{airway equipment}
 \concept{dead-space}

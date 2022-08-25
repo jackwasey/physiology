@@ -13,7 +13,9 @@ temp_c_to_k(temp_c)
 Temperature in Kelvin from Celsius
 }
 \seealso{
-Other physics: \code{\link{Pa_to_torr}},
-  \code{\link{pres_atm_kPa}}, \code{\link{svp_sea_level}}
+Other physics: 
+\code{\link{Pa_to_torr}},
+\code{\link{pres_atm_kPa}()},
+\code{\link{svp_sea_level}()}
 }
 \concept{physics}
