@@ -20,4 +20,4 @@ man-roxygen
 physiology\.Rcheck
 physiology_.*\.tar\.gz
 ^\.github$
-.lintr
+^\.lintr$
