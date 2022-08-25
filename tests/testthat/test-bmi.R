@@ -211,9 +211,15 @@ test_that("height, gender funcs invalid input", {
 
     #mismatch length
     expect_error(do.call(f, list(height_m = c(1.5, 2), male = TRUE)), info = f)
-    expect_error(do.call(f, list(height_m = 2, male = c(TRUE, FALSE))), info = f)
+    expect_error(
+      do.call(f, list(height_m = 2, male = c(TRUE, FALSE))),
+      info = f
+    )
     expect_error(do.call(f, list(height_m = c(1.5, 2), male = NULL)), info = f)
-    expect_error(do.call(f, list(height_m = NULL, male = c(TRUE, FALSE))), info = f)
+    expect_error(
+      do.call(f, list(height_m = NULL, male = c(TRUE, FALSE))),
+      info = f
+    )
     expect_error(do.call(f, list(height_m = c(1.5, NA), male = TRUE)), info = f)
     expect_error(do.call(f, list(height_m = 2, male = c(NA, TRUE))), info = f)
     expect_error(do.call(f, list(height_m = NULL, male = FALSE)), info = f)
