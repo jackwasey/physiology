@@ -27,13 +27,15 @@ ideal_weight <- function(height_m, ..., age_y = NULL, male = NULL) {
 
 #' @describeIn ideal_weight Ideal weight of an adult
 #' @export
-ideal_weight_adult <- function(height_m, male, ...)
+ideal_weight_adult <- function(height_m, male, ...) {
   ideal_weight_Devine(height_m, male, ...)
+}
 
 #' @describeIn ideal_weight Ideal weight of a child, age >= 1 and age < 18 years
 #' @export
-ideal_weight_child <- function(height_m, age_y = NULL, ...)
+ideal_weight_child <- function(height_m, age_y = NULL, ...) {
   ideal_weight_Traub(height_m, age_y, ...)
+}
 
 #' ideal weight for child per Traub
 #'
@@ -76,8 +78,9 @@ ideal_weight_Traub <- function(height_m, age_y = NULL, ...) {
 #'   ref.)
 #' @rdname ideal_weight
 #' @export
-ideal_weight_Devine <- function(height_m, male, ...)
+ideal_weight_Devine <- function(height_m, male, ...) {
   ideal_weight_linear(height_m, male, 60, 50, 45.5, 2.3, 2.3, ...)
+}
 
 #' @title ideal weight by Robinson method
 #' @rdname ideal_weight
@@ -86,8 +89,9 @@ ideal_weight_Devine <- function(height_m, male, ...)
 #'   relationship. (Robinson JD, Lupkiewicz SM, Palenik L et al. Determination
 #'   of ideal body weight for drug dosage calculations. Am J Hosp Pharm 1983;
 #'   40: 1016-9.)
-ideal_weight_Robinson <- function(height_m, male, ...)
+ideal_weight_Robinson <- function(height_m, male, ...) {
   ideal_weight_linear(height_m, male, 60, 52, 49, 1.9, 1.7, ...)
+}
 
 
 #' @title ideal weight by Miller
@@ -96,8 +100,9 @@ ideal_weight_Robinson <- function(height_m, male, ...)
 #' @description Miller's method for ideal weight: different linear relationship.
 #'   (Miller DR, Carlson JD, Loyd BJ et al. Determining ideal body weight.
 #'   (Letter). Am J Hosp Pharm 1983; 40: 1622.)
-ideal_weight_Miller <- function(height_m, male, ...)
+ideal_weight_Miller <- function(height_m, male, ...) {
   ideal_weight_linear(height_m, male, 60, 56.2, 53.1, 1.41, 1.36, ...)
+}
 
 #' @title ideal weight by Broca
 #' @description Calculate ideal weight based on Broca (1871) Height in cm -100
@@ -105,8 +110,9 @@ ideal_weight_Miller <- function(height_m, male, ...)
 #'   1877.
 #' @rdname ideal_weight
 #' @export
-ideal_weight_Broca <- function(height_m, male, ...)
+ideal_weight_Broca <- function(height_m, male, ...) {
   ideal_weight_linear(height_m, male, 0, -100, -105, 2.54, 2.54, ...)
+}
 
 #' @title ideal weight by Lemmens
 #' @description Lemmens method assumes BMI 22 as ideal (Obesity Surgery 2005)

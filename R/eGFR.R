@@ -205,7 +205,7 @@ egfr_mdrd <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
     (age_y ^ (-0.203)) *
     (0.742 + 0.258 * male) *
     (1 + 0.212 * black)
-  if (any(ret > 60) & warn_ckdepi_preferred)
+  if (any(ret > 60) && warn_ckdepi_preferred)
     warning("The MDRD equation for eGFR is not recommended for values above ",
             "60 mL/min/1.73m^2 (CKD-EPI is recommended). ",
             "Use results above 60 with caution.")
@@ -245,7 +245,7 @@ egfr_ckdepi <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
     0.993 ^ age_y *
     (1.018 - 0.018 * male) *
     (1 + 0.159 * black)
-  if (any(ret < 60) & warn_mdrd_preferred) {
+  if (any(ret < 60) && warn_mdrd_preferred) {
     warning("The CKD-EPI equation for eGFR is not recommended for values below",
             " 60 mL/min/1.73m^2 (MDRD is recommended). Use with caution.")
   }

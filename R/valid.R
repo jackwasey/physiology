@@ -86,10 +86,11 @@ valid_age <- function(age_y, age_min = 0, age_max = 150,
 valid_age_adult <- function(age_y, age_min = 18, age_max = 150,
                             age_min_hard = 17, age_max_hard = 150,
                             extra_msg = "", do_warn = TRUE, do_stop = FALSE,
-                            equal_ok = FALSE)
+                            equal_ok = FALSE) {
   valid(age_y, "age", "yr",
         age_min, age_max, age_min_hard, age_max_hard,
         extra_msg, do_warn, do_stop, equal_ok = equal_ok)
+}
 
 #' @rdname valid_height
 #' @param scr_uM numeric serum creatinine (umol/L)
@@ -103,7 +104,7 @@ valid_age_adult <- function(age_y, age_min = 18, age_max = 150,
 #'   \code{warn}
 #' @export
 valid_creatinine <- function(scr_uM, scr_min = 8, scr_max = 1000,
-                             scr_min_hard=0, scr_max_hard = 4000,
+                             scr_min_hard = 0, scr_max_hard = 4000,
                              extra_msg = "", do_warn = TRUE, do_stop = FALSE,
                              equal_ok = FALSE) {
   # Note that scr_min was selected to help ensure that unit conversion errors

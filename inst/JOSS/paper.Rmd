@@ -11,10 +11,10 @@ The goal of the 'physiology' package for R is to assimilate some core formulae, 
 The main areas covered relate to body dimensions, and renal function. These both have high relevance to pharmaceutical research: many drugs are dosed based on weight, and some scale with body surface area. Many drugs have at least partial renal excretion, so estimating renal function from common laboratory measurements is important.
 
 ```{r quickgfr, echo = TRUE}
-egfr(creatinine_mgdl_to_uM(1.4), 
+egfr(creatinine_mgdl_to_uM(1.4),
      age_y = 2,
      height_m = 0.9,
-     male = FALSE, 
+     male = FALSE,
      black = TRUE)
 ```
 
@@ -22,7 +22,7 @@ egfr(creatinine_mgdl_to_uM(1.4),
 # how does eGFR vary with height and age in teenagers?
 hw <- expand.grid(
         Age = seq(20, 100, 20),
-        #Height = c(seq.default(1.2, 1.8, by = 0.2)), 
+        #Height = c(seq.default(1.2, 1.8, by = 0.2)),
         Height = 1.6,
         Male = c("Male", "Female"),
         Black = c("Black", "Not Black"))
@@ -30,15 +30,16 @@ suppressWarnings(
         res <- apply(hw, 1, FUN = function(x) {
                 egfr(scr_uM = 80,
                      age_y = as.integer(x["Age"]),
-                     height_m = as.integer(x["Height"]), 
+                     height_m = as.integer(x["Height"]),
                      #height_m = 1.6,
-                     male = x["Male"] == "Male", 
-                     black = x["Black"] == "Black")}
+                     male = x["Male"] == "Male",
+                     black = x["Black"] == "Black")
+                }
                 )
         )
 plt <- cbind(hw, eGFR = res)
-ggplot(plt, aes(x = Age, y = eGFR)) + 
-        geom_col() + 
+ggplot(plt, aes(x = Age, y = eGFR)) +
+        geom_col() +
         facet_wrap(~ Male + Black) +
         ylim(0, 150)
 ```

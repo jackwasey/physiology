@@ -22,7 +22,7 @@ test_that("ideal_weight_adultAdult", {
                                     do_warn = FALSE), NA)
 
   expect_equal(ideal_weight_adult(60 / inch, male = TRUE), 50)
-  expect_equal(ideal_weight_adult(60 / inch, male = F), 45.5)
+  expect_equal(ideal_weight_adult(60 / inch, male = FALSE), 45.5)
   expect_equal(ideal_weight_adult(height_m = c(60 / inch, 60 / inch),
                                   male = c(FALSE, TRUE)),
                c(45.5, 50))
@@ -204,28 +204,28 @@ test_that("height, gender funcs invalid input", {
     expect_error(do.call(f), info = f)
     expect_error(do.call(f, bad_input), info = f)
     expect_error(do.call(f, list(height_m = 1.5)), info = f)
-    expect_error(do.call(f, list(male = T)), info = f)
+    expect_error(do.call(f, list(male = TRUE)), info = f)
     expect_error(do.call(f, list(NA_real_)), info = f)
     expect_error(do.call(f, list(NULL)), info = f)
     expect_error(do.call(f, list(NULL, NULL)), info = f)
 
     #mismatch length
-    expect_error(do.call(f, list(height_m = c(1.5, 2), male = T)), info = f)
-    expect_error(do.call(f, list(height_m = 2, male = c(T, F))), info = f)
+    expect_error(do.call(f, list(height_m = c(1.5, 2), male = TRUE)), info = f)
+    expect_error(do.call(f, list(height_m = 2, male = c(TRUE, FALSE))), info = f)
     expect_error(do.call(f, list(height_m = c(1.5, 2), male = NULL)), info = f)
-    expect_error(do.call(f, list(height_m = NULL, male = c(T, F))), info = f)
-    expect_error(do.call(f, list(height_m = c(1.5, NA), male = T)), info = f)
-    expect_error(do.call(f, list(height_m = 2, male = c(NA, T))), info = f)
-    expect_error(do.call(f, list(height_m = NULL, male = F)), info = f)
+    expect_error(do.call(f, list(height_m = NULL, male = c(TRUE, FALSE))), info = f)
+    expect_error(do.call(f, list(height_m = c(1.5, NA), male = TRUE)), info = f)
+    expect_error(do.call(f, list(height_m = 2, male = c(NA, TRUE))), info = f)
+    expect_error(do.call(f, list(height_m = NULL, male = FALSE)), info = f)
     expect_error(do.call(f, list(height_m = 2, male = NULL)), info = f)
 
     # stop/warn conditions: we don't know that each specific function doesn't
     # have tighter rules or other arguments required, so we can only look for
     # errors here, if we test all ht/wt functions together.
     expect_error(
-      do.call(f, list(height_m = -1, male = T, do.stop = TRUE)), info = f)
+      do.call(f, list(height_m = -1, male = TRUE, do.stop = TRUE)), info = f)
     expect_error(
-      do.call(f, list(height_m =  0, male = T, do.stop = TRUE)), info = f)
+      do.call(f, list(height_m =  0, male = TRUE, do.stop = TRUE)), info = f)
     expect_error(
       do.call(f, list(height_m = 1.5, male = "m", do.stop = TRUE)), info = f)
     expect_error(
@@ -233,7 +233,7 @@ test_that("height, gender funcs invalid input", {
     expect_error(
       do.call(f, list(height_m = 1.5, male = -1, do.stop = TRUE)), info = f)
     expect_error(
-      do.call(f, list(height_m = 8, male = T, do.stop = TRUE)), info = f)
+      do.call(f, list(height_m = 8, male = TRUE, do.stop = TRUE)), info = f)
   }
 })
 

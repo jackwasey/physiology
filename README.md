@@ -13,8 +13,6 @@ status](https://www.r-pkg.org/badges/version/physiology)](https://cran.r-project
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/jackwasey/physiology?branch=master&svg=true)](https://ci.appveyor.com/project/jackwasey/physiology)
 [![Codecov test
 coverage](https://codecov.io/gh/jackwasey/physiology/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jackwasey/physiology?branch=master)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
