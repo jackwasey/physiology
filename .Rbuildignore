@@ -19,3 +19,4 @@ man-roxygen
 .*\.ods$
 physiology\.Rcheck
 physiology_.*\.tar\.gz
+^\.github$
