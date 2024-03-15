@@ -16,7 +16,7 @@ Compare ideal weight formulae over range of adult heights
 library(physiology)
 library(ggplot2)
 hts <- seq(from = 1.5, to = 2.0, by = 0.01)
-male <- rep(T, times = length(hts))
+male <- rep(TRUE, times = length(hts))
 suppressWarnings({
   ideal_weights <- data.frame(
     "Height" = hts,

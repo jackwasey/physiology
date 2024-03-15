@@ -37,7 +37,8 @@ Suggests:
     knitr,
     spelling,
     tidyr,
-    utils
+    utils,
+    covr
 LinkingTo: 
     Rcpp
 VignetteBuilder: 

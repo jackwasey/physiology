@@ -84,8 +84,9 @@ deadspace_anatomic_child <- function(ideal_weight_kg, age_y = NULL) {
 #'   independent
 #' @details 'Mean intrathoracic anatomic dead space was 1.03 ml/kg and was not
 #'   related to age.' Numa, 1985
-deadspace_intrathoracic_ml <- function(ideal_weight_kg)
+deadspace_intrathoracic_ml <- function(ideal_weight_kg) {
   1.03 * ideal_weight_kg
+}
 
 # nocov start
 deadspace_extrathoracic <- function(ideal_weight_kg = NULL, age_y = NULL) {
