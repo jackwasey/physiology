@@ -32,8 +32,9 @@ ett_vol_ml(ett_size_by_age(1:10))
 
 }
 \seealso{
-Other airway equipment: \code{\link{deadspace_things_ml}},
-  \code{\link{deadspace_total}},
-  \code{\link{ett_size_by_age}}
+Other airway equipment: 
+\code{\link{deadspace_things_ml}},
+\code{\link{deadspace_total}()},
+\code{\link{ett_size_by_age}()}
 }
 \concept{airway equipment}

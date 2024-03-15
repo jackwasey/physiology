@@ -26,7 +26,7 @@ creatinine_mgdl_to_uM <- function(scr_mgdl, ...) {
 #' muscle mass and diet (including amputees, paraplegics, bodybuilders, or
 #' obese patients; or vegetarians or when taking creatine dietary supplements).
 #' For more details, please refer to the NIDDK summary on estimating GFR:
-#' \url{https://www.niddk.nih.gov/health}.
+#' \href{https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/laboratory-evaluation/glomerular-filtration-rate-calculators}{NIDDK eGFR calculators}.
 #'
 #' The main function (\code{egfr}) automatically selects the best
 #' method for eGFR calculation based on the following metrics:
@@ -168,7 +168,7 @@ egfr_cockcroft_gault <- function(scr_uM, age_y, weight_kg, male,
 #' @param warn_ckdepi_preferred When calculating eGFR > 60, should a warning be
 #'   generated suggesting CKD-EPI is preferred?
 #' @references
-#' \url{https://www.niddk.nih.gov/health}
+#' \href{https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/laboratory-evaluation/glomerular-filtration-rate-calculators}{NIDDK eGFR calculators}
 #'
 #' Levey AS, Stevens LA, Schmid CH, Zhang YL, Castro AF, 3rd, Feldman HI, et al.
 #' A new equation to estimate glomerular filtration rate. Ann Intern Med.
@@ -256,7 +256,7 @@ egfr_ckdepi <- function(scr_uM, age_y, male, black, idms_assay = TRUE,
 #'   less than 18 years).
 #' @references
 #'
-#' \url{https://www.niddk.nih.gov/health}
+#' \href{https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/laboratory-evaluation/glomerular-filtration-rate-calculators}{NIDDK eGFR calculators}
 #'
 #' Schwartz GJ, et al. New equations to estimate GFR in children with CKD. J Am
 #' Soc Nephrol. 2009;20:629-637.

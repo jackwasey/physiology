@@ -4,8 +4,13 @@
 \alias{alveolar_PAO2_mmHg}
 \title{alveolar gas equation}
 \usage{
-alveolar_PAO2_mmHg(fi_o2 = 0.209, rq = 0.8, PACO2_mmHg = 40,
-  Patm_mmHg = 760, PAH2O_mmHg = 47)
+alveolar_PAO2_mmHg(
+  fi_o2 = 0.209,
+  rq = 0.8,
+  PACO2_mmHg = 40,
+  Patm_mmHg = 760,
+  PAH2O_mmHg = 47
+)
 }
 \arguments{
 \item{fi_o2}{fraction of oxygen in inspired gas, from 0 to 1, default
@@ -40,6 +45,7 @@ alveolar_PAO2_mmHg(fi_o2 = 1)
 alveolar_PAO2_mmHg(fi_o2 = 1, Patm_mmHg = 1520)
 }
 \seealso{
-Other respiratory: \code{\link{deadspace_total}}
+Other respiratory: 
+\code{\link{deadspace_total}()}
 }
 \concept{respiratory}

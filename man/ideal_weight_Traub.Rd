@@ -19,7 +19,7 @@ not used in the calculation itself, so may be missing.}
 \item{...}{arguments passed to downstream functions, e.g. \code{warn = TRUE}}
 }
 \description{
-\code{2.396e0.01863(height)}, where height is in cm. There is an
+\verb{2.396e0.01863(height)}, where height is in cm. There is an
 argument for using another package to capture durations, of which age is a
 special case. However, I am resisting bringing in external dependencies,
 and for almost all use-cases I can imagine, the age will be captured as a

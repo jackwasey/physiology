@@ -40,7 +40,7 @@ This effectively reverses engineers an ideal weight from BMI of
 22, then use the square root of its ratio to actual body weight to adjust
 the 70ml per kg of an ideal weight person. Age-dependent regression
 equations for indexed blood volume \code{InBV} at ideal body weight. (No
-adjustment made in obesity by Lemmens.) \code{InBV = 90-0.4 X age} (males) \code{InBV = 85-0.4 X age} (females).
+adjustment made in obesity by Lemmens.) \verb{InBV = 90-0.4 X age} (males) \verb{InBV = 85-0.4 X age} (females).
 
 applies to slim adults, but note that the age-related decline is
   not seen if high degree of physical activity is maintained. TODO: check BMI

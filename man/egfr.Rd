@@ -11,14 +11,27 @@ filtration rate (eGFR) calculation.}
 \usage{
 egfr(scr_uM, age_y, height_m, male, black, ...)
 
-egfr_cockcroft_gault(scr_uM, age_y, weight_kg, male, idms_assay = TRUE,
-  ...)
+egfr_cockcroft_gault(scr_uM, age_y, weight_kg, male, idms_assay = TRUE, ...)
 
-egfr_mdrd(scr_uM, age_y, male, black, idms_assay = TRUE, ...,
-  warn_ckdepi_preferred = TRUE)
+egfr_mdrd(
+  scr_uM,
+  age_y,
+  male,
+  black,
+  idms_assay = TRUE,
+  ...,
+  warn_ckdepi_preferred = TRUE
+)
 
-egfr_ckdepi(scr_uM, age_y, male, black, idms_assay = TRUE, ...,
-  warn_mdrd_preferred = TRUE)
+egfr_ckdepi(
+  scr_uM,
+  age_y,
+  male,
+  black,
+  idms_assay = TRUE,
+  ...,
+  warn_mdrd_preferred = TRUE
+)
 
 egfr_bedside_schwartz(scr_uM, height_m, idms_assay = TRUE, ...)
 }
@@ -64,7 +77,7 @@ hospitalized patients, patients with acute renal failure) or extremes in
 muscle mass and diet (including amputees, paraplegics, bodybuilders, or
 obese patients; or vegetarians or when taking creatine dietary supplements).
 For more details, please refer to the NIDDK summary on estimating GFR:
-\url{https://www.niddk.nih.gov/health}.
+\href{https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/laboratory-evaluation/glomerular-filtration-rate-calculators}{NIDDK eGFR calculators}.
 
 The main function (\code{egfr}) automatically selects the best
 method for eGFR calculation based on the following metrics:
@@ -88,18 +101,18 @@ recommendation to use an IDMS - calibrated assay, so by default
 }
 \section{Functions}{
 \itemize{
-\item \code{egfr_cockcroft_gault}: The Cockcroft - Gault equation for eGFR (not preferred).
+\item \code{egfr_cockcroft_gault()}: The Cockcroft - Gault equation for eGFR (not preferred).
 
-\item \code{egfr_mdrd}: The MDRD equation for eGFR (preferred for adults with eGFR <
+\item \code{egfr_mdrd()}: The MDRD equation for eGFR (preferred for adults with eGFR <
 60).
 
-\item \code{egfr_ckdepi}: The CKD-EPI equation for eGFR (preferred for adults
+\item \code{egfr_ckdepi()}: The CKD-EPI equation for eGFR (preferred for adults
 with eGFR >= 60).
 
-\item \code{egfr_bedside_schwartz}: The Bedside Schwartz equation for eGFR (for children, age
+\item \code{egfr_bedside_schwartz()}: The Bedside Schwartz equation for eGFR (for children, age
 less than 18 years).
-}}
 
+}}
 \references{
 Levey AS, Stevens LA, Schmid CH, Zhang YL, Castro AF, 3rd,
 Feldman HI, et al. A new equation to estimate glomerular filtration rate. Ann
@@ -114,7 +127,7 @@ Med. 2006 Aug 15;145(4):247-54.
 Cockcroft DW, Gault MH. Prediction of creatinine clearance from serum
 creatinine. Nephron. 1976;16(1):31-41.
 
-\url{https://www.niddk.nih.gov/health}
+\href{https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/laboratory-evaluation/glomerular-filtration-rate-calculators}{NIDDK eGFR calculators}
 
 Levey AS, Stevens LA, Schmid CH, Zhang YL, Castro AF, 3rd, Feldman HI, et al.
 A new equation to estimate glomerular filtration rate. Ann Intern Med.
@@ -126,7 +139,7 @@ standardized serum creatinine values in the modification of diet in renal
 disease study equation for estimating glomerular filtration rate. Ann Intern
 Med. 2006 Aug 15;145(4):247-54.
 
-\url{https://www.niddk.nih.gov/health}
+\href{https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/laboratory-evaluation/glomerular-filtration-rate-calculators}{NIDDK eGFR calculators}
 
 Schwartz GJ, et al. New equations to estimate GFR in children with CKD. J Am
 Soc Nephrol. 2009;20:629-637.
@@ -137,14 +150,19 @@ adolescents. Clin J Am Soc Nephrol. 2009;4(11):1832-43.
 \seealso{
 \code{\link{creatinine_mgdl_to_uM}}
 
-Other renal: \code{\link{creatinine_mgdl_to_uM}}
+Other renal: 
+\code{\link{creatinine_mgdl_to_uM}()}
 
-Other renal: \code{\link{creatinine_mgdl_to_uM}}
+Other renal: 
+\code{\link{creatinine_mgdl_to_uM}()}
 
-Other renal: \code{\link{creatinine_mgdl_to_uM}}
+Other renal: 
+\code{\link{creatinine_mgdl_to_uM}()}
 
-Other renal: \code{\link{creatinine_mgdl_to_uM}}
+Other renal: 
+\code{\link{creatinine_mgdl_to_uM}()}
 
-Other renal: \code{\link{creatinine_mgdl_to_uM}}
+Other renal: 
+\code{\link{creatinine_mgdl_to_uM}()}
 }
 \concept{renal}

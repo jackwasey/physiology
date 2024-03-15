@@ -13,7 +13,9 @@ svp_sea_level(temp_k)
 Saturation vapor pressure of water at sea level
 }
 \seealso{
-Other physics: \code{\link{Pa_to_torr}},
-  \code{\link{pres_atm_kPa}}, \code{\link{temp_c_to_k}}
+Other physics: 
+\code{\link{Pa_to_torr}},
+\code{\link{pres_atm_kPa}()},
+\code{\link{temp_c_to_k}()}
 }
 \concept{physics}

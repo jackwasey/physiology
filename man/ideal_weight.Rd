@@ -65,11 +65,11 @@ Lemmens method assumes BMI 22 as ideal (Obesity Surgery 2005)
 }
 \section{Functions}{
 \itemize{
-\item \code{ideal_weight_adult}: Ideal weight of an adult
+\item \code{ideal_weight_adult()}: Ideal weight of an adult
 
-\item \code{ideal_weight_child}: Ideal weight of a child, age >= 1 and age < 18 years
+\item \code{ideal_weight_child()}: Ideal weight of a child, age >= 1 and age < 18 years
+
 }}
-
 \examples{
 ideal_weight_adult(1.7, male = TRUE)
 ideal_weight_adult(1.7, male = FALSE)

@@ -54,29 +54,29 @@ Estimate body surface area (BSA)
 }
 \section{Functions}{
 \itemize{
-\item \code{bsa_adult}: Uses `bsa_mosteller()`
+\item \code{bsa_adult()}: Uses `bsa_mosteller()`
 
-\item \code{bsa_dubois_dubois}: Du Bois and Du Bois formula (usually the preferred formula
+\item \code{bsa_dubois_dubois()}: Du Bois and Du Bois formula (usually the preferred formula
 for adults and children)
 
-\item \code{bsa_mosteller}: Mosteller formula
+\item \code{bsa_mosteller()}: Mosteller formula
 
-\item \code{bsa_haycock}: Haycock formula
+\item \code{bsa_haycock()}: Haycock formula
 
-\item \code{bsa_gehan_george}: Gehan and George formula
+\item \code{bsa_gehan_george()}: Gehan and George formula
 
-\item \code{bsa_boyd}: Boyd formula
+\item \code{bsa_boyd()}: Boyd formula
 
-\item \code{bsa_fujimoto}: Fujimoto formula (often used for Japanese individuals)
+\item \code{bsa_fujimoto()}: Fujimoto formula (often used for Japanese individuals)
 
-\item \code{bsa_takahira}: Takahira formula (a variant of Du Bois that could be used for
+\item \code{bsa_takahira()}: Takahira formula (a variant of Du Bois that could be used for
 Japanese individuals; Fujimoto may be preferred)
 
-\item \code{bsa_shuter_aslani}: Shuter and Aslani formula
+\item \code{bsa_shuter_aslani()}: Shuter and Aslani formula
 
-\item \code{bsa_schlich}: Schlich formula
+\item \code{bsa_schlich()}: Schlich formula
+
 }}
-
 \examples{
 bsa_dubois_dubois(2, 80)
 bsa_dubois_dubois(1.5, 80)
